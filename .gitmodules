@@ -1,0 +1,3 @@
+[submodule "Development/Libraries/VrLib"]
+	path = Development/Libraries/VrLib
+	url = https://github.com/Borf/VrLib

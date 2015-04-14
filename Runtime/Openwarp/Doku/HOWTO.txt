@@ -1,0 +1,65 @@
+Hier eine kurze Anleitung:
+
+       
+
+== Device-Treiber
+
+        1.)    Es gibt das Unterverzeichnis ‚driver‘. Dort ist das Zip-Archiv ‚FTDI_RS232_CDM 2.04.16 WHQL Certified.zip‘ zu finden. Dieses bitte entpacken und den Ort des Verzeichnisses merken.
+
+        2.)    Jetzt das USB-Kabel vom openWAR² anstecken. Windows sucht nun den Treiber für das Device. Hier explizit auf das entpackte Verzeichnis verweisen, dann installiert er den Treiber richtig.
+
+       
+
+== Software starten
+
+        1.)    Einfach die EXE ‚openWARP2_designer.exe‘ starten. Wenn es Probleme geben sollte in Form einer Meldung, dass die Software nicht richtig installiert sei, dann bitte die Datei ‚vcredist_x86.exe‘ aus dem Unterverzeichnis ‚driver‘ starten. Dann sollte es gehen.
+
+        2.)    Nachdem die Software gestartet wurde, sucht si automatisch nach angeschlossenen openWARP² Kanälen. Alle gefundenen Kanäle werden links in der Liste aufgelistet. Wenn keine Geräte gefunden wurden, dann erzeugt die Software zwei Dummy-Geräte, damit die Software auch OHNE angeschlossenen Geräte benutzt werden kann.
+
+        3.)    Wenn keine Geräte gefunden wurden, obwohl ein Geräte angeschlossen ist, so kann das folgende Ursachen haben:
+
+        a.       Das Gerät ist nicht angeschaltet (Stecker in Steckdose)
+
+        b.      Es wird kein Eingangssignal eingespeist (Zur Zeit muss ein DVI-Signal anliegen, damit das Gerät gefunden wird)
+
+        c.       Das Gerät hat sich aufgehängt. Dann bitte Stecker ziehen, kurz warten und wieder einschalten.
+
+        4.)    Wenn trotzdem kein Gerät gefunden wird, bitte den Inhalt des Log-Fenster (unter ‚help --> log window...‘) kopieren und mir schicken.
+
+       
+
+== Warping einstellen
+
+        1.)    Das Warping lässt sich unter dem Register ‚Warping‘ einstellen.
+
+        2.)    Dort kann mit dem ‚Warp-Assistant‘ das Bild mit Hilfe von Schiebereglern angepasst werden. Dafür stehen einfache Manipulationmethoden zur Verfügung.
+
+        3.)    Wenn das nicht ausreichend ist, so kann das Gitter Punktweise verschoben werden. Dazu in dem Registerblatt ‚open calibration window…‘ anklicken. Dazu ein paar Tips:
+
+        a.       Wenn das ganze Gitter verschoben werden soll, einfach einen Punkt anklicken, die ALT-Taste gedrückt halten und mit den Pfeiltasten das ganze Gitter verschieben.
+
+        b.      Wenn das Bild auf dem Schirm gespiegelt ist, so kann in dem Options-Fenster (rechte Maustaste) unter ‚Key move options‘ die Bewegungsrichtung der Pfeiltasten gedreht oder gespiegelt werden.
+
+        c.       Wenn ein Punkt mit der Maus angefasst wird, so bewegt sich normalerweise nur der ausgewählte Punkt. Wird aber die Steuerungstaste (CTRL) gedrückt gehalten, so bewegt sich ein ganzer Bereich an Punkten. Das kann die Einstellung vereinfachen.
+
+        d.      An das Gitter wird ein Polynom fünfter Ordnung angefittet. Das bedeutet, dass die Auswirkungen anders sein können, als die Verschiebung der Punkte. Mit der Taste ‚f‘ wird das Polynom gebildet und automatisch hochgeladen, so dass die Auswirkung sichtbar ist.
+
+       
+
+== Framework speichern
+
+        1.)    Die Software arbeitet intern mit einem kompletten Abbild aller Einstellungen (genannt: Framework). Dieses Framework kann explizit gespeichert und geladen werden.
+
+        2.)    Beim Start der Software sucht die Software nach einem ‚Default-Framework‘. Wenn dieses gefunden wurde, wird es automatisch geladen und auf die verbundenen Geräte geladen. Dabei wird das Framework stets für jedes Gerät anhand der Seriennummer gespeichert und zugewiesen.
+
+        3.)    Um beim Start eines ganzen Systems das automatische Hochladen des Frameworks zu gewährleisten muss also der openWARP² designer in dem Autostart des Systems gelegt werden.
+
+       
+
+== Troubleshooting
+
+        1.)    Die openWARP² Box braucht nicht für eine bestimmte Auflösung konfiguriert werden. Allerdings ist das EDID noch nicht durchgeschliffen. Ich habe ein generisches 1080p EDID auf die Box gespielt. Wenn das nicht mit dem Display und der Grafikkarte funktionieren sollte, dann bitte das EDID aus dem Display auslesen und auf die Box spielen (muss dabei am Strom hängen). Ich habe einen DDC-Programmer mit in die Box gelegt und die Software angehängt. Den Programmer brauche ich allerdings wieder!
+
+        2.)    Es kann vorkommen (sehr selten), dass die Box sicht nicht richtig auf das Eingangssignal ‚fängt‘. Das Bild sieht dann etwas ‚verpixelt‘ aus. Es reicht in diesem Falle aus, in der Software in dem ‚General‘-Reiter ein ‚resync‘ zu forcieren.
+
+       

@@ -1,0 +1,210 @@
+openWARP² LC designer
+
+Todo:
+
+- Warp-Feld intern mit Werten bei Start füllen sonst ist nix drin?
+- refetch device
+- option window für Warping Option usw
+- Matrix in Auto Upload after Framework
+- all devices ON/ OFF
+- Timeout?
+
+== OW2LCD v1.2.8 / 03.07.2011
+- extended Device Options
+- DVI input adjustment implemented (Timing adjustment)
+- double buffer in Framework
+
+== OW2LCD v1.2.7 / 06.05.2011
+- Bugfix Auto Reset Check Box
+
+== OW2LCD v1.2.6 / 12.04.2011
+- Auto Reset function embedded
+- Quick_scan and Auto_Reset in framework
+- Quick_scan, auto_reset, Matrix_values, double_buffer, delay_lines included in upload device function
+- cropping implemented
+- cropping rest button
+- Auto disable resolution rescaling if Matrix is used
+- cosmetic changes
+
+== OW2LCD v1.2.5 / 25.02.2011
+- matrix calculation enhancd
+- matrix values stored in framework
+
+== OW2LCD v1.2.4 / 24.02.2011
+- new scaling method for matrix embedded
+
+== OW2LCD v1.2.3 / 23.01.2011
+- cosmetic changes in button and menu captions
+- 'board reset' button added
+- update internal SPI programming subroutines
+- reject warp reset after scan on first device
+- latency now also stored in default setting
+- firmware update function added
+- import device option now working
+
+== OW2LCD v1.2.2 / 19.01.2011
+- Quick scan check box added
+
+== OW2LCD v1.2.1 / 25.10.2010
+- system path 'intern' for temporary calculations
+- new grid window (openWARP2-designer)
+- new warp window (openWARP2-designer)
+- device names in INI-File
+-Debig Message switch in INI File
+
+== OW2LCD v1.1.5 / 06.10.2010
+-  new communication Window
+
+== OW2LCD v1.1.4 / 07.07.2010
+- default value: no resolution rescaling
+- No Warp-reset after start up
+
+== OW2LCD v1.1.3 / 29.06.2010
+- Baudrate 115200 included
+
+== OW2LCD v1.1.2 / 28.06.2010
+- Safe_Send method embedded
+- truncation of warp coefficient during load from fit calculation
+- force main tab during startup
+- Matrix Function embeded
+
+== OW2LCD v1.1.1 / 05.05.2010
+- new adresses for Flash memory
+
+== OW2LCD v1.0.4 / 01.02.2010
+- autoscan in INI file
+- manual selection of devices in comm-window (doubleklick)
+- bugfix grid window size after manual device selection
+- resolution rescaling default value is now TRUE
+
+== OW2LCD v1.0.3 / 26.11.2009
+- Flash programming for configuration settings embedded
+- Reset all in Warpwindow now also resets the corner shift values
+- scale fix to 2048 or to automatically calculated scaling option added
+- save as default now working.
+- bugfix default warp coeffs
+- bugfix reset button now resets flip_v and flip_h
+- disabled flip boxes
+
+== OW2LCD v1.0.2 / 23.11.2009
+- bugfix reset warp button klick
+
+== OW2LCD v1.0.1 / 17.11.2009
+- better bow calculation in WarpAssistant
+- clean up source code...
+- save as default button
+- new about window
+
+== OW2LCD v0.1.1 / 24.10.2009
+- first Verion based on OW2D v1.3.17
+
+== OW2D v1.3.17 / 20.09.2009
+- new Method for Device-Serialnumber detection for new board
+
+== OW2D v1.3.16 / 13.09.2009
+- Kleinigkeiten
+
+== OW2D v1.3.15 / 12.09.2009
+- shading upload test: Start/Stop row in INI file
+- file check if shading image file exist
+- file check if LUT file exist
+- file check if Grid file exist
+- line and row selection visualization in grid window
+- 'x' hot key to change move grid option
+
+== OW2D v1.3.14 / 10.09.2009
+- RT Demo window added
+
+== OW2D v1.3.13 / 01.09.2009
+- bugfix Gamma-LUT file loaded with framework
+
+== OW2D v1.3.12 / 10.08.2009
+- Gamma-LUT file now also saved in framework
+- bugfix relative path for gridfile in framework
+
+== OW2D v1.3.11 / 10.08.2009
+- Speed selection in INI file
+- individual Gamma upload added
+
+== OW2D v1.3.10 / 07.08.2009
+- Memory synchronization for shading upload
+- bugfix shading upload if no device connected
+- bugfix resolution refresh if no device connected
+- INI-File for configuration settings
+- dummy resolution and name in INI file
+- percentage status bar for shading upload
+- ALT-Key for grid movement with mouse implemented
+- Mousewheel can change rubber band radius
+
+== OW2D v1.3.09 / 07.08.2009
+- temporary disabled 3MB and pseudo refresh
+
+== OW2D v1.3.08 / 06.08.2009
+- bugfix masking size
+- save fit coeff in framework instead of doing the fit
+- bugfix timing channel selection
+
+== OW2D v1.3.07 / 05.08.2009
+- bugfix relative paths for framework files
+
+== OW2D v1.3.06 / 05.08.2009
+- bugfix if shading file not exists
+- no changes for framework load.
+- bugfix shading upload after framework load
+
+== OW2D v1.3.05 / 31.07.2009
+- rotation addad to WarpAssistant
+- blending image generation includes
+- test procedure for shading upload (reduced hight)
+- corner shift function in WarpAssistant included
+- hints for WarpAssistant slider
+- delete unused shading images from framework directory
+
+== OW2D v1.3.04 / 20.07.2009
+- 3Mbit as default COM speed
+- larger scale options in WarpAssistant
+- description of status register added
+
+== OW2D v1.3.03 / 15.07.2009
+- pseudo Refresh always on for shading
+- more debug register for status info
+
+== OW2D v1.3.02 / 17.06.2009
+- Added Get Status information
+- Added Tool Menue
+- Added explicit batch load menue entry
+
+== OW2D v1.3.01 / 14.06.2009
+- Warpmap Grid-filename also part of framework
+- fill part of Shading memory before upload
+- batch file processing
+
+== OW2D v1.2.06 / 10.06.2009
+- RS232 Speed now 3Mbit
+- 1.5 or 3Mbit select Box in Communication Window
+- Shading ACK skip to increase Shading upload speed
+- Resync button now working again
+
+== OW2D v1.2.05 / 07.06.2009
+- now original x as default configuration
+
+== OW2D v1.2.04 / 06.06.2009
+- shading now part of framework
+
+== OW2D v1.2.03 / 25.05.2009
+- Load and save submenue entry in grid window
+- more shortcuts in grid window
+- color setting in grid-options
+
+== OW2D v1.2.02 / 18.05.2009
+- Rubber-band only with ctrl-key down
+
+== OW2D v1.2.01 / 11.05.2009
+- Message Dialog if no devices was found
+- more verbose log information for USB Ports
+- alpha-shading
+- Rubber-band grid movement
+
+== OW2D v1.1.01 / 28.04.2009
+- erste Version mit nrComm (Ersatz für FTDI-DLL)
+- mit COlor replacement
