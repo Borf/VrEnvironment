@@ -1,0 +1,265 @@
+{
+	"computers" :
+	[
+	],
+	"devices" :
+	[
+		{
+			"name" : "LeftButtonOne",
+			"type" : "digital",
+			"driver" : "hydra",
+			"src" : "LeftButtonOne"
+		},
+		{
+			"name" : "RightButtonOne",
+			"type" : "digital",
+			"driver" : "hydra",
+			"src" : "RightButtonOne"
+		},
+		{
+			"name" : "LeftButtonTwo",
+			"type" : "digital",
+			"driver" : "hydra",
+			"src" : "LeftButtonTwo"
+		},
+		{
+			"name" : "RightButtonTwo",
+			"type" : "digital",
+			"driver" : "hydra",
+			"src" : "RightButtonTwo"
+		},
+		{
+			"name" : "LeftButtonThree",
+			"type" : "digital",
+			"driver" : "hydra",
+			"src" : "LeftButtonThree"
+		},
+		{
+			"name" : "RightButtonThree",
+			"type" : "digital",
+			"driver" : "hydra",
+			"src" : "RightButtonThree"
+		},
+		{
+			"name" : "LeftButtonFour",
+			"type" : "digital",
+			"driver" : "hydra",
+			"src" : "LeftButtonFour"
+		},
+		{
+			"name" : "RightButtonFour",
+			"type" : "digital",
+			"driver" : "hydra",
+			"src" : "RightButtonFour"
+		},
+		{
+			"name" : "LeftStartButton",
+			"type" : "digital",
+			"driver" : "hydra",
+			"src" : "LeftStartButton"
+		},
+		{
+			"name" : "RightStartButton",
+			"type" : "digital",
+			"driver" : "hydra",
+			"src" : "RightStartButton"
+		},
+		{
+			"name" : "LeftJoystickButton",
+			"type" : "digital",
+			"driver" : "hydra",
+			"src" : "LeftJoystickButton"
+		},
+		{
+			"name" : "RightJoystickButton",
+			"type" : "digital",
+			"driver" : "hydra",
+			"src" : "RightJoystickButton"
+		},
+		{
+			"name" : "LeftBumper",
+			"type" : "digital",
+			"driver" : "hydra",
+			"src" : "LeftBumper"
+		},
+		{
+			"name" : "RightBumper",
+			"type" : "digital",
+			"driver" : "hydra",
+			"src" : "RightBumper"
+		},
+		{
+			"name" : "LeftTrigger",
+			"type" : "analog",
+			"driver" : "hydra",
+			"src" : "LeftTrigger"
+		},
+		{
+			"name" : "RightTrigger",
+			"type" : "analog",
+			"driver" : "hydra",
+			"src" : "RightTrigger"
+		},
+		{
+			"name" : "LeftJoystick",
+			"type" : "twodimension",
+			"driver" : "hydra",
+			"src" : "LeftJoystick"
+		},
+		{
+			"name" : "RightJoystick",
+			"type" : "twodimension",
+			"driver" : "hydra",
+			"src" : "RightJoystick"
+		},
+		{
+			"name" : "LeftNunchuk",
+			"type" : "positional",
+			"driver" : "hydra",
+			"src" : "LeftNunchuk"
+		},
+		{
+			"name" : "RightNunchuk",
+			"type" : "positional",
+			"driver" : "hydra",
+			"src" : "RightNunchuk"
+		},
+		{
+			"name" : "MainUserHead",
+			"type" : "positional",
+			"driver" : "SimPosition",
+			"src" : "Head"
+		},
+		{
+			"name" : "WandPosition",
+			"type" : "positional",
+			"driver" : "SimPosition",
+			"src" : "Wand"
+		},
+		{
+			"name" : "CameraPosition",
+			"type" : "positional",
+			"driver" : "SimPosition",
+			"src" : "Camera"
+		},
+		{
+			"name" : "LeftButton",
+			"type" : "digital",
+			"driver" : "mouse",
+			"src" : "left"
+		},
+		{
+			"name" : "RightButton",
+			"type" : "digital",
+			"driver" : "mouse",
+			"src" : "right"
+		},
+		{
+			"name" : "MiddleButton",
+			"type" : "digital",
+			"driver" : "keyboard",
+			"src" : "f5"
+		},
+		{
+			"name" : "KeyPageUp",
+			"type" : "digital",
+			"driver" : "keyboard",
+			"src" : "pageup"
+		},
+		{
+			"name" : "KeyPageDown",
+			"type" : "digital",
+			"driver" : "keyboard",
+			"src" : "pagedown"
+		}
+	],
+	"driverconfig" :
+	{
+		"SimPosition" :
+		{
+			"Head" :
+			{
+				"initial" : [ 0.0, 0.0, 0.0 ],
+				"xneg" : "shift+a",
+				"xpos" : "shift+d",
+				"yneg" : "shift+z",
+				"ypos" : "shift+q",
+				"zneg" : "shift+w",
+				"zpos" : "shift+s",
+				"rotxneg" : "shift+numpad7",
+				"rotxpos" : "shift+numpad9",
+				"rotyneg" : "shift+numpad4",
+				"rotypos" : "shift+numpad6",
+				"rotzneg" : "shift+numpad1",
+				"rotzpos" : "shift+numpad3"
+			},
+			"Wand" :
+			{
+				"initial" : [ 0.0, 0.0, 0.0 ],
+				"xneg" : "ctrl+a",
+				"xpos" : "ctrl+d",
+				"yneg" : "ctrl+z",
+				"ypos" : "ctrl+q",
+				"zneg" : "ctrl+w",
+				"zpos" : "ctrl+s",
+				"rotxneg" : "ctrl+numpad7",
+				"rotxpos" : "ctrl+numpad9",
+				"rotyneg" : "ctrl+numpad4",
+				"rotypos" : "ctrl+numpad6",
+				"rotzneg" : "ctrl+numpad1",
+				"rotzpos" : "ctrl+numpad3"
+			},
+			"Camera" :
+			{
+				"initial" : [ 0.0, -0.5, 3.5 ],
+				"xneg" : "a",
+				"xpos" : "d",
+				"yneg" : "z",
+				"ypos" : "q",
+				"zneg" : "w",
+				"zpos" : "s",
+				"rotxneg" : "numpad7",
+				"rotxpos" : "numpad9",
+				"rotyneg" : "numpad4",
+				"rotypos" : "numpad6",
+				"rotzneg" : "numpad1",
+				"rotzpos" : "numpad3",
+				"camera" : true
+			}
+		}
+	},
+	"users" :
+	[
+		{
+			"name" : "MainUser",
+			"src" : "MainUserHead"
+		}
+	],
+	"local" :
+	{
+
+			"host" : "dontcare",
+			"window" : 
+			{
+				"title" : "XBOX Demo",
+				"x" : 700,
+				"y" : 100,
+				"width" : 800,
+				"height" : 800,
+				"border" : true
+			},
+			"viewports" :
+			[
+				{
+					"type" : "simulator",
+					"x" : 0.0,
+					"y" : 0.0,
+					"width" : 1,
+					"height" : 1,
+					"camera" : "CameraPosition"
+				}
+			]
+
+
+	}
+}

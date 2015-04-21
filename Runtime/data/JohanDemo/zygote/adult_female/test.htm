@@ -1,0 +1,32 @@
+<script>
+	var MODELS = new Array();
+</script>
+<script src="adult_female.js"></script>
+
+
+<script>
+	onload = function()
+	{
+/*		for(var v in MODELS['adult_female.obj'].urls)
+		{
+			var a = document.createElement("a");
+			a.appendChild(document.createTextNode(v));
+			a.href = "http://www.zygotebody.com/models/adult_female/" + v;
+			document.getElementById("main").appendChild(a);
+			document.getElementById("main").appendChild(document.createElement("br"));
+
+		}*/
+
+		for (var v in MODELS['adult_female.obj'].materials) {
+			var a = document.createElement("a");
+			a.appendChild(document.createTextNode(v));
+			a.href = "http://www.zygotebody.com/models/common/" + MODELS['adult_female.obj'].materials[v].map_Kd;
+			document.getElementById("main").appendChild(a);
+			document.getElementById("main").appendChild(document.createElement("br"));
+
+		}
+
+	}
+</script>
+<div id="main">
+</div>

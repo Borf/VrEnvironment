@@ -1,0 +1,125 @@
+{
+	"devices" :
+	[
+		{
+			"name" : "LeftButtonOne",
+			"type" : "digital",
+			"driver" : "hydra",
+			"src" : "LeftButtonOne"
+		},
+		{
+			"name" : "RightButtonOne",
+			"type" : "digital",
+			"driver" : "hydra",
+			"src" : "RightButtonOne"
+		},
+		{
+			"name" : "LeftButtonTwo",
+			"type" : "digital",
+			"driver" : "hydra",
+			"src" : "LeftButtonTwo"
+		},
+		{
+			"name" : "RightButtonTwo",
+			"type" : "digital",
+			"driver" : "hydra",
+			"src" : "RightButtonTwo"
+		},
+		{
+			"name" : "LeftButtonThree",
+			"type" : "digital",
+			"driver" : "hydra",
+			"src" : "LeftButtonThree"
+		},
+		{
+			"name" : "RightButtonThree",
+			"type" : "digital",
+			"driver" : "hydra",
+			"src" : "RightButtonThree"
+		},
+		{
+			"name" : "LeftButtonFour",
+			"type" : "digital",
+			"driver" : "hydra",
+			"src" : "LeftButtonFour"
+		},
+		{
+			"name" : "RightButtonFour",
+			"type" : "digital",
+			"driver" : "hydra",
+			"src" : "RightButtonFour"
+		},
+		{
+			"name" : "LeftStartButton",
+			"type" : "digital",
+			"driver" : "hydra",
+			"src" : "LeftStartButton"
+		},
+		{
+			"name" : "RightStartButton",
+			"type" : "digital",
+			"driver" : "hydra",
+			"src" : "RightStartButton"
+		},
+		{
+			"name" : "LeftJoystickButton",
+			"type" : "digital",
+			"driver" : "hydra",
+			"src" : "LeftJoystickButton"
+		},
+		{
+			"name" : "RightJoystickButton",
+			"type" : "digital",
+			"driver" : "hydra",
+			"src" : "RightJoystickButton"
+		},
+		{
+			"name" : "LeftBumper",
+			"type" : "digital",
+			"driver" : "hydra",
+			"src" : "LeftBumper"
+		},
+		{
+			"name" : "RightBumper",
+			"type" : "digital",
+			"driver" : "hydra",
+			"src" : "RightBumper"
+		},
+		{
+			"name" : "LeftTrigger",
+			"type" : "analog",
+			"driver" : "hydra",
+			"src" : "LeftTrigger"
+		},
+		{
+			"name" : "RightTrigger",
+			"type" : "analog",
+			"driver" : "hydra",
+			"src" : "RightTrigger"
+		},
+		{
+			"name" : "LeftJoystick",
+			"type" : "twodimension",
+			"driver" : "hydra",
+			"src" : "LeftJoystick"
+		},
+		{
+			"name" : "RightJoystick",
+			"type" : "twodimension",
+			"driver" : "hydra",
+			"src" : "RightJoystick"
+		},
+		{
+			"name" : "LeftNunchuk",
+			"type" : "positional",
+			"driver" : "hydra",
+			"src" : "LeftNunchuk"
+		},
+		{
+			"name" : "RightNunchuk",
+			"type" : "positional",
+			"driver" : "hydra",
+			"src" : "RightNunchuk"
+		}
+	]
+}

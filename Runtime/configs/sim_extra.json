@@ -1,0 +1,73 @@
+{
+	"local" :
+	{
+			"viewports" :
+			[
+				{
+					"type" : "viewport",
+					"x" : 0.0,
+					"y" : 0.5,
+					"width" : 0.333,
+					"height" : 0.5,
+					"user" : "MainUser",
+					"eye" : "center",
+
+					"topleft" :		[ -1.5,	 1.5,  1.5 ],
+					"topright" :	[ -1.5,	 1.5, -1.5 ],
+					"bottomleft" :	[ -1.5,	-1.5,  1.5 ],
+					"bottomright" : [ -1.5, -1.5, -1.5 ]
+				},
+				{
+					"type" : "viewport",
+					"x" : 0.333,
+					"y" : 0.5,
+					"width" : 0.333,
+					"height" : 0.5,
+					"user" : "MainUser",
+					"eye" : "center",
+
+					"topleft" :		[ -1.5, 1.5, -1.5 ],
+					"topright" :	[  1.5, 1.5, -1.5 ],
+					"bottomleft" :	[ -1.5, -1.5,-1.5 ],
+					"bottomright" : [  1.5, -1.5,-1.5 ]
+				},
+				{
+					"type" : "viewport",
+					"x" : 0.666,
+					"y" : 0.5,
+					"width" : 0.333,
+					"height" : 0.5,
+					"user" : "MainUser",
+					"eye" : "center",
+
+					"topleft" :		[  1.5,  1.5, -1.5 ],
+					"topright" :	[  1.5,  1.5,  1.5 ],
+					"bottomleft" :	[  1.5, -1.5, -1.5 ],
+					"bottomright" : [  1.5, -1.5,  1.5 ]
+				},
+				{
+					"type" : "viewport",
+					"x" : 0.333,
+					"y" : 0.0,
+					"width" : 0.333,
+					"height" : 0.5,
+					"user" : "MainUser",
+					"eye" : "center",
+
+					"topleft" :		[ -1.5, -1.5, -1.5 ],
+					"topright" :	[  1.5, -1.5, -1.5 ],
+					"bottomleft" :	[ -1.5, -1.5,  1.5 ],
+					"bottomright" : [  1.5, -1.5,  1.5 ]
+				},
+				{
+					"type" : "simulator",
+					"x" : 0.0,
+					"y" : 0.0,
+					"width" : 1,
+					"height" : 1,
+					"camera" : "CameraPosition"
+				}
+
+			]
+	}
+}
