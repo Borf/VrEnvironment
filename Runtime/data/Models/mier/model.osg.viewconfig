@@ -1,0 +1,26 @@
+{
+	"controlmode" :	"flyaround",
+
+	"lights" :
+	[
+		{
+			"ambient"	: [ 0.1, 0.1, 0.1, 1.0 ],
+			"diffuse"	: [ 0.8, 0.8, 0.8, 1.0 ],
+			"specular"	: [ 0.0, 0.0, 0.0, 0.0 ],
+			"position"	: [ 10.0, 10.0, 10.0, 1.0 ],
+			"direction"	: [ 1.0, 0.0, 0.0 ]
+		}
+	],
+
+	"room" :
+	{
+		"modeladjustments" :
+		{
+			"scale"		: [ 1, 1, 1],
+			"rotation"	: [ 0.0, 0.0, 0.0],
+			"translation"	: [ 0.0, 0, 0.0]
+		}
+	}
+
+
+}

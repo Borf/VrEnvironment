@@ -1,0 +1,35 @@
+{
+	"controlmode" :	"walk",
+
+/*	"lights" :
+	[
+		{
+			"ambient"	: [ 0.5, 0.5, 0.5, 1.0 ],
+			"diffuse"	: [ 0.5, 0.5, 0.5, 1.0 ],
+			"specular"	: [ 0.0, 0.0, 0.0, 0.0 ],
+			"position"	: [ 10.0, 10.0, 10.0, 1.0 ],
+			"direction"	: [ 1.0, 0.0, 0.0 ]
+		}
+	],*/
+
+	"room" :
+	{
+		"modeladjustments" :
+		{
+			"scale"		: [ 0.03, 0.03, 0.03],
+			"rotation"	: [ 0.0, 45.0, 0.0],
+			"translation"	: [ 2, 1.1, 2]
+		}
+	},
+	"nav" :
+	{
+		"modeladjustments" :
+		{
+			"scale"		: [ 0.0333333333333, 0.0333333333, 0.0333333],
+			"rotation"	: [ 0.0, 180.0, 0.0],
+			"translation"	: [ 0.0, 8.25, -55.0]
+		}
+	}
+
+
+}
