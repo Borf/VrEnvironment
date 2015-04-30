@@ -3,7 +3,6 @@ varying vec3 lightDir,normal;
 varying float canDiscard;
 uniform vec3 cutNormal;
 uniform vec3 cutPos;
-uniform float cutDist;
 uniform mat4 modelMatrix;
 
 varying vec3 position;
