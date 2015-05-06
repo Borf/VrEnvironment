@@ -17,4 +17,5 @@ void main()
 
 	gl_FragColor.rgb = light * tex.rgb;
 	gl_FragColor.a = tex.a;
+	gl_FragColor.rgb = vec3(1,0,0);
 }
