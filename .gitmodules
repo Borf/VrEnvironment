@@ -1,6 +1,6 @@
-[submodule "Development/Libraries/VrLib"]
-	path = Development/Libraries/VrLib
-	url = https://github.com/Borf/VrLib.git
 [submodule "Development/Applications/VrDemos"]
 	path = Development/Applications/VrDemos
 	url = https://github.com/Borf/VrDemos.git
+[submodule "Development/Applications/crimescene"]
+	path = Development/Applications/crimescene
+	url = https://bitbucket.org/jtalboom/crimescene.git
