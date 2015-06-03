@@ -14,6 +14,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VrDemos", "Applications\VrD
 		{C1C8BD19-EF70-44E0-A9B4-E11BAC4FB858} = {C1C8BD19-EF70-44E0-A9B4-E11BAC4FB858}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BulletPhysics", "Libraries\BulletPhysics\BulletPhysics.vcxproj", "{CA560089-F243-4A8D-9371-DDC350F0AA54}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -28,6 +30,10 @@ Global
 		{86C77F38-FE5D-4DAA-ABC5-B157AD41C3CD}.Debug|Win32.Build.0 = Debug|Win32
 		{86C77F38-FE5D-4DAA-ABC5-B157AD41C3CD}.Release|Win32.ActiveCfg = Release|Win32
 		{86C77F38-FE5D-4DAA-ABC5-B157AD41C3CD}.Release|Win32.Build.0 = Release|Win32
+		{CA560089-F243-4A8D-9371-DDC350F0AA54}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CA560089-F243-4A8D-9371-DDC350F0AA54}.Debug|Win32.Build.0 = Debug|Win32
+		{CA560089-F243-4A8D-9371-DDC350F0AA54}.Release|Win32.ActiveCfg = Release|Win32
+		{CA560089-F243-4A8D-9371-DDC350F0AA54}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -35,5 +41,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{C1C8BD19-EF70-44E0-A9B4-E11BAC4FB858} = {35F31874-6217-437D-9209-9FC783136E32}
 		{86C77F38-FE5D-4DAA-ABC5-B157AD41C3CD} = {3F01A017-F950-4285-9925-EAE9A90054F4}
+		{CA560089-F243-4A8D-9371-DDC350F0AA54} = {35F31874-6217-437D-9209-9FC783136E32}
 	EndGlobalSection
 EndGlobal

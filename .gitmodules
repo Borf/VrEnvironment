@@ -3,4 +3,7 @@
 	url = https://github.com/Borf/VrDemos.git
 [submodule "Development/Applications/crimescene"]
 	path = Development/Applications/crimescene
-	url = https://bitbucket.org/jtalboom/crimescene.git
+	url = https://bitbucket.org/jtalboom/crimescene
+[submodule "Development/Libraries"]
+	path = Development/Libraries
+	url = https://github.com/Borf/VrLibraries.git
