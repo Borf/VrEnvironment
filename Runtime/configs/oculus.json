@@ -8,8 +8,6 @@
 			"name" : "MainUserHead",
 			"type" : "positional",
 			"driver" : "oculus"
-//			"driver" :  "SimPosition",
-//			"src" : "Head"
 		},
 		{
 			"name" : "WandPosition",
@@ -199,15 +197,7 @@
                     "height": 1,
                     "eye": "both",
                     "user": "MainUser"
-                }/*,
-                {
-					"type" : "simulator",
-					"x" : 0.75,
-					"y" : 0.0,
-					"width" : 0.25,
-					"height" : 1,
-					"camera" : "CameraPosition"
-				}*/
+                }
 
 			]
 
