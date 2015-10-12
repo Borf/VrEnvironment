@@ -13,3 +13,6 @@
 [submodule "Development/Services/VrServer"]
 	path = Development/Services/VrServer
 	url = https://github.com/Borf/VrServer.git
+[submodule "Development/Applications/virtueelpdedit"]
+	path = Development/Applications/virtueelpdedit
+	url = https://bitbucket.org/jtalboom/virtueelpdedit.git

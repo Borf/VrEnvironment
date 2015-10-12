@@ -3,3 +3,4 @@ Development/Release/
 *.opensdf
 *.sdf
 Runtime/
+Development/.vs/config/applicationhost.config
