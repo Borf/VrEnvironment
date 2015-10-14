@@ -34,6 +34,7 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VirtueelPDEdit", "Applications\VirtueelPdEdit\VirtueelPdEdit.vcxproj", "{77FC0951-974F-4967-B473-DD47405EB406}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C1C8BD19-EF70-44E0-A9B4-E11BAC4FB858} = {C1C8BD19-EF70-44E0-A9B4-E11BAC4FB858}
+		{20F4C5F8-5FAB-4F18-AC71-51F8C0B49328} = {20F4C5F8-5FAB-4F18-AC71-51F8C0B49328}
 	EndProjectSection
 EndProject
 Global
