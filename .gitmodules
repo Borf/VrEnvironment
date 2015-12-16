@@ -16,3 +16,6 @@ url=https://bitbucket.org/jtalboom/virtueelpd.git
 [submodule "Development/Applications/virtueelpdedit"]
 	path = Development/Applications/virtueelpdedit
 	url = https://bitbucket.org/jtalboom/virtueelpdedit.git
+[submodule "Development/Applications/cellstroll"]
+	path = Development/Applications/cellstroll
+	url = https://bitbucket.org/jtalboom/cellstroll.git
