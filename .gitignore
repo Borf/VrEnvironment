@@ -4,3 +4,5 @@ Development/Release/
 *.sdf
 Runtime/
 Development/.vs/config/applicationhost.config
+Development/VrEnvironment.VC.opendb
+Development/packages/
