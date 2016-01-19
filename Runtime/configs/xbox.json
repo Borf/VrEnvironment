@@ -1,0 +1,113 @@
+{
+	"devices" :
+	[
+		{
+			"name" : "LeftThumbStickMagnitude",
+			"type" : "analog",
+			"driver" : "XBOX",
+			"src" : "LeftThumbStickMagnitude"
+		},
+		{
+			"name" : "RightThumbStickMagnitude",
+			"type" : "analog",
+			"driver" : "XBOX",
+			"src" : "RightThumbStickMagnitude"
+		},
+		{
+			"name" : "RightThumbStickAngle",
+			"type" : "analog",
+			"driver" : "XBOX",
+			"src" : "RightThumbStickAngle"
+		},
+		{
+			"name" : "RightThumbPos",
+			"type" : "twodimension",
+			"driver" : "XBOX",
+			"src" : "RightThumbPos"
+		},
+		{
+			"name" : "LeftThumbPos",
+			"type" : "twodimension",
+			"driver" : "XBOX",
+			"src" : "LeftThumbPos"
+		},
+		{
+			"name" : "LeftThumbStickAngle",
+			"type" : "analog",
+			"driver" : "XBOX",
+			"src" : "LeftThumbStickAngle"
+		},
+		{
+			"name" : "DPadUp",
+			"type" : "digital",
+			"driver" : "XBOX",
+			"src" : "DPadUp"
+		},
+		{
+			"name" : "DPadDown",
+			"type" : "digital",
+			"driver" : "XBOX",
+			"src" : "DPadDown"
+		},
+		{
+			"name" : "DPadRight",
+			"type" : "digital",
+			"driver" : "XBOX",
+			"src" : "DPadRight"
+		},
+		{
+			"name" : "DPadLeft",
+			"type" : "digital",
+			"driver" : "XBOX",
+			"src" : "DPadLeft"
+		},
+		{
+			"name" : "LeftTrigger",
+			"type" : "digital",
+			"driver" : "XBOX",
+			"src" : "LeftTrigger"
+		},
+		{
+			"name" : "StartButton",
+			"type" : "digital",
+			"driver" : "XBOX",
+			"src" : "StartButton"
+		},
+		{
+			"name" : "BackButton",
+			"type" : "digital",
+			"driver" : "XBOX",
+			"src" : "BackButton"
+		},
+		{
+			"name" : "XButton",
+			"type" : "digital",
+			"driver" : "XBOX",
+			"src" : "XButton"
+		},
+		{
+			"name" : "YButton",
+			"type" : "digital",
+			"driver" : "XBOX",
+			"src" : "YButton"
+		},
+		{
+			"name" : "AButton",
+			"type" : "digital",
+			"driver" : "XBOX",
+			"src" : "AButton"
+		},
+		{
+			"name" : "BButton",
+			"type" : "digital",
+			"driver" : "XBOX",
+			"src" : "BButton"
+		},
+		{
+			"name" : "RightTrigger",
+			"type" : "digital",
+			"driver" : "XBOX",
+			"src" : "RightTrigger"
+		}
+	]
+}
