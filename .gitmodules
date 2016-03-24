@@ -19,3 +19,9 @@ url=https://bitbucket.org/jtalboom/virtueelpd.git
 [submodule "Development/Applications/cellstroll"]
 	path = Development/Applications/cellstroll
 	url = https://bitbucket.org/jtalboom/cellstroll.git
+[submodule "Development/Applications/CaveQuake"]
+	path = Development/Applications/CaveQuake
+	url = https://github.com/Borf/CaveQuake.git
+[submodule "Development/Applications/CaveCraft"]
+	path = Development/Applications/CaveCraft
+	url = https://github.com/Borf/CaveCraft.git
