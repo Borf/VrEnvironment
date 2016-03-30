@@ -2,98 +2,43 @@
 	"computers" :
 	[
 		{
-			"host" : "PC121010",
-			"ip" : "192.168.2.199",
+			"host" : "CAVE-Control",
+			"ip" : "145.48.205.25",
 			"mode" : "master",
 			"window" : 
 			{
 				"title" : "VrCaveSimulator",
-				"x" : 2100,
+				"x" : 0,
 				"y" : 100,
-				"width" : 1700,
+				"width" : 1280,
 				"height" : 900,
 				"border" : true,
 				"vsync" : false
 			},
 			"viewports" :
 			[
-				/*{
-					"type" : "viewport",
-					"x" : 0.0,
-					"y" : 0.5,
-					"width" : 0.333,
-					"height" : 0.5,
-					"user" : "MainUser",
-					"eye" : "center",
-
-					"topleft" :		[ -1.5,	 0.8,  1.5 ],
-					"topright" :	[ -1.5,	 0.8, -1.5 ],
-					"bottomleft" :	[ -1.5,	-1.5,  1.5 ],
-					"bottomright" : [ -1.5, -1.5, -1.5 ]
-				},
-				{
-					"type" : "viewport",
-					"x" : 0.333,
-					"y" : 0.5,
-					"width" : 0.333,
-					"height" : 0.5,
-					"user" : "MainUser",
-					"eye" : "center",
-
-					"topleft" :		[ -1.5, 0.8, -1.5 ],
-					"topright" :	[  1.5, 0.8, -1.5 ],
-					"bottomleft" :	[ -1.5, -1.5,-1.5 ],
-					"bottomright" : [  1.5, -1.5,-1.5 ]
-				},
-				{
-					"type" : "viewport",
-					"x" : 0.666,
-					"y" : 0.5,
-					"width" : 0.333,
-					"height" : 0.5,
-					"user" : "MainUser",
-					"eye" : "center",
-
-					"topleft" :		[  1.5,  0.8, -1.5 ],
-					"topright" :	[  1.5,  0.8,  1.5 ],
-					"bottomleft" :	[  1.5, -1.5, -1.5 ],
-					"bottomright" : [  1.5, -1.5,  1.5 ]
-				},
-				{
-					"type" : "viewport",
-					"x" : 0.333,
-					"y" : 0.0,
-					"width" : 0.333,
-					"height" : 0.5,
-					"user" : "MainUser",
-					"eye" : "center",
-
-					"topleft" :		[ -1.5, -1.5, -1.5 ],
-					"topright" :	[  1.5, -1.5, -1.5 ],
-					"bottomleft" :	[ -1.5, -1.5,  0.75 ],
-					"bottomright" : [  1.5, -1.5,  0.75 ]
-				},*/
 				{
 					"type" : "simulator",
 					"x" : 0.0,
 					"y" : 0.0,
-					"width" : 0.333,
-					"height" : 0.5,
-					"camera" : "CameraPosition"
+					"width" : 1,
+					"height" : 1,
+					"camera" : "CameraPosition",
+					"user" : "MainUser"
 				}
 			]
 		},
 		{
-			"host" : "PC121006",
+			"host" : "CAVE-Front",
 			"mode" : "slave",
-			"ip" : "145.48.130.224",
+			"ip" : "145.48.205.26",
 			"window" : 
 			{
 				"title" : "Front",
 				"x" : 0,
 				"y" : 0,
-				"width" : 2800,
-				"height" : 1050,
+				"width" : 1280,
+				"height" : 1024,
 				"border" : false,
 				"vsync" : false
 			},
@@ -103,7 +48,7 @@
 					"type" : "viewport",
 					"x" : 0,
 					"y" : 0,
-					"width" : 0.5,
+					"width" : 1,
 					"height" : 1,
 					"user" : "MainUser",
 					"eye" : "left",
@@ -112,50 +57,20 @@
 					"topright" :	[  1.5, 0.8,  -1.5 ],
 					"bottomleft" :	[ -1.5, -1.5, -1.5 ],
 					"bottomright" : [  1.5, -1.5, -1.5 ]
-				},
-				{
-					"type" : "viewport",
-					"x" : 0.5,
-					"y" : 0,
-					"width" : 0.5,
-					"height" : 1,
-					"user" : "MainUser",
-					"eye" : "right",
-
-					"topleft" :		[ -1.5, 0.8,  -1.5 ],
-					"topright" :	[  1.5, 0.8,  -1.5 ],
-					"bottomleft" :	[ -1.5, -1.5, -1.5 ],
-					"bottomright" : [  1.5, -1.5, -1.5 ]
-				}/*,
-				{
-					"type" : "simulator",
-					"x" : 0.0,
-					"y" : 0.0,
-					"width" : 0.5,
-					"height" : 1.0,
-					"camera" : "CameraPosition"
-				},
-				{
-					"type" : "simulator",
-					"x" : 0.5,
-					"y" : 0.0,
-					"width" : 0.5,
-					"height" : 1.0,
-					"camera" : "CameraPosition"
-				}*/
+				}
 			]
 		},
 		{
-			"host" : "PC121007",
+			"host" : "CAVE-Right",
 			"mode" : "slave",
-			"ip" : "145.48.130.228",
+			"ip" : "145.48.205.27",
 			"window" : 
 			{
 				"title" : "Rechts",
 				"x" : 0,
 				"y" : 0,
-				"width" : 2800,
-				"height" : 1050,
+				"width" : 1280,
+				"height" : 1024,
 				"border" : false
 			},
 			"viewports" :
@@ -164,43 +79,29 @@
 					"type" : "viewport",
 					"x" : 0,
 					"y" : 0,
-					"width" : 0.5,
+					"width" : 1,
 					"height" : 1,
 					"user" : "MainUser",
 					"eye" : "right",
 
-					"topleft" :		[  1.5,  0.8, -1.5 ],
-					"topright" :	[  1.5,  0.8,  1.5 ],
-					"bottomleft" :	[  1.5, -1.5, -1.5 ],
-					"bottomright" : [  1.5, -1.5,  1.5 ]
-				},
-				{
-					"type" : "viewport",
-					"x" : 0.5,
-					"y" : 0,
-					"width" : 0.5,
-					"height" : 1,
-					"user" : "MainUser",
-					"eye" : "left",
-
-					"topleft" :		[  1.5,  0.8, -1.5 ],
-					"topright" :	[  1.5,  0.8,  1.5 ],
-					"bottomleft" :	[  1.5, -1.5, -1.5 ],
+					"topleft" :		[  1.5,	 0.8, -1.5 ],
+					"topright" :	[  1.5,	 0.8,  1.5 ],
+					"bottomleft" :	[  1.5,	-1.5, -1.5 ],
 					"bottomright" : [  1.5, -1.5,  1.5 ]
 				}
 			]
 		},
 		{
-			"host" : "PC121013",
+			"host" : "CAVE-Left",
 			"mode" : "slave",
-			"ip" : "145.48.130.225",
+			"ip" : "145.48.205.29",
 			"window" : 
 			{
 				"title" : "Links",
 				"x" : 0,
 				"y" : 0,
-				"width" : 2800,
-				"height" : 1050,
+				"width" : 1280,
+				"height" : 1024,
 				"border" : false
 			},
 			"viewports" :
@@ -209,7 +110,7 @@
 					"type" : "viewport",
 					"x" : 0,
 					"y" : 0,
-					"width" : 0.5,
+					"width" : 1,
 					"height" : 1,
 					"user" : "MainUser",
 					"eye" : "left",
@@ -218,65 +119,6 @@
 					"topright" :	[ -1.5,	 0.8, -1.5 ],
 					"bottomleft" :	[ -1.5,	-1.5,  1.5 ],
 					"bottomright" : [ -1.5, -1.5, -1.5 ]
-				},
-				{
-					"type" : "viewport",
-					"x" : 0.5,
-					"y" : 0,
-					"width" : 0.5,
-					"height" : 1,
-					"user" : "MainUser",
-					"eye" : "right",
-
-					"topleft" :		[ -1.5,	 0.8,  1.5 ],
-					"topright" :	[ -1.5,	 0.8, -1.5 ],
-					"bottomleft" :	[ -1.5,	-1.5,  1.5 ],
-					"bottomright" : [ -1.5, -1.5, -1.5 ]
-				}
-			]
-		},
-		{
-			"host" : "PC121015",
-			"mode" : "slave",
-			"ip" : "145.48.130.227",
-			"window" : 
-			{
-				"title" : "Vloer",
-				"x" : 0,
-				"y" : 0,
-				"width" : 2800,
-				"height" : 1050,
-				"border" : false
-			},
-			"viewports" :
-			[
-				{
-					"type" : "viewport",
-					"x" : 0,
-					"y" : 0,
-					"width" : 0.5,
-					"height" : 1,
-					"user" : "MainUser",
-					"eye" : "right",
-
-					"topleft" :		[ -1.5, -1.5, -1.5 ],
-					"topright" :	[  1.5, -1.5, -1.5 ],
-					"bottomleft" :	[ -1.5, -1.5,  0.75 ],
-					"bottomright" : [  1.5, -1.5,  0.75 ]
-				},
-				{
-					"type" : "viewport",
-					"x" : 0.5,
-					"y" : 0,
-					"width" : 0.5,
-					"height" : 1,
-					"user" : "MainUser",
-					"eye" : "left",
-
-					"topleft" :		[ -1.5, -1.5, -1.5 ],
-					"topright" :	[  1.5, -1.5, -1.5 ],
-					"bottomleft" :	[ -1.5, -1.5,  0.75 ],
-					"bottomright" : [  1.5, -1.5,  0.75 ]
 				}
 			]
 		}
@@ -284,24 +126,6 @@
 	],
 	"devices" :
 	[
-		{
-			"name" : "MainUserHead",
-			"type" : "positional",
-			"driver" : "vrpn",
-			"src" : "1"
-		},
-		{
-			"name" : "WandPosition",
-			"type" : "positional",
-			"driver" : "vrpn",
-			"src" : "0"
-		},
-		{
-			"name" : "CameraPosition",
-			"type" : "positional",
-			"driver" : "SimPosition",
-			"src" : "Camera"
-		},
 		{
 			"name" : "LeftButton",
 			"type" : "digital",
