@@ -121,6 +121,37 @@
 					"bottomright" : [ -1.5, -1.5, -1.5 ]
 				}
 			]
+		},
+		{
+			"host" : "CAVE-Floor",
+			"mode" : "slave",
+			"ip" : "145.48.205.28",
+			"window" : 
+			{
+				"title" : "Vloer",
+				"x" : 0,
+				"y" : 0,
+				"width" : 1280,
+				"height" : 1024,
+				"border" : false
+			},
+			"viewports" :
+			[
+				{
+					"type" : "viewport",
+					"x" : 0,
+					"y" : 0,
+					"width" : 1,
+					"height" : 1,
+					"user" : "MainUser",
+					"eye" : "left",
+
+					"topleft" :		[ -1.5, -1.5, -1.5 ],  
+					"topright" :	[  1.5, -1.5, -1.5 ],  
+					"bottomleft" :	[ -1.5, -1.5,  0.75 ],  
+					"bottomright" : [  1.5, -1.5,  0.75 ]  
+				}
+			]
 		}
 
 	],

@@ -25,3 +25,9 @@ url=https://bitbucket.org/jtalboom/virtueelpd.git
 [submodule "Development/Applications/CaveCraft"]
 	path = Development/Applications/CaveCraft
 	url = https://github.com/Borf/CaveCraft.git
+[submodule "Development/Applications/CaveStarter.net"]
+	path = Development/Applications/CaveStarter.net
+	url = https://github.com/Borf/CaveStarter.net.git
+[submodule "Development/Applications/CaveStarterControl.net"]
+	path = Development/Applications/CaveStarterControl.net
+	url = https://github.com/Borf/CaveStarterControl.net.git
