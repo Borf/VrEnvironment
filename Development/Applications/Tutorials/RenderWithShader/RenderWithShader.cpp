@@ -46,7 +46,7 @@ void RenderWithShader::draw(const glm::mat4 &projectionMatrix, const glm::mat4 &
 	shader->setUniform(Uniforms::diffuseColor, glm::vec4(1, 1, 1, 1));
 	shader->setUniform(Uniforms::textureFactor, 1.0f);
 	texture->bind();
-
+	//dit opbouwen moet natuurlijk niet ieder frame, maar voor 1 quad kan 't wel hier steeds
 	std::vector<vrlib::gl::VertexP3N3T2> verts;
 	vrlib::gl::VertexP3N3T2 vert;
 	vrlib::gl::setN3(vert, glm::vec3(0,0,1));
