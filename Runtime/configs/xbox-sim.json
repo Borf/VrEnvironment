@@ -88,8 +88,8 @@
 		{
 			"name" : "YButton",
 			"type" : "digital",
-			"driver" : "XBOX",
-			"src" : "YButton"
+			"driver" : "keyboard",
+			"src" : "y"
 		},
 		{
 			"name" : "AButton",

@@ -7,3 +7,4 @@ Development/.vs/config/applicationhost.config
 Development/VrEnvironment.VC.opendb
 Development/packages/
 Development/.vs/VrEnvironment/v14/.suo
+*.lastbuildstate
