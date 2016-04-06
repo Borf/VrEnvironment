@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="shaders">
+      <UniqueIdentifier>{95f550a6-9a9c-4ea0-aae1-81dc976c6e4f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ShadowMap.cpp">
@@ -26,5 +29,19 @@
     <ClInclude Include="ShadowMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\ShadowMap\shaders\default.vert">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="data\ShadowMap\shaders\shadowmap.frag">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="data\ShadowMap\shaders\shadowmap.vert">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="data\ShadowMap\shaders\default.frag">
+      <Filter>shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

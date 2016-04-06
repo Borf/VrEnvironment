@@ -42,9 +42,9 @@ void main()
 		visibility -= 0.15*(1.0-texture( s_shadowmap, vec3(shadowPos.xy + poissonDisk[index]/4000.0,  (shadowPos.z-bias)/shadowPos.w) ));
 	}
 	float light = 0.5 * diffuse + 0.5;
-	vec4 tex = visibility * mix(diffuseColor, texture2D(s_texture, texCoord), textureFactor);
+	vec4 tex = mix(diffuseColor, texture2D(s_texture, texCoord), textureFactor);
 	if(tex.a < 0.01)
 		discard;
-	fragColor.rgb = light * tex.rgb;
+	fragColor.rgb = visibility * light * tex.rgb;
 	fragColor.a = tex.a;
 }

@@ -39,6 +39,7 @@ void RenderWithShader::init()
 
 void RenderWithShader::draw(const glm::mat4 &projectionMatrix, const glm::mat4 &modelViewMatrix)
 {
+	glDisable(GL_CULL_FACE);
 	shader->use();
 	shader->setUniform(Uniforms::projectionMatrix, projectionMatrix);
 	shader->setUniform(Uniforms::viewMatrix, modelViewMatrix);
@@ -50,10 +51,10 @@ void RenderWithShader::draw(const glm::mat4 &projectionMatrix, const glm::mat4 &
 	std::vector<vrlib::gl::VertexP3N3T2> verts;
 	vrlib::gl::VertexP3N3T2 vert;
 	vrlib::gl::setN3(vert, glm::vec3(0,0,1));
-	vrlib::gl::setP3(vert, glm::vec3(-1, -1, 0)); vrlib::gl::setT2(vert, glm::vec2(0, 0)); verts.push_back(vert);
-	vrlib::gl::setP3(vert, glm::vec3(-1,  1, 0)); vrlib::gl::setT2(vert, glm::vec2(0, 4)); verts.push_back(vert);
-	vrlib::gl::setP3(vert, glm::vec3( 1,  1, 0)); vrlib::gl::setT2(vert, glm::vec2(4, 4)); verts.push_back(vert);
-	vrlib::gl::setP3(vert, glm::vec3( 1, -1, 0)); vrlib::gl::setT2(vert, glm::vec2(4, 0)); verts.push_back(vert);
+	vrlib::gl::setP3(vert, glm::vec3(-1, -1, -1)); vrlib::gl::setT2(vert, glm::vec2(0, 0)); verts.push_back(vert);
+	vrlib::gl::setP3(vert, glm::vec3(-1,  1, -1)); vrlib::gl::setT2(vert, glm::vec2(0, 4)); verts.push_back(vert);
+	vrlib::gl::setP3(vert, glm::vec3( 1,  1, -1)); vrlib::gl::setT2(vert, glm::vec2(4, 4)); verts.push_back(vert);
+	vrlib::gl::setP3(vert, glm::vec3( 1, -1, -1)); vrlib::gl::setT2(vert, glm::vec2(4, 0)); verts.push_back(vert);
 
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);

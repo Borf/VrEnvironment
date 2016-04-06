@@ -65,7 +65,8 @@ void ShadowMap::draw(const glm::mat4 &projectionMatrix, const glm::mat4 &modelVi
 
 	int viewport[4];
 	glGetIntegerv(GL_VIEWPORT, viewport);
-
+	glDisable(GL_SCISSOR_TEST);
+	
 	shadowMapShader->use();
 	shadowMapShader->setUniform(ShadowUniforms::projectionMatrix, shadowProjectionMatrix);
 	shadowMapShader->setUniform(ShadowUniforms::viewMatrix, shadowCameraMatrix);
@@ -83,6 +84,8 @@ void ShadowMap::draw(const glm::mat4 &projectionMatrix, const glm::mat4 &modelVi
 	});
 	shadowMapFbo->unbind();
 	glViewport(viewport[0], viewport[1], viewport[2], viewport[3]);
+	glEnable(GL_SCISSOR_TEST);
+	glScissor(viewport[0], viewport[1], viewport[2], viewport[3]);
 	glClearColor(0, 1, 0, 1);
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
@@ -103,26 +106,7 @@ void ShadowMap::draw(const glm::mat4 &projectionMatrix, const glm::mat4 &modelVi
 		shader->setUniform(Uniforms::modelMatrix, modelMatrix);
 	});
 
-/*	glUseProgram(0);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	glOrtho(-1, 1, -1, 1, -10, 10);
-	glDisable(GL_DEPTH_TEST);
-	glEnable(GL_TEXTURE_2D);
-	glDisable(GL_LIGHTING);
-	shadowMapFbo->use();
-	glBegin(GL_QUADS);
-		glTexCoord2f(0, 0); glVertex3f(-1, -1, 0);
-		glTexCoord2f(0, 0); glVertex3f(1,  -1, 0);
-		glTexCoord2f(0, 0); glVertex3f(1,   1, 0);
-		glTexCoord2f(0, 0); glVertex3f(-1,  1, 0);
-	glEnd();
-	glEnable(GL_DEPTH_TEST);
-	glBindTexture(GL_TEXTURE_2D, 0);*/
-
-
+	glDisable(GL_SCISSOR_TEST);
 }
 
 void ShadowMap::preFrame(double frameTime, double totalTime)

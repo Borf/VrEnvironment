@@ -87,6 +87,12 @@
   <ItemGroup>
     <ClInclude Include="ShadowMap.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="data\ShadowMap\shaders\default.frag" />
+    <None Include="data\ShadowMap\shaders\default.vert" />
+    <None Include="data\ShadowMap\shaders\shadowmap.frag" />
+    <None Include="data\ShadowMap\shaders\shadowmap.vert" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

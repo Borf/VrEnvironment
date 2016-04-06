@@ -3,7 +3,7 @@
 	[
 		{
 			"host" : "CAVE-Control",
-			"ip" : "145.48.205.25",
+			"ip" : "145.48.205.29",
 			"mode" : "master",
 			"window" : 
 			{
@@ -94,7 +94,7 @@
 		{
 			"host" : "CAVE-Left",
 			"mode" : "slave",
-			"ip" : "145.48.205.29",
+			"ip" : "145.48.205.38",
 			"window" : 
 			{
 				"title" : "Links",
