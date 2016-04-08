@@ -8,3 +8,6 @@ Development/VrEnvironment.VC.opendb
 Development/packages/
 Development/.vs/VrEnvironment/v14/.suo
 *.lastbuildstate
+*.tlog
+Development/Applications/Tutorials/AnimatedModel/Release/
+Thumbs.db
