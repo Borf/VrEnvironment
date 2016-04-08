@@ -5,6 +5,7 @@
 
 #include <VrLib/gl/Vertex.h>
 #include <vrlib/Model.h>
+#include <VrLib/models/AssimpModel.h>
 #include <vrlib/Texture.h>
 #include <VrLib/Log.h>
 using vrlib::Log;
@@ -39,7 +40,7 @@ void AnimatedModel::init()
 
 	model = vrlib::Model::getModel<vrlib::gl::VertexP3N3T2B4B4>("data/AnimatedModel/models/testgastje.fbx");
 	modelInstance = model->getInstance();
-
+	((vrlib::State*)modelInstance)->playAnimation("AnimStack::Armature|walk");
 
 	logger << "Initialized" << Log::newline;
 }
@@ -53,17 +54,17 @@ void AnimatedModel::draw(const glm::mat4 &projectionMatrix, const glm::mat4 &mod
 	shader->setUniform(Uniforms::textureFactor, 1.0f);
 	shader->setUniform(Uniforms::diffuseColor, glm::vec4(1, 1, 1, 1));
 	
-	
+
 	std::vector<glm::mat4> boneMatrices;
-	for (int i = 0; i < 50; i++)
+	for (int i = 0; i < 16; i++)
 		boneMatrices.push_back(glm::mat4());
 	shader->setUniform(Uniforms::boneMatrices, boneMatrices);
+
+	shader->setUniform(Uniforms::boneMatrices, ((vrlib::State*)modelInstance)->boneMatrices);
 	modelInstance->draw([this](const glm::mat4 &modelMatrix)
 	{
 		glm::mat4 matrix(modelMatrix);
-		matrix = glm::translate(matrix, glm::vec3(0, 0, -1.5f));
-		matrix = glm::scale(matrix, glm::vec3(0.5f, 0.5f, 0.5f));
-		shader->setUniform(Uniforms::modelMatrix, matrix);
+		shader->setUniform(Uniforms::modelMatrix, glm::mat4());
 	},
 		[this](const vrlib::Material &material)
 	{
@@ -84,7 +85,7 @@ void AnimatedModel::draw(const glm::mat4 &projectionMatrix, const glm::mat4 &mod
 
 void AnimatedModel::preFrame(double frameTime, double totalTime)
 {
-
+	modelInstance->update(frameTime / 1000.0f);
 }
 
 
