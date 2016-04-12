@@ -38,9 +38,11 @@ void AnimatedModel::init()
 	shader->use();
 	shader->setUniform(Uniforms::s_texture, 0);
 
-	model = vrlib::Model::getModel<vrlib::gl::VertexP3N3T2B4B4>("data/AnimatedModel/models/testgastje.fbx");
+	//model = vrlib::Model::getModel<vrlib::gl::VertexP3N3T2B4B4>("data/AnimatedModel/models/testgastje.fbx");
+	model = vrlib::Model::getModel<vrlib::gl::VertexP3N3T2B4B4>("data/AnimatedModel/models/rooster/rooster.fbx");
 	modelInstance = model->getInstance();
-	((vrlib::State*)modelInstance)->playAnimation("AnimStack::Armature|walk");
+	//((vrlib::State*)modelInstance)->playAnimation("AnimStack::Armature|walk");
+	((vrlib::State*)modelInstance)->playAnimation("Armature|Walking");
 
 	logger << "Initialized" << Log::newline;
 }
@@ -54,12 +56,8 @@ void AnimatedModel::draw(const glm::mat4 &projectionMatrix, const glm::mat4 &mod
 	shader->setUniform(Uniforms::textureFactor, 1.0f);
 	shader->setUniform(Uniforms::diffuseColor, glm::vec4(1, 1, 1, 1));
 	
-
-	std::vector<glm::mat4> boneMatrices;
-	for (int i = 0; i < 16; i++)
-		boneMatrices.push_back(glm::mat4());
-	shader->setUniform(Uniforms::boneMatrices, boneMatrices);
-
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	shader->setUniform(Uniforms::boneMatrices, ((vrlib::State*)modelInstance)->boneMatrices);
 	modelInstance->draw([this](const glm::mat4 &modelMatrix)
 	{

@@ -21,6 +21,6 @@ void main()
 	vec4 tex = mix(diffuseColor, texture2D(s_texture, texCoord), textureFactor);
 	if(tex.a < 0.01)
 		discard;
-	fragColor.rgb = light * tex.rgb * debugColor;
+	fragColor.rgb = light * tex.rgb;// * debugColor;
 	fragColor.a = tex.a;
 }
