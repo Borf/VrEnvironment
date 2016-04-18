@@ -1,0 +1,5 @@
+Author: Čestmír Dammer
+License: CC0
+
+This model was created for wonderful world of Kelgar. (www.kelgar.org)
+Diffuse UV Texture was derived from photo documentation by Rick Hoppmann.

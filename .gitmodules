@@ -9,7 +9,7 @@
 	url = https://github.com/Borf/VrLibraries.git
 [submodule "Development/Applications/virtueelpd"]
 	path = Development/Applications/virtueelpd
-url=https://bitbucket.org/jtalboom/virtueelpd.git
+	url=https://bitbucket.org/jtalboom/virtueelpd.git
 [submodule "Development/Services/VrServer"]
 	path = Development/Services/VrServer
 	url = https://github.com/Borf/VrServer.git
@@ -22,3 +22,15 @@ url=https://bitbucket.org/jtalboom/virtueelpd.git
 [submodule "Development/Applications/VirtualCell"]
 	path = Development/Applications/VirtualCell
 	url = https://bitbucket.org/ti_vr/virtualcell.git
+[submodule "Development/Applications/CaveQuake"]
+	path = Development/Applications/CaveQuake
+	url = https://github.com/Borf/CaveQuake.git
+[submodule "Development/Applications/CaveCraft"]
+	path = Development/Applications/CaveCraft
+	url = https://github.com/Borf/CaveCraft.git
+[submodule "Development/Applications/CaveStarter.net"]
+	path = Development/Applications/CaveStarter.net
+	url = https://github.com/Borf/CaveStarter.net.git
+[submodule "Development/Applications/CaveStarterControl.net"]
+	path = Development/Applications/CaveStarterControl.net
+	url = https://github.com/Borf/CaveStarterControl.net.git
