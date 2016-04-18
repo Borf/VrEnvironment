@@ -34,3 +34,6 @@
 [submodule "Development/Applications/CaveStarterControl.net"]
 	path = Development/Applications/CaveStarterControl.net
 	url = https://github.com/Borf/CaveStarterControl.net.git
+[submodule "Development/Applications/3dengine"]
+	path = Development/Applications/3dengine
+	url = https://bitbucket.org/ti_vr/3dengine.git
