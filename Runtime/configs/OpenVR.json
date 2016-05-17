@@ -7,10 +7,17 @@
 		{
 			"name" : "MainUserHead",
 			"type" : "positional",
-			"driver" : "openvr"
+			"driver" : "openvr",
+			"src" : "hmd"
 		},
 		{
 			"name" : "WandPosition",
+			"type" : "positional",
+			"driver" : "openvr",
+			"src" : "WandRight"
+		},	
+		{
+			"name" : "WandPositionLeft",
 			"type" : "positional",
 			"driver" : "openvr",
 			"src" : "WandLeft"
