@@ -119,7 +119,7 @@
 		{
 			"Head" :
 			{
-				"initial" : [ 0.0, 0.0, 0.0 ],
+				"initial" : [ 0.0, 1.5, 0.0 ],
 				"xneg" : "shift+a",
 				"xpos" : "shift+d",
 				"yneg" : "shift+z",
@@ -135,7 +135,7 @@
 			},
 			"Wand" :
 			{
-				"initial" : [ 0.0, 0.0, 0.0 ],
+				"initial" : [ 0.0, 1.5, 0.0 ],
 				"xneg" : "ctrl+a",
 				"xpos" : "ctrl+d",
 				"yneg" : "ctrl+z",
@@ -151,7 +151,7 @@
 			},
 			"Camera" :
 			{
-				"initial" : [ 0.0, -0.5, 3.5 ],
+				"initial" : [ 0.0, 1.5, 3.5 ],
 				"xneg" : "a",
 				"xpos" : "d",
 				"yneg" : "z",
