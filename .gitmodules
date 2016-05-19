@@ -37,3 +37,6 @@
 [submodule "Development/Applications/3dengine"]
 	path = Development/Applications/3dengine
 	url = https://bitbucket.org/ti_vr/3dengine.git
+[submodule "Development/Applications/chemicalstorage"]
+	path = Development/Applications/chemicalstorage
+	url = https://bitbucket.org/ti_vr/chemicalstorage.git
