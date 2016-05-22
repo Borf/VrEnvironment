@@ -10,6 +10,9 @@ namespace gl { class FBO; }
 
 class DeferredRenderer : public vrlib::Application
 {
+	vrlib::Model* environment;
+
+
 	vrlib::Model* model;
 	vrlib::Texture* texture;
 	enum class Uniforms

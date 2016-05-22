@@ -53,22 +53,25 @@ void DeferredRenderer::init()
 	postProcessShader->setUniform(PostProcessUniforms::s_normal, 1);
 	postProcessShader->setUniform(PostProcessUniforms::s_position, 2);
 
-	model = vrlib::Model::getModel<vrlib::gl::VertexP3N3T2>("data/DeferredRenderer/models/WoodenBox02.obj");
+
+	environment = vrlib::Model::getModel<vrlib::gl::VertexP3N3T2>("data/DeferredRenderer/models/crytek-sponza/sponza.obj");
+
+	model = vrlib::Model::getModel<vrlib::gl::VertexP3N3T2>("data/DeferredRenderer/models/mier.3ds");
 	texture = vrlib::Texture::loadCached("data/DeferredRenderer/textures/grid.png");
 
 	fbo = new vrlib::gl::FBO(2048, 2048, true, vrlib::gl::FBO::Color, vrlib::gl::FBO::Normal, vrlib::gl::FBO::Position);
 	logger << "Initialized" << Log::newline;
 
 
-	lights.push_back(Light(glm::vec3(0, 50, 0), 100, glm::vec4(1,1,1,1)));
-	for (int i = 0; i < 3; i++)
+	lights.push_back(Light(glm::vec3(0, 5, 0), 1000, glm::vec4(0.5f, 0.5f, 0.5f,1)));
+	for (int i = 0; i < 2; i++)
 	{
-		lights.push_back(Light(glm::vec3(5, 2, 5), 3.5 + sin(i), glm::vec4(1, 0, 0, 1)));
-		lights.push_back(Light(glm::vec3(5, 2, 5), 3.5 + sin(i), glm::vec4(0, 1, 0, 1)));
-		lights.push_back(Light(glm::vec3(5, 2, 5), 3.5 + sin(i), glm::vec4(0, 0, 1, 1)));
-		lights.push_back(Light(glm::vec3(5, 2, 5), 3.5 + sin(i), glm::vec4(0, 1, 1, 1)));
-		lights.push_back(Light(glm::vec3(5, 2, 5), 3.5 + sin(i), glm::vec4(1, 1, 0, 1)));
-		lights.push_back(Light(glm::vec3(5, 2, 5), 3.5 + sin(i), glm::vec4(1, 0, 1, 1)));
+		lights.push_back(Light(glm::vec3(5, 1 + 4 * i, 5), 2, glm::vec4(1, 0, 0, 1)));
+		lights.push_back(Light(glm::vec3(5, 1 + 4 * i, 5), 2, glm::vec4(0, 1, 0, 1)));
+		lights.push_back(Light(glm::vec3(5, 1 + 4 * i, 5), 2, glm::vec4(0, 0, 1, 1)));
+		lights.push_back(Light(glm::vec3(5, 1 + 4 * i, 5), 2, glm::vec4(0, 1, 1, 1)));
+		lights.push_back(Light(glm::vec3(5, 1 + 4 * i, 5), 2, glm::vec4(1, 1, 0, 1)));
+		lights.push_back(Light(glm::vec3(5, 1 + 4 * i, 5), 2, glm::vec4(1, 0, 1, 1)));
 	}
 }
 
@@ -97,16 +100,35 @@ void DeferredRenderer::draw(const glm::mat4 &projectionMatrix, const glm::mat4 &
 
 
 
-	for (int x = -10; x < 10; x++)
+	environment->draw([this](const glm::mat4 &modelMatrix)
 	{
-		for (int y = -10; y < 10; y++)
+		shader->setUniform(Uniforms::modelMatrix, glm::scale(glm::mat4(), glm::vec3(0.009, 0.009, 0.009)) * modelMatrix);
+	},
+		[this](const vrlib::Material &material)
+	{
+		if (material.texture)
+		{
+			shader->setUniform(Uniforms::textureFactor, 1.0f);
+			material.texture->bind();
+		}
+		else
+		{
+			shader->setUniform(Uniforms::textureFactor, 0.0f);
+			shader->setUniform(Uniforms::diffuseColor, material.color.diffuse);
+		}
+	});
+
+
+	for (int x = -5; x < 5; x++)
+	{
+		for (int y = -5; y < 5; y++)
 		{
 			model->draw([this, x, y](const glm::mat4 &modelMatrix)
 			{
 				glm::mat4 matrix;
 				matrix = glm::translate(matrix, glm::vec3(x, 0.2f, y));
-				matrix = glm::scale(matrix, glm::vec3(0.3f, 0.3f, 0.3f));
-				matrix = glm::rotate(matrix, (float)(sin(x/10.0f) + cos(y/4.0f)), glm::vec3(0, 1, 0));
+				matrix = glm::scale(matrix, glm::vec3(0.01f, 0.01f, 0.01f));
+				matrix = glm::rotate(matrix, (float)(sin(x/2.0f) + cos(y/1.5f)), glm::vec3(0, 1, 0));
 
 				shader->setUniform(Uniforms::modelMatrix, matrix * modelMatrix);
 			},
@@ -126,6 +148,7 @@ void DeferredRenderer::draw(const glm::mat4 &projectionMatrix, const glm::mat4 &
 		}
 	}
 
+	if(!environment)
 	{
 		shader->setUniform(Uniforms::modelMatrix, glm::mat4());
 		std::vector<vrlib::gl::VertexP3N3T2> verts;
