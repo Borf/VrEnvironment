@@ -1,4 +1,6 @@
-#version 150
+#version 330
+
+#include "common.glsl"
 
 uniform sampler2D s_color;
 uniform sampler2D s_normal;
@@ -22,7 +24,7 @@ void main()
 
     vec4 image = texture2D( s_color, texCoord );
     vec4 position = texture2D( s_position, texCoord );
-    vec3 normal = texture2D( s_normal, texCoord ).xyz;
+    vec3 normal = decodeNormal(texture2D( s_normal, texCoord ).xy);
     
 	float diffuse = 0;
 	float ambient = 0.1;
@@ -53,6 +55,7 @@ void main()
 
 
 
+
 //	distanceFac = 1;
 //	lightDir = vec3(1,1,1);
 
@@ -65,4 +68,7 @@ void main()
     //fragColor = distanceFac * (lightColor * max(dot(normal,lightDir),0.15) * image);// + pow(max(dot(normal,vHalfVector),0.0), 100) * 1.5);
 	fragColor = lightColor * (diffuse + ambient + specular) * image;
 	fragColor.a = 1;
+
+//	fragColor.rgb = abs(normal);
+
 }

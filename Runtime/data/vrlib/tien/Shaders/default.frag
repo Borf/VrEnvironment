@@ -1,4 +1,7 @@
-#version 150
+#version 330
+
+#include "common.glsl"
+
 
 uniform sampler2D s_texture;
 uniform vec4 diffuseColor;
@@ -11,6 +14,8 @@ out vec4 fragColor;
 out vec4 fragNormal;
 out vec4 fragPosition;
 
+
+
 void main()
 {
 	vec4 tex = mix(diffuseColor, texture2D(s_texture, texCoord), textureFactor);
@@ -19,7 +24,8 @@ void main()
 	fragColor.rgb = tex.rgb;
 	fragColor.a = tex.a;
 
-	fragNormal = vec4(normal,1);
+	fragNormal.xy = encodeNormal(normalize(normal));
+	//fragNormal.xyz = normalize(normal);
 	fragPosition = position;
 	fragPosition.a = 1;
 }
