@@ -25,7 +25,5 @@ void main()
 	fragColor.a = tex.a;
 
 	fragNormal.xy = encodeNormal(normalize(normal));
-	//fragNormal.xyz = normalize(normal);
-	fragPosition = position;
-	fragPosition.a = 1;
+	//fragPosition = position;
 }

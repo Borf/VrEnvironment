@@ -4,7 +4,12 @@
 
 uniform sampler2D s_color;
 uniform sampler2D s_normal;
-uniform sampler2D s_position;
+uniform sampler2D s_depth;
+
+uniform mat4 projectionMatrix;
+uniform mat4 modelViewMatrix;
+uniform mat4 projectionMatrixInv;
+uniform mat4 modelViewMatrixInv;
 
 in vec2 texCoord;
 
@@ -23,8 +28,12 @@ void main()
 	vec3 cameraPosition = vec3(0,1.5,-1);
 
     vec4 image = texture2D( s_color, texCoord );
-    vec4 position = texture2D( s_position, texCoord );
+    float depth = texture2D( s_depth, texCoord ).x;
     vec3 normal = decodeNormal(texture2D( s_normal, texCoord ).xy);
+
+			vec4 viewPos = vec4(texCoord.xy*2.0-1.0, depth*2.0-1.0, 1);
+			vec4 tempPos = modelViewMatrixInv * projectionMatrixInv * viewPos;
+			vec3 position = tempPos.xyz / tempPos.w;
     
 	float diffuse = 0;
 	float ambient = 0.1;
@@ -37,6 +46,8 @@ void main()
 			break;	
 		case 1: // point light
 			ambient = 0;
+
+
 			vec3 lightDir = lightPosition - position.xyz;
 			float len = length(lightDir);
 //		    if(len > lightRange)
@@ -68,7 +79,5 @@ void main()
     //fragColor = distanceFac * (lightColor * max(dot(normal,lightDir),0.15) * image);// + pow(max(dot(normal,vHalfVector),0.0), 100) * 1.5);
 	fragColor = lightColor * (diffuse + ambient + specular) * image;
 	fragColor.a = 1;
-
-//	fragColor.rgb = abs(normal);
-
+//	fragColor.rgb = position.xyz / 2.0;
 }

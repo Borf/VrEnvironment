@@ -2,6 +2,12 @@
 
 in vec2 a_position;
 
+
+uniform mat4 projectionMatrix;
+uniform mat4 modelViewMatrix;
+uniform mat4 projectionMatrixInv;
+uniform mat4 modelViewMatrixInv;
+
 out vec2 texCoord;
 
 void main()

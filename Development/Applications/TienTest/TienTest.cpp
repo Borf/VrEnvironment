@@ -88,6 +88,7 @@ void TienTest::preFrame(double frameTime, double totalTime)
 	{
 		auto t = movingLight->getComponent<vrlib::tien::components::Transform>();
 		t->position.x = 2 * cos(totalTime / 1000.0f + 0.31416 *i);
+		t->position.y = 1.5f + 1.0f * cos(totalTime / 1000.0f + 3.1416 *i);
 		t->position.z = 2 * sin(totalTime / 1000.0f + 0.31416 *i);
 		t->rotation = glm::quat(glm::vec3(0, -(totalTime / 1000.0f + 0.31416 *i), 0));
 		i++;
