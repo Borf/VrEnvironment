@@ -5,6 +5,7 @@
 #include <VrLib/tien/Node.h>
 #include <VrLib/tien/Renderer.h>
 #include <VrLib/tien/components/Transform.h>
+#include <VrLib/tien/components/TransformAttach.h>
 #include <VrLib/tien/components/ModelRenderer.h>
 #include <VrLib/tien/components/Camera.h>
 #include <VrLib/tien/components/Light.h>
@@ -24,53 +25,63 @@ TienTest::TienTest()
 void TienTest::init()
 {
 	leftButton.init("LeftButton");
+	mHead.init("MainUserHead");
 	renderer.init();
 	logger << "Initialized" << Log::newline;
 
 
 	{
 		vrlib::tien::Node* n = new vrlib::tien::Node("Main Camera", &renderer);
-		n->components.push_back(new vrlib::tien::components::Transform(glm::vec3(0, 0, 5)));
-		n->components.push_back(new vrlib::tien::components::Camera());
+		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0, 5)));
+		n->addComponent(new vrlib::tien::components::Camera());
+		n->addComponent(new vrlib::tien::components::TransformAttach(mHead));
 	}
 
 	{
 		vrlib::tien::Node* n = new vrlib::tien::Node("Sunlight", &renderer);
-		n->components.push_back(new vrlib::tien::components::Transform(glm::vec3(0, 0, 0)));
+		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(1, 1, 1)));
 		vrlib::tien::components::Light* light = new vrlib::tien::components::Light();
 		light->color = glm::vec4(1, 1, 0.8627f, 1);
 		light->intensity = 20.0f;
 		light->type = vrlib::tien::components::Light::Type::directional;
-		n->components.push_back(light);
+		n->addComponent(light);
 	}
 
 	for (int i = 0; i < 20; i++)
 	{
 		vrlib::tien::Node* n = new vrlib::tien::Node("MovingLight", &renderer);
-		n->components.push_back(new vrlib::tien::components::Transform(glm::vec3(0, 0.5, 0)));
+		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0.5, 0)));
+		if(i == 0)
+			n->addComponent(new vrlib::tien::components::TransformAttach(mHead));
+
 		vrlib::tien::components::Light* light = new vrlib::tien::components::Light();
 		light->color = glm::vec4(vrlib::util::randomHsv(), 1);
 		light->intensity = 20.0f;
 		light->range = 1;
 		light->type = vrlib::tien::components::Light::Type::point;
-		n->components.push_back(light);
+		n->addComponent(light);
 		movingLights.push_back(n);
 
 		{
 			vrlib::tien::Node* nn = new vrlib::tien::Node("box", n);
-			nn->components.push_back(new vrlib::tien::components::Transform(glm::vec3(0, -0.25, 0), glm::quat(), glm::vec3(0.25f, 0.25f, 0.25f)));
-			nn->components.push_back(new vrlib::tien::components::ModelRenderer("data/TienTest/models/WoodenBox02.obj"));
+			nn->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, -0.25, 0), glm::quat(), glm::vec3(0.25f, 0.25f, 0.25f)));
+			nn->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/WoodenBox02.obj"));
 		}
 	}
 
 	{
 		vrlib::tien::Node* n = new vrlib::tien::Node("Environment", &renderer);
-		n->components.push_back(new vrlib::tien::components::Transform(glm::vec3(0, 0, 0), glm::quat(glm::vec3(0, glm::radians(90.0f), 0)), glm::vec3(0.008f, 0.008f, 0.008f)));
-		n->components.push_back(new vrlib::tien::components::ModelRenderer("data/TienTest/models/crytek-sponza/sponza.obj"));
+		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0, 0), glm::quat(glm::vec3(0, glm::radians(90.0f), 0)), glm::vec3(0.008f, 0.008f, 0.008f)));
+		n->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/crytek-sponza/sponza.obj"));
 
-		//n->components.push_back(new vrlib::tien::components::Transform(glm::vec3(0, 13, 0), glm::quat(glm::vec3(0, glm::radians(90.0f), 0)), glm::vec3(0.8f, 0.8f, 0.8f)));
-		//n->components.push_back(new vrlib::tien::components::ModelRenderer("data/TienTest/models/cathedral/sibenik2.obj"));
-		
+//		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, -32, 0), glm::quat(glm::vec3(0, glm::radians(90.0f), 0)), glm::vec3(.5f, .5f, .5f)));
+//		n->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/Paris/Paris2010_0.obj"));
+
+//		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0, 0), glm::quat(glm::vec3(0, glm::radians(90.0f), 0)), glm::vec3(.5f, .5f, .5f)));
+//		n->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/Damaged Downtown/Downtown_Damage_2.obj"));
+
+		//n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 13, 0), glm::quat(glm::vec3(0, glm::radians(90.0f), 0)), glm::vec3(0.8f, 0.8f, 0.8f)));
+		//n->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/cathedral/sibenik2.obj"));
 	}
 
 

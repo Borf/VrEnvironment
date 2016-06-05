@@ -35,13 +35,14 @@ void main()
 	vec3 position = tempPos.xyz / tempPos.w;
     
 	float diffuse = 0;
-	float ambient = 0.1;
+	float ambient = 0;
 	float specular = 0;
 
 	switch(lightType) // directional light
 	{
 		case 0: // directional light
-			diffuse = max(0, dot(normalize(normal), normalize(vec3(1,1,1))));
+			diffuse = max(0, dot(normalize(normal), normalize(lightPosition.xyz)));
+			ambient = 0.25;
 			break;	
 		case 1: // point light
 			ambient = 0;

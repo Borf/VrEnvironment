@@ -8,6 +8,7 @@
 class TienTest : public vrlib::Application
 {
 	vrlib::DigitalDevice leftButton;
+	vrlib::PositionalDevice mHead;
 
 	vrlib::tien::Renderer renderer;
 
