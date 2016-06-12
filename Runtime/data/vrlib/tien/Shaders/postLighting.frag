@@ -42,19 +42,17 @@ void main()
 	{
 		case 0: // directional light
 			diffuse = max(0, dot(normalize(normal), normalize(lightPosition.xyz)));
-			ambient = 0.25;
+			ambient = 0.5;
 			break;	
 		case 1: // point light
 			ambient = 0;
 
 
 			vec3 lightDir = lightPosition - position.xyz;
-			float len = length(lightDir);
-//		    if(len > lightRange)
-//				discard;
-			float distanceFac = pow(1 - (len / lightRange), 1.0);
+			float distance = length(lightDir);
+
+			float distanceFac = pow(clamp((lightRange - distance) / lightRange, 0, 1), 1.5);
 			diffuse = distanceFac * clamp(dot(normalize(normal), normalize(lightDir)), 0, 1);
-			
 			break;	
 		case 2: // spotlight
 		

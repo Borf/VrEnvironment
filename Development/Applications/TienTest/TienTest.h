@@ -2,15 +2,17 @@
 
 #include <VrLib/Application.h>
 #include <VrLib/Device.h>
-#include <VrLib/tien/Renderer.h>
+#include <VrLib/tien/Tien.h>
+#include <VrLib/tien/Node.h>
 #include <list>
+#include <vector>
 
 class TienTest : public vrlib::Application
 {
 	vrlib::DigitalDevice leftButton;
 	vrlib::PositionalDevice mHead;
 
-	vrlib::tien::Renderer renderer;
+	vrlib::tien::Tien tien;
 
 	std::vector<vrlib::tien::Node*> movingLights;
 
