@@ -11,6 +11,8 @@ class TienTest : public vrlib::Application
 {
 	vrlib::DigitalDevice leftButton;
 	vrlib::PositionalDevice mHead;
+	vrlib::PositionalDevice  mWand;
+	vrlib::PositionalDevice  mWandLeft;
 
 	vrlib::tien::Tien tien;
 

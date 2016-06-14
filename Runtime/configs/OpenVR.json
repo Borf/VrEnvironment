@@ -57,66 +57,6 @@
 			"type" : "digital",
 			"driver" : "keyboard",
 			"src" : "pagedown"
-		},
-		{
-			"name" : "LeftLittle",
-			"type" : "analog",
-			"driver" : "glove",
-			"src" : "LeftLittle"
-		},
-		{
-			"name" : "LeftRing",
-			"type" : "analog",
-			"driver" : "glove",
-			"src" : "LeftRing"
-		},
-		{
-			"name" : "LeftMiddle",
-			"type" : "analog",
-			"driver" : "glove",
-			"src" : "LeftMiddle"
-		},
-		{
-			"name" : "LeftIndex",
-			"type" : "analog",
-			"driver" : "glove",
-			"src" : "LeftIndex"
-		},
-		{
-			"name" : "LeftThumb",
-			"type" : "analog",
-			"driver" : "glove",
-			"src" : "LeftThumb"
-		},
-		{
-			"name" : "RightLittle",
-			"type" : "analog",
-			"driver" : "glove",
-			"src" : "RightLittle"
-		},
-		{
-			"name" : "RightRing",
-			"type" : "analog",
-			"driver" : "glove",
-			"src" : "RightRing"
-		},
-		{
-			"name" : "RightMiddle",
-			"type" : "analog",
-			"driver" : "glove",
-			"src" : "RightMiddle"
-		},
-		{
-			"name" : "RightIndex",
-			"type" : "analog",
-			"driver" : "glove",
-			"src" : "RightIndex"
-		},
-		{
-			"name" : "RightThumb",
-			"type" : "analog",
-			"driver" : "glove",
-			"src" : "RightThumb"
 		}
 	],
 	"driverconfig" :
@@ -192,7 +132,8 @@
 				"y" : 0,
 				"width" : 1280,
 				"height" : 720,
-				"border" : false
+				"border" : true,
+				"cursor" : true
 			},
 			"viewports" :
 			[

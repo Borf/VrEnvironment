@@ -51,14 +51,31 @@ void ViveDemo::draw(const glm::mat4 &projectionMatrix, const glm::mat4 &modelVie
 	shader->setUniform(Uniforms::textureFactor, 1.0f);
 	shader->setUniform(Uniforms::diffuseColor, glm::vec4(1, 1, 1, 1));
 
-	glm::mat4 wand = mWand.getData();
+	glm::mat4 wandRight = mWand.getData();
+	glm::mat4 wandLeft = mWandLeft.getData();
 
-	model->draw([this, &wand](const glm::mat4 &modelMatrix)
+	model->draw([this, &wandRight](const glm::mat4 &modelMatrix)
 	{
 		glm::mat4 matrix(modelMatrix);
-		//matrix = glm::translate(matrix, glm::vec3(0, 0, -1.5f));
-		//matrix = glm::scale(matrix, glm::vec3(0.5f, 0.5f, 0.5f));
-		shader->setUniform(Uniforms::modelMatrix, wand * matrix);
+		shader->setUniform(Uniforms::modelMatrix, wandRight * matrix);
+	},
+		[this](const vrlib::Material &material)
+	{
+		if (material.texture)
+		{
+			shader->setUniform(Uniforms::textureFactor, 1.0f);
+			material.texture->bind();
+		}
+		else
+		{
+			shader->setUniform(Uniforms::textureFactor, 0.0f);
+			shader->setUniform(Uniforms::diffuseColor, material.color.diffuse);
+		}
+	});
+	model->draw([this, &wandLeft](const glm::mat4 &modelMatrix)
+	{
+		glm::mat4 matrix(modelMatrix);
+		shader->setUniform(Uniforms::modelMatrix, wandLeft * matrix);
 	},
 		[this](const vrlib::Material &material)
 	{

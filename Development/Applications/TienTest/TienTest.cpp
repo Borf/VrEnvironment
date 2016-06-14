@@ -27,6 +27,10 @@ TienTest::TienTest()
 
 void TienTest::init()
 {
+	mWand.init("WandPosition");
+	mWandLeft.init("WandPositionLeft");
+
+
 	leftButton.init("LeftButton");
 	mHead.init("MainUserHead");
 	tien.init();
@@ -57,6 +61,23 @@ void TienTest::init()
 		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, -.5f, 0)));
 		n->addComponent(new vrlib::tien::components::RigidBody(0));
 		n->addComponent(new vrlib::tien::components::BoxCollider(glm::vec3(50,1,50)));
+	}
+
+	{
+		vrlib::tien::Node* n = new vrlib::tien::Node("LeftHand", &scene);
+		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0,0,0)));
+		n->addComponent(new vrlib::tien::components::ModelRenderer("data/vrlib/rendermodels/vr_controller_vive_1_5/vr_controller_vive_1_5.obj"));
+		n->addComponent(new vrlib::tien::components::RigidBody(0));
+		n->addComponent(new vrlib::tien::components::BoxCollider(n));
+		n->addComponent(new vrlib::tien::components::TransformAttach(mWandLeft));
+	}
+	{
+		vrlib::tien::Node* n = new vrlib::tien::Node("RightHand", &scene);
+		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0, 0)));
+		n->addComponent(new vrlib::tien::components::ModelRenderer("data/vrlib/rendermodels/vr_controller_vive_1_5/vr_controller_vive_1_5.obj"));
+		n->addComponent(new vrlib::tien::components::RigidBody(0));
+		n->addComponent(new vrlib::tien::components::BoxCollider(n));
+		n->addComponent(new vrlib::tien::components::TransformAttach(mWand));
 	}
 
 
