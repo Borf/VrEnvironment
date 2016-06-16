@@ -17,7 +17,7 @@ class TienTest : public vrlib::Application
 	vrlib::tien::Tien tien;
 
 	std::vector<vrlib::tien::Node*> movingLights;
-
+	vrlib::tien::Node* sunLight;
 public:
 	TienTest();
 

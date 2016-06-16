@@ -135,7 +135,7 @@
 			},
 			"Wand" :
 			{
-				"initial" : [ 0.0, 1.5, 0.0 ],
+				"initial" : [ 0.0, 1.0, -0.25 ],
 				"xneg" : "ctrl+a",
 				"xpos" : "ctrl+d",
 				"yneg" : "ctrl+z",

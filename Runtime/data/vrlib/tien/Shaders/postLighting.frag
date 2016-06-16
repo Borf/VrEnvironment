@@ -46,8 +46,6 @@ void main()
 			break;	
 		case 1: // point light
 			ambient = 0;
-
-
 			vec3 lightDir = lightPosition - position.xyz;
 			float distance = length(lightDir);
 
@@ -62,25 +60,6 @@ void main()
 			break;
 	}
 
-
-
-
-
-//	distanceFac = 1;
-//	lightDir = vec3(1,1,1);
-
- //   normal = normalize(normal);
- //   lightDir = normalize(lightDir);
-    
-//    vec3 eyeDir = normalize(cameraPosition-position.xyz);
- //   vec3 vHalfVector = normalize(lightDir.xyz+eyeDir);
-    
-    //fragColor = distanceFac * (lightColor * max(dot(normal,lightDir),0.15) * image);// + pow(max(dot(normal,vHalfVector),0.0), 100) * 1.5);
 	fragColor = lightColor * (diffuse + ambient + specular) * image;
 	fragColor.a = 1;
-
-//	if(lightType == 1)
-//		fragColor.rgb = lightColor.xyz;
-
-
 }

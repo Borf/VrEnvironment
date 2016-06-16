@@ -53,6 +53,7 @@ void TienTest::init()
 		light->intensity = 20.0f;
 		light->type = vrlib::tien::components::Light::Type::directional;
 		n->addComponent(light);
+		sunLight = n;
 	}
 
 
@@ -67,7 +68,7 @@ void TienTest::init()
 		vrlib::tien::Node* n = new vrlib::tien::Node("LeftHand", &scene);
 		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0,0,0)));
 		n->addComponent(new vrlib::tien::components::ModelRenderer("data/vrlib/rendermodels/vr_controller_vive_1_5/vr_controller_vive_1_5.obj"));
-		n->addComponent(new vrlib::tien::components::RigidBody(0.2f));
+		n->addComponent(new vrlib::tien::components::RigidBody(0.1f));
 		n->addComponent(new vrlib::tien::components::BoxCollider(n));
 		n->addComponent(new vrlib::tien::components::TransformAttach(mWandLeft));
 	}
@@ -75,7 +76,7 @@ void TienTest::init()
 		vrlib::tien::Node* n = new vrlib::tien::Node("RightHand", &scene);
 		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0, 0)));
 		n->addComponent(new vrlib::tien::components::ModelRenderer("data/vrlib/rendermodels/vr_controller_vive_1_5/vr_controller_vive_1_5.obj"));
-		n->addComponent(new vrlib::tien::components::RigidBody(0.2f));
+		n->addComponent(new vrlib::tien::components::RigidBody(0.1f));
 		n->addComponent(new vrlib::tien::components::BoxCollider(n));
 		n->addComponent(new vrlib::tien::components::TransformAttach(mWand));
 	}
@@ -88,12 +89,13 @@ void TienTest::init()
 			vrlib::tien::Node* nn = new vrlib::tien::Node("box", &scene);
 			nn->addComponent(new vrlib::tien::components::Transform(glm::vec3(.3f * (x + .6 * y)-1, .25f * y+0.15f, -1), glm::quat(), glm::vec3(0.25f, 0.25f, 0.25f)));
 			nn->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/WoodenBox02.obj"));
+//			nn->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/normaltest/normaltest2.obj"));
 			nn->addComponent(new vrlib::tien::components::RigidBody(5));
 			nn->addComponent(new vrlib::tien::components::BoxCollider(nn));
 			
 
 
-			vrlib::tien::Node* n = new vrlib::tien::Node("LightUnderBox", nn);
+		/*	vrlib::tien::Node* n = new vrlib::tien::Node("LightUnderBox", nn);
 			n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0, 1)));
 			
 			vrlib::tien::components::Light* light = new vrlib::tien::components::Light();
@@ -101,7 +103,7 @@ void TienTest::init()
 			light->intensity = 20.0f;
 			light->range = 0.5;
 			light->type = vrlib::tien::components::Light::Type::point;
-			n->addComponent(light);
+			n->addComponent(light);*/
 		}
 	}
 
@@ -193,6 +195,10 @@ void TienTest::preFrame(double frameTime, double totalTime)
 		t->rotation = glm::quat(glm::vec3(0, -(totalTime / 1000.0f + 0.31416 *i), 0));
 		i++;
 	}
+
+	sunLight->getComponent<vrlib::tien::components::Transform>()->position = glm::normalize(glm::vec3(
+		cos(totalTime/1000.0f), 1, sin(totalTime / 1000.0f)));
+
 	tien.update(frameTime / 1000.0f);
 }
 
