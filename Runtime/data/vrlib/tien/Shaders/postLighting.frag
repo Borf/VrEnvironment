@@ -41,8 +41,8 @@ void main()
 	switch(lightType) // directional light
 	{
 		case 0: // directional light
-			diffuse = max(0, dot(normalize(normal), normalize(lightPosition.xyz)));
-			ambient = 0.5;
+			diffuse = max(0, dot(normalize(normal), normalize(lightPosition.xyz))) * 0.5;
+			ambient = 0.1;
 			break;	
 		case 1: // point light
 			ambient = 0;
@@ -62,4 +62,7 @@ void main()
 
 	fragColor = lightColor * (diffuse + ambient + specular) * image;
 	fragColor.a = 1;
+
+	//fragColor.rgb = normal.rgb;
+
 }
