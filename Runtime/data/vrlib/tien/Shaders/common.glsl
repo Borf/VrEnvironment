@@ -1,4 +1,4 @@
-#if 0
+#if 1
 
 vec3 encodeNormal(vec3 n) {
 	return n * 0.5 + 0.5;
@@ -11,9 +11,10 @@ vec3 decodeNormal(vec3 renc) {
 
 
 
-#if 1
+#if 0
 //Cry Engine 3
 //http://aras-p.info/texts/CompactNormalStorage.html
+//seems to work, but gives some noisy noise on some polygons
 vec2 encodeNormal(vec3 n) {
 	float p = sqrt(n.z*8+8);
 	return vec2(n.xy/p + 0.5);
@@ -34,7 +35,7 @@ vec3 decodeNormal(vec2 enc) {
 
 
 #if 0
-
+//didn't seem to work
 vec2 encodeNormal(vec3 n) {
 	return n.xy * inversesqrt(8 - 8 * n.z) + 0.5;
 }
@@ -106,4 +107,29 @@ vec3 decodeNormal (vec2 encodedNormal)
 	return v;
 }
 
+#endif
+
+
+#if 0
+//need to convert and test this
+half4 encode (half3 n)
+{
+    half scale = 1.7777;
+    half2 enc = n.xy / (n.z+1);
+    enc /= scale;
+    enc = enc*0.5+0.5;
+    return half4(enc,0,0);
+}
+half3 decode (half4 enc)
+{
+    half scale = 1.7777;
+    half3 nn =
+        enc.xyz*half3(2*scale,2*scale,0) +
+        half3(-scale,-scale,1);
+    half g = 2.0 / dot(nn.xyz,nn.xyz);
+    half3 n;
+    n.xy = g*nn.xy;
+    n.z = g-1;
+    return n;
+}
 #endif

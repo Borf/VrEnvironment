@@ -28,7 +28,7 @@ void main()
 
     vec4 image = texture2D( s_color, texCoord );
     float depth = texture2D( s_depth, texCoord ).x;
-    vec3 normal = decodeNormal(texture2D( s_normal, texCoord ).xy);
+    vec3 normal = normalize(decodeNormal(texture2D( s_normal, texCoord ).xyz));
 
 	vec4 viewPos = vec4(texCoord.xy*2.0-1.0, depth*2.0-1.0, 1);
 	vec4 tempPos = modelViewMatrixInv * projectionMatrixInv * viewPos;
@@ -63,6 +63,6 @@ void main()
 	fragColor = lightColor * (diffuse + ambient + specular) * image;
 	fragColor.a = 1;
 
-	//fragColor.rgb = normal.rgb;
+	//fragColor.rgb = abs(normal.rgb);
 
 }

@@ -25,11 +25,12 @@ uniform mat4 viewMatrix;
 
 void main()
 {
-	mat3 TBN = mat3( tangent,
-				bitangent,
-				normal);
+	mat3 TBN = mat3(	tangent,
+						bitangent,
+						normal);
 
-	vec3 n = normalize(TBN * normalize(2.0 * texture2D (s_normalmap, texCoord).rgb - 1.0).xyz);
+	vec3 n = normalize(2.0 * texture2D(s_normalmap, texCoord).rgb - 1);
+	n = TBN * n;
 
 	vec4 tex = mix(diffuseColor, texture2D(s_texture, texCoord), textureFactor);
 	if(tex.a < 0.01)
@@ -37,6 +38,6 @@ void main()
 	fragColor.rgb = tex.rgb;
 	fragColor.a = tex.a;
 
-	fragNormal.xy = encodeNormal(normalize(n));
+	fragNormal.xyz = encodeNormal(normalize(n));
 	//fragPosition = position;
 }
