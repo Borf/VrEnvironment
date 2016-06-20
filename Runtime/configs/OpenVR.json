@@ -41,22 +41,52 @@
 			"src" : "right"
 		},
 		{
-			"name" : "MiddleButton",
+			"name" : "buttonLeftMenu",
 			"type" : "digital",
-			"driver" : "keyboard",
-			"src" : "f5"
+			"driver" : "openvr",
+			"src" : "buttonLeftMenu"
 		},
 		{
-			"name" : "KeyPageUp",
+			"name" : "buttonLeftGrip",
 			"type" : "digital",
-			"driver" : "keyboard",
-			"src" : "pageup"
+			"driver" : "openvr",
+			"src" : "buttonLeftGrip"
 		},
 		{
-			"name" : "KeyPageDown",
+			"name" : "buttonLeftTouch",
 			"type" : "digital",
-			"driver" : "keyboard",
-			"src" : "pagedown"
+			"driver" : "openvr",
+			"src" : "buttonLeftTouch"
+		},
+		{
+			"name" : "buttonLeftTrigger",
+			"type" : "digital",
+			"driver" : "openvr",
+			"src" : "buttonLeftTrigger"
+		},
+		{
+			"name" : "buttonRightMenu",
+			"type" : "digital",
+			"driver" : "openvr",
+			"src" : "buttonRightMenu"
+		},
+		{
+			"name" : "buttonRightGrip",
+			"type" : "digital",
+			"driver" : "openvr",
+			"src" : "buttonRightGrip"
+		},
+		{
+			"name" : "buttonRightTouch",
+			"type" : "digital",
+			"driver" : "openvr",
+			"src" : "buttonRightTouch"
+		},
+		{
+			"name" : "buttonRightTrigger",
+			"type" : "digital",
+			"driver" : "openvr",
+			"src" : "buttonRightTrigger"
 		}
 	],
 	"driverconfig" :

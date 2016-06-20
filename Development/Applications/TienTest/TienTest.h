@@ -4,6 +4,7 @@
 #include <VrLib/Device.h>
 #include <VrLib/tien/Tien.h>
 #include <VrLib/tien/Node.h>
+#include <VrLib/HtcVive.h>
 #include <list>
 #include <vector>
 
@@ -44,6 +45,7 @@ class Bullet : public GameObject
 public:
 	Bullet(vrlib::tien::Node* node, Tower* src, Enemy* enemy) : src(src), targetEnemy(enemy) { this->node = node; }
 
+	bool dead = false;
 	Tower* src;
 	Enemy* targetEnemy;
 	glm::vec3 target;
@@ -52,10 +54,9 @@ public:
 
 class TienTest : public vrlib::Application
 {
+	vrlib::Vive	vive;
 	vrlib::DigitalDevice leftButton;
-	vrlib::PositionalDevice mHead;
-	vrlib::PositionalDevice  mWand;
-	vrlib::PositionalDevice  mWandLeft;
+
 
 	vrlib::tien::Tien tien;
 
@@ -66,6 +67,14 @@ class TienTest : public vrlib::Application
 	std::vector<glm::vec2> path;
 	std::vector<Tower*> towers;
 	std::vector<Bullet> bullets;
+
+	vrlib::tien::Node* leftHand;
+	vrlib::tien::Node* rightHand;
+
+	vrlib::tien::Node* archerTowerButton;
+	glm::vec3 newTowerPrevPosition;
+	vrlib::tien::Node* newTower;
+
 
 
 	int wave;
