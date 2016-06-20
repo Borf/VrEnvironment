@@ -28,12 +28,15 @@ void main()
 						bitangent,
 						normal);
 
-	vec3 n = normal;//normalize(2.0 * texture2D(s_normalmap, texCoord).rgb - 1);
-	//n = TBN * n;
+	vec3 n = normalize(2.0 * texture2D(s_normalmap, texCoord).rgb - 1);
+	n = TBN * n;
+
+	float mask = texture2D(s_mask, position.xz/128.0).r;
 
 	vec4 tex = texture2D(s_texture, texCoord);
-	fragColor.rgb = tex.rgb;
-	fragColor.a = texture2D(s_mask, position.xz/128.0).r;
+	fragColor.a = 1;
+	fragColor.rgb = tex.rgb * mask;
 
-	fragNormal.xyz = encodeNormal(normalize(n));
+	fragNormal.xyz = encodeNormal(n);
+	fragNormal.a = mask;
 }

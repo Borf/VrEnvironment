@@ -230,6 +230,12 @@ void TienTest::init()
 		t->shootTime = 0;
 		t->node = n;
 		towers.push_back(t);
+
+
+		vrlib::tien::Node* nn = new vrlib::tien::Node("ArcherTowerDude", n);
+		nn->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 2.5f, 0), glm::quat(), glm::vec3(0.001f, 0.001f, 0.001f)));
+		nn->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/dude/testgastje.fbx"));
+		
 	}
 
 	{
@@ -344,12 +350,12 @@ void TienTest::preFrame(double frameTime, double totalTime)
 				if (glm::distance(ep, tp) < towerTemplates[(int)t->type].range)
 				{
 					vrlib::tien::Node* n = new vrlib::tien::Node("Bullet", &tien.currentRunningScene);
-					n->addComponent(new vrlib::tien::components::Transform(t->node->getComponent<vrlib::tien::components::Transform>()->position + glm::vec3(0, 0.12, 0), glm::quat(glm::vec3(0, 0, 0)), glm::vec3(0.005f, 0.005f, 0.005f)));
+					n->addComponent(new vrlib::tien::components::Transform(t->node->getComponent<vrlib::tien::components::Transform>()->position + glm::vec3(0, 0.17, 0), glm::quat(glm::vec3(0, 0, 0)), glm::vec3(0.003f, 0.003f, 0.003f)));
 					n->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/bullet/bullet.obj"));
 					vrlib::tien::components::Light* l = new vrlib::tien::components::Light();
 					l->color = glm::vec4(1, 0, 0, 1);
 					l->type = vrlib::tien::components::Light::Type::point;
-					l->range = 0.15f;
+					l->range = 0.2f;
 					n->addComponent(l);
 
 

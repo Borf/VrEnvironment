@@ -38,6 +38,7 @@ void main()
 	fragColor.rgb = tex.rgb;
 	fragColor.a = tex.a;
 
+	fragNormal.a = 1;
 	fragNormal.xyz = encodeNormal(normalize(n));
 	//fragPosition = position;
 }
