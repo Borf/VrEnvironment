@@ -63,6 +63,4 @@ void main()
 	fragColor = lightColor * (diffuse + ambient + specular) * image;
 	fragColor.a = 1;
 
-	//fragColor.rgb = abs(normal.rgb);
-
 }

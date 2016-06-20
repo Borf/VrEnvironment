@@ -7,6 +7,49 @@
 #include <list>
 #include <vector>
 
+
+class GameObject
+{
+public:
+	glm::vec2 getPosition();
+	vrlib::tien::Node* node;
+};
+
+class Enemy : public GameObject
+{
+public:
+	int pathIndex;
+	float speed;
+	int health;
+};
+
+
+
+class Tower : public GameObject
+{
+public:
+	enum class Type
+	{
+		Archer = 0,
+		Bomb = 1,
+		Slow = 2,
+		Rapid
+	} type;
+	int level;
+	float shootTime;
+};
+
+class Bullet : public GameObject
+{
+public:
+	Bullet(vrlib::tien::Node* node, Tower* src, Enemy* enemy) : src(src), targetEnemy(enemy) { this->node = node; }
+
+	Tower* src;
+	Enemy* targetEnemy;
+	glm::vec3 target;
+};
+
+
 class TienTest : public vrlib::Application
 {
 	vrlib::DigitalDevice leftButton;
@@ -18,6 +61,20 @@ class TienTest : public vrlib::Application
 
 	std::vector<vrlib::tien::Node*> movingLights;
 	vrlib::tien::Node* sunLight;
+
+	std::vector<Enemy*> enemies;
+	std::vector<glm::vec2> path;
+	std::vector<Tower*> towers;
+	std::vector<Bullet> bullets;
+
+
+	int wave;
+	int spawnTotal;
+	float spawnDelay;
+
+	int spawnCount;
+	float nextSpawn;
+
 public:
 	TienTest();
 

@@ -4,6 +4,7 @@
 #include <fstream>
 
 #include <VrLib/tien/Scene.h>
+#include <VrLib/tien/Terrain.h>
 #include <VrLib/tien/components/Transform.h>
 #include <VrLib/tien/components/TransformAttach.h>
 #include <VrLib/tien/components/ModelRenderer.h>
@@ -11,6 +12,8 @@
 #include <VrLib/tien/components/RigidBody.h>
 #include <VrLib/tien/components/Camera.h>
 #include <VrLib/tien/components/Light.h>
+#include <VrLib/tien/components/TerrainRenderer.h>
+
 #include <VrLib/Model.h>
 #include <VrLib/Util.h>
 #include <VrLib/json.h>
@@ -18,6 +21,19 @@
 #include <VrLib/Log.h>
 using vrlib::Log;
 using vrlib::logger;
+
+
+class TowerTemplate
+{
+public:
+	float shootDelay;
+	int damage;
+	float range;
+} towerTemplates[3] = {
+	{ 1.0f, 3, 0.2f },
+	{ 2.0f, 2, 0.2f },
+	{ 1.5f, 1, 0.15f },
+};
 
 
 TienTest::TienTest()
@@ -87,23 +103,11 @@ void TienTest::init()
 		for (int x = 0; x < 7-y; x++)
 		{
 			vrlib::tien::Node* nn = new vrlib::tien::Node("box", &scene);
-			nn->addComponent(new vrlib::tien::components::Transform(glm::vec3(.3f * (x + .6 * y)-1, .25f * y+1.15f, -1.25), glm::quat(), glm::vec3(0.25f, 0.25f, 0.25f)));
+			nn->addComponent(new vrlib::tien::components::Transform(glm::vec3(.3f * (x + .6 * y)-1, .25f * y+.15f, -3.25), glm::quat(), glm::vec3(0.25f, 0.25f, 0.25f)));
 			nn->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/WoodenBox02.obj"));
-//			nn->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/normaltest/normaltest2.obj"));
 			nn->addComponent(new vrlib::tien::components::RigidBody(5));
 			nn->addComponent(new vrlib::tien::components::BoxCollider(nn));
-			
 
-
-		/*	vrlib::tien::Node* n = new vrlib::tien::Node("LightUnderBox", nn);
-			n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0, 1)));
-			
-			vrlib::tien::components::Light* light = new vrlib::tien::components::Light();
-			light->color = glm::vec4(vrlib::util::randomHsv(), 1);
-			light->intensity = 20.0f;
-			light->range = 0.5;
-			light->type = vrlib::tien::components::Light::Type::point;
-			n->addComponent(light);*/
 		}
 	}
 
@@ -167,12 +171,6 @@ void TienTest::init()
 			light->range = 1;
 			light->type = vrlib::tien::components::Light::Type::point;
 			n->addComponent(light);
-		/*	{
-				vrlib::tien::Node* nn = new vrlib::tien::Node("box", n);
-				nn->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0, 0), glm::quat(), glm::vec3(0.25f, 0.25f, 0.25f)));
-				nn->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/bulb/bulb.obj"));
-			}*/
-
 		}
 
 	{
@@ -188,18 +186,6 @@ void TienTest::init()
 
 	{
 		vrlib::tien::Node* n = new vrlib::tien::Node("Environment", &scene);
-//		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0, 0), glm::quat(glm::vec3(0, glm::radians(90.0f), 0)), glm::vec3(0.008f, 0.008f, 0.008f)));
-//		n->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/crytek-sponza/sponza.obj"));
-
-//		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, -32, 0), glm::quat(glm::vec3(0, glm::radians(90.0f), 0)), glm::vec3(.5f, .5f, .5f)));
-//		n->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/Paris/Paris2010_0.obj"));
-
-//		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0, 0), glm::quat(glm::vec3(0, glm::radians(90.0f), 0)), glm::vec3(.5f, .5f, .5f)));
-//		n->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/Damaged Downtown/Downtown_Damage_2.obj"));
-
-//n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 13, 0), glm::quat(glm::vec3(0, glm::radians(90.0f), 0)), glm::vec3(0.8f, 0.8f, 0.8f)));
-//n->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/cathedral/sibenik2.obj"));
-
 		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0, 0), glm::quat(glm::vec3(0, 0, 0)), glm::vec3(1.0f, 1.f, 1.f)));
 		n->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/Room/Room.obj"));
 	}
@@ -219,6 +205,62 @@ void TienTest::init()
 	}
 
 
+	{
+		vrlib::tien::Node* n = new vrlib::tien::Node("Terrain", &scene);
+		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(-.8f,0.85f,-1.81f), glm::quat(), glm::vec3(0.013f, 0.013f, 0.013f)));
+		auto terrainRenderer = new vrlib::tien::components::TerrainRenderer(new vrlib::tien::Terrain("data/TienTest/Textures/heightmap.png"));
+		terrainRenderer->addMaterialLayer("data/TienTest/textures/grass_diffuse.png", "data/TienTest/textures/grass_normal.png", "data/TienTest/textures/grass_mask.png");
+		terrainRenderer->addMaterialLayer("data/TienTest/textures/ground_diffuse.png", "data/TienTest/textures/ground_normal.png", "data/TienTest/textures/ground_mask.png");
+		n->addComponent(terrainRenderer);
+	}
+
+	{
+		vrlib::tien::Node* n = new vrlib::tien::Node("Tower", &scene);
+		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(.64f, 0.88f, -1.60f), glm::quat(), glm::vec3(0.0005f, 0.0005f, 0.0005f)));
+		n->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/Tower/tower.obj"));
+	}
+
+
+	{
+		vrlib::tien::Node* n = new vrlib::tien::Node("ArcherTower", &scene);
+		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(-.4f, 0.85f, -.52f), glm::quat(), glm::vec3(0.05f, 0.05f, 0.05f)));
+		n->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/ArcherTower/archertower.obj"));
+		Tower* t = new Tower();
+		t->type = Tower::Type::Archer;
+		t->shootTime = 0;
+		t->node = n;
+		towers.push_back(t);
+	}
+
+	{
+		vrlib::tien::Node* n = new vrlib::tien::Node("ArcherTower", &scene);
+		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(-.1f, 0.85f, -.52f), glm::quat(), glm::vec3(0.05f, 0.05f, 0.05f)));
+		n->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/ArcherTower/archertower.obj"));
+		Tower* t = new Tower();
+		t->type = Tower::Type::Archer;
+		t->shootTime = 0;
+		t->node = n;
+		towers.push_back(t);
+	}
+
+
+	path.push_back(glm::vec2(-.55f, -1.6f));
+	path.push_back(glm::vec2(-.55f, -.4f));
+	path.push_back(glm::vec2(0.57f, -.4f));
+	path.push_back(glm::vec2(0.57f, -.8f));
+	path.push_back(glm::vec2(-.075f, -.8f));
+	path.push_back(glm::vec2(-.075f, -1.15f));
+	path.push_back(glm::vec2(0.65f, -1.2f));
+	path.push_back(glm::vec2(0.65f, -1.7f));
+
+	wave = 1;
+	spawnTotal = 10;
+	spawnDelay = 0.75f;
+
+	spawnCount = 0;
+	nextSpawn = 10;
+
+
 	tien.currentScene = scene;
 	tien.start();
 	//tien.pause();
@@ -232,21 +274,116 @@ void TienTest::draw(const glm::mat4 &projectionMatrix, const glm::mat4 &modelVie
 
 void TienTest::preFrame(double frameTime, double totalTime)
 {
-	int i = 0;
-	for (auto movingLight : movingLights)
+	sunLight->getComponent<vrlib::tien::components::Transform>()->position = glm::normalize(glm::vec3(
+		cos(totalTime/1000.0f), 1, sin(totalTime / 1000.0f)));
+
+
+	for (Enemy* e : enemies)
 	{
-		auto t = movingLight->getComponent<vrlib::tien::components::Transform>();
-		t->position.x = 2 * cos(totalTime / 1000.0f + 0.31416 *i);
-		t->position.y = 1.5f + 1.0f * cos(totalTime / 1000.0f + 3.1416 *i);
-		t->position.z = 2 * sin(totalTime / 1000.0f + 0.31416 *i);
-		t->rotation = glm::quat(glm::vec3(0, -(totalTime / 1000.0f + 0.31416 *i), 0));
-		i++;
+		auto t = e->node->getComponent<vrlib::tien::components::Transform>();
+		glm::vec3 target = glm::vec3(path[e->pathIndex + 1].x, 0.85f, path[e->pathIndex + 1].y);
+		t->lookAt(target, glm::vec3(0, 1, 0));
+		t->rotate(glm::vec3(0, glm::radians(90.0f), 0));
+		if (t->moveTo(target, (float)(frameTime/1000.0f * e->speed)))
+		{
+			if(e->pathIndex < (int)path.size()-2)
+				e->pathIndex++;
+		}
 	}
 
-	//sunLight->getComponent<vrlib::tien::components::Transform>()->position = glm::normalize(glm::vec3(
-	//	cos(totalTime/1000.0f), 1, sin(totalTime / 1000.0f)));
 
-	tien.update(frameTime / 1000.0f);
+	nextSpawn -= (float)frameTime / 1000.0f;
+	if (nextSpawn <= 0)
+	{
+		if (spawnCount < spawnTotal)
+		{
+			logger << "Spawning enemy" << Log::newline;
+			{
+				vrlib::tien::Node* n = new vrlib::tien::Node("Enemy", &tien.currentRunningScene);
+				n->addComponent(new vrlib::tien::components::Transform(glm::vec3(-.55f, 0.85f, -1.60f), glm::quat(glm::vec3(0, glm::radians(-90.0f), 0)), glm::vec3(0.02f, 0.02f, 0.02f)));
+				n->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/mier.3ds"));
+				Enemy* e = new Enemy();
+				e->node = n;
+				e->pathIndex = 0;
+				e->speed = 0.1f;
+				e->health = 5;
+				enemies.push_back(e);
+			}
+
+			spawnCount++;
+			nextSpawn = spawnDelay;
+		}
+	}
+
+	for (auto t : towers)
+	{
+		t->shootTime = glm::max(0.0f, (float)(t->shootTime - frameTime / 1000.0f));
+		if (t->shootTime <= 0)
+		{
+			glm::vec2 tp = t->getPosition();
+			int i = 0;
+			for (Enemy* e : enemies)
+			{
+				glm::vec2 ep = e->getPosition();
+
+				if (glm::distance(ep, tp) < towerTemplates[(int)t->type].range)
+				{
+					vrlib::tien::Node* n = new vrlib::tien::Node("Bullet", &tien.currentRunningScene);
+					n->addComponent(new vrlib::tien::components::Transform(t->node->getComponent<vrlib::tien::components::Transform>()->position + glm::vec3(0,0.12,0), glm::quat(glm::vec3(0, 0, 0)), glm::vec3(0.005f, 0.005f, 0.005f)));
+					n->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/bullet/bullet.obj"));
+					vrlib::tien::components::Light* l = new vrlib::tien::components::Light();
+					l->color = glm::vec4(1, 0, 0, 1);
+					l->type = vrlib::tien::components::Light::Type::point;
+					l->range = 0.15f;
+					n->addComponent(l);
+
+
+					bullets.push_back(Bullet(n, t, e));
+					logger << "Shoot!" << Log::newline;
+					t->shootTime = towerTemplates[(int)t->type].shootDelay;
+					break;
+				}
+				i++;
+			}
+		}
+	}
+
+	for (int i = 0; i < (int)bullets.size(); i++)
+	{
+		Bullet &b = bullets[i];
+
+		glm::vec3 target = b.target;
+		if (b.targetEnemy)
+			target = b.targetEnemy->node->getComponent<vrlib::tien::components::Transform>()->position;
+		if (b.node->getComponent<vrlib::tien::components::Transform>()->moveTo(target, (float)frameTime/1000.0f))
+		{
+			logger << "Hit!" << Log::newline;
+			if (b.targetEnemy)
+			{
+				Enemy* e = b.targetEnemy;
+				e->health -= towerTemplates[(int)b.src->type].damage;
+				if (e->health <= 0)
+				{
+					delete e->node;
+					enemies.erase(std::find(enemies.begin(), enemies.end(), e));
+					logger << "Enemy Die" << Log::newline;
+					//enemy die
+				}
+			}
+			delete b.node;
+			bullets.erase(bullets.begin()+i);
+			i--;
+		}
+	}
+
+
+
+
+	tien.update((float)(frameTime / 1000.0f));
 }
 
-
+glm::vec2 GameObject::getPosition()
+{
+	glm::vec3 pos = node->getComponent<vrlib::tien::components::Transform>()->position;
+	return glm::vec2(pos.x, pos.z);
+}
