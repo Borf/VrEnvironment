@@ -1,7 +1,8 @@
 #include "TienTest.h"
 
-#include <gl/glew.h>
+#include <GL/glew.h>
 #include <fstream>
+#include <algorithm>
 
 #include <VrLib/tien/Scene.h>
 #include <VrLib/tien/Terrain.h>
@@ -15,7 +16,7 @@
 #include <VrLib/tien/components/TerrainRenderer.h>
 
 #include <VrLib/Model.h>
-#include <VrLib/Util.h>
+#include <VrLib/util.h>
 #include <VrLib/json.h>
 
 #include <VrLib/Log.h>
