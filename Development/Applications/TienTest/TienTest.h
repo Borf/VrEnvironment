@@ -74,6 +74,7 @@ class TienTest : public vrlib::Application
 	vrlib::tien::Node* archerTowerButton;
 	glm::vec3 newTowerPrevPosition;
 	vrlib::tien::Node* newTower;
+	float newTowerTime;
 
 
 

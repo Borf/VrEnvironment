@@ -211,6 +211,8 @@ void TienTest::init()
 		terrainRenderer->addMaterialLayer("data/TienTest/textures/grass_diffuse.png", "data/TienTest/textures/grass_normal.png", "data/TienTest/textures/grass_mask.png");
 		terrainRenderer->addMaterialLayer("data/TienTest/textures/ground_diffuse.png", "data/TienTest/textures/ground_normal.png", "data/TienTest/textures/ground_mask.png");
 		n->addComponent(terrainRenderer);
+		n->addComponent(new vrlib::tien::components::RigidBody(0));
+		n->addComponent(new vrlib::tien::components::TerrainCollider(n));
 	}
 
 	{
@@ -238,20 +240,6 @@ void TienTest::init()
 		nn->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/dude/testgastje.fbx"));
 		
 	}
-
-	{
-		vrlib::tien::Node* n = new vrlib::tien::Node("ArcherTower", &scene);
-		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(-.1f, 0.85f, -.52f), glm::quat(), glm::vec3(0.05f, 0.05f, 0.05f)));
-		n->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/ArcherTower/archertower.obj"));
-		n->addComponent(new vrlib::tien::components::RigidBody(0));
-		n->addComponent(new vrlib::tien::components::BoxCollider(n));
-		Tower* t = new Tower();
-		t->type = Tower::Type::Archer;
-		t->shootTime = 0;
-		t->node = n;
-		towers.push_back(t);
-	}
-
 
 	{
 		vrlib::tien::Node* n = new vrlib::tien::Node("ArcherTowerButton", &scene);
@@ -462,17 +450,29 @@ void TienTest::preFrame(double frameTime, double totalTime)
 		glm::vec3 pos = newTower->getComponent<vrlib::tien::components::Transform>()->position;
 		if (glm::distance(pos, newTowerPrevPosition) < 0.0001f && newTower->getComponent<vrlib::tien::components::RigidBody>()->body->getLinearVelocity().length() < 0.01f)
 		{
-			Tower* t = new Tower();
-			t->node = newTower;
-			t->level = 1;
-			t->type = Tower::Type::Archer;
-			t->shootTime = 0;
-			towers.push_back(t);
-			newTower->getComponent<vrlib::tien::components::RigidBody>()->body->setMassProps(0, btVector3(0, 0, 0));
-			newTower->getComponent<vrlib::tien::components::RigidBody>()->body->setCollisionFlags(btCollisionObject::CF_KINEMATIC_OBJECT);
-			newTower->getComponent<vrlib::tien::components::RigidBody>()->body->setGravity(btVector3(0, 0, 0));
-			newTower = nullptr;
+			newTowerTime -= frameTime / 1000.0f;
+			if (newTowerTime < 0)
+			{
+				Tower* t = new Tower();
+				t->node = newTower;
+				t->level = 1;
+				t->type = Tower::Type::Archer;
+				t->shootTime = 0;
+				towers.push_back(t);
+				newTower->getComponent<vrlib::tien::components::RigidBody>()->body->setMassProps(0, btVector3(0, 0, 0));
+				newTower->getComponent<vrlib::tien::components::RigidBody>()->body->setCollisionFlags(btCollisionObject::CF_KINEMATIC_OBJECT);
+				newTower->getComponent<vrlib::tien::components::RigidBody>()->body->setGravity(btVector3(0, 0, 0));
+
+				vrlib::tien::Node* nn = new vrlib::tien::Node("ArcherTowerDude", newTower);
+				nn->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 2.5f, 0), glm::quat(), glm::vec3(0.001f, 0.001f, 0.001f)));
+				nn->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/dude/testgastje.fbx"));
+
+
+				newTower = nullptr;
+			}
 		}
+		else
+			newTowerTime = 2;
 		newTowerPrevPosition = pos;
 	}
 
@@ -489,6 +489,7 @@ void TienTest::preFrame(double frameTime, double totalTime)
 			n->addComponent(new vrlib::tien::components::RigidBody(0.0f));
 			n->addComponent(new vrlib::tien::components::BoxCollider(n));
 			newTower = n;
+			newTowerTime = 2;
 		}
 	}
 
