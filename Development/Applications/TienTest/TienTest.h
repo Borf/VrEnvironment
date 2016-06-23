@@ -71,6 +71,8 @@ class TienTest : public vrlib::Application
 	vrlib::tien::Node* leftHand;
 	vrlib::tien::Node* rightHand;
 
+	vrlib::tien::Node* terrain;
+
 	vrlib::tien::Node* archerTowerButton;
 	glm::vec3 newTowerPrevPosition;
 	vrlib::tien::Node* newTower;

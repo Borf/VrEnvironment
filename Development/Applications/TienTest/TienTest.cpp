@@ -10,6 +10,7 @@
 #include <VrLib/tien/components/TransformAttach.h>
 #include <VrLib/tien/components/ModelRenderer.h>
 #include <VrLib/tien/components/BoxCollider.h>
+#include <VrLib/tien/components/TerrainCollider.h>
 #include <VrLib/tien/components/RigidBody.h>
 #include <VrLib/tien/components/Camera.h>
 #include <VrLib/tien/components/Light.h>
@@ -18,6 +19,7 @@
 #include <VrLib/Model.h>
 #include <VrLib/util.h>
 #include <VrLib/json.h>
+#include <VrLib/math/Ray.h>
 
 #include <VrLib/Log.h>
 using vrlib::Log;
@@ -50,16 +52,15 @@ void TienTest::init()
 
 	newTower = nullptr;
 
-	vrlib::tien::Scene scene;
 	{
-		vrlib::tien::Node* n = new vrlib::tien::Node("Main Camera", &scene);
+		vrlib::tien::Node* n = new vrlib::tien::Node("Main Camera", &tien.currentScene);
 		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0, 5)));
 		n->addComponent(new vrlib::tien::components::Camera());
 		//		n->addComponent(new vrlib::tien::components::TransformAttach(mHead));
 	}
 
 	{
-		vrlib::tien::Node* n = new vrlib::tien::Node("Sunlight", &scene);
+		vrlib::tien::Node* n = new vrlib::tien::Node("Sunlight", &tien.currentScene);
 		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(1, 1, 1)));
 		vrlib::tien::components::Light* light = new vrlib::tien::components::Light();
 		light->color = glm::vec4(1, 1, 0.8627f, 1);
@@ -71,14 +72,14 @@ void TienTest::init()
 
 
 	{
-		vrlib::tien::Node* n = new vrlib::tien::Node("FloorCollider", &scene);
+		vrlib::tien::Node* n = new vrlib::tien::Node("FloorCollider", &tien.currentScene);
 		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, -.5f, 0)));
 		n->addComponent(new vrlib::tien::components::RigidBody(0));
 		n->addComponent(new vrlib::tien::components::BoxCollider(glm::vec3(50, 1, 50)));
 	}
 
 	{
-		vrlib::tien::Node* n = new vrlib::tien::Node("LeftHand", &scene);
+		vrlib::tien::Node* n = new vrlib::tien::Node("LeftHand", &tien.currentScene);
 		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0, 0)));
 		n->addComponent(new vrlib::tien::components::ModelRenderer("data/vrlib/rendermodels/vr_controller_vive_1_5/vr_controller_vive_1_5.obj"));
 		n->addComponent(new vrlib::tien::components::RigidBody(0));
@@ -87,7 +88,7 @@ void TienTest::init()
 		leftHand = n;
 	}
 	{
-		vrlib::tien::Node* n = new vrlib::tien::Node("RightHand", &scene);
+		vrlib::tien::Node* n = new vrlib::tien::Node("RightHand", &tien.currentScene);
 		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0, 0)));
 		n->addComponent(new vrlib::tien::components::ModelRenderer("data/vrlib/rendermodels/vr_controller_vive_1_5/vr_controller_vive_1_5.obj"));
 		n->addComponent(new vrlib::tien::components::RigidBody(0));
@@ -101,7 +102,7 @@ void TienTest::init()
 	{
 		for (int x = 0; x < 7 - y; x++)
 		{
-			vrlib::tien::Node* nn = new vrlib::tien::Node("box", &scene);
+			vrlib::tien::Node* nn = new vrlib::tien::Node("box", &tien.currentScene);
 			nn->addComponent(new vrlib::tien::components::Transform(glm::vec3(.3f * (x + .6 * y) - 1, .25f * y + .15f, -3.25), glm::quat(), glm::vec3(0.25f, 0.25f, 0.25f)));
 			nn->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/WoodenBox02.obj"));
 			nn->addComponent(new vrlib::tien::components::RigidBody(5));
@@ -162,7 +163,7 @@ void TienTest::init()
 	for (int ii = 0; ii < 4; ii++)
 		for (int i = -3; i <= 3; i += 2)
 		{
-			vrlib::tien::Node* n = new vrlib::tien::Node("Lamp1", &scene);
+			vrlib::tien::Node* n = new vrlib::tien::Node("Lamp1", &tien.currentScene);
 			n->addComponent(new vrlib::tien::components::Transform(glm::vec3(dirs[ii][0] == 0 ? i : dirs[ii][0] * 4.5f, 2, dirs[ii][1] == 0 ? i : dirs[ii][1] * 4.5f)));
 			vrlib::tien::components::Light* light = new vrlib::tien::components::Light();
 			light->color = glm::vec4(vrlib::util::randomHsv(), 1);// glm::vec4(1, 1, 0.9f, 1);
@@ -173,7 +174,7 @@ void TienTest::init()
 		}
 
 	{
-		vrlib::tien::Node* n = new vrlib::tien::Node("Lamp1", &scene);
+		vrlib::tien::Node* n = new vrlib::tien::Node("Lamp1", &tien.currentScene);
 		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 2, 0)));
 		vrlib::tien::components::Light* light = new vrlib::tien::components::Light();
 		light->color = glm::vec4(1, 1, 0.9f, 1);
@@ -184,19 +185,19 @@ void TienTest::init()
 	}
 
 	{
-		vrlib::tien::Node* n = new vrlib::tien::Node("Environment", &scene);
+		vrlib::tien::Node* n = new vrlib::tien::Node("Environment", &tien.currentScene);
 		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0, 0), glm::quat(glm::vec3(0, 0, 0)), glm::vec3(1.0f, 1.f, 1.f)));
 		n->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/Room/Room.obj"));
 	}
 	{
-		vrlib::tien::Node* n = new vrlib::tien::Node("Table right", &scene);
+		vrlib::tien::Node* n = new vrlib::tien::Node("Table right", &tien.currentScene);
 		n->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/Table/Table.fbx"));
 		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0.55f, 0, -1), glm::quat(glm::vec3(0, glm::radians(-90.0f), 0)), glm::vec3(0.5f, 0.5f, 0.5f)));
 		n->addComponent(new vrlib::tien::components::RigidBody(0));
 		n->addComponent(new vrlib::tien::components::BoxCollider(n));
 	}
 	{
-		vrlib::tien::Node* n = new vrlib::tien::Node("Table left", &scene);
+		vrlib::tien::Node* n = new vrlib::tien::Node("Table left", &tien.currentScene);
 		n->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/Table/Table.fbx"));
 		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(-0.55f, 0, -1), glm::quat(glm::vec3(0, glm::radians(90.0f), 0)), glm::vec3(0.5f, 0.5f, 0.5f)));
 		n->addComponent(new vrlib::tien::components::RigidBody(0));
@@ -205,7 +206,7 @@ void TienTest::init()
 
 
 	{
-		vrlib::tien::Node* n = new vrlib::tien::Node("Terrain", &scene);
+		vrlib::tien::Node* n = new vrlib::tien::Node("Terrain", &tien.currentScene);
 		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(-.8f, 0.85f, -1.81f), glm::quat(), glm::vec3(0.013f, 0.013f, 0.013f)));
 		auto terrainRenderer = new vrlib::tien::components::TerrainRenderer(new vrlib::tien::Terrain("data/TienTest/Textures/heightmap.png"));
 		terrainRenderer->addMaterialLayer("data/TienTest/textures/grass_diffuse.png", "data/TienTest/textures/grass_normal.png", "data/TienTest/textures/grass_mask.png");
@@ -213,36 +214,18 @@ void TienTest::init()
 		n->addComponent(terrainRenderer);
 		n->addComponent(new vrlib::tien::components::RigidBody(0));
 		n->addComponent(new vrlib::tien::components::TerrainCollider(n));
+		terrain = n;
 	}
 
 	{
-		vrlib::tien::Node* n = new vrlib::tien::Node("Tower", &scene);
+		vrlib::tien::Node* n = new vrlib::tien::Node("Tower", &tien.currentScene);
 		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(.64f, 0.88f, -1.60f), glm::quat(), glm::vec3(0.0005f, 0.0005f, 0.0005f)));
 		n->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/Tower/tower.obj"));
 	}
 
 
 	{
-		vrlib::tien::Node* n = new vrlib::tien::Node("ArcherTower", &scene);
-		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(-.4f, 0.85f, -.52f), glm::quat(), glm::vec3(0.05f, 0.05f, 0.05f)));
-		n->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/ArcherTower/archertower.obj"));
-		n->addComponent(new vrlib::tien::components::RigidBody(0));
-		n->addComponent(new vrlib::tien::components::BoxCollider(n));
-		Tower* t = new Tower();
-		t->type = Tower::Type::Archer;
-		t->shootTime = 0;
-		t->node = n;
-		towers.push_back(t);
-
-
-		vrlib::tien::Node* nn = new vrlib::tien::Node("ArcherTowerDude", n);
-		nn->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 2.5f, 0), glm::quat(), glm::vec3(0.001f, 0.001f, 0.001f)));
-		nn->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/dude/testgastje.fbx"));
-		
-	}
-
-	{
-		vrlib::tien::Node* n = new vrlib::tien::Node("ArcherTowerButton", &scene);
+		vrlib::tien::Node* n = new vrlib::tien::Node("ArcherTowerButton", &tien.currentScene);
 		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(.8f, 0.9f, -.1f), glm::quat(), glm::vec3(0.1f, 0.1f, 0.1f)));
 		n->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/buttons/ArrowTower.obj"));
 		n->addComponent(new vrlib::tien::components::RigidBody(0));
@@ -266,12 +249,40 @@ void TienTest::init()
 	spawnCount = 0;
 	nextSpawn = 10;
 
+	{
+		vrlib::tien::Node* n = new vrlib::tien::Node("NewArcherTower", &tien.currentScene);
+		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(-.4f, 2, -.52f), glm::quat(), glm::vec3(0.05f, 0.05f, 0.05f)));
+		n->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/ArcherTower/archertower.obj"));
+		n->addComponent(new vrlib::tien::components::RigidBody(1.0f));
+		n->addComponent(new vrlib::tien::components::BoxCollider(n));
+		newTower = n;
+		newTowerTime = 1;
+	}
+
 	logger << "Initialized" << Log::newline;
 
-	tien.currentScene = scene;
 	tien.start();
 	logger << "Started" << Log::newline;
 	//tien.pause();
+
+	newTower = tien.currentRunningScene.findNodeWithName("NewArcherTower");
+
+	btVector3 inertia;
+	tien.currentRunningScene.world->removeRigidBody(newTower->getComponent<vrlib::tien::components::RigidBody>()->body);
+	newTower->getComponent<vrlib::tien::components::RigidBody>()->body->getCollisionShape()->calculateLocalInertia(1, inertia);
+	newTower->getComponent<vrlib::tien::components::RigidBody>()->body->setMassProps(1, inertia);
+	newTower->getComponent<vrlib::tien::components::RigidBody>()->body->setCollisionFlags(0);
+	newTower->getComponent<vrlib::tien::components::RigidBody>()->body->setGravity(btVector3(0, -1, 0));
+	newTower->getComponent<vrlib::tien::components::RigidBody>()->body->setLinearVelocity(btVector3(0, 0, 0));
+	newTower->getComponent<vrlib::tien::components::RigidBody>()->body->setLinearFactor(btVector3(0, 1, 0));
+	newTower->getComponent<vrlib::tien::components::RigidBody>()->body->setAngularFactor(btVector3(0, 0, 0));
+
+	newTower->getComponent<vrlib::tien::components::RigidBody>()->body->activate(true);
+	tien.currentRunningScene.world->addRigidBody(newTower->getComponent<vrlib::tien::components::RigidBody>()->body);
+
+	//TODO the pointers set in the init are all invalid ! they point to the non-active object. 
+	//TODO idea: just set the runningscene to the scene, and then make a copy in the non-running scene
+	//TODO idea, get rid of the double bookkeeping
 
 }
 
@@ -401,7 +412,7 @@ void TienTest::preFrame(double frameTime, double totalTime)
 	{
 		wave++;
 		spawnTotal = 10 + (int)glm::pow(wave, 0.5);
-		spawnDelay = 0.75f * 1.0 / ((wave + 10) / 10.0f);
+		spawnDelay = 0.75f * 1.0f / ((wave + 10) / 10.0f);
 
 		spawnCount = 0;
 		nextSpawn = 4;
@@ -448,9 +459,11 @@ void TienTest::preFrame(double frameTime, double totalTime)
 	else if (newTower && vive.controllers[1].triggerButton.getData() == vrlib::DigitalState::OFF && vive.controllers[0].triggerButton.getData() == vrlib::DigitalState::OFF)
 	{
 		glm::vec3 pos = newTower->getComponent<vrlib::tien::components::Transform>()->position;
-		if (glm::distance(pos, newTowerPrevPosition) < 0.0001f && newTower->getComponent<vrlib::tien::components::RigidBody>()->body->getLinearVelocity().length() < 0.01f)
+		if (glm::distance(pos, newTowerPrevPosition) < 0.0001f && 
+			newTower->getComponent<vrlib::tien::components::RigidBody>()->body->getLinearVelocity().length() < 0.01f &&
+			tien.currentRunningScene.testBodyCollision(newTower, terrain))
 		{
-			newTowerTime -= frameTime / 1000.0f;
+			newTowerTime -= (float)(frameTime / 1000.0f);
 			if (newTowerTime < 0)
 			{
 				Tower* t = new Tower();
@@ -472,7 +485,7 @@ void TienTest::preFrame(double frameTime, double totalTime)
 			}
 		}
 		else
-			newTowerTime = 2;
+			newTowerTime = glm::max(newTowerTime, 2.0f);
 		newTowerPrevPosition = pos;
 	}
 
