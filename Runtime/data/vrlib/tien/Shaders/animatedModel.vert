@@ -30,18 +30,18 @@ void main()
 {
 	texCoord = a_texture;
 
-	normal = normalMatrix * (a_normal);
-	bitangent = normalMatrix * (a_bitangent);
-	tangent = normalMatrix * (a_tangent);
-
-/*	TBN = mat3( tangent,
-				bitangent,
-				normal);*/
-
 	mat4 boneTransform = boneMatrices[a_boneIds[0]] * a_boneWeights[0];
 	boneTransform += boneMatrices[a_boneIds[1]] * a_boneWeights[1];
 	boneTransform += boneMatrices[a_boneIds[2]] * a_boneWeights[2];
 	boneTransform += boneMatrices[a_boneIds[3]] * a_boneWeights[3];
+
+	normal = normalMatrix * mat3(boneTransform) * (a_normal);
+	bitangent = normalMatrix * mat3(boneTransform) * (a_bitangent);
+	tangent = normalMatrix * mat3(boneTransform) * (a_tangent);
+
+/*	TBN = mat3( tangent,
+				bitangent,
+				normal);*/
 
 	position = modelMatrix * boneTransform * vec4(a_position,1.0);
 
