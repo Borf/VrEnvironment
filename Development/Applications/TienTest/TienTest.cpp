@@ -183,6 +183,7 @@ void TienTest::init()
 		light->intensity = 20.0f;
 		light->range = 20;
 		light->type = vrlib::tien::components::Light::Type::point;
+		light->shadow = vrlib::tien::components::Light::Shadow::shadowmap;
 		n->addComponent(light);
 	}
 
