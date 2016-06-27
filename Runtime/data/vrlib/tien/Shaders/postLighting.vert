@@ -2,13 +2,11 @@
 
 in vec3 a_position;
 
-
 uniform int lightType;
 uniform mat4 projectionMatrix;
 uniform mat4 modelViewMatrix;
 uniform mat4 projectionMatrixInv;
 uniform mat4 modelViewMatrixInv;
-
 
 void main()
 {

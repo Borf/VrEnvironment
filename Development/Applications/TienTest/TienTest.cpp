@@ -67,6 +67,7 @@ void TienTest::init()
 		light->color = glm::vec4(1, 1, 0.8627f, 1);
 		light->intensity = 20.0f;
 		light->type = vrlib::tien::components::Light::Type::directional;
+		light->shadow = vrlib::tien::components::Light::Shadow::shadowmap;
 		n->addComponent(light);
 		sunLight = n;
 	}
@@ -284,8 +285,8 @@ void TienTest::draw(const glm::mat4 &projectionMatrix, const glm::mat4 &modelVie
 
 void TienTest::preFrame(double frameTime, double totalTime)
 {
-	sunLight->getComponent<vrlib::tien::components::Transform>()->position = glm::normalize(glm::vec3(
-		cos(totalTime / 1000.0f), 1, sin(totalTime / 1000.0f)));
+	//sunLight->getComponent<vrlib::tien::components::Transform>()->position = glm::normalize(glm::vec3(
+	//	cos(totalTime / 1000.0f), 1, sin(totalTime / 1000.0f)));
 
 
 	for (Enemy* e : enemies)
@@ -313,7 +314,7 @@ void TienTest::preFrame(double frameTime, double totalTime)
 				//n->addComponent(new vrlib::tien::components::Transform(glm::vec3(-.55f, 0.85f, -1.60f), glm::quat(glm::vec3(0, glm::radians(-90.0f), 0)), glm::vec3(0.02f, 0.02f, 0.02f)));
 				//n->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/mier.3ds"));
 				
-				if (wave % 3 == 0)
+				if (wave % 3 == 1)
 				{
 					n->addComponent(new vrlib::tien::components::Transform(glm::vec3(-.55f, 0.85f, -1.60f), glm::quat(glm::vec3(0, glm::radians(90.0f), 0)), glm::vec3(0.01f, 0.01f, 0.01f)));
 					n->addComponent(new vrlib::tien::components::AnimatedModelRenderer("data/TienTest/models/spider/spider3.fbx"));
@@ -326,13 +327,13 @@ void TienTest::preFrame(double frameTime, double totalTime)
 					light->range = 0.25f;
 					nn->addComponent(light);
 				}
-				else if (wave % 3 == 1)
+				else if (wave % 3 == 2)
 				{
 					n->addComponent(new vrlib::tien::components::Transform(glm::vec3(-.55f, 0.85f, -1.60f), glm::quat(glm::vec3(0, glm::radians(90.0f), 0)), glm::vec3(0.0002f, 0.0002f, 0.0002f)));
 					n->addComponent(new vrlib::tien::components::AnimatedModelRenderer("data/TienTest/models/Robot/Robots_Prowler.fbx"));
 					n->getComponent<vrlib::tien::components::AnimatedModelRenderer>()->playAnimation("Prowler_Rig Bipe", true);
 				}
-				else if (wave % 3 == 2)
+				else if (wave % 3 == 0)
 				{
 					n->addComponent(new vrlib::tien::components::Transform(glm::vec3(-.55f, 0.85f, -1.60f), glm::quat(glm::vec3(0, glm::radians(-90.0f), 0)), glm::vec3(0.02f, 0.02f, 0.02f)));
 					n->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/mier.3ds"));
