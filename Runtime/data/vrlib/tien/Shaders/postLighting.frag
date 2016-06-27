@@ -87,12 +87,15 @@ void main()
 			break;	
 		case 1: // point light
 			ambient = 0;
-			vec3 lightDir = vec3(0,3.5,0) - position.xyz;
+			vec3 lightDir = lightPosition.xyz - position.xyz;
 			float distance = length(lightDir);
 
-			float sampledDistance = texture(s_shadowmapcube, normalize(lightDir * -1)).r;
-			if(distance > sampledDistance+0.005)
-				visibility = 0.4;
+			if(lightCastShadow)
+			{
+				float sampledDistance = texture(s_shadowmapcube, normalize(lightDir * -1)).r;
+				if(distance > sampledDistance+0.005)
+					visibility = 0.4;
+			}
 
 			float distanceFac = pow(clamp((lightRange - distance) / lightRange, 0, 1), 1.5);
 			diffuse = distanceFac * clamp(dot(normalize(normal), normalize(lightDir)), 0, 1);
@@ -110,6 +113,9 @@ void main()
 	fragColor = lightColor * (diffuse + ambient + specular) * visibility * image;
 	fragColor.a = 1;
 	
+//	fragColor = lightColor * 0.1;
+//	fragColor = vec4(0.15,0,0, 0.25);
+
 	//fragColor.rgb = abs(normal.rgb);
 
 }
