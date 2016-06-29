@@ -190,6 +190,7 @@ void TienTest::init()
 		vrlib::tien::Node* n = new vrlib::tien::Node("Environment", &tien.scene);
 		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0, 0), glm::quat(glm::vec3(0, 0, 0)), glm::vec3(1.0f, 1.f, 1.f)));
 		n->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/Room/Room.obj"));
+		n->getComponent<vrlib::tien::components::ModelRenderer>()->castShadow = false;
 	}
 	{
 		vrlib::tien::Node* n = new vrlib::tien::Node("Table right", &tien.scene);
@@ -268,6 +269,13 @@ void TienTest::init()
 		nn->addComponent(new vrlib::tien::components::Transform(glm::vec3(-3, 0, 1), glm::quat(glm::vec3(0, glm::radians(90.0f), 0)), glm::vec3(0.0025f, 0.0025f, 0.0025f)));
 		nn->addComponent(new vrlib::tien::components::AnimatedModelRenderer("data/TienTest/models/dude/testgastje.fbx"));
 		nn->getComponent<vrlib::tien::components::AnimatedModelRenderer>()->playAnimation("Armature|idle", true);
+	}
+
+	{
+		vrlib::tien::Node* nn = new vrlib::tien::Node("Dude2", &tien.scene);
+		nn->addComponent(new vrlib::tien::components::Transform(glm::vec3(-3, 0, 2), glm::quat(glm::vec3(0, glm::radians(90.0f), 0)), glm::vec3(0.25f, 0.25f, 0.25f)));
+		nn->addComponent(new vrlib::tien::components::AnimatedModelRenderer("data/TienTest/models/spider/spider3.fbx"));
+		nn->getComponent<vrlib::tien::components::AnimatedModelRenderer>()->playAnimation("Armature|ArmatureAction", true);
 	}
 
 
