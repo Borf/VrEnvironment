@@ -13,8 +13,8 @@ void main()
 {
 
 	vec2 texcoord;
-	texcoord.y = 1 - position.y/20.0+0.5;
-	texcoord.x = atan(position.x/10.0, position.z/10.0) / (2 * 3.1415);
+	texcoord.y = acos(position.y) / 3.1415;
+	texcoord.x = atan(position.x, position.z) / (2 * 3.1415);
 	
 	vec4 tex = texture2D(s_texture, texcoord);
 

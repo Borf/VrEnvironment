@@ -55,8 +55,7 @@ void PanoramaViewer::draw(const glm::mat4 &projectionMatrix, const glm::mat4 &mo
 	model->draw([this](const glm::mat4 &modelMatrix)
 	{
 		glm::mat4 matrix(modelMatrix);
-		matrix = glm::translate(matrix, glm::vec3(0, 0, -1.5f));
-		matrix = glm::scale(matrix, glm::vec3(0.5f, 0.5f, 0.5f));
+		matrix = glm::scale(matrix, glm::vec3(50, 50, 55));
 		shader->setUniform(Uniforms::modelMatrix, matrix);
 	},
 		[this](const vrlib::Material &material)
