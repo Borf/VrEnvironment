@@ -52,7 +52,7 @@ void TienTest::init()
 	tien.init();
 
 	newTower = nullptr;
-
+	
 	{
 		vrlib::tien::Node* n = new vrlib::tien::Node("Main Camera", &tien.scene);
 		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0, 5)));
@@ -68,6 +68,7 @@ void TienTest::init()
 		light->intensity = 20.0f;
 		light->type = vrlib::tien::components::Light::Type::directional;
 		light->shadow = vrlib::tien::components::Light::Shadow::shadowmap;
+
 		n->addComponent(light);
 		sunLight = n;
 	}
@@ -174,15 +175,15 @@ void TienTest::init()
 			light->type = vrlib::tien::components::Light::Type::point;
 			n->addComponent(light);
 		}
-
 	{
 		vrlib::tien::Node* n = new vrlib::tien::Node("Lamp1", &tien.scene);
-		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 2, 0)));
+		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 3.5, 0)));
 		vrlib::tien::components::Light* light = new vrlib::tien::components::Light();
 		light->color = glm::vec4(1, 1, 0.9f, 1);
 		light->intensity = 20.0f;
-		light->range = 20;
+		light->range = 10;
 		light->type = vrlib::tien::components::Light::Type::point;
+		light->shadow = vrlib::tien::components::Light::Shadow::shadowmap;
 		n->addComponent(light);
 	}
 

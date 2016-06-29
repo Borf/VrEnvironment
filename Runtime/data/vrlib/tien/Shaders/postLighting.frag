@@ -6,6 +6,7 @@ uniform sampler2D s_color;
 uniform sampler2D s_normal;
 uniform sampler2D s_depth;
 uniform sampler2DShadow s_shadowmap;
+uniform samplerCube s_shadowmapcube;
 
 uniform mat4 projectionMatrix;
 uniform mat4 modelViewMatrix;
@@ -67,17 +68,34 @@ void main()
 	float diffuse = 0;
 	float ambient = 0;
 	float specular = 0;
+	float visibility = 1.0;
 
 	switch(lightType) // directional light
 	{
 		case 0: // directional light
 			diffuse = max(0, dot(normalize(normal), normalize(lightPosition.xyz))) * 0.5;
 			ambient = 0.1;
+			if(lightCastShadow)
+			{
+				vec4 shadowPos = biasMatrix * shadowMatrix * vec4(position,1.0);
+				float bias = 0.005;
+				for (int i=0;i<4;i++){
+					int index = i;
+					visibility -= 0.15*(1.0-texture( s_shadowmap, vec3(shadowPos.xy + poissonDisk[index]/4000.0,  (shadowPos.z-bias)/shadowPos.w) ));
+				}
+			}
 			break;	
 		case 1: // point light
 			ambient = 0;
-			vec3 lightDir = lightPosition - position.xyz;
+			vec3 lightDir = lightPosition.xyz - position.xyz;
 			float distance = length(lightDir);
+
+			if(lightCastShadow)
+			{
+				float sampledDistance = texture(s_shadowmapcube, normalize(lightDir * -1)).r;
+				if(distance > sampledDistance+0.005)
+					visibility = 0.4;
+			}
 
 			float distanceFac = pow(clamp((lightRange - distance) / lightRange, 0, 1), 1.5);
 			diffuse = distanceFac * clamp(dot(normalize(normal), normalize(lightDir)), 0, 1);
@@ -90,22 +108,14 @@ void main()
 			break;
 	}
 
-	float visibility = 1.0;
-	if(lightCastShadow)
-	{
-		vec4 shadowPos = biasMatrix * shadowMatrix * vec4(position,1.0);
-		float bias = 0.005;
-		for (int i=0;i<4;i++){
-			int index = i;
-			visibility -= 0.15*(1.0-texture( s_shadowmap, vec3(shadowPos.xy + poissonDisk[index]/4000.0,  (shadowPos.z-bias)/shadowPos.w) ));
-		}
-	}
+
 
 	fragColor = lightColor * (diffuse + ambient + specular) * visibility * image;
 	fragColor.a = 1;
-
-
 	
+//	fragColor = lightColor * 0.1;
+//	fragColor = vec4(0.15,0,0, 0.25);
+
 	//fragColor.rgb = abs(normal.rgb);
 
 }
