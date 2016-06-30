@@ -83,11 +83,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Demo.h" />
     <ClInclude Include="TienTest.h" />
+    <ClInclude Include="TowerDefense.h" />
+    <ClInclude Include="VirtueelPD.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Demo.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="TienTest.cpp" />
+    <ClCompile Include="TowerDefense.cpp" />
+    <ClCompile Include="VirtueelPD.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
