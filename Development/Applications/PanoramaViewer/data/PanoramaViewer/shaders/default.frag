@@ -4,6 +4,7 @@ uniform sampler2D s_texture;
 uniform vec4 diffuseColor;
 uniform float textureFactor;
 uniform bool useSphereMap;
+uniform float offset;
 
 in vec2 texCoord;
 in vec3 normal;
@@ -18,7 +19,7 @@ void main()
 	{
 		vec2 texcoord;
 		texcoord.y = acos(position.y) / 3.14159265;
-		texcoord.x = (atan(position.x, position.z) + 3.14159265) / (2 * 3.14159265);
+		texcoord.x = 1 - (atan(position.x, position.z) + 3.14159265) / (2 * 3.14159265) + offset;
 	
 		fragColor.rgb = texture2D(s_texture, texcoord).rgb;
 	}

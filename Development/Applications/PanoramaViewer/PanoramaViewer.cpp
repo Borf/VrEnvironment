@@ -32,6 +32,7 @@ void PanoramaViewer::init()
 	shader->registerUniform(Uniforms::diffuseColor, "diffuseColor");
 	shader->registerUniform(Uniforms::textureFactor, "textureFactor");
 	shader->registerUniform(Uniforms::useSphereMap, "useSphereMap");
+	shader->registerUniform(Uniforms::offset, "offset");
 	shader->use();
 	shader->setUniform(Uniforms::s_texture, 0);
 
@@ -41,6 +42,7 @@ void PanoramaViewer::init()
 	std::function<void(const std::string &path)> scanDir;
 	scanDir = [this, &scanDir](const std::string &path)
 	{
+		logger << "Scanning directory " << path << Log::newline;
 		std::vector<std::string> files = vrlib::util::scandir(path);
 		for (auto &f : files)
 		{
@@ -49,7 +51,7 @@ void PanoramaViewer::init()
 			if (f[f.size() - 1] == '/')
 			{
 				scanDir(path + f);
-				return;
+				continue;
 			}
 			if (f.substr(f.size() - 4) == ".mp4" || f.substr(f.size() - 4) == ".MP4")
 				continue;
@@ -74,6 +76,8 @@ void PanoramaViewer::init()
 
 void PanoramaViewer::draw(const glm::mat4 &projectionMatrix, const glm::mat4 &modelViewMatrix)
 {
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_FRONT);
 	shader->use();
 	shader->setUniform(Uniforms::projectionMatrix, projectionMatrix);
 	shader->setUniform(Uniforms::viewMatrix, modelViewMatrix);
@@ -81,7 +85,7 @@ void PanoramaViewer::draw(const glm::mat4 &projectionMatrix, const glm::mat4 &mo
 	shader->setUniform(Uniforms::textureFactor, 1.0f);
 	shader->setUniform(Uniforms::diffuseColor, glm::vec4(1, 1, 1, 1));
 	shader->setUniform(Uniforms::useSphereMap, true);
-
+	shader->setUniform(Uniforms::offset, 0.0f);
 	shader->setUniform(Uniforms::textureFactor, 1.0f);
 	texture->bind();
 
@@ -95,24 +99,29 @@ void PanoramaViewer::draw(const glm::mat4 &projectionMatrix, const glm::mat4 &mo
 	{
 	});
 
-
-	for (size_t i = 0; i < textures.size(); i++)
+	if (showMenu)
 	{
-		textures[i]->bind();
-		model->draw([this,i](const glm::mat4 &modelMatrix)
+		for (size_t i = 0; i < textures.size(); i++)
 		{
-			float s = .5f + sphereSelection[i] * .75f;
-			glm::mat4 matrix(modelMatrix);
-			matrix = glm::translate(matrix, getPos(i));
-			matrix = glm::scale(matrix, glm::vec3(s, s, s));
-			shader->setUniform(Uniforms::modelMatrix, matrix);
-		},
-			[this](const vrlib::Material &material)
-		{
-		});
+			textures[i]->bind();
+			shader->setUniform(Uniforms::offset, time * (float)sin(i / 2.135345f));
+
+			model->draw([this, i](const glm::mat4 &modelMatrix)
+			{
+				float s = .5f + sphereSelection[i] * .5f;
+				glm::mat4 matrix(modelMatrix);
+				matrix = glm::translate(matrix, getPos(i, true));
+				matrix = glm::scale(matrix, glm::vec3(s, s, s));
+				shader->setUniform(Uniforms::modelMatrix, matrix);
+			},
+				[this](const vrlib::Material &material)
+			{
+			});
+		}
 	}
 
 
+	glCullFace(GL_BACK);
 	shader->setUniform(Uniforms::useSphereMap, false);
 	viveController->draw([this](const glm::mat4 &modelMatrix)
 	{
@@ -136,9 +145,11 @@ void PanoramaViewer::draw(const glm::mat4 &projectionMatrix, const glm::mat4 &mo
 
 }
 
-glm::vec3 PanoramaViewer::getPos(int i)
+glm::vec3 PanoramaViewer::getPos(int i, bool selection)
 {
-	return glm::vec3((float)i/2.0f - textures.size() / 4.0f, 1 + sphereSelection[i], -1);
+	return glm::vec3((1.25f- (selection ? sphereSelection[i] : 0)) * glm::cos( i/(float)15.0f * 2 * 3.1415),
+					1 + i / 25.0f, 
+					(1.25f - (selection ? sphereSelection[i] : 0)) * glm::sin(i / (float)15.0f * 2 * 3.1415));
 }
 
 void PanoramaViewer::preFrame(double frameTime, double totalTime)
@@ -152,15 +163,23 @@ void PanoramaViewer::preFrame(double frameTime, double totalTime)
 
 	for (size_t i = 0; i < sphereSelection.size(); i++)
 	{
-		glm::vec3 p = getPos(i);
-		p.y = 1;
+		glm::vec3 p = getPos(i, false);
 		float dist = glm::distance(p, glm::vec3(vive.controllers[0].transform.getData() * glm::vec4(0, 0, 0, 1)));
 		if (dist < 0.5f)
 			sphereSelection[i] = 1 - dist * 2;
 
-		if (dist < 0.333f && vive.controllers[0].triggerButton.getData() == vrlib::DigitalState::ON)
+		if (showMenu && glm::distance(getPos(i, true), glm::vec3(vive.controllers[0].transform.getData() * glm::vec4(0, 0, 0, 1))) < 0.25f && 
+			(vive.controllers[0].triggerButton.getData() == vrlib::DigitalState::ON || vive.controllers[0].touchButton.getData() == vrlib::DigitalState::ON))
+		{
 			texture = textures[i];
+			showMenu = false;
+		}
 	}
+
+	if (vive.controllers[0].applicationMenuButton.getData() == vrlib::DigitalState::TOGGLE_ON)
+		showMenu = !showMenu;
+
+	time += frameTime / 10000.0f;
 }
 
 

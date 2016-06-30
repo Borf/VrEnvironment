@@ -20,9 +20,11 @@ class PanoramaViewer : public vrlib::Application
 		s_texture,
 		diffuseColor,
 		textureFactor,
-		useSphereMap
+		useSphereMap,
+		offset
 	};
-
+	float time = 0;
+	bool showMenu = true;
 	vrlib::gl::Shader<Uniforms>* shader;
 
 	vrlib::Texture* texture;
@@ -32,7 +34,7 @@ class PanoramaViewer : public vrlib::Application
 
 	vrlib::Model* viveController;
 
-	glm::vec3 getPos(int i);
+	glm::vec3 getPos(int i, bool selection);
 
 public:
 	PanoramaViewer();
