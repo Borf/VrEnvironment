@@ -2,12 +2,15 @@
 
 #include <VrLib/Application.h>
 #include <VrLib/gl/shader.h>
+#include <VrLib/HtcVive.h>
 
 namespace vrlib { class Model; class Texture;  }
 
 
 class PanoramaViewer : public vrlib::Application
 {
+	vrlib::Vive vive;
+
 	vrlib::Model* model;
 	enum class Uniforms
 	{
@@ -16,12 +19,20 @@ class PanoramaViewer : public vrlib::Application
 		viewMatrix,
 		s_texture,
 		diffuseColor,
-		textureFactor
+		textureFactor,
+		useSphereMap
 	};
 
 	vrlib::gl::Shader<Uniforms>* shader;
 
 	vrlib::Texture* texture;
+
+	std::vector<vrlib::Texture*> textures;
+	std::vector<float> sphereSelection;
+
+	vrlib::Model* viveController;
+
+	glm::vec3 getPos(int i);
 
 public:
 	PanoramaViewer();
