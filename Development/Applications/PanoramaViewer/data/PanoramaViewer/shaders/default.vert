@@ -16,7 +16,6 @@ void main()
 {
 	mat3 normalMatrix = mat3(viewMatrix * modelMatrix);
 	normalMatrix = transpose(inverse(normalMatrix));
-
 	position = vec4(normalize(a_position), 1.0);
 	texCoord = a_texture;
 	normal = normalMatrix * a_normal;
