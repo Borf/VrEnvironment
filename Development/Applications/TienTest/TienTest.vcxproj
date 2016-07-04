@@ -83,12 +83,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Biker.h" />
     <ClInclude Include="Demo.h" />
     <ClInclude Include="TienTest.h" />
     <ClInclude Include="TowerDefense.h" />
     <ClInclude Include="VirtueelPD.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Biker.cpp" />
     <ClCompile Include="Demo.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="TienTest.cpp" />

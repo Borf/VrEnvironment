@@ -13,14 +13,14 @@ in vec3 normal;
 in vec3 bitangent;
 in vec3 tangent;
 
-in vec4 position;
+in vec3 position;
 out vec4 fragColor;
 out vec4 fragNormal;
 out vec4 fragPosition;
 
 uniform mat4 modelMatrix;
 uniform mat4 viewMatrix;
-in float height;
+uniform vec2 heightmapSize;
 
 void main()
 {
@@ -31,12 +31,14 @@ void main()
 	vec3 n = normalize(2.0 * texture2D(s_normalmap, texCoord).rgb - 1);
 	n = TBN * n;
 
-	float mask = texture2D(s_mask, position.xz/128.0).r;
-
+	float mask = texture2D(s_mask, position.xz/heightmapSize).r;
 	vec4 tex = texture2D(s_texture, texCoord);
+
+	//tex.rgb = vec3(1,1,1);
+
 	fragColor.a = 1;
 	fragColor.rgb = tex.rgb * mask;
 
 	fragNormal.xyz = encodeNormal(n);
-	fragNormal.a = mask;
+	fragNormal.a = 1;
 }

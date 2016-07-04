@@ -2,6 +2,7 @@
 #include "Demo.h"
 #include "TowerDefense.h"
 #include "VirtueelPD.h"
+#include "Biker.h"
 
 #include <GL/glew.h>
 
@@ -25,7 +26,7 @@ void TienTest::init()
 
 	logger << "Initialized" << Log::newline;
 	tien.start();
-	demo = new TowerDefense();
+	demo = new Biker();
 	demo->init(tien.scene, this);
 	logger << "Started" << Log::newline;
 }

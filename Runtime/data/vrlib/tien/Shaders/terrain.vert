@@ -9,7 +9,7 @@ in vec3 a_tangent;
 in vec2 a_texture;
 
 out vec2 texCoord;
-out vec4 position;
+out vec3 position;
 
 out vec3 normal;
 out vec3 tangent;
@@ -21,11 +21,10 @@ uniform mat4 modelMatrix;
 uniform mat4 projectionMatrix;
 uniform mat4 viewMatrix;
 uniform mat3 normalMatrix;
-out float height;
 
 void main()
 {
-	texCoord = a_texture;
+	texCoord = a_position.xz / 10.0;
 
 	normal = normalize(normalMatrix * (a_normal));
 	bitangent = normalize(normalMatrix * (a_bitangent));
@@ -35,9 +34,7 @@ void main()
 				bitangent,
 				normal);*/
 
-	height = a_position.y;
-
-	position = vec4(a_position,1.0);
+	position = a_position;
 
 	gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(a_position,1.0);
 

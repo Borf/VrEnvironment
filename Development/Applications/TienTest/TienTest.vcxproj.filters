@@ -27,6 +27,9 @@
     <ClInclude Include="VirtueelPD.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Biker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TienTest.cpp">
@@ -42,6 +45,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="VirtueelPD.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Biker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

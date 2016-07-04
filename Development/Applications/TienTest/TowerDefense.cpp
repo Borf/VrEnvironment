@@ -159,7 +159,7 @@ void TowerDefense::init(vrlib::tien::Scene& scene, TienTest* app)
 	{
 		vrlib::tien::Node* n = new vrlib::tien::Node("Terrain", &scene);
 		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(-.8f, 0.85f, -1.81f), glm::quat(), glm::vec3(0.013f, 0.013f, 0.013f)));
-		auto terrainRenderer = new vrlib::tien::components::TerrainRenderer(new vrlib::tien::Terrain("data/TienTest/Textures/heightmap.png"));
+		auto terrainRenderer = new vrlib::tien::components::TerrainRenderer(new vrlib::tien::Terrain("data/TienTest/Textures/heightmap.png", 10.0f));
 		terrainRenderer->addMaterialLayer("data/TienTest/textures/grass_diffuse.png", "data/TienTest/textures/grass_normal.png", "data/TienTest/textures/grass_mask.png");
 		terrainRenderer->addMaterialLayer("data/TienTest/textures/ground_diffuse.png", "data/TienTest/textures/ground_normal.png", "data/TienTest/textures/ground_mask.png");
 		n->addComponent(terrainRenderer);
