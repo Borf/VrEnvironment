@@ -30,7 +30,8 @@ void main()
 {
 	texCoord = a_texture;
 
-	mat4 boneTransform = boneMatrices[a_boneIds[0]] * a_boneWeights[0];
+	mat4 boneTransform = mat4(0);
+	boneTransform += boneMatrices[a_boneIds[0]] * a_boneWeights[0];
 	boneTransform += boneMatrices[a_boneIds[1]] * a_boneWeights[1];
 	boneTransform += boneMatrices[a_boneIds[2]] * a_boneWeights[2];
 	boneTransform += boneMatrices[a_boneIds[3]] * a_boneWeights[3];

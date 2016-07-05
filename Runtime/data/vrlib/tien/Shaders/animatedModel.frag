@@ -29,7 +29,7 @@ void main()
 						bitangent,
 						normal);
 
-	vec3 n = normalize(2.0 * texture2D(s_normalmap, texCoord).rgb - 1);
+	vec3 n = mix(vec3(0,1,0), normalize(2.0 * texture2D(s_normalmap, texCoord).rgb - 1), textureFactor);
 	n = TBN * n;
 
 	vec4 tex = mix(diffuseColor, texture2D(s_texture, texCoord), textureFactor);

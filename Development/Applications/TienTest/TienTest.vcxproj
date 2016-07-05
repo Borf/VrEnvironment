@@ -21,14 +21,14 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -85,6 +85,7 @@
   <ItemGroup>
     <ClInclude Include="Biker.h" />
     <ClInclude Include="Demo.h" />
+    <ClInclude Include="Serial.h" />
     <ClInclude Include="TienTest.h" />
     <ClInclude Include="TowerDefense.h" />
     <ClInclude Include="VirtueelPD.h" />
@@ -93,6 +94,7 @@
     <ClCompile Include="Biker.cpp" />
     <ClCompile Include="Demo.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Serial.cpp" />
     <ClCompile Include="TienTest.cpp" />
     <ClCompile Include="TowerDefense.cpp" />
     <ClCompile Include="VirtueelPD.cpp" />

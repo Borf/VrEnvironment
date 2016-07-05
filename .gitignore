@@ -13,3 +13,4 @@ Development/.vs/VrEnvironment/v14/.suo
 *.tlog
 Development/Applications/Tutorials/AnimatedModel/Release/
 Thumbs.db
+Development/Applications/HeightMapDemo/HeightMapDemo.cpp
