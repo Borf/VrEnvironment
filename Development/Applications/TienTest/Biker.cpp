@@ -14,6 +14,7 @@
 #include <VrLib/tien/components/TerrainCollider.h>
 #include <VrLib/tien/components/ModelRenderer.h>
 #include <VrLib/tien/components/AnimatedModelRenderer.h>
+#include <VrLib/tien/components/DynamicSkyBox.h>
 #include <VrLib/tien/components/TransformAttach.h>
 
 CSerial serial;
@@ -78,6 +79,7 @@ void Biker::init(vrlib::tien::Scene & scene, TienTest * app)
 		vrlib::tien::Node* n = new vrlib::tien::Node("Main Camera", bike);
 		n->addComponent(new vrlib::tien::components::Transform(-bike->transform->position, glm::inverse(bike->transform->rotation), 1.0f / bike->transform->scale));
 		n->addComponent(new vrlib::tien::components::Camera());
+		n->addComponent(new vrlib::tien::components::DynamicSkyBox());
 	}
 
 
@@ -126,6 +128,9 @@ void Biker::update(float frameTime, vrlib::tien::Scene & scene, TienTest * app)
 			serial.SendData("ST\r\n", 4);
 		}
 	}
+
+	if (!serial.IsOpened())
+		speed = 50.0f;
 
 	//speed = 50.0f;
 
