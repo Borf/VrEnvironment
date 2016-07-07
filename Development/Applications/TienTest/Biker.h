@@ -4,17 +4,17 @@
 #include <vector>
 #include <glm/glm.hpp>
 
-namespace vrlib { namespace tien { class Node;  } }
+namespace vrlib { namespace tien { class Terrain;  class Node; } }
 
 class Route
 {
 	std::vector<std::tuple<glm::vec2, glm::vec2, float> > nodes;
-	float length = 0;
 public:
 	void addNode(const glm::vec2 &position, const glm::vec2 &direction);
 	void finish();
 	
 	glm::vec2 getPosition(float index);
+	float length = 0;
 
 
 };
@@ -29,6 +29,7 @@ public:
 	vrlib::tien::Node* bike;
 
 	Route route;
+	vrlib::tien::Terrain* terrain;
 
 	float time = 0;
 	float position = 0;
