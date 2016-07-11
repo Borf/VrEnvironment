@@ -72,9 +72,9 @@ void Biker::init(vrlib::tien::Scene & scene, TienTest * app)
 	{
 		vrlib::tien::Node* n = new vrlib::tien::Node("Bike", &scene);
 		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(-0, 0, 0), glm::quat(glm::vec3(0,-glm::half_pi<float>(), 0)), glm::vec3(1, 1, 1)));
-		n->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/biker/models/bike/bikeAnimTest.fbx"));
+		n->addComponent(new vrlib::tien::components::AnimatedModelRenderer("data/TienTest/biker/models/bike/bikeAnimTest.fbx"));
 		n->addComponent(new vrlib::tien::components::RigidBody(0));
-		//n->getComponent<vrlib::tien::components::AnimatedModelRenderer>()->playAnimation("Armature|Draaien");
+		n->getComponent<vrlib::tien::components::AnimatedModelRenderer>()->playAnimation("Armature|ArmatureAction.001");
 		bike = n;
 	}
 	{
@@ -99,7 +99,6 @@ void Biker::init(vrlib::tien::Scene & scene, TienTest * app)
 		n->addComponent(new vrlib::tien::components::TransformAttach(app->vive.controllers[0].transform));
 	}
 
-
 	route.addNode(glm::vec2(50, -50),	glm::vec2(0, 200));
 	route.addNode(glm::vec2(50, 50),	glm::vec2(-200, 0));
 	route.addNode(glm::vec2(-50, 50),	glm::vec2(0, -200));
@@ -108,17 +107,36 @@ void Biker::init(vrlib::tien::Scene & scene, TienTest * app)
 
 	auto getPos = [&scene,this](const glm::vec2 &p)
 	{
-		float h = 0;
-		scene.castRay(vrlib::math::Ray(glm::vec3(p.x, 50, p.y+1) * (128 / 127.0f), glm::vec3(0, -1, 0)), [&h](vrlib::tien::Node* node, const glm::vec3 &hitPosition, const glm::vec3 &hitNormal)
+	/*	float h = 0;
+		scene.castRay(vrlib::math::Ray(glm::vec3(p.x, 50, p.y+1) * (128 / 126.0f), glm::vec3(0, -1, 0)), [&h](vrlib::tien::Node* node, const glm::vec3 &hitPosition, const glm::vec3 &hitNormal)
 		{
-			h = hitPosition.y + 0.25f;
+			h = hitPosition.y + 0.05f;
 			return false;
 		});
 		return glm::vec3(p.x, h, p.y);
-
-		//return terrain->getPosition(p + glm::vec2(128, 128)) + glm::vec3(-128, -14.85f, -128);
+		*/
+		return terrain->getPosition(p + glm::vec2(128, 128)) + glm::vec3(-128, -14.85f, -128);
 
 	};
+
+	for (int i = 0; i < 100; i++)
+	{
+		int tree = rand() % 8;
+		if (tree == 0)
+			tree = rand() % 8;
+		if (tree == 0)
+			tree = rand() % 8;
+		if (tree == 0)
+			tree = 10;
+
+
+		float scale = 0.9 + ((float)rand() / RAND_MAX) * 0.2f;
+
+		vrlib::tien::Node* n = new vrlib::tien::Node("Tree", &scene);
+		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(-50, 0, 0), glm::quat(), glm::vec3(1, 1, 1)));
+		n->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/biker/models/trees/2/tree"+std::to_string(tree)+".obj"));
+		n->transform->position = getPos(glm::vec2((rand() % 100) - 50, (rand() % 100) - 50)) + glm::vec3(0,-0.25f,0);
+	}
 
 	glm::vec2 startPos = route.getPosition(0);
 	bike->transform->position = getPos(startPos);
@@ -206,12 +224,12 @@ void Biker::update(float frameTime, vrlib::tien::Scene & scene, TienTest * app)
 		}
 	}
 
-	if (!serial.IsOpened())
-		speed = 50.0f;
+	//if (!serial.IsOpened())
+		//speed = 50.0f;
 
 	//speed = 50.0f;
 
-	float dist = speed / 1000.0f;
+	float dist = glm::pow(speed / 200.0f, 1.75f);
 	
 	if (dist > 0)
 	{
@@ -264,7 +282,7 @@ void Biker::update(float frameTime, vrlib::tien::Scene & scene, TienTest * app)
 		bike->transform->rotation = glm::quat(glm::vec3(0, glm::pi<float>() - glm::atan(dir.y, dir.x), 0));
 
 	}
-	//bike->getComponent<vrlib::tien::components::AnimatedModelRenderer>()->animationSpeed = speed / 20.0f;
+	bike->getComponent<vrlib::tien::components::AnimatedModelRenderer>()->animationSpeed = speed / 20.0f;
 }
 
 
