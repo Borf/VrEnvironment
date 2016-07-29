@@ -14,3 +14,6 @@ Development/.vs/VrEnvironment/v14/.suo
 Development/Applications/Tutorials/AnimatedModel/Release/
 Thumbs.db
 Development/Applications/HeightMapDemo/HeightMapDemo.cpp
+Development/Applications/NetworkEngine/NetworkTunnelControl/bin/
+Development/Applications/NetworkEngine/NetworkTunnelControl/obj/
+Development/Applications/NetworkEngine/NetworkTunnelControl/packages/Newtonsoft.Json.9.0.1/Newtonsoft.Json.9.0.1.nupkg

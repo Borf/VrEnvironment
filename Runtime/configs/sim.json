@@ -111,6 +111,17 @@
 			"type" : "analog",
 			"driver" : "glove",
 			"src" : "RightThumb"
+		},		{
+			"name" : "buttonLeftTrigger",
+			"type" : "digital",
+			"driver" : "mouse",
+			"src" : "left"
+		},
+		{
+			"name" : "buttonRightTrigger",
+			"type" : "digital",
+			"driver" : "mouse",
+			"src" : "left"
 		}
 	],
 	"driverconfig" :
@@ -182,12 +193,13 @@
 			"window" : 
 			{
 				"title" : "ChangeMe",
-				"x" : 700,
-				"y" : 100,
-				"width" : 800,
-				"height" : 800,
+				"x" : -1,
+				"y" : -1,
+				"width" : 1920,
+				"height" : 1079,
 				"border" : true,
-				"vsync" : false
+				"vsync" : true,
+				"cursor" :  true
 			},
             "viewports" :
 			[

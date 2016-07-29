@@ -39,10 +39,10 @@ void AnimatedModel::init()
 	shader->setUniform(Uniforms::s_texture, 0);
 
 	//model = vrlib::Model::getModel<vrlib::gl::VertexP3N3T2B4B4>("data/AnimatedModel/models/testgastje.fbx");
-	model = vrlib::Model::getModel<vrlib::gl::VertexP3N3T2B4B4>("data/AnimatedModel/models/rooster/rooster.fbx");
+	model = vrlib::Model::getModel<vrlib::gl::VertexP3N3T2B4B4>("data/TienTest/biker/models/bike/bikeAnimTest.fbx");
 	modelInstance = model->getInstance();
 	//((vrlib::State*)modelInstance)->playAnimation("AnimStack::Armature|walk");
-	((vrlib::State*)modelInstance)->playAnimation("Armature|Walking");
+	((vrlib::State*)modelInstance)->playAnimation("Armature|ArmatureAction.001");
 
 	logger << "Initialized" << Log::newline;
 }
@@ -61,7 +61,6 @@ void AnimatedModel::draw(const glm::mat4 &projectionMatrix, const glm::mat4 &mod
 	shader->setUniform(Uniforms::boneMatrices, ((vrlib::State*)modelInstance)->boneMatrices);
 	modelInstance->draw([this](const glm::mat4 &modelMatrix)
 	{
-		glm::mat4 matrix(modelMatrix);
 		shader->setUniform(Uniforms::modelMatrix, glm::mat4());
 	},
 		[this](const vrlib::Material &material)

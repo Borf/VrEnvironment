@@ -50,7 +50,10 @@ mat4 biasMatrix = mat4(
 0.5, 0.5, 0.5, 1.0
 );
 
-
+float insideBox(vec2 v, vec2 bottomLeft, vec2 topRight) {
+    vec2 s = step(bottomLeft, v) - step(topRight, v);
+    return s.x * s.y;   
+}
 
 void main()
 {
@@ -74,15 +77,20 @@ void main()
 	{
 		case 0: // directional light
 			diffuse = max(0, dot(normalize(normal), normalize(lightPosition.xyz))) * 0.5;
-			ambient = 0.1;
+			ambient = 0.5;
 			if(lightCastShadow)
 			{
 				vec4 shadowPos = biasMatrix * shadowMatrix * vec4(position,1.0);
-				float bias = 0.005;
-				for (int i=0;i<4;i++){
-					int index = i;
-					visibility -= 0.15*(1.0-texture( s_shadowmap, vec3(shadowPos.xy + poissonDisk[index]/4000.0,  (shadowPos.z-bias)/shadowPos.w) ));
+				if(insideBox(shadowPos.xy, vec2(-.5,-.5), vec2(.5,.5)) > 0.1)
+				{
+					float bias = 0.005;
+					for (int i=0;i<4;i++){
+						int index = i;
+						visibility -= 0.15*(1.0-texture( s_shadowmap, vec3(shadowPos.xy + poissonDisk[index]/4000.0,  (shadowPos.z-bias)/shadowPos.w) ));
+					}
 				}
+				else
+					visibility = 0;
 			}
 			break;	
 		case 1: // point light
@@ -117,5 +125,7 @@ void main()
 //	fragColor = vec4(0.15,0,0, 0.25);
 
 	//fragColor.rgb = abs(normal.rgb);
+
+	//fragColor.rgb = position.xyz;
 
 }

@@ -46,12 +46,11 @@ void Biker::init(vrlib::tien::Scene & scene, TienTest * app)
 		light->color = glm::vec4(1, 1, 0.8627f, 1);
 		light->intensity = 20.0f;
 		light->type = vrlib::tien::components::Light::Type::directional;
-		//light->shadow = vrlib::tien::components::Light::Shadow::shadowmap;
+		light->shadow = vrlib::tien::components::Light::Shadow::shadowmap;
 		n->addComponent(light);
 	}
 
 	{
-
 		float scale = 1;// .075f;
 		terrain = new vrlib::tien::Terrain("data/TienTest/biker/Textures/heightmap.png", 50.0f);
 
@@ -67,7 +66,13 @@ void Biker::init(vrlib::tien::Scene & scene, TienTest * app)
 		n->addComponent(terrainRenderer);
 		n->addComponent(new vrlib::tien::components::TerrainCollider(n));
 		n->addComponent(new vrlib::tien::components::RigidBody(0));
+
+		vrlib::tien::Node* n2 = new vrlib::tien::Node("Grass", &scene);
+		n2->addComponent(new vrlib::tien::components::Transform(glm::vec3(-terrain->getWidth() / 2.0f * scale, -15, -terrain->getHeight() / 2.0f* scale), glm::quat(), glm::vec3(scale, scale, scale)));
+		n2->addComponent(new GrassComponent(*terrain));
+
 	}
+
 
 	{
 		vrlib::tien::Node* n = new vrlib::tien::Node("Bike", &scene);
@@ -197,6 +202,9 @@ void Biker::init(vrlib::tien::Scene & scene, TienTest * app)
 		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0,0,0)));
 		n->addComponent(new vrlib::tien::components::MeshRenderer(mesh));
 	}
+	glm::vec2 pos = route.getPosition(position);
+	glm::vec2 dir = route.getPosition(position + 0.05f) - pos;
+	bike->transform->rotation = glm::quat(glm::vec3(0, glm::pi<float>() - glm::atan(dir.y, dir.x), 0));
 
 
 }
@@ -225,11 +233,16 @@ void Biker::update(float frameTime, vrlib::tien::Scene & scene, TienTest * app)
 	}
 
 	//if (!serial.IsOpened())
-		//speed = 50.0f;
+	//	speed = 50.0f;
 
-	//speed = 50.0f;
+	if (app->vive.controllers[0].triggerButton.getData() == vrlib::DigitalState::ON)
+		speed = 10;
+	if (app->vive.controllers[0].triggerButton.getData() == vrlib::DigitalState::TOGGLE_OFF)
+		speed = 0;
 
-	float dist = glm::pow(speed / 200.0f, 1.75f);
+	//speed = 10.0f;
+
+	float dist = glm::pow(speed, 1.75f) * frameTime * 0.05f;
 	
 	if (dist > 0)
 	{
@@ -257,15 +270,28 @@ void Biker::update(float frameTime, vrlib::tien::Scene & scene, TienTest * app)
 
 		bike->transform->position.x = pos.x;
 		bike->transform->position.z = pos.y;
-
-		bike->transform->rotation = glm::quat(glm::vec3(0, glm::pi<float>() - glm::atan(dir.y, dir.x), 0));
-
+		glm::vec3 up;
 		scene.castRay(vrlib::math::Ray(glm::vec3(pos.x, 100, pos.y), glm::vec3(0, -1, 0)),
-			[this](vrlib::tien::Node* node, const glm::vec3 &hitPosition, const glm::vec3 &hitNormal)
+			[this, &up](vrlib::tien::Node* node, const glm::vec3 &hitPosition, const glm::vec3 &hitNormal)
 		{
 			bike->transform->position.y = hitPosition.y + 0.1f;
+			up = glm::normalize(hitNormal);
 			return true;
 		});
+
+		glm::quat newRot(glm::vec3(0, 1, 0), up);
+		newRot = newRot * glm::quat(glm::vec3(0, glm::pi<float>() - glm::atan(dir.y, dir.x), 0));
+
+
+		bike->transform->rotation = glm::slerp(bike->transform->rotation, newRot, 0.01f);
+
+
+
+
+
+	//	bike->transform->rotation = glm::slerp(bike->transform->rotation, glm::quat(glm::vec3(0, glm::pi<float>() - glm::atan(dir.y, dir.x), 0)), 0.001f);
+
+
 
 		float fac = 1;
 		if (len != 0)
@@ -273,14 +299,6 @@ void Biker::update(float frameTime, vrlib::tien::Scene & scene, TienTest * app)
 			fac = 1 - len;
 		}
 		position += inc;
-	}
-	else
-	{
-		glm::vec2 pos = route.getPosition(position);
-		glm::vec2 dir = route.getPosition(position + 0.05f) - pos;
-
-		bike->transform->rotation = glm::quat(glm::vec3(0, glm::pi<float>() - glm::atan(dir.y, dir.x), 0));
-
 	}
 	bike->getComponent<vrlib::tien::components::AnimatedModelRenderer>()->animationSpeed = speed / 20.0f;
 }
@@ -331,4 +349,106 @@ glm::vec2 Route::getPosition(float index)
 	return hermiteCurve.getPoint(fract);
 
 
+}
+
+
+
+
+GrassComponent::GrassComponent(vrlib::tien::Terrain &terrain) : terrain(terrain)
+{
+	renderContext = GrassRenderContext::getInstance();
+	
+	grassTexture = vrlib::Texture::loadCached("data/TienTest/biker/textures/texture_grass.jpg");
+
+	std::vector<vrlib::gl::VertexP3> vertices;
+
+	int gridSize = 4;
+
+	for (int x = 0; x < terrain.getWidth() - gridSize; x+= gridSize)
+	{
+		for (int y = 0; y < terrain.getHeight() - gridSize; y+= gridSize)
+		{
+			vrlib::gl::VertexP3 v;
+			vrlib::gl::setP3(v, glm::vec3(x, terrain[x][y], y));
+			vertices.push_back(v);
+
+			vrlib::gl::setP3(v, glm::vec3(x, terrain[x][y + gridSize], y + gridSize));
+			vertices.push_back(v);
+
+			vrlib::gl::setP3(v, glm::vec3(x + gridSize, terrain[x + gridSize][y + gridSize], y + gridSize));
+			vertices.push_back(v);
+
+			vrlib::gl::setP3(v, glm::vec3(x + gridSize, terrain[x + gridSize][y], y));
+			vertices.push_back(v);
+		}
+	}
+
+
+	vbo.bind();
+	vbo.setData(vertices.size(), &vertices[0], GL_STATIC_DRAW);
+	vao = new vrlib::gl::VAO(&vbo);
+}
+
+
+void GrassComponent::update(float elapsedTime, vrlib::tien::Scene& scene)
+{
+	time += elapsedTime;
+}
+
+
+void GrassComponent::draw()
+{
+	glDisable(GL_CULL_FACE);
+	vrlib::tien::components::Transform* t = node->getComponent<vrlib::tien::components::Transform>();
+
+	GrassRenderContext* context = dynamic_cast<GrassRenderContext*>(renderContext);
+	context->renderShader->use();
+	context->renderShader->setUniform(GrassRenderContext::RenderUniform::modelMatrix, t->globalTransform);
+	context->renderShader->setUniform(GrassRenderContext::RenderUniform::normalMatrix, glm::transpose(glm::inverse(glm::mat3(t->globalTransform))));
+	context->renderShader->setUniform(GrassRenderContext::RenderUniform::modelViewProjectionMatrix, context->viewprojection * t->globalTransform);
+	context->renderShader->setUniform(GrassRenderContext::RenderUniform::time, time);
+	grassTexture->bind();
+	vao->bind();
+	glDrawArrays(GL_QUADS, 0, vbo.getLength());
+	vao->unBind();
+
+	glEnable(GL_CULL_FACE);
+
+}
+
+void GrassComponent::drawShadowMap()
+{
+}
+
+
+void GrassComponent::GrassRenderContext::frameSetup(const glm::mat4 &projectionMatrix, const glm::mat4 &viewMatrix)
+{
+	renderShader->use();
+	renderShader->setUniform(RenderUniform::projectionMatrix, projectionMatrix);
+	renderShader->setUniform(RenderUniform::viewMatrix, viewMatrix);
+	viewprojection = projectionMatrix * viewMatrix;
+}
+
+
+void GrassComponent::GrassRenderContext::init()
+{
+	renderShader = new vrlib::gl::Shader<RenderUniform>("data/TienTest/biker/shaders/grass.vert", "data/TienTest/biker/shaders/grass.frag", "data/TienTest/biker/shaders/grass.geom");
+	renderShader->bindAttributeLocation("a_position", 0);
+	renderShader->bindAttributeLocation("a_normal", 1);
+	renderShader->bindAttributeLocation("a_bitangent", 2);
+	renderShader->bindAttributeLocation("a_tangent", 3);
+	renderShader->bindAttributeLocation("a_texture", 4);
+	renderShader->link();
+	renderShader->bindFragLocation("fragColor", 0);
+	renderShader->bindFragLocation("fragNormal", 1);
+	//shader->bindFragLocation("fragColor", 0);
+	renderShader->registerUniform(RenderUniform::modelMatrix, "modelMatrix");
+	renderShader->registerUniform(RenderUniform::projectionMatrix, "projectionMatrix");
+	renderShader->registerUniform(RenderUniform::viewMatrix, "viewMatrix");
+	renderShader->registerUniform(RenderUniform::normalMatrix, "normalMatrix");
+	renderShader->registerUniform(RenderUniform::s_texture, "s_texture");
+	renderShader->registerUniform(RenderUniform::modelViewProjectionMatrix, "modelViewProjectionMatrix");
+	renderShader->registerUniform(RenderUniform::time, "time");
+	renderShader->use();
+	renderShader->setUniform(RenderUniform::s_texture, 0);
 }

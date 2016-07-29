@@ -1,31 +1,16 @@
 #pragma once
 
-#include "Demo.h"
-#include <vector>
-#include <glm/glm.hpp>
-#include <VrLib/gl/VAO.h>
 #include <VrLib/gl/VBO.h>
 #include <VrLib/gl/VIO.h>
-
 #include <VrLib/tien/components/Renderable.h>
 
-namespace vrlib {
+namespace vrlib
+{
 	class Texture;
-	namespace tien { class Terrain;  class Node; }
+	namespace gl	{		class VAO; }
+	namespace tien	{		class Terrain;	}
 }
 
-class Route
-{
-	std::vector<std::tuple<glm::vec2, glm::vec2, float> > nodes;
-public:
-	void addNode(const glm::vec2 &position, const glm::vec2 &direction);
-	void finish();
-	
-	glm::vec2 getPosition(float index);
-	float length = 0;
-
-
-};
 
 class GrassComponent : public vrlib::tien::components::Renderable
 {
@@ -64,25 +49,3 @@ public:
 	virtual void drawShadowMap() override;
 
 };
-
-
-
-class Biker : public Demo
-{
-public:
-	Biker();
-	~Biker();
-	
-	vrlib::tien::Node* bike;
-
-	Route route;
-	vrlib::tien::Terrain* terrain;
-
-	float time = 0;
-	float position = 0;
-
-	// Inherited via Demo
-	virtual void init(vrlib::tien::Scene & scene, TienTest * app) override;
-	virtual void update(float frameTime, vrlib::tien::Scene & scene, TienTest * app) override;
-};
-
