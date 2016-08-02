@@ -28,6 +28,8 @@ public:
 	
 	vrlib::tien::Tien tien;
 
+	vrlib::tien::Terrain* terrain = nullptr;
+
 	// Inherited via Demo
 	virtual void init() override;
 	virtual void preFrame(double frameTime, double totalTime) override;

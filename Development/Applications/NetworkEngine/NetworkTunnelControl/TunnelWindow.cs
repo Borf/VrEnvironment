@@ -185,5 +185,52 @@ namespace NetworkTunnelControl
 			Connection.sendTunnel("scene/node/delete", new { id = uuid });
 			Connection.sendTunnel("scene/get", null);
 		}
+
+		private void timeOfDay_Scroll(object sender, EventArgs e)
+		{
+			int value = timeOfDay.Value;
+			float fac = value / (float)timeOfDay.Maximum;
+			fac = fac * 24;
+
+			Connection.sendTunnel("scene/skybox/settime", new { time = fac });
+
+		}
+
+		private void button1_Click_1(object sender, EventArgs e)
+		{
+			Random r = new Random();
+			float[,] heights = new float[32,32];
+			for (int x = 0; x < 32; x++)
+				for (int y = 0; y < 32; y++)
+					heights[x, y] = 2 + (float)(Math.Cos(x/5.0) + Math.Cos(y/5.0));
+
+
+			Connection.sendTunnel("scene/terrain/add",
+			new
+			{
+				size = new[] { 32, 32 },
+				heights = heights.Cast<float>().ToArray()
+			});
+
+			Connection.sendTunnel("scene/node/add",
+			new
+			{
+				name = "floor",
+				components = new
+				{
+					transform = new
+					{
+						position = new[] { -16, 0, -16 },
+						scale = 1
+					},
+					terrain = new
+					{
+
+					}
+				}
+			});
+
+			Connection.sendTunnel("scene/get", null);
+		}
 	}
 }

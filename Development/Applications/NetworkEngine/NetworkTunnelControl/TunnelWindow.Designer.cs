@@ -32,6 +32,10 @@
 			this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
 			this.btnPlant = new System.Windows.Forms.Button();
 			this.btnRemove = new System.Windows.Forms.Button();
+			this.timeOfDay = new System.Windows.Forms.TrackBar();
+			this.lblTime = new System.Windows.Forms.Label();
+			this.button1 = new System.Windows.Forms.Button();
+			((System.ComponentModel.ISupportInitialize)(this.timeOfDay)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// treeView1
@@ -69,11 +73,44 @@
 			this.btnRemove.UseVisualStyleBackColor = true;
 			this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
 			// 
+			// timeOfDay
+			// 
+			this.timeOfDay.LargeChange = 500;
+			this.timeOfDay.Location = new System.Drawing.Point(1030, 12);
+			this.timeOfDay.Maximum = 1000;
+			this.timeOfDay.Name = "timeOfDay";
+			this.timeOfDay.Size = new System.Drawing.Size(213, 45);
+			this.timeOfDay.SmallChange = 100;
+			this.timeOfDay.TabIndex = 4;
+			this.timeOfDay.Scroll += new System.EventHandler(this.timeOfDay_Scroll);
+			// 
+			// lblTime
+			// 
+			this.lblTime.AutoSize = true;
+			this.lblTime.Location = new System.Drawing.Point(941, 12);
+			this.lblTime.Name = "lblTime";
+			this.lblTime.Size = new System.Drawing.Size(30, 13);
+			this.lblTime.TabIndex = 5;
+			this.lblTime.Text = "Time";
+			// 
+			// button1
+			// 
+			this.button1.Location = new System.Drawing.Point(321, 70);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(159, 23);
+			this.button1.TabIndex = 6;
+			this.button1.Text = "Terrrain";
+			this.button1.UseVisualStyleBackColor = true;
+			this.button1.Click += new System.EventHandler(this.button1_Click_1);
+			// 
 			// TunnelWindow
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1313, 653);
+			this.Controls.Add(this.button1);
+			this.Controls.Add(this.lblTime);
+			this.Controls.Add(this.timeOfDay);
 			this.Controls.Add(this.btnRemove);
 			this.Controls.Add(this.btnPlant);
 			this.Controls.Add(this.propertyGrid1);
@@ -82,7 +119,9 @@
 			this.Text = "TunnelWindow";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TunnelWindow_FormClosed);
 			this.Load += new System.EventHandler(this.TunnelWindow_Load);
+			((System.ComponentModel.ISupportInitialize)(this.timeOfDay)).EndInit();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -92,5 +131,8 @@
 		private System.Windows.Forms.PropertyGrid propertyGrid1;
 		private System.Windows.Forms.Button btnPlant;
 		private System.Windows.Forms.Button btnRemove;
+		private System.Windows.Forms.TrackBar timeOfDay;
+		private System.Windows.Forms.Label lblTime;
+		private System.Windows.Forms.Button button1;
 	}
 }

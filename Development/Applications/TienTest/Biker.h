@@ -63,6 +63,8 @@ public:
 	virtual void draw() override;
 	virtual void drawShadowMap() override;
 
+	vrlib::json::Value toJson() const override;
+
 };
 
 

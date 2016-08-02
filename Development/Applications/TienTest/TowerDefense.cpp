@@ -333,11 +333,11 @@ void TowerDefense::update(float frameTime, vrlib::tien::Scene& scene, TienTest* 
 
 					float angle = atan2(tp.y - ep.y, tp.x - ep.x) + glm::radians(90.0f);
 
-					t->node->children.front()->transform->rotation = glm::quat(glm::vec3(0, -angle, 0));
+					t->node->getFirstChild()->transform->rotation = glm::quat(glm::vec3(0, -angle, 0));
 
-					t->node->children.front()->getComponent<vrlib::tien::components::AnimatedModelRenderer>()->playAnimation("Armature|attack", [this, t]()
+					t->node->getFirstChild()->getComponent<vrlib::tien::components::AnimatedModelRenderer>()->playAnimation("Armature|attack", [this, t]()
 					{
-						t->node->children.front()->getComponent<vrlib::tien::components::AnimatedModelRenderer>()->playAnimation("Armature|idle", true);
+						t->node->getFirstChild()->getComponent<vrlib::tien::components::AnimatedModelRenderer>()->playAnimation("Armature|idle", true);
 					});
 
 					break;
