@@ -2,6 +2,8 @@
 
 #include <VrLib/Application.h>
 #include <VrLib/tien/Tien.h>
+#include <glm/gtc/quaternion.hpp>
+
 
 namespace vrlib {
 	class Tunnel;
@@ -11,16 +13,52 @@ namespace vrlib {
 }
 
 
+class Route;
 
+class RouteFollower
+{
+public:
+	vrlib::tien::Node* node;
+	Route* route;
+	float speed;
+	float offset;
+
+	enum class Rotate
+	{
+		XZ,
+		XYZ,
+		NONE,
+	} rotate;
+
+	glm::quat rotateOffset;
+
+
+};
 
 
 
 class NetworkEngine : public vrlib::Application
 {
 public:
+	enum class DebugUniform
+	{
+		projectionMatrix,
+		modelViewMatrix,
+	};
+	vrlib::gl::Shader<DebugUniform>* debugShader;
+
 	std::vector<vrlib::Tunnel*> tunnels;
 
 	std::map<std::string, std::function<void(vrlib::Tunnel* tunnel, const vrlib::json::Value &)>> callbacks;
+
+	std::vector<Route*> routes;
+	bool showRoutes = true;
+	std::vector<glm::vec4> routeColors;
+
+	std::vector<RouteFollower> routeFollowers;
+
+	
+
 
 
 	NetworkEngine();

@@ -4,7 +4,7 @@
 #include <tuple>
 
 
-void Route::addNode(const glm::vec2 &position, const glm::vec2 &direction)
+void Route::addNode(const glm::vec3 &position, const glm::vec3 &direction)
 {
 	nodes.push_back(std::make_tuple(position, direction, 0.0f));
 }
@@ -16,14 +16,14 @@ void Route::finish()
 	{
 		int i1 = i;
 		int i2 = (i + 1) % nodes.size();
-		vrlib::math::HermiteCurve hermiteCurve(std::get<0>(nodes[i1]), std::get<1>(nodes[i1]), std::get<0>(nodes[i2]), std::get<1>(nodes[i2]));
+		vrlib::math::HermiteCurve<glm::vec3> hermiteCurve(std::get<0>(nodes[i1]), std::get<1>(nodes[i1]), std::get<0>(nodes[i2]), std::get<1>(nodes[i2]));
 		std::get<2>(nodes[i1]) = hermiteCurve.getLength();
 		length += std::get<2>(nodes[i1]);
 	}
 
 }
 
-glm::vec2 Route::getPosition(float index)
+glm::vec3 Route::getPosition(float index)
 {
 	while (index > length)
 		index -= length;
@@ -45,7 +45,7 @@ glm::vec2 Route::getPosition(float index)
 
 
 
-	vrlib::math::HermiteCurve hermiteCurve(std::get<0>(nodes[i1]), std::get<1>(nodes[i1]), std::get<0>(nodes[i2]), std::get<1>(nodes[i2]));
+	vrlib::math::HermiteCurve<glm::vec3> hermiteCurve(std::get<0>(nodes[i1]), std::get<1>(nodes[i1]), std::get<0>(nodes[i2]), std::get<1>(nodes[i2]));
 	return hermiteCurve.getPoint(fract);
 
 

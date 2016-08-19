@@ -76,14 +76,19 @@ void main()
 	switch(lightType) // directional light
 	{
 		case 0: // directional light
-			diffuse = max(0, dot(normalize(normal), normalize(lightPosition.xyz))) * 0.5;
+			vec3 n = normalize( normal );
+
+			diffuse = max(0, dot(n, normalize(lightPosition.xyz))) * 0.5;
 			ambient = 0.5;
 			if(lightCastShadow)
 			{
 				vec4 shadowPos = biasMatrix * shadowMatrix * vec4(position,1.0);
 				if(insideBox(shadowPos.xy, vec2(-.5,-.5), vec2(.5,.5)) > 0.1)
 				{
-					float bias = 0.005;
+					vec3 L = normalize( position.xyz - lightPosition.xyz);
+					float cosTheta = clamp(dot(n,L), 0, 1);
+					float bias = clamp(0.005*tan(acos(cosTheta)), 0, 0.05);
+
 					for (int i=0;i<4;i++){
 						int index = i;
 						visibility -= 0.15*(1.0-texture( s_shadowmap, vec3(shadowPos.xy + poissonDisk[index]/4000.0,  (shadowPos.z-bias)/shadowPos.w) ));
@@ -124,7 +129,7 @@ void main()
 //	fragColor = lightColor * 0.1;
 //	fragColor = vec4(0.15,0,0, 0.25);
 
-	//fragColor.rgb = abs(normal.rgb);
+	//fragColor.rgb = (normal.rgb);
 
 	//fragColor.rgb = position.xyz;
 

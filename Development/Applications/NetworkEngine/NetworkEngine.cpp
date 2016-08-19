@@ -1,8 +1,12 @@
 #include "NetworkEngine.h"
+#include "Route.h"
+
+#include <glm/gtc/matrix_transform.hpp>
 
 #include <VrLib/ServerConnection.h>
 #include <VrLib/Kernel.h>
 #include <VrLib/Log.h>
+#include <VrLib/gl/Vertex.h>
 
 using vrlib::logger;
 
@@ -66,21 +70,58 @@ void NetworkEngine::init()
 	}
 
 
-	
-	/*{
+	if(false)
+	{
 		terrain = new vrlib::tien::Terrain();
 		terrain->setSize(32, 32);
 		for (int x = 0; x < 32; x++)
 			for (int y = 0; y < 32; y++)
 				(*terrain)[x][y] = 2+sin(x / 2.0f) + cos(y / 2.0f);// rand() / (float)RAND_MAX;
+				//(*terrain)[x][y] = 6 + 3 * sin(y / 3.0f);
 
 		{
 			vrlib::tien::Node* n = new vrlib::tien::Node("terrain", &tien.scene);
 			n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0, 0)));
 			auto renderer = new vrlib::tien::components::TerrainRenderer(terrain);
 			n->addComponent(renderer);
+
+			renderer->addMaterialLayer("data/TienTest/biker/textures/grass_diffuse.png", "data/TienTest/biker/textures/grass_normal.png", "data/vrlib/tien/textures/white.png");
 		}
-	}*/
+	}
+
+
+	{
+		float roundness = 5.0f;
+		Route* r = new Route();
+		r->addNode(glm::vec3(10, 0.1f, -10), glm::vec3(1, 0, 1) * roundness);
+		r->addNode(glm::vec3(10, 0.1f, 10), glm::vec3(-1, 0, 1) * roundness);
+		r->addNode(glm::vec3(-10, 0.1f, 10), glm::vec3(-1, 0, -1) * roundness);
+		r->addNode(glm::vec3(-10, 0.1f, -10), glm::vec3(1, 0, -1) * roundness);
+		r->finish();
+		routes.push_back(r);
+	}
+
+	{
+		vrlib::tien::Node* n = new vrlib::tien::Node("Character", &tien.scene);
+		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0, 0), glm::quat(), glm::vec3(0.0025f, 0.0025f, 0.0025f)));
+		n->addComponent(new vrlib::tien::components::AnimatedModelRenderer("data/TienTest/models/dude/testgastje.fbx"));
+
+		n->getComponent<vrlib::tien::components::AnimatedModelRenderer>()->playAnimation("Armature|walk", true);
+
+		RouteFollower f;
+
+		f.node = n;
+		f.route = routes[0];
+		f.offset = 0;
+		f.speed = 3.0f;
+		f.rotate = RouteFollower::Rotate::XZ;
+		f.rotateOffset = glm::quat(glm::vec3(0, -glm::radians(90.0f), 0));
+		routeFollowers.push_back(f);
+	}
+
+
+
+
 
 
 	{
@@ -95,10 +136,10 @@ void NetworkEngine::init()
 		vrlib::gl::setTan3(v, glm::vec3(1, 0, 0));
 		vrlib::gl::setBiTan3(v, glm::vec3(0, 0, 1));
 
-		vrlib::gl::setP3(v, glm::vec3(-40, 0, -40));		vrlib::gl::setT2(v, glm::vec2(-10, -10));		mesh->vertices.push_back(v);
-		vrlib::gl::setP3(v, glm::vec3( 40, 0, -40));		vrlib::gl::setT2(v, glm::vec2( 10, -10));		mesh->vertices.push_back(v);
-		vrlib::gl::setP3(v, glm::vec3( 40, 0,  40));		vrlib::gl::setT2(v, glm::vec2( 10,  10));		mesh->vertices.push_back(v);
-		vrlib::gl::setP3(v, glm::vec3(-40, 0,  40));		vrlib::gl::setT2(v, glm::vec2(-10,  10));		mesh->vertices.push_back(v);
+		vrlib::gl::setP3(v, glm::vec3(-100, 0, -100));		vrlib::gl::setT2(v, glm::vec2(-25, -25));		mesh->vertices.push_back(v);
+		vrlib::gl::setP3(v, glm::vec3( 100, 0, -100));		vrlib::gl::setT2(v, glm::vec2( 25, -25));		mesh->vertices.push_back(v);
+		vrlib::gl::setP3(v, glm::vec3( 100, 0,  100));		vrlib::gl::setT2(v, glm::vec2( 25,  25));		mesh->vertices.push_back(v);
+		vrlib::gl::setP3(v, glm::vec3(-100, 0,  100));		vrlib::gl::setT2(v, glm::vec2(-25,  25));		mesh->vertices.push_back(v);
 
 		n->addComponent(new vrlib::tien::components::MeshRenderer(mesh));
 	}
@@ -302,6 +343,13 @@ void NetworkEngine::init()
 		tien.pause();
 	};
 
+	debugShader = new vrlib::gl::Shader<DebugUniform>("data/vrlib/tien/shaders/physicsdebug.vert", "data/vrlib/tien/shaders/physicsdebug.frag");
+	debugShader->bindAttributeLocation("a_position", 0);
+	debugShader->bindAttributeLocation("a_color", 1);
+	debugShader->link();
+	debugShader->registerUniform(DebugUniform::projectionMatrix, "projectionMatrix");
+	debugShader->registerUniform(DebugUniform::modelViewMatrix, "modelViewMatrix");
+
 	tien.start();
 }
 
@@ -317,6 +365,49 @@ void NetworkEngine::preFrame(double frameTime, double totalTime)
 		}
 	}
 
+	for (auto &f : routeFollowers)
+	{
+		float dist = f.speed * (frameTime / 1000.0f);
+		if (dist > 1)
+			dist = 1;
+
+		float inc = dist;
+
+		glm::vec3 pos = f.route->getPosition(f.offset);
+		glm::vec3 dir;
+		dir = f.route->getPosition(f.offset + inc) - pos;
+
+		float ff = 1.5f;
+
+		while (glm::abs(glm::length(dir) - dist) > 0.0001f)
+		{
+			float l = glm::length(dir) - dist;
+			if (l > 0)
+				inc /= ff;
+			else
+				inc *= ff;
+			dir = f.route->getPosition(f.offset + inc) - pos;
+			ff = 1 + (ff - 1) * .9f;
+		}
+		
+		f.offset += inc;
+		f.node->transform->position = f.route->getPosition(f.offset);
+
+		
+		if (f.rotate != RouteFollower::Rotate::NONE)
+		{
+			glm::vec3 dir = f.route->getPosition(f.offset + 0.05f) - f.node->transform->position;
+			if (f.rotate == RouteFollower::Rotate::XZ)
+				f.node->transform->rotation = glm::quat(glm::vec3(0, glm::pi<float>() - glm::atan(dir.z, dir.x), 0)) * f.rotateOffset;
+			if (f.rotate == RouteFollower::Rotate::XYZ)
+				f.node->transform->rotation = glm::quat(glm::lookAt(f.node->transform->position, f.node->transform->position + dir, glm::vec3(0,1,0))) * f.rotateOffset;
+		}
+
+	}
+
+	//tien.scene.cameraNode->transform->lookAt(routeFollowers[0].node->transform->position);
+	tien.scene.cameraNode->transform->position = routeFollowers[0].node->transform->position;
+	tien.scene.cameraNode->transform->rotation = glm::slerp(routeFollowers[0].node->transform->rotation, tien.scene.cameraNode->transform->rotation, 0.9f);
 
 	tien.update((float)(frameTime / 1000.0f));
 }
@@ -324,4 +415,40 @@ void NetworkEngine::preFrame(double frameTime, double totalTime)
 void NetworkEngine::draw(const glm::mat4 & projectionMatrix, const glm::mat4 & modelViewMatrix, const glm::mat4 & userMatrix)
 {
 	tien.render(projectionMatrix, modelViewMatrix);
+
+	if (showRoutes)
+	{
+		std::vector<vrlib::gl::VertexP3C4> verts;
+
+		for (size_t i = 0; i < routes.size(); i++)
+		{
+			while(routeColors.size() <= i)
+				routeColors.push_back(glm::vec4(vrlib::util::randomHsv(), 1.0f));
+			glm::vec4 color = routeColors[i];
+			for (float f = 0; f < routes[i]->length; f += 0.1f)
+			{
+				verts.push_back(vrlib::gl::VertexP3C4(routes[i]->getPosition(f), color));
+				verts.push_back(vrlib::gl::VertexP3C4(routes[i]->getPosition(f+0.1f), color));
+			}
+		}
+
+
+
+		glDisable(GL_DEPTH_TEST);
+		glBindVertexArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+		debugShader->use();
+		debugShader->setUniform(DebugUniform::modelViewMatrix, glm::inverse(tien.scene.cameraNode->transform->globalTransform) * modelViewMatrix);
+		debugShader->setUniform(DebugUniform::projectionMatrix, projectionMatrix);
+
+		vrlib::gl::setAttributes<vrlib::gl::VertexP3C4>(&verts[0]);
+		glLineWidth(1.0f);
+		glDrawArrays(GL_LINES, 0, verts.size());
+		glEnable(GL_DEPTH_TEST);
+
+
+
+	}
+
 }

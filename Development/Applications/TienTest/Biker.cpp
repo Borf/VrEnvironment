@@ -182,7 +182,7 @@ void Biker::init(vrlib::tien::Scene & scene, TienTest * app)
 			lastPos = pos;
 			t += inc * 1.0f;
 		}
-		for (int i = 0; i < mesh->vertices.size() / count; i++)
+		for (size_t i = 0; i < mesh->vertices.size() / count; i++)
 		{
 			for (int ii = 0; ii < count - 1; ii++)
 			{
@@ -316,7 +316,7 @@ void Route::finish()
 	{
 		int i1 = i;
 		int i2 = (i + 1) % nodes.size();
-		vrlib::math::HermiteCurve hermiteCurve(std::get<0>(nodes[i1]), std::get<1>(nodes[i1]), std::get<0>(nodes[i2]), std::get<1>(nodes[i2]));
+		vrlib::math::HermiteCurve<> hermiteCurve(std::get<0>(nodes[i1]), std::get<1>(nodes[i1]), std::get<0>(nodes[i2]), std::get<1>(nodes[i2]));
 		std::get<2>(nodes[i1]) = hermiteCurve.getLength();
 		length += std::get<2>(nodes[i1]);
 	}
@@ -345,7 +345,7 @@ glm::vec2 Route::getPosition(float index)
 
 
 
-	vrlib::math::HermiteCurve hermiteCurve(std::get<0>(nodes[i1]), std::get<1>(nodes[i1]), std::get<0>(nodes[i2]), std::get<1>(nodes[i2]));
+	vrlib::math::HermiteCurve<> hermiteCurve(std::get<0>(nodes[i1]), std::get<1>(nodes[i1]), std::get<0>(nodes[i2]), std::get<1>(nodes[i2]));
 	return hermiteCurve.getPoint(fract);
 
 

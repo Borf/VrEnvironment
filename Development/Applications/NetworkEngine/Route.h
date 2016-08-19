@@ -2,15 +2,18 @@
 
 #include <vector>
 #include <glm/glm.hpp>
+#include <VrLib/util.h>
 
 class Route
 {
-	std::vector<std::tuple<glm::vec2, glm::vec2, float> > nodes;
+	std::vector<std::tuple<glm::vec3, glm::vec3, float> > nodes;
 public:
-	void addNode(const glm::vec2 &position, const glm::vec2 &direction);
+	std::string id = vrlib::util::getGuid();
+
+	void addNode(const glm::vec3 &position, const glm::vec3 &direction);
 	void finish();
 
-	glm::vec2 getPosition(float index);
+	glm::vec3 getPosition(float index);
 	float length = 0;
 
 

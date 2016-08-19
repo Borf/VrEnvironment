@@ -30,7 +30,7 @@ void main()
 						normal);
 
 	vec3 n = mix(vec3(0,1,0), normalize(2.0 * texture2D(s_normalmap, texCoord).rgb - 1), textureFactor);
-	n = TBN * n;
+	n = mix(normal, TBN * n, textureFactor);
 
 	vec4 tex = mix(diffuseColor, texture2D(s_texture, texCoord), textureFactor);
 	if(tex.a < 0.01)
