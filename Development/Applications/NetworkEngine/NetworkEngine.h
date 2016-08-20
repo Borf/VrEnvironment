@@ -2,6 +2,7 @@
 
 #include <VrLib/Application.h>
 #include <VrLib/tien/Tien.h>
+#include <VrLib/util.h>
 #include <glm/gtc/quaternion.hpp>
 
 
@@ -22,13 +23,13 @@ public:
 	Route* route;
 	float speed;
 	float offset;
-
+	std::string id = vrlib::util::getGuid();
 	enum class Rotate
 	{
 		XZ,
 		XYZ,
 		NONE,
-	} rotate;
+	} rotate = Rotate::NONE;
 
 	glm::quat rotateOffset;
 

@@ -150,6 +150,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="api.cpp" />
+    <ClCompile Include="api_route.cpp" />
+    <ClCompile Include="api_scene.cpp" />
+    <ClCompile Include="api_scene_node.cpp" />
+    <ClCompile Include="api_scene_road.cpp" />
+    <ClCompile Include="api_scene_skybox.cpp" />
+    <ClCompile Include="api_scene_terrain.cpp" />
     <ClCompile Include="GrassComponent.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NetworkEngine.cpp" />

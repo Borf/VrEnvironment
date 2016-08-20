@@ -327,14 +327,92 @@ void NetworkEngine::init()
 	};
 	callbacks["scene/skybox/update"] = [this](vrlib::Tunnel* tunnel, const vrlib::json::Value &data) {};
 
-	callbacks["scene/road/add"] = [this](vrlib::Tunnel* tunnel, const vrlib::json::Value &data) {};
+	callbacks["scene/road/add"] = [this](vrlib::Tunnel* tunnel, const vrlib::json::Value &data) 
+	{
+		for (size_t i = 0; i < routes.size(); i++)
+		{
+			if (routes[i]->id == data["id"].asString())
+			{
+				vrlib::json::Value packet;
+				packet["id"] = "scene/road/add";
+				packet["data"]["status"] = "ok";
+				tunnel->send(packet);
+				return;
+			}
+		}
+		vrlib::json::Value packet;
+		packet["id"] = "route/delete";
+		packet["data"]["status"] = "error";
+		packet["data"]["error"] = "Route not found";
+		tunnel->send(packet);
+
+
+
+
+
+
+	};
 	callbacks["scene/road/delete"] = [this](vrlib::Tunnel* tunnel, const vrlib::json::Value &data) {};
 
 	callbacks["scene/raycast"] = [this](vrlib::Tunnel* tunnel, const vrlib::json::Value &data) {};
 
-	callbacks["path/add"] = [this](vrlib::Tunnel* tunnel, const vrlib::json::Value &data) {};
-	callbacks["path/edit"] = [this](vrlib::Tunnel* tunnel, const vrlib::json::Value &data) {};
-	callbacks["path/delete"] = [this](vrlib::Tunnel* tunnel, const vrlib::json::Value &data) {};
+	callbacks["route/add"] = [this](vrlib::Tunnel* tunnel, const vrlib::json::Value &data) 
+	{
+		Route* r = new Route();
+		for (size_t i = 0; i < data["nodes"].size(); i++)
+		{
+			r->addNode(	glm::vec3(data["nodes"][i]["pos"][0].asFloat(), data["nodes"][i]["pos"][1].asFloat(), data["nodes"][i]["pos"][2].asFloat()), 
+						glm::vec3(data["nodes"][i]["dir"][0].asFloat(), data["nodes"][i]["dir"][1].asFloat(), data["nodes"][i]["dir"][2].asFloat()));
+		}
+		r->finish();
+		routes.push_back(r);
+
+		vrlib::json::Value packet;
+		packet["id"] = "route/add";
+		packet["data"]["status"] = "ok";
+		packet["data"]["id"] = r->id;
+		tunnel->send(packet);
+	};
+	callbacks["route/update"] = [this](vrlib::Tunnel* tunnel, const vrlib::json::Value &data) 
+	{
+		
+	
+	};
+	callbacks["route/delete"] = [this](vrlib::Tunnel* tunnel, const vrlib::json::Value &data) 
+	{
+		for (size_t i = 0; i < routeFollowers.size(); i++)
+		{
+			if (routeFollowers[i].route->id == data["id"].asString())
+			{
+				vrlib::json::Value packet;
+				packet["id"] = "route/delete";
+				packet["data"]["status"] = "error";
+				packet["data"]["error"] = "Route is still in use";
+				tunnel->send(packet);
+				return;
+			}
+		}
+
+		for (size_t i = 0; i < routes.size(); i++)
+		{
+			if (routes[i]->id == data["id"].asString())
+			{
+				routes.erase(routes.begin() + i);
+				vrlib::json::Value packet;
+				packet["id"] = "route/delete";
+				packet["data"]["status"] = "ok";
+				tunnel->send(packet);
+				return;
+			}
+		}
+		vrlib::json::Value packet;
+		packet["id"] = "route/delete";
+		packet["data"]["status"] = "error";
+		packet["data"]["error"] = "Route not found";
+		tunnel->send(packet);
+
+	
+	};
 
 	callbacks["play"] = [this](vrlib::Tunnel* tunnel, const vrlib::json::Value &data) {
 		tien.start();
@@ -367,7 +445,7 @@ void NetworkEngine::preFrame(double frameTime, double totalTime)
 
 	for (auto &f : routeFollowers)
 	{
-		float dist = f.speed * (frameTime / 1000.0f);
+		float dist = f.speed * (float)(frameTime / 1000.0f);
 		if (dist > 1)
 			dist = 1;
 
@@ -407,7 +485,7 @@ void NetworkEngine::preFrame(double frameTime, double totalTime)
 
 	//tien.scene.cameraNode->transform->lookAt(routeFollowers[0].node->transform->position);
 	tien.scene.cameraNode->transform->position = routeFollowers[0].node->transform->position;
-	tien.scene.cameraNode->transform->rotation = glm::slerp(routeFollowers[0].node->transform->rotation, tien.scene.cameraNode->transform->rotation, 0.9f);
+	tien.scene.cameraNode->transform->rotation = glm::slerp(routeFollowers[0].node->transform->rotation, tien.scene.cameraNode->transform->rotation, 0.95f);
 
 	tien.update((float)(frameTime / 1000.0f));
 }
