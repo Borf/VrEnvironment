@@ -28,6 +28,14 @@ using vrlib::logger;
 #include <VrLib/tien/components/DynamicSkyBox.h>
 #include <VrLib/tien/components/TransformAttach.h>
 
+inline std::map<std::string, std::function<void(NetworkEngine*, vrlib::Tunnel*, const vrlib::json::Value &)>> &callbacks()
+{
+	static std::map<std::string, std::function<void(NetworkEngine*, vrlib::Tunnel*, const vrlib::json::Value &)>> callbacks;
+	return callbacks;
+}
+
+
+
 NetworkEngine::NetworkEngine()
 {
 }
@@ -144,282 +152,12 @@ void NetworkEngine::init()
 		n->addComponent(new vrlib::tien::components::MeshRenderer(mesh));
 	}
 
-	callbacks["scene/get"] = [this](vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
-	{
-		vrlib::json::Value ret;
-		ret["id"] = "scene/get";
-		ret["data"] = tien.scene.asJson();
-		tunnel->send(ret);
-	};
-	
-	callbacks["scene/save"] = [](vrlib::Tunnel* tunnel, const vrlib::json::Value &data) 
-	{
-		vrlib::json::Value packet;
-		packet["id"] = "scene/save";
-		packet["status"] = "error";
-		packet["error"] = "not implemented";
-		tunnel->send(packet);
-	};
-	callbacks["scene/load"] = [](vrlib::Tunnel* tunnel, const vrlib::json::Value &data) 
-	{
-		vrlib::json::Value packet;
-		packet["id"] = "scene/load";
-		packet["status"] = "error";
-		packet["error"] = "not implemented";
-		tunnel->send(packet);
-	};
-
-	callbacks["scene/node/add"] = [this](vrlib::Tunnel* tunnel, const vrlib::json::Value &data) 
-	{
-		vrlib::tien::Node* parent = &tien.scene;
-		if (data.isMember("parent"))
-			parent = parent->findNodeWithGuid(data["parent"]);
-		if (!parent)
-			return;
-		
-		vrlib::tien::Node* n = new vrlib::tien::Node(data["name"], parent);
-		n->addComponent(new vrlib::tien::components::Transform());
-		if (data.isMember("components"))
-		{
-			if (data["components"].isMember("transform"))
-			{
-				if (data["components"]["transform"].isMember("position"))
-					n->transform->position = glm::vec3(data["components"]["transform"]["position"][0].asFloat(), data["components"]["transform"]["position"][1].asFloat(), data["components"]["transform"]["position"][2].asFloat());
-				if (data["components"]["transform"].isMember("rotation"))
-					n->transform->rotation = glm::quat(glm::vec3(glm::radians(data["components"]["transform"]["rotation"][0].asFloat()), glm::radians(data["components"]["transform"]["rotation"][1].asFloat()), glm::radians(data["components"]["transform"]["rotation"][2].asFloat())));
-				if (data["components"]["transform"].isMember("scale"))
-					n->transform->scale = glm::vec3(data["components"]["transform"]["scale"].asFloat(), data["components"]["transform"]["scale"].asFloat(), data["components"]["transform"]["scale"].asFloat());
-			}
-			if (data["components"].isMember("model"))
-			{
-				auto renderer = new vrlib::tien::components::ModelRenderer(data["components"]["model"]["file"]);
-				if (data["components"]["model"].isMember("cullbackfaces"))
-					renderer->cullBackFaces = data["components"]["model"]["cullbackfaces"];
-				n->addComponent(renderer);
-			}
-			if (data["components"].isMember("terrain"))
-			{
-				if (!terrain)
-				{
-					delete n;
-					vrlib::json::Value ret;
-					ret["id"] = "scene/node/add";
-					ret["data"]["status"] = "error";
-					ret["data"]["error"] = "No terrain added";
-					tunnel->send(ret);
-					return;
-				}
-				auto renderer = new vrlib::tien::components::TerrainRenderer(terrain);
-				if (data["components"]["model"].isMember("smoothnormals"))
-					renderer->smoothNormals = data["components"]["model"]["smoothnormals"];
-				n->addComponent(renderer);
-			}
-		}
-		vrlib::json::Value ret;
-		ret["id"] = "scene/node/add";
-		ret["data"]["uuid"] = n->guid;
-		ret["data"]["status"] = "ok";
-		tunnel->send(ret);
-	};
-	callbacks["scene/node/moveto"] = [this](vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
-	{
-		vrlib::json::Value packet;
-		packet["id"] = "scene/node/moveto";
-		packet["status"] = "error";
-		packet["error"] = "not implemented";
-		tunnel->send(packet);
-	};
-	callbacks["scene/node/update"] = [this](vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
-	{
-		vrlib::json::Value packet;
-		packet["id"] = "scene/node/update";
-		packet["status"] = "error";
-		packet["error"] = "not implemented";
-		tunnel->send(packet);
-	};
-	callbacks["scene/node/delete"] = [this](vrlib::Tunnel* tunnel, const vrlib::json::Value &data) 
-	{
-		vrlib::json::Value packet;
-		packet["id"] = "scene/node/delete";
-		vrlib::tien::Node* node = tien.scene.findNodeWithGuid(data["id"]);
-		if (node)
-		{
-			delete node;
-			packet["data"]["status"] = "ok";
-		}
-		else
-		{
-			packet["data"]["status"] = "error";
-			packet["data"]["error"] = "node not found";
-		}
-		tunnel->send(packet);
-	};
-
-	callbacks["scene/terrain/add"] = [this](vrlib::Tunnel* tunnel, const vrlib::json::Value &data) {
-		if (!terrain) //todo: multiple terrains with a seperate guid?
-			terrain = new vrlib::tien::Terrain();
-		terrain->setSize(data["size"][0].asInt(), data["size"][1].asInt());
-		if(data.isMember("heights"))
-			for (int y = 0; y < terrain->getHeight(); y++)
-				for (int x = 0; x < terrain->getWidth(); x++)
-					(*terrain)[x][y] = data["heights"][x + terrain->getWidth() * y].asFloat();
-		auto renderer = tien.scene.findNodeWithComponent<vrlib::tien::components::TerrainRenderer>();
-		if (renderer)
-			renderer->getComponent<vrlib::tien::components::TerrainRenderer>()->rebuildBuffers();
-	};
-	callbacks["scene/terrain/update"] = [this](vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
-	{
-		vrlib::json::Value packet;
-		packet["id"] = "scene/terrain/update";
-		packet["status"] = "error";
-		packet["error"] = "not implemented";
-		tunnel->send(packet);
-	};
-	callbacks["scene/terrain/delete"] = [this](vrlib::Tunnel* tunnel, const vrlib::json::Value &data) {
-		auto renderer = tien.scene.findNodeWithComponent<vrlib::tien::components::TerrainRenderer>();
-		vrlib::json::Value packet;
-		packet["id"] = "scene/terrain/delete";
-		vrlib::tien::Node* node = tien.scene.findNodeWithGuid(data["id"]);
-		if (renderer)
-		{
-			packet["data"]["status"] = "error";
-			packet["data"]["error"] = "terrain is still in use";
-		}
-		else
-		{
-			delete terrain;
-			terrain = nullptr;
-			packet["data"]["status"] = "ok";
-		}
-		tunnel->send(packet);
-	};
-	callbacks["scene/terrain/addlayer"] = [this](vrlib::Tunnel* tunnel, const vrlib::json::Value &data) {
-		vrlib::json::Value packet;
-		packet["id"] = "scene/terrain/addlayer";
-		packet["status"] = "error";
-		packet["error"] = "not implemented";
-		tunnel->send(packet);
-	};
-	callbacks["scene/terrain/dellayer"] = [this](vrlib::Tunnel* tunnel, const vrlib::json::Value &data) {
-		vrlib::json::Value packet;
-		packet["id"] = "scene/terrain/dellayer";
-		packet["status"] = "error";
-		packet["error"] = "not implemented";
-		tunnel->send(packet);
-	};
-	callbacks["scene/terrain/getheight"] = [this](vrlib::Tunnel* tunnel, const vrlib::json::Value &data) {
-		vrlib::json::Value packet;
-		packet["id"] = "scene/terrain/getheight";
-		packet["status"] = "error";
-		packet["error"] = "not implemented";
-		tunnel->send(packet);
-	};
-
-	callbacks["scene/skybox/settime"] = [this](vrlib::Tunnel* tunnel, const vrlib::json::Value &data) 
-	{
-		auto skybox = tien.scene.cameraNode->getComponent<vrlib::tien::components::DynamicSkyBox>();
-		skybox->timeOfDay = data["time"].asFloat();
-		logger << "Time of day: " << skybox->timeOfDay << Log::newline;
-		vrlib::json::Value packet;
-		packet["id"] = "scene/skybox/settime";
-		packet["data"]["status"] = "ok";
-		tunnel->send(packet);
-	};
-	callbacks["scene/skybox/update"] = [this](vrlib::Tunnel* tunnel, const vrlib::json::Value &data) {};
-
-	callbacks["scene/road/add"] = [this](vrlib::Tunnel* tunnel, const vrlib::json::Value &data) 
-	{
-		for (size_t i = 0; i < routes.size(); i++)
-		{
-			if (routes[i]->id == data["id"].asString())
-			{
-				vrlib::json::Value packet;
-				packet["id"] = "scene/road/add";
-				packet["data"]["status"] = "ok";
-				tunnel->send(packet);
-				return;
-			}
-		}
-		vrlib::json::Value packet;
-		packet["id"] = "route/delete";
-		packet["data"]["status"] = "error";
-		packet["data"]["error"] = "Route not found";
-		tunnel->send(packet);
 
 
 
 
 
 
-	};
-	callbacks["scene/road/delete"] = [this](vrlib::Tunnel* tunnel, const vrlib::json::Value &data) {};
-
-	callbacks["scene/raycast"] = [this](vrlib::Tunnel* tunnel, const vrlib::json::Value &data) {};
-
-	callbacks["route/add"] = [this](vrlib::Tunnel* tunnel, const vrlib::json::Value &data) 
-	{
-		Route* r = new Route();
-		for (size_t i = 0; i < data["nodes"].size(); i++)
-		{
-			r->addNode(	glm::vec3(data["nodes"][i]["pos"][0].asFloat(), data["nodes"][i]["pos"][1].asFloat(), data["nodes"][i]["pos"][2].asFloat()), 
-						glm::vec3(data["nodes"][i]["dir"][0].asFloat(), data["nodes"][i]["dir"][1].asFloat(), data["nodes"][i]["dir"][2].asFloat()));
-		}
-		r->finish();
-		routes.push_back(r);
-
-		vrlib::json::Value packet;
-		packet["id"] = "route/add";
-		packet["data"]["status"] = "ok";
-		packet["data"]["id"] = r->id;
-		tunnel->send(packet);
-	};
-	callbacks["route/update"] = [this](vrlib::Tunnel* tunnel, const vrlib::json::Value &data) 
-	{
-		
-	
-	};
-	callbacks["route/delete"] = [this](vrlib::Tunnel* tunnel, const vrlib::json::Value &data) 
-	{
-		for (size_t i = 0; i < routeFollowers.size(); i++)
-		{
-			if (routeFollowers[i].route->id == data["id"].asString())
-			{
-				vrlib::json::Value packet;
-				packet["id"] = "route/delete";
-				packet["data"]["status"] = "error";
-				packet["data"]["error"] = "Route is still in use";
-				tunnel->send(packet);
-				return;
-			}
-		}
-
-		for (size_t i = 0; i < routes.size(); i++)
-		{
-			if (routes[i]->id == data["id"].asString())
-			{
-				routes.erase(routes.begin() + i);
-				vrlib::json::Value packet;
-				packet["id"] = "route/delete";
-				packet["data"]["status"] = "ok";
-				tunnel->send(packet);
-				return;
-			}
-		}
-		vrlib::json::Value packet;
-		packet["id"] = "route/delete";
-		packet["data"]["status"] = "error";
-		packet["data"]["error"] = "Route not found";
-		tunnel->send(packet);
-
-	
-	};
-
-	callbacks["play"] = [this](vrlib::Tunnel* tunnel, const vrlib::json::Value &data) {
-		tien.start();
-	};
-	callbacks["pause"] = [this](vrlib::Tunnel* tunnel, const vrlib::json::Value &data) {
-		tien.pause();
-	};
 
 	debugShader = new vrlib::gl::Shader<DebugUniform>("data/vrlib/tien/shaders/physicsdebug.vert", "data/vrlib/tien/shaders/physicsdebug.frag");
 	debugShader->bindAttributeLocation("a_position", 0);
@@ -438,8 +176,8 @@ void NetworkEngine::preFrame(double frameTime, double totalTime)
 		while (t->available())
 		{
 			vrlib::json::Value v = t->recv();
-			if (callbacks.find(v["id"].asString()) != callbacks.end())
-				callbacks[v["id"].asString()](t, v["data"]);
+			if (callbacks().find(v["id"].asString()) != callbacks().end())
+				callbacks()[v["id"].asString()](this, t, v["data"]);
 		}
 	}
 

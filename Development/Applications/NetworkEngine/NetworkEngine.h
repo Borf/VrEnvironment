@@ -6,15 +6,17 @@
 #include <glm/gtc/quaternion.hpp>
 
 
+
+
 namespace vrlib {
 	class Tunnel;
 	class Texture;
 	namespace json { class Value; }
 	namespace tien { class Terrain;  class Node; }
 }
-
-
 class Route;
+class NetworkEngine;
+std::map<std::string, std::function<void(NetworkEngine*, vrlib::Tunnel*, const vrlib::json::Value &)>> &callbacks();
 
 class RouteFollower
 {
@@ -50,7 +52,6 @@ public:
 
 	std::vector<vrlib::Tunnel*> tunnels;
 
-	std::map<std::string, std::function<void(vrlib::Tunnel* tunnel, const vrlib::json::Value &)>> callbacks;
 
 	std::vector<Route*> routes;
 	bool showRoutes = true;

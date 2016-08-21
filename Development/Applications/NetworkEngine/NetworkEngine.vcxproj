@@ -163,6 +163,7 @@
     <ClCompile Include="Route.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="api.h" />
     <ClInclude Include="GrassComponent.h" />
     <ClInclude Include="NetworkEngine.h" />
     <ClInclude Include="Route.h" />

@@ -59,5 +59,8 @@
     <ClInclude Include="Route.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="api.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
