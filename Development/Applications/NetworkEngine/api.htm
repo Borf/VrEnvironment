@@ -44,13 +44,13 @@ h1
 			<li><a href="#scene/node/moveto">scene/node/moveto</a></li>
 			<li><a href="#scene/node/update">scene/node/update</a></li>
 			<li><a href="#scene/node/delete">scene/node/delete</a></li>
+			<li><a href="#scene/node/addlayer">scene/node/addlayer</a></li>
+			<li><a href="#scene/node/dellayer">scene/node/dellayer</a></li>
 		</ul></li>
 		<li>terrain<ul>
 			<li><a href="#scene/terrain/add">scene/terrain/add</a></li>
 			<li><a href="#scene/terrain/update">scene/terrain/update</a></li>
 			<li><a href="#scene/terrain/delete">scene/terrain/delete</a></li>
-			<li><a href="#scene/terrain/addlayer">scene/terrain/addlayer</a></li>
-			<li><a href="#scene/terrain/dellayer">scene/terrain/dellayer</a></li>
 			<li><a href="#scene/terrain/getheight">scene/terrain/getheight</a></li>
 		</ul></li>
 		<li>skybox<ul>
@@ -296,6 +296,57 @@ h1
 
 
 <!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->
+	<div class="call" id="scene/node/addlayer">
+		<h2>scene/node/addlayer</h2>
+		Adds a texture layer on top of a terrain. The texture is repeated over the terrain, and is only visible between heights between minHeight and maxHeight. After those heights the texture fades out after fadeDist distance
+<div class="code">{
+	"id" : "scene/node/addlayer",
+	"data" :
+	{
+		"id" : {uuid},
+		"diffuse" : {texture.png},
+		"normal" : {texture.png},
+		"minHeight" : 0,
+		"maxHeight" : 10,
+		"fadeDist" : 1
+	}
+}
+</div>
+		Response
+<div class="code">{
+	"status" : "ok"
+}</div>
+		Errors:
+		<ul>
+		</ul>
+	</div>
+
+
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+	<div class="call" id="scene/node/dellayer">
+		<h2>scene/node/dellayer</h2>
+
+<div class="code">{
+	"id" : "scene/node/dellayer",
+	"data" :
+	{
+	}
+}
+</div>
+		Response
+<div class="code">{
+	"status" : "ok"
+}</div>
+		Errors:
+		<ul>
+		</ul>
+	</div>
+
+
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->
+
 
 
 <h1>scene/terrain</h1>
@@ -351,52 +402,6 @@ h1
 
 <div class="code">{
 	"id" : "scene/terrain/delete",
-	"data" :
-	{
-	}
-}
-</div>
-		Response
-<div class="code">{
-	"status" : "ok"
-}</div>
-		Errors:
-		<ul>
-		</ul>
-	</div>
-
-
-<!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->
-
-
-	<div class="call" id="scene/terrain/addlayer">
-		<h2>scene/terrain/addlayer</h2>
-
-<div class="code">{
-	"id" : "scene/terrain/addlayer",
-	"data" :
-	{
-	}
-}
-</div>
-		Response
-<div class="code">{
-	"status" : "ok"
-}</div>
-		Errors:
-		<ul>
-		</ul>
-	</div>
-
-
-<!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->
-
-
-	<div class="call" id="scene/terrain/dellayer">
-		<h2>scene/terrain/dellayer</h2>
-
-<div class="code">{
-	"id" : "scene/terrain/dellayer",
 	"data" :
 	{
 	}

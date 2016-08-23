@@ -4,7 +4,7 @@
 #include <VrLib/tien/Tien.h>
 #include <VrLib/util.h>
 #include <glm/gtc/quaternion.hpp>
-
+#include <VrLib/HtcVive.h>
 
 
 
@@ -60,6 +60,7 @@ public:
 	std::vector<RouteFollower> routeFollowers;
 
 	
+	vrlib::Vive vive;
 
 
 

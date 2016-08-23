@@ -230,7 +230,72 @@ namespace NetworkTunnelControl
 				}
 			});
 
+
+
+
 			Connection.sendTunnel("scene/get", null);
 		}
+
+		private void btnStuff_Click(object sender, EventArgs e)
+		{
+			using (Bitmap heightmap = new Bitmap("heightmap.png"))
+			{
+
+				float[,] heights = new float[heightmap.Width, heightmap.Height];
+				for (int x = 0; x < heightmap.Width; x++)
+					for (int y = 0; y < heightmap.Height; y++)
+						heights[x, y] = (heightmap.GetPixel(x, y).R / 256.0f) * 10.0f;
+
+				Connection.sendTunnel("scene/terrain/add",
+				new
+				{
+					size = new[] { heightmap.Width, heightmap.Height },
+					heights = heights.Cast<float>().ToArray()
+				});
+				string terrainId = "";
+				AutoResetEvent blocker = new AutoResetEvent(false);
+				Connection.callbacks["scene/node/add"] = (data) =>
+				{
+					terrainId = data.uuid;
+					blocker.Set();
+				};
+
+				Connection.sendTunnel("scene/node/add",
+				new
+				{
+					name = "floor",
+					components = new
+					{
+						transform = new
+						{
+							position = new[] { -heightmap.Width/2, 0, -heightmap.Height/2 },
+							scale = 1
+						},
+						terrain = new
+						{
+
+						}
+					}
+				});
+				blocker.WaitOne();
+				Connection.callbacks.Remove("scene/node/add");
+
+
+				Connection.sendTunnel("scene/node/addlayer",
+					new
+					{
+						id = terrainId,
+						diffuse = "data/TienTest/textures/grass_diffuse.png",
+						normal = "data/TienTest/textures/grass_normal.png"
+					});
+
+
+				Connection.sendTunnel("scene/get", null);
+			}
+
+		}
+
+
+
 	}
 }

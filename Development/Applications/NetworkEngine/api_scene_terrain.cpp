@@ -51,27 +51,6 @@ Api scene_terrain_delete("scene/terrain/delete", [](NetworkEngine* engine, vrlib
 
 
 
-Api scene_terrain_addlayer("scene/terrain/addlayer", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
-{
-	vrlib::json::Value packet;
-	packet["id"] = "scene/terrain/addlayer";
-	packet["status"] = "error";
-	packet["error"] = "not implemented";
-	tunnel->send(packet);
-});
-
-
-
-
-Api scene_terrain_dellayer("scene/terrain/dellayer", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
-{
-	vrlib::json::Value packet;
-	packet["id"] = "scene/terrain/dellayer";
-	packet["status"] = "error";
-	packet["error"] = "not implemented";
-	tunnel->send(packet);
-});
-
 
 Api scene_terrain_getheight("scene/terrain/getheight", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
 {

@@ -81,6 +81,52 @@ Api scene_node_update("scene/node/update", [](NetworkEngine* engine, vrlib::Tunn
 
 
 
+Api scene_terrain_addlayer("scene/node/addlayer", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
+{
+	vrlib::json::Value packet;
+	packet["id"] = "scene/node/addlayer";
+
+	vrlib::tien::Node* node = engine->tien.scene.findNodeWithGuid(data["id"]);
+	if (node)
+	{
+		auto renderer = node->getComponent<vrlib::tien::components::TerrainRenderer>();
+		if (!renderer)
+		{
+			packet["data"]["status"] = "error";
+			packet["data"]["error"] = "node has no terrain renderer";
+		}
+		else
+		{
+			packet["data"]["status"] = "ok";
+			renderer->addMaterialLayer(data["diffuse"].asString(), data["normal"].asString(), data["minHeight"].asFloat(), data["maxHeight"].asFloat(), data["fadeDist"].asFloat());
+		}
+
+
+
+
+	}
+	else
+	{
+		packet["data"]["status"] = "error";
+		packet["data"]["error"] = "node not found";
+	}
+	tunnel->send(packet);
+});
+
+
+
+
+Api scene_terrain_dellayer("scene/node/dellayer", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
+{
+	vrlib::json::Value packet;
+	packet["id"] = "scene/node/dellayer";
+	packet["status"] = "error";
+	packet["error"] = "not implemented";
+	tunnel->send(packet);
+});
+
+
+
 Api scene_node_delete("scene/node/delete", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
 {
 	vrlib::json::Value packet;

@@ -48,6 +48,7 @@ NetworkEngine::~NetworkEngine()
 void NetworkEngine::init()
 {
 	tien.init();
+	vive.init();
 	vrlib::Kernel::getInstance()->serverConnection->onTunnelCreate([this](vrlib::Tunnel* tunnel)
 	{
 		logger << "Got a tunnel" << Log::newline;
@@ -75,6 +76,20 @@ void NetworkEngine::init()
 		n->addComponent(new vrlib::tien::components::DynamicSkyBox());
 		n->getComponent<vrlib::tien::components::DynamicSkyBox>()->light = sunlight;
 		tien.scene.cameraNode = n;
+	}
+
+
+	{
+		vrlib::tien::Node* n = new vrlib::tien::Node("LeftHand", &tien.scene);
+		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0, 0)));
+		n->addComponent(new vrlib::tien::components::ModelRenderer("data/vrlib/rendermodels/vr_controller_vive_1_5/vr_controller_vive_1_5.obj"));
+		n->addComponent(new vrlib::tien::components::TransformAttach(vive.controllers[1].transform));
+	}
+	{
+		vrlib::tien::Node* n = new vrlib::tien::Node("RightHand", &tien.scene);
+		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0, 0)));
+		n->addComponent(new vrlib::tien::components::ModelRenderer("data/vrlib/rendermodels/vr_controller_vive_1_5/vr_controller_vive_1_5.obj"));
+		n->addComponent(new vrlib::tien::components::TransformAttach(vive.controllers[0].transform));
 	}
 
 
@@ -219,11 +234,17 @@ void NetworkEngine::preFrame(double frameTime, double totalTime)
 				f.node->transform->rotation = glm::quat(glm::lookAt(f.node->transform->position, f.node->transform->position + dir, glm::vec3(0,1,0))) * f.rotateOffset;
 		}
 
+		if (terrain)
+		{
+			f.node->transform->position = terrain->getPosition(glm::vec2(128 + f.node->transform->position.x, 128 + f.node->transform->position.z)) + glm::vec3(-128, 0, -128);
+		}
+
+
 	}
 
 	//tien.scene.cameraNode->transform->lookAt(routeFollowers[0].node->transform->position);
 	tien.scene.cameraNode->transform->position = routeFollowers[0].node->transform->position;
-	tien.scene.cameraNode->transform->rotation = glm::slerp(routeFollowers[0].node->transform->rotation, tien.scene.cameraNode->transform->rotation, 0.95f);
+	tien.scene.cameraNode->transform->rotation = routeFollowers[0].node->transform->rotation;
 
 	tien.update((float)(frameTime / 1000.0f));
 }
@@ -250,12 +271,12 @@ void NetworkEngine::draw(const glm::mat4 & projectionMatrix, const glm::mat4 & m
 
 
 
-		glDisable(GL_DEPTH_TEST);
+		glEnable(GL_DEPTH_TEST);
 		glBindVertexArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 		debugShader->use();
-		debugShader->setUniform(DebugUniform::modelViewMatrix, glm::inverse(tien.scene.cameraNode->transform->globalTransform) * modelViewMatrix);
+		debugShader->setUniform(DebugUniform::modelViewMatrix, modelViewMatrix * glm::inverse(tien.scene.cameraNode->transform->globalTransform));
 		debugShader->setUniform(DebugUniform::projectionMatrix, projectionMatrix);
 
 		vrlib::gl::setAttributes<vrlib::gl::VertexP3C4>(&verts[0]);

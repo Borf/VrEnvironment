@@ -24,9 +24,20 @@ namespace NetworkTunnelControl
 			button2_Click(null, null);
 			if (tunnelApps.Items.Count > 0)
 				button1_Click(null, null);
+
+			Timer t = new Timer();
+			t.Tick += new EventHandler((a, b) => reload());
+			t.Interval = 5000;
+			t.Start();
+
 		}
 
 		public void button2_Click(object sender, EventArgs e)
+		{
+			reload();
+		}
+
+		public void reload()
 		{
 			tunnelApps.FullRowSelect = true;
 			tunnelApps.GridLines = true;
@@ -42,9 +53,8 @@ namespace NetworkTunnelControl
 				tunnelApps.Items.Add(session.id).SubItems.AddRange(new string[] { session.ip, session.user, session.file });
 
 			tunnelApps.SelectedIndices.Clear();
-			if(tunnelApps.Items.Count > 0)
+			if (tunnelApps.Items.Count > 0)
 				tunnelApps.SelectedIndices.Add(0);
-
 
 			tunnelApps.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
 		}

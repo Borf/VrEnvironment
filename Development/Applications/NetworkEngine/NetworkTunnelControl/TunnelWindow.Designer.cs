@@ -35,6 +35,7 @@
 			this.timeOfDay = new System.Windows.Forms.TrackBar();
 			this.lblTime = new System.Windows.Forms.Label();
 			this.button1 = new System.Windows.Forms.Button();
+			this.btnStuff = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.timeOfDay)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -103,11 +104,22 @@
 			this.button1.UseVisualStyleBackColor = true;
 			this.button1.Click += new System.EventHandler(this.button1_Click_1);
 			// 
+			// btnStuff
+			// 
+			this.btnStuff.Location = new System.Drawing.Point(649, 196);
+			this.btnStuff.Name = "btnStuff";
+			this.btnStuff.Size = new System.Drawing.Size(159, 23);
+			this.btnStuff.TabIndex = 7;
+			this.btnStuff.Text = "Do stuff";
+			this.btnStuff.UseVisualStyleBackColor = true;
+			this.btnStuff.Click += new System.EventHandler(this.btnStuff_Click);
+			// 
 			// TunnelWindow
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1313, 653);
+			this.Controls.Add(this.btnStuff);
 			this.Controls.Add(this.button1);
 			this.Controls.Add(this.lblTime);
 			this.Controls.Add(this.timeOfDay);
@@ -134,5 +146,6 @@
 		private System.Windows.Forms.TrackBar timeOfDay;
 		private System.Windows.Forms.Label lblTime;
 		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.Button btnStuff;
 	}
 }
