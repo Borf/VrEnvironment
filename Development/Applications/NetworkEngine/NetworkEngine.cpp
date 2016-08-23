@@ -111,10 +111,10 @@ void NetworkEngine::init()
 
 	{
 		vrlib::tien::Node* n = new vrlib::tien::Node("Character", &tien.scene);
-		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0, 0), glm::quat(), glm::vec3(0.0025f, 0.0025f, 0.0025f)));
-		n->addComponent(new vrlib::tien::components::AnimatedModelRenderer("data/TienTest/models/dude/testgastje.fbx"));
+		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0, 0), glm::quat(), glm::vec3(0.01f, 0.01f, 0.01f)));
+		n->addComponent(new vrlib::tien::components::AnimatedModelRenderer("data/NetworkEngine/models/bike/bike_anim.fbx"));
 
-		n->getComponent<vrlib::tien::components::AnimatedModelRenderer>()->playAnimation("Armature|walk", true);
+		n->getComponent<vrlib::tien::components::AnimatedModelRenderer>()->playAnimation("Armature|Fietsen", true);
 
 		RouteFollower f;
 
@@ -123,7 +123,7 @@ void NetworkEngine::init()
 		f.offset = 0;
 		f.speed = 3.0f;
 		f.rotate = RouteFollower::Rotate::XZ;
-		f.rotateOffset = glm::quat(glm::vec3(0, -glm::radians(90.0f), 0));
+		f.rotateOffset = glm::quat(glm::vec3(0, -glm::radians(0.0f), 0));
 		routeFollowers.push_back(f);
 	}
 
