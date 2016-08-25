@@ -56,6 +56,32 @@ void NetworkEngine::init()
 	});
 
 
+	callbacks()["scene/reset"](this, nullptr, vrlib::json::Value());
+
+
+
+	debugShader = new vrlib::gl::Shader<DebugUniform>("data/vrlib/tien/shaders/physicsdebug.vert", "data/vrlib/tien/shaders/physicsdebug.frag");
+	debugShader->bindAttributeLocation("a_position", 0);
+	debugShader->bindAttributeLocation("a_color", 1);
+	debugShader->link();
+	debugShader->registerUniform(DebugUniform::projectionMatrix, "projectionMatrix");
+	debugShader->registerUniform(DebugUniform::modelViewMatrix, "modelViewMatrix");
+
+	tien.start();
+}
+
+
+
+void NetworkEngine::reset()
+{
+	while (tien.scene.getFirstChild())
+		delete tien.scene.getFirstChild();
+	for (auto r : routes)
+		delete r;
+	routes.clear();
+	routeFollowers.clear();
+
+
 	vrlib::tien::Node* sunlight;
 	{
 		vrlib::tien::Node* n = new vrlib::tien::Node("Sunlight", &tien.scene);
@@ -93,14 +119,14 @@ void NetworkEngine::init()
 	}
 
 
-	if(false)
+	if (false)
 	{
 		terrain = new vrlib::tien::Terrain();
 		terrain->setSize(32, 32);
 		for (int x = 0; x < 32; x++)
 			for (int y = 0; y < 32; y++)
-				(*terrain)[x][y] = 2+sin(x / 2.0f) + cos(y / 2.0f);// rand() / (float)RAND_MAX;
-				//(*terrain)[x][y] = 6 + 3 * sin(y / 3.0f);
+				(*terrain)[x][y] = 2 + sin(x / 2.0f) + cos(y / 2.0f);// rand() / (float)RAND_MAX;
+																	 //(*terrain)[x][y] = 6 + 3 * sin(y / 3.0f);
 
 		{
 			vrlib::tien::Node* n = new vrlib::tien::Node("terrain", &tien.scene);
@@ -113,7 +139,7 @@ void NetworkEngine::init()
 	}
 
 
-	{
+/*	{
 		float roundness = 5.0f;
 		Route* r = new Route();
 		r->addNode(glm::vec3(10, 0.1f, -10), glm::vec3(1, 0, 1) * roundness);
@@ -122,30 +148,25 @@ void NetworkEngine::init()
 		r->addNode(glm::vec3(-10, 0.1f, -10), glm::vec3(1, 0, -1) * roundness);
 		r->finish();
 		routes.push_back(r);
-	}
-
-	/*{
-		vrlib::tien::Node* n = new vrlib::tien::Node("Character", &tien.scene);
-		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0, 0), glm::quat(), glm::vec3(0.01f, 0.01f, 0.01f)));
-		n->addComponent(new vrlib::tien::components::AnimatedModelRenderer("data/NetworkEngine/models/bike/bike_anim.fbx"));
-
-		n->getComponent<vrlib::tien::components::AnimatedModelRenderer>()->playAnimation("Armature|Fietsen", true);
-
-		RouteFollower f;
-
-		f.node = n;
-		f.route = routes[0];
-		f.offset = 0;
-		f.speed = 3.0f;
-		f.rotate = RouteFollower::Rotate::XZ;
-		f.rotateOffset = glm::quat(glm::vec3(0, -glm::radians(0.0f), 0));
-		routeFollowers.push_back(f);
 	}*/
 
+	/*{
+	vrlib::tien::Node* n = new vrlib::tien::Node("Character", &tien.scene);
+	n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0, 0), glm::quat(), glm::vec3(0.01f, 0.01f, 0.01f)));
+	n->addComponent(new vrlib::tien::components::AnimatedModelRenderer("data/NetworkEngine/models/bike/bike_anim.fbx"));
 
+	n->getComponent<vrlib::tien::components::AnimatedModelRenderer>()->playAnimation("Armature|Fietsen", true);
 
+	RouteFollower f;
 
-
+	f.node = n;
+	f.route = routes[0];
+	f.offset = 0;
+	f.speed = 3.0f;
+	f.rotate = RouteFollower::Rotate::XZ;
+	f.rotateOffset = glm::quat(glm::vec3(0, -glm::radians(0.0f), 0));
+	routeFollowers.push_back(f);
+	}*/
 
 	{
 		vrlib::tien::Node* n = new vrlib::tien::Node("GroundPlane", &tien.scene);
@@ -153,36 +174,22 @@ void NetworkEngine::init()
 
 		vrlib::tien::components::MeshRenderer::Mesh* mesh = new vrlib::tien::components::MeshRenderer::Mesh();
 		mesh->material.texture = vrlib::Texture::loadCached("data/TienTest/textures/grid.png");
-		mesh->indices = { 2, 1, 0, 2, 0, 3};
+		mesh->indices = { 2, 1, 0, 2, 0, 3 };
 		vrlib::gl::VertexP3N2B2T2T2 v;
 		vrlib::gl::setN3(v, glm::vec3(0, 1, 0));
 		vrlib::gl::setTan3(v, glm::vec3(1, 0, 0));
 		vrlib::gl::setBiTan3(v, glm::vec3(0, 0, 1));
 
 		vrlib::gl::setP3(v, glm::vec3(-100, 0, -100));		vrlib::gl::setT2(v, glm::vec2(-25, -25));		mesh->vertices.push_back(v);
-		vrlib::gl::setP3(v, glm::vec3( 100, 0, -100));		vrlib::gl::setT2(v, glm::vec2( 25, -25));		mesh->vertices.push_back(v);
-		vrlib::gl::setP3(v, glm::vec3( 100, 0,  100));		vrlib::gl::setT2(v, glm::vec2( 25,  25));		mesh->vertices.push_back(v);
-		vrlib::gl::setP3(v, glm::vec3(-100, 0,  100));		vrlib::gl::setT2(v, glm::vec2(-25,  25));		mesh->vertices.push_back(v);
+		vrlib::gl::setP3(v, glm::vec3(100, 0, -100));		vrlib::gl::setT2(v, glm::vec2(25, -25));		mesh->vertices.push_back(v);
+		vrlib::gl::setP3(v, glm::vec3(100, 0, 100));		vrlib::gl::setT2(v, glm::vec2(25, 25));		mesh->vertices.push_back(v);
+		vrlib::gl::setP3(v, glm::vec3(-100, 0, 100));		vrlib::gl::setT2(v, glm::vec2(-25, 25));		mesh->vertices.push_back(v);
 
 		n->addComponent(new vrlib::tien::components::MeshRenderer(mesh));
 	}
-
-
-
-
-
-
-
-
-	debugShader = new vrlib::gl::Shader<DebugUniform>("data/vrlib/tien/shaders/physicsdebug.vert", "data/vrlib/tien/shaders/physicsdebug.frag");
-	debugShader->bindAttributeLocation("a_position", 0);
-	debugShader->bindAttributeLocation("a_color", 1);
-	debugShader->link();
-	debugShader->registerUniform(DebugUniform::projectionMatrix, "projectionMatrix");
-	debugShader->registerUniform(DebugUniform::modelViewMatrix, "modelViewMatrix");
-
-	tien.start();
 }
+
+
 
 void NetworkEngine::preFrame(double frameTime, double totalTime)
 {
@@ -209,8 +216,8 @@ void NetworkEngine::preFrame(double frameTime, double totalTime)
 		dir = f.route->getPosition(f.offset + inc) - pos;
 
 		float ff = 1.5f;
-
-		while (glm::abs(glm::length(dir) - dist) > 0.0001f)
+		int i = 0;
+		while (glm::abs(glm::length(dir) - dist) > 0.0001f && i < 100)
 		{
 			float l = glm::length(dir) - dist;
 			if (l > 0)
@@ -219,6 +226,7 @@ void NetworkEngine::preFrame(double frameTime, double totalTime)
 				inc *= ff;
 			dir = f.route->getPosition(f.offset + inc) - pos;
 			ff = 1 + (ff - 1) * .9f;
+			i++;
 		}
 		
 		f.offset += inc;
@@ -234,7 +242,7 @@ void NetworkEngine::preFrame(double frameTime, double totalTime)
 				f.node->transform->rotation = glm::quat(glm::lookAt(f.node->transform->position, f.node->transform->position + dir, glm::vec3(0,1,0))) * f.rotateOffset;
 		}
 
-		if (terrain)
+		if (terrain && f.followHeight)
 		{
 			f.node->transform->position = terrain->getPosition(glm::vec2(128 + f.node->transform->position.x, 128 + f.node->transform->position.z)) + glm::vec3(-128, 0, -128);
 		}

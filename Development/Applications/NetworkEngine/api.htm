@@ -46,6 +46,7 @@ h1
 			<li><a href="#scene/node/delete">scene/node/delete</a></li>
 			<li><a href="#scene/node/addlayer">scene/node/addlayer</a></li>
 			<li><a href="#scene/node/dellayer">scene/node/dellayer</a></li>
+			<li><a href="#scene/node/find">scene/node/find</a></li>
 		</ul></li>
 		<li>terrain<ul>
 			<li><a href="#scene/terrain/add">scene/terrain/add</a></li>
@@ -67,6 +68,7 @@ h1
 		<li><a href="#route/add">route/add</a></li>
 		<li><a href="#route/update">route/update</a></li>
 		<li><a href="#route/delete">route/delete</a></li>
+		<li><a href="#route/follow">route/follow</a></li>
 	</ul></li>
 	<li><a href="#play">play</a></li>
 	<li><a href="#pause">pause</a></li>
@@ -229,12 +231,19 @@ h1
 
 	<div class="call" id="scene/node/update">
 		<h2>scene/node/update</h2>
-
+		Updates one ore more properties of a node. id in the data field is mandatory, other fields are optional
 <div class="code">{
 	"id" : "scene/node/update",
 	"data" :
 	{
-		"id" : {guid}
+		"id" : {guid},
+		"parent" : {guid},
+		"transform" :
+		{
+			"position" : [ 0, 0, 0 ],
+			"scale" : [ 1, 1, 1 ]
+			"rotation" : [ 0, 0, 0 ],
+		}
 	}
 }
 </div>
@@ -289,6 +298,30 @@ h1
 <div class="code">{
 	"status" : "ok"
 }</div>
+		Errors:
+		<ul>
+		</ul>
+	</div>
+
+
+	<!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+	<div class="call" id="scene/node/find">
+		<h2>scene/node/find</h2>
+
+<div class="code">{
+	"id" : "scene/node/find",
+	"data" :
+	{
+		"name" : {name}
+	}
+}
+</div>
+		Response
+<div class="code">[
+...node info...
+	
+]</div>
 		Errors:
 		<ul>
 		</ul>
@@ -427,6 +460,13 @@ h1
 	"id" : "scene/terrain/getheight",
 	"data" :
 	{
+		"position" : [ 10.2, 4.4 ],
+		"positions" : 
+		[
+			[ 10.2, 4.4 ],
+			[ 11.2, 4.4 ],
+			[ 12.2, 4.4 ]
+		]
 	}
 }
 </div>
@@ -595,6 +635,36 @@ h1
 }</div>
 		Errors:
 		<ul>
+		</ul>
+	</div>
+
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+	<div class="call" id="route/follow">
+		<h2>route/follow</h2>
+
+<div class="code">{
+	"id" : "route/follow",
+	"data" :
+	{
+		"route" : {routeid},
+		"node" : {nodeid},
+		"speed" : 1.0,
+		"offset" : 0.0,
+		"rotate" : "XY",
+		"rotateOffset" : [ 0, 0, 0 ],
+		"positionOffset" : [ 0, 0, 0]
+	}
+}
+</div>
+		Response
+<div class="code">{
+	"status" : "ok"
+}</div>
+		Errors:
+		<ul>
+			<li>Route not found</li>
+			<li>Node not found</li>
 		</ul>
 	</div>
 

@@ -29,8 +29,8 @@ namespace NetworkTunnelControl
 			client = new TcpClient();
 
 			
-			//await client.ConnectAsync("145.48.6.10", 6666);
-			await client.ConnectAsync("127.0.0.1", 6666);
+			await client.ConnectAsync("145.48.6.10", 6666);
+			//await client.ConnectAsync("127.0.0.1", 6666);
 			System.Console.WriteLine("Connected");
 			stream = client.GetStream();
 			stream.BeginRead(buffer, 0, 1024, onRead, null);
@@ -99,7 +99,7 @@ namespace NetworkTunnelControl
 				blocker.Set();
 			};
 			send("session/list", null);
-			blocker.WaitOne();
+			blocker.WaitOne(5000);
 			callbacks.Remove("session/list");
 			return sessions;
 		}
@@ -130,17 +130,23 @@ namespace NetworkTunnelControl
 		public delegate dynamic Callback2(dynamic json);
 		public static dynamic sendTunnelWait(string _id, dynamic _data, Callback2 callback)
 		{
-			dynamic ret = null;
-			AutoResetEvent blocker = new AutoResetEvent(false);
-			callbacks[_id] = (d) =>
+			for (int i = 0; i < 10; i++)
 			{
-				ret = callback(d);
-				blocker.Set();
-			};
-			sendTunnel(_id, _data);
-			blocker.WaitOne();
-			Connection.callbacks.Remove(_id);
-			return ret;
+				dynamic ret = null;
+				AutoResetEvent blocker = new AutoResetEvent(false);
+				callbacks[_id] = (d) =>
+				{
+					ret = callback(d);
+					blocker.Set();
+				};
+				sendTunnel(_id, _data);
+				if (blocker.WaitOne(500))
+				{
+					Connection.callbacks.Remove(_id);
+					return ret;
+				}
+			}
+			return null;
 		}
 
 

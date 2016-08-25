@@ -56,7 +56,21 @@ Api scene_terrain_getheight("scene/terrain/getheight", [](NetworkEngine* engine,
 {
 	vrlib::json::Value packet;
 	packet["id"] = "scene/terrain/getheight";
-	packet["status"] = "error";
-	packet["error"] = "not implemented";
+
+	if (engine->terrain)
+	{
+		packet["status"] = "ok";
+		if(data.isMember("position"))
+			packet["data"]["height"] = engine->terrain->getPosition(glm::vec2(128 + data["position"][0].asFloat(), 128 + data["position"][1].asFloat())).y;
+		else if(data.isMember("positions"))
+		{
+			for(int i = 0; i < data["positions"].size(); i++)
+				packet["data"]["heights"].push_back(engine->terrain->getPosition(glm::vec2(128 + data["positions"][i][0].asFloat(), 128 + data["positions"][i][1].asFloat())).y);
+		}
+	}
+	else
+		packet["status"] = "error";
+
+
 	tunnel->send(packet);
 });

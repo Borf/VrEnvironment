@@ -13,7 +13,8 @@ public:
 	void addNode(const glm::vec3 &position, const glm::vec3 &direction);
 	void finish();
 
-	glm::vec3 getPosition(float index);
+	glm::vec3 getPosition(float index) const;
+	inline glm::vec2 getPositionXY(float index) const { glm::vec3 p = getPosition(index); return glm::vec2(p.x, p.z); }
 	float length = 0;
 
 

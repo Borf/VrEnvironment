@@ -29,7 +29,7 @@ void main()
 						normal);
 
 	vec3 n = normalize(2.0 * texture2D(s_normalmap, texCoord).rgb - 1);
-	n = TBN * n;
+	n = normalize(TBN * n);
 
 	float mask = texture2D(s_mask, position.xz/heightmapSize).r;
 	vec4 tex = texture2D(s_texture, texCoord);

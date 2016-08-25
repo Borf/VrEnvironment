@@ -2,6 +2,7 @@
 
 #include <VrLib/tien/components/Transform.h>
 #include <VrLib/tien/components/ModelRenderer.h>
+#include <VrLib/tien/components/AnimatedModelRenderer.h>
 #include <VrLib/tien/components/TerrainRenderer.h>
 
 
@@ -28,10 +29,22 @@ Api scene_node_add("scene/node/add", [](NetworkEngine* engine, vrlib::Tunnel* tu
 		}
 		if (data["components"].isMember("model"))
 		{
-			auto renderer = new vrlib::tien::components::ModelRenderer(data["components"]["model"]["file"]);
-			if (data["components"]["model"].isMember("cullbackfaces"))
-				renderer->cullBackFaces = data["components"]["model"]["cullbackfaces"];
-			n->addComponent(renderer);
+			if (data["components"]["model"].isMember("animated") && data["components"]["model"]["animated"].asBool())
+			{
+				auto renderer = new vrlib::tien::components::AnimatedModelRenderer(data["components"]["model"]["file"]);
+
+				if (data["components"]["model"].isMember("animation"))
+					renderer->playAnimation(data["components"]["model"]["animation"], true);
+
+				n->addComponent(renderer);
+			}
+			else
+			{
+				auto renderer = new vrlib::tien::components::ModelRenderer(data["components"]["model"]["file"]);
+				if (data["components"]["model"].isMember("cullbackfaces"))
+					renderer->cullBackFaces = data["components"]["model"]["cullbackfaces"];
+				n->addComponent(renderer);
+			}
 		}
 		if (data["components"].isMember("terrain"))
 		{
@@ -73,10 +86,37 @@ Api scene_node_moveto("scene/node/moveto", [](NetworkEngine* engine, vrlib::Tunn
 Api scene_node_update("scene/node/update", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
 {
 	vrlib::json::Value packet;
-	packet["id"] = "scene/node/update";
-	packet["status"] = "error";
-	packet["error"] = "not implemented";
+	packet["id"] = "scene/node/delete";
+	vrlib::tien::Node* node = engine->tien.scene.findNodeWithGuid(data["id"]);
+	if (node)
+	{
+		packet["data"]["status"] = "ok";
+		if (data.isMember("parent"))
+		{
+			vrlib::tien::Node* newParent = engine->tien.scene.findNodeWithGuid(data["parent"]);
+			node->setParent(newParent);
+		}
+		if (data.isMember("transform"))
+		{
+			if(data["transform"].isMember("position"))
+				node->transform->position = glm::vec3(data["transform"]["position"][0].asFloat(), data["transform"]["position"][1].asFloat(), data["transform"]["position"][2].asFloat());
+			if (data["transform"].isMember("rotation"))
+				node->transform->rotation = glm::quat(glm::vec3(glm::radians(data["transform"]["rotation"][0].asFloat()), glm::radians(data["transform"]["rotation"][1].asFloat()), glm::radians(data["transform"]["rotation"][2].asFloat())));
+			if (data["transform"].isMember("scale"))
+				node->transform->scale = glm::vec3(data["transform"]["scale"].asFloat(), data["transform"]["scale"].asFloat(), data["transform"]["scale"].asFloat());
+		}
+
+
+
+
+	}
+	else
+	{
+		packet["data"]["status"] = "error";
+		packet["data"]["error"] = "node not found";
+	}
 	tunnel->send(packet);
+
 });
 
 
@@ -145,5 +185,22 @@ Api scene_node_delete("scene/node/delete", [](NetworkEngine* engine, vrlib::Tunn
 	tunnel->send(packet);
 });
 
+
+
+
+
+Api scene_node_find("scene/node/find", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
+{
+	vrlib::json::Value packet;
+	packet["id"] = "scene/node/find";
+	if (data.isMember("name"))
+	{
+		std::vector<vrlib::tien::Node*> nodes = engine->tien.scene.findNodesWithName(data["name"]);
+		for (auto n : nodes)
+			packet["data"].push_back(n->asJson());
+	}
+		
+	tunnel->send(packet);
+});
 
 

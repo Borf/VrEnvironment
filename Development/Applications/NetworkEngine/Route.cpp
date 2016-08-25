@@ -23,7 +23,7 @@ void Route::finish()
 
 }
 
-glm::vec3 Route::getPosition(float index)
+glm::vec3 Route::getPosition(float index) const
 {
 	while (index > length)
 		index -= length;

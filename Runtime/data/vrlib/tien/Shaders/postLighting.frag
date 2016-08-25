@@ -58,7 +58,6 @@ float insideBox(vec2 v, vec2 bottomLeft, vec2 topRight) {
 void main()
 {
 	vec2 texCoord = gl_FragCoord.xy / windowSize;
-	vec3 cameraPosition = vec3(0,1.5,-1);
 
     vec4 image = texture2D( s_color, texCoord );
     float depth = texture2D( s_depth, texCoord ).x;
@@ -72,6 +71,9 @@ void main()
 	float ambient = 0;
 	float specular = 0;
 	float visibility = 1.0;
+
+
+	//image.rgb = normal.rgb;
 
 	switch(lightType) // directional light
 	{
@@ -87,7 +89,7 @@ void main()
 				{
 					vec3 L = normalize( position.xyz - lightPosition.xyz);
 					float cosTheta = clamp(dot(n,L), 0, 1);
-					float bias = clamp(0.005*tan(acos(cosTheta)), 0, 0.05);
+					float bias = clamp(0.001*tan(acos(cosTheta)), 0.001, 0.005);
 
 					for (int i=0;i<4;i++){
 						int index = i;

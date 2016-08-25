@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -240,6 +241,8 @@ namespace NetworkTunnelControl
 		{
 			using (Bitmap heightmap = new Bitmap("../../heightmap.png"))
 			{
+				Connection.sendTunnel("scene/reset", null);
+				Connection.sendTunnel("pause", null);
 
 				float[,] heights = new float[heightmap.Width, heightmap.Height];
 				for (int x = 0; x < heightmap.Width; x++)
@@ -271,29 +274,6 @@ namespace NetworkTunnelControl
 						}
 					}
 				}, data => data.uuid);
-
-
-
-				string bikeId = Connection.sendTunnelWait("scene/node/add",
-				new
-				{
-					name = "bike",
-					components = new
-					{
-						transform = new
-						{
-							position = new[] { 0, 5, 0 },
-							scale = 0.01
-						},
-						model = new
-						{
-							file = "data/Networkengine/models/bike/bike_anim.fbx"
-						}
-					}
-				}, data => data.uuid);
-
-
-
 				Connection.sendTunnel("scene/node/addlayer",
 					new
 					{
@@ -316,6 +296,124 @@ namespace NetworkTunnelControl
 						fadeDist = 0.5f
 					});
 
+
+				string bikeId = Connection.sendTunnelWait("scene/node/add",
+				new
+				{
+					name = "bike",
+					components = new
+					{
+						transform = new
+						{
+							position = new[] { 0, 0.15, 0 },
+							scale = 0.01
+						},
+						model = new
+						{
+							file = "data/Networkengine/models/bike/bike_anim.fbx",
+							animated = true,
+							animation = "Armature|Fietsen"
+						}
+					}
+				}, data => data.uuid);
+
+				string cameraId = Connection.sendTunnelWait("scene/node/find",
+					new { name = "Camera" }, data => data[0].uuid);
+
+
+				Connection.sendTunnel("scene/node/update",
+					new
+					{
+						id = cameraId,
+						parent = bikeId,
+						transform = new
+						{
+							scale = 100
+						}
+					});
+
+
+				string treesId = Connection.sendTunnelWait("scene/node/add",
+				new
+				{
+					name = "trees"
+				}, data => data.uuid);
+
+
+				Random r = new Random();
+				List<float[]> positions = new List<float[]>();
+				for (int i = 0; i < 100; i++)
+					positions.Add(new[] { (float)(r.NextDouble() * 80 - 40), 0.0f, (float)(r.NextDouble() * 80 - 40) });
+
+
+				Connection.sendTunnelWait("scene/terrain/getheight", new
+				{
+					positions = positions.Select(a => new float[] { a[0], a[2] }).ToArray()
+				}, data =>
+				{
+					for (int i = 0; i < 100; i++)
+						positions[i][1] = data["heights"][i];
+					return null;
+				});
+
+
+				for (int i = 0; i < 100; i++)
+				{
+					Connection.sendTunnel("scene/node/add",
+					new
+					{
+						name = "Tree",
+						parent = treesId,
+						components = new
+						{
+							transform = new
+							{
+								position = positions[i],
+								rotation = new[] { 0, r.NextDouble() * 360, 0 },
+								scale = 1 + 0.4 * r.NextDouble()
+							},
+							model = new
+							{
+								file = "data/TienTest/biker/models/trees/2/tree"+r.Next(1, 7)+".obj",
+								cullbackfaces = false
+							}
+						}
+					});
+				}
+
+
+				float roundness = 10;
+				float size = 20;
+				string routeId = Connection.sendTunnelWait("route/add", new
+				{
+					nodes = new[]
+					{
+						new {   pos = new [] { size, 0, -size },    dir = new [] { roundness, 0, roundness } },
+						new {   pos = new [] { size, 0, size },		dir = new [] {-roundness, 0, roundness } },
+						new {   pos = new [] { -size, 0, size },    dir = new [] {-roundness, 0,-roundness } },
+						new {   pos = new [] { -size, 0, -size },   dir = new [] { roundness, 0,-roundness } }
+					}
+
+				}, data => data.uuid);
+
+
+				/*Connection.sendTunnel("route/follow", new
+				{
+					route = routeId,
+					node = bikeId,
+					speed = 2.0,
+					rotate = "XZ",
+					followHeight = true
+				});*/
+
+
+				Connection.sendTunnel("scene/road/add", new
+				{
+					route = routeId
+				});
+
+
+				Connection.sendTunnel("play", null);
 				Connection.sendTunnel("scene/get", null);
 			}
 
