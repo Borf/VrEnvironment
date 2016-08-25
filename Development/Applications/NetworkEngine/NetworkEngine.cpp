@@ -124,7 +124,7 @@ void NetworkEngine::init()
 		routes.push_back(r);
 	}
 
-	{
+	/*{
 		vrlib::tien::Node* n = new vrlib::tien::Node("Character", &tien.scene);
 		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0, 0), glm::quat(), glm::vec3(0.01f, 0.01f, 0.01f)));
 		n->addComponent(new vrlib::tien::components::AnimatedModelRenderer("data/NetworkEngine/models/bike/bike_anim.fbx"));
@@ -140,7 +140,7 @@ void NetworkEngine::init()
 		f.rotate = RouteFollower::Rotate::XZ;
 		f.rotateOffset = glm::quat(glm::vec3(0, -glm::radians(0.0f), 0));
 		routeFollowers.push_back(f);
-	}
+	}*/
 
 
 
@@ -243,8 +243,8 @@ void NetworkEngine::preFrame(double frameTime, double totalTime)
 	}
 
 	//tien.scene.cameraNode->transform->lookAt(routeFollowers[0].node->transform->position);
-	tien.scene.cameraNode->transform->position = routeFollowers[0].node->transform->position;
-	tien.scene.cameraNode->transform->rotation = routeFollowers[0].node->transform->rotation;
+	//tien.scene.cameraNode->transform->position = routeFollowers[0].node->transform->position;
+	//tien.scene.cameraNode->transform->rotation = routeFollowers[0].node->transform->rotation;
 
 	tien.update((float)(frameTime / 1000.0f));
 }

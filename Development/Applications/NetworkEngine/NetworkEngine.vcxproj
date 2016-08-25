@@ -168,6 +168,11 @@
     <ClInclude Include="NetworkEngine.h" />
     <ClInclude Include="Route.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="api.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -29,8 +29,8 @@ namespace NetworkTunnelControl
 			client = new TcpClient();
 
 			
-			await client.ConnectAsync("145.48.6.10", 6666);
-			//await client.ConnectAsync("127.0.0.1", 6666);
+			//await client.ConnectAsync("145.48.6.10", 6666);
+			await client.ConnectAsync("127.0.0.1", 6666);
 			System.Console.WriteLine("Connected");
 			stream = client.GetStream();
 			stream.BeginRead(buffer, 0, 1024, onRead, null);
@@ -126,6 +126,23 @@ namespace NetworkTunnelControl
 			stream.WriteAsync(BitConverter.GetBytes(d.Length), 0, 4).Wait();
 			stream.WriteAsync(d, 0, d.Length).Wait();
 		}
+
+		public delegate dynamic Callback2(dynamic json);
+		public static dynamic sendTunnelWait(string _id, dynamic _data, Callback2 callback)
+		{
+			dynamic ret = null;
+			AutoResetEvent blocker = new AutoResetEvent(false);
+			callbacks[_id] = (d) =>
+			{
+				ret = callback(d);
+				blocker.Set();
+			};
+			sendTunnel(_id, _data);
+			blocker.WaitOne();
+			Connection.callbacks.Remove(_id);
+			return ret;
+		}
+
 
 
 		private static byte[] concat(byte[] b1, byte[] b2, int count)

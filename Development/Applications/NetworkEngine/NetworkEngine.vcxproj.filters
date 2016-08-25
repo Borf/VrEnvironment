@@ -63,4 +63,7 @@
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="api.htm" />
+  </ItemGroup>
 </Project>
