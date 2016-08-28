@@ -1,9 +1,12 @@
 #include "api.h"
 
+#include "PanelComponent.h"
+
 #include <VrLib/tien/components/Transform.h>
 #include <VrLib/tien/components/ModelRenderer.h>
 #include <VrLib/tien/components/AnimatedModelRenderer.h>
 #include <VrLib/tien/components/TerrainRenderer.h>
+
 
 
 Api scene_node_add("scene/node/add", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
@@ -62,6 +65,24 @@ Api scene_node_add("scene/node/add", [](NetworkEngine* engine, vrlib::Tunnel* tu
 			if (data["components"]["model"].isMember("smoothnormals"))
 				renderer->smoothNormals = data["components"]["model"]["smoothnormals"];
 			n->addComponent(renderer);
+		}
+		if (data["components"].isMember("panel"))
+		{
+			auto panel = new PanelComponent(glm::vec2(data["components"]["panel"]["size"][0].asFloat(), data["components"]["panel"]["size"][1].asFloat()), 
+											glm::ivec2(data["components"]["panel"]["resolution"][0].asInt(), data["components"]["panel"]["resolution"][0].asInt()));
+
+			if (data["components"]["panel"].isMember("background"))
+			{
+				panel->clearColor = glm::vec4(	data["components"]["panel"]["background"][0].asFloat(), 
+												data["components"]["panel"]["background"][1].asFloat(), 
+												data["components"]["panel"]["background"][2].asFloat(), 
+												data["components"]["panel"]["background"][3].asFloat());
+				panel->clear();
+			}
+
+
+			n->addComponent(panel);
+			n->addComponent(new vrlib::tien::components::MeshRenderer(panel));
 		}
 	}
 	vrlib::json::Value ret;

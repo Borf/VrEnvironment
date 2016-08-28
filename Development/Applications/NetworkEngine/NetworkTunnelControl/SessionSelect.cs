@@ -65,7 +65,7 @@ namespace NetworkTunnelControl
 				return;
 			string id = tunnelApps.SelectedItems[0].Text;
 			Console.WriteLine("Tunneling to " + id);
-			Connection.openTunnel(id);
+			Connection.openTunnel(id, "muffins");
 			Hide();
 			new TunnelWindow(this).Show();
 		}

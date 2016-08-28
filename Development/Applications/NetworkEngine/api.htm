@@ -54,6 +54,11 @@ h1
 			<li><a href="#scene/terrain/delete">scene/terrain/delete</a></li>
 			<li><a href="#scene/terrain/getheight">scene/terrain/getheight</a></li>
 		</ul></li>
+		<li>panel<ul>
+			<li><a href="#scene/panel/clear">scene/panel/clear</a></li>
+			<li><a href="#scene/panel/drawlines">scene/panel/drawlines</a></li>
+			<li><a href="#scene/panel/drawtext">scene/panel/drawtext</a></li>
+		</ul></li>
 		<li>skybox<ul>
 			<li><a href="#scene/skybox/settime">scene/skybox/settime</a></li>
 			<li><a href="#scene/skybox/update">scene/skybox/update</a></li>
@@ -185,7 +190,11 @@ h1
 
 	<div class="call" id="scene/node/add">
 		<h2>scene/node/add</h2>
-		Adds a node to the scene. Returns the guid of the newly created node
+		Adds a node to the scene. Returns the guid of the newly created node.<br />
+		Transform indicates the position of the new node. Transformation is relative to parent, including scaling<br/>
+		Model indicates a modelrenderer is attached to this node. cullbackfaces indicates the backfaces are not being drawed (default), animated indicates if the animations should be loaded (default no). If animated, the default animation can be set with the animation field<br/>
+		Terrain indicates a terrain renderer. Terrain should be added first with scene/terrain/add API<br/>
+		Panel creates a virtual drawing panel that can be drawn on. ID can be used for scene/panel/* API calls
 <div class="code">{
 	"id" : "scene/node/add",
 	"data" : 
@@ -204,10 +213,17 @@ h1
 				"filename" : {filename},
 				"cullbackfaces" : true,
 				"animated" : false,
-			}
+				"animation" : ""
+			},
 			"terrain" : 
 			{
 				"smoothnormals" : true
+			},
+			"panel" :
+			{
+				size = [ 1, 1 ],
+				resolution = [ 512, 512 ],
+				background = [ 1, 1, 1, 1]
 			}
 		}
 	}
@@ -377,8 +393,82 @@ h1
 		</ul>
 	</div>
 
-
 <!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+	<h1>scene/panel</h1>
+
+	<div class="call" id="scene/panel/clear">
+		<h2>scene/panel/clear</h2>
+		Clears the contents of the panel
+		<div class="code">{
+	"id" : "scene/panel/clear",
+	"data" :
+	{
+	}
+}
+		</div>
+		Response
+		<div class="code">
+			{
+			"status" : "ok"
+			}
+		</div>
+		Errors:
+		<ul></ul>
+	</div>
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->
+	<div class="call" id="scene/panel/swap">
+		<h2>scene/panel/swap</h2>
+		Swaps the buffers for this panel
+		<div class="code">{
+	"id" : "scene/panel/swap",
+	"data" :
+	{
+	}
+}
+		</div>
+		Response
+		<div class="code">
+			{
+			"status" : "ok"
+			}
+		</div>
+		Errors:
+		<ul></ul>
+	</div>
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->
+	<div class="call" id="scene/panel/drawlines">
+		<h2>scene/panel/drawlines</h2>
+		Swaps the buffers for this panel
+		<div class="code">{
+	"id" : "scene/panel/drawlines",
+	"data" :
+	{
+		"id" : {panelid},
+		"width" : 1,
+		lines : 
+		[
+			0,0, 10,10, 0,0,0,1, // x1,y1, x2,y2, r,g,b,a
+			0,0, 100,10, 0,0,0,1, // x1,y1, x2,y2, r,g,b,a
+		]
+	}
+}
+		</div>
+		Response
+		<div class="code">
+			{
+			"status" : "ok"
+			}
+		</div>
+		Errors:
+		<ul></ul>
+	</div>
+
+
+
+
+
+	<!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->
 
 
 

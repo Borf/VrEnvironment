@@ -29,8 +29,8 @@ namespace NetworkTunnelControl
 			client = new TcpClient();
 
 			
-			await client.ConnectAsync("145.48.6.10", 6666);
-			//await client.ConnectAsync("127.0.0.1", 6666);
+			//await client.ConnectAsync("145.48.6.10", 6666);
+			await client.ConnectAsync("127.0.0.1", 6666);
 			System.Console.WriteLine("Connected");
 			stream = client.GetStream();
 			stream.BeginRead(buffer, 0, 1024, onRead, null);
@@ -104,7 +104,7 @@ namespace NetworkTunnelControl
 			return sessions;
 		}
 
-		public static void openTunnel(string id)
+		public static void openTunnel(string id, string key = "")
 		{
 			AutoResetEvent blocker = new AutoResetEvent(false);
 			callbacks["tunnel/create"] = (data) =>
@@ -113,7 +113,10 @@ namespace NetworkTunnelControl
 				blocker.Set();
 			};
 
-			send("tunnel/create", new { session = id });
+			if(key != "")
+				send("tunnel/create", new { session = id, key = key });
+			else
+				send("tunnel/create", new { session = id });
 			blocker.WaitOne();
 			Console.WriteLine("Tunnel ID is " + tunnelId);
 			callbacks.Remove("tunnel/create");

@@ -46,6 +46,7 @@ public:
 class NetworkEngine : public vrlib::Application
 {
 public:
+	std::string tunnelKey = "";
 	enum class DebugUniform
 	{
 		projectionMatrix,

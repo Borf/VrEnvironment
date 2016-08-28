@@ -49,7 +49,7 @@ void NetworkEngine::init()
 {
 	tien.init();
 	vive.init();
-	vrlib::Kernel::getInstance()->serverConnection->onTunnelCreate([this](vrlib::Tunnel* tunnel)
+	vrlib::Kernel::getInstance()->serverConnection->onTunnelCreate(tunnelKey, [this](vrlib::Tunnel* tunnel)
 	{
 		logger << "Got a tunnel" << Log::newline;
 		tunnels.push_back(tunnel);
@@ -261,7 +261,7 @@ void NetworkEngine::draw(const glm::mat4 & projectionMatrix, const glm::mat4 & m
 {
 	tien.render(projectionMatrix, modelViewMatrix);
 
-	if (showRoutes)
+	if (showRoutes && routes.size() > 0)
 	{
 		std::vector<vrlib::gl::VertexP3C4> verts;
 

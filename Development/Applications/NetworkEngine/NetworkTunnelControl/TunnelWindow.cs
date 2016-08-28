@@ -397,14 +397,14 @@ namespace NetworkTunnelControl
 				}, data => data.uuid);
 
 
-				/*Connection.sendTunnel("route/follow", new
+				Connection.sendTunnel("route/follow", new
 				{
 					route = routeId,
 					node = bikeId,
 					speed = 2.0,
 					rotate = "XZ",
 					followHeight = true
-				});*/
+				});
 
 
 				Connection.sendTunnel("scene/road/add", new
@@ -413,13 +413,121 @@ namespace NetworkTunnelControl
 				});
 
 
+				string panelId = Connection.sendTunnelWait("scene/node/add",
+				new
+				{
+					name = "panel",
+					parent = bikeId,
+					components = new
+					{
+						transform = new
+						{
+							position = new[] { -40, 115, 0 },
+							rotation = new[] { -30, 90, 0 },
+							scale = 100
+						},
+						panel = new
+						{
+							size = new[] { 0.2, 0.3 },
+							resolution = new[] { 512, 512 }
+						}
+					}
+				}, data => data.uuid);
+
+				Connection.sendTunnel("scene/panel/clear", new
+				{
+					id = panelId,
+				});
+
+
+				List<double[]> lines = new List<double[]>();
+				double step = Math.PI / 36;
+				for (double f = 0; f < 2 * Math.PI; f += step)
+					lines.Add(new[] { 256 + 200 * Math.Cos(f), 256 + 200 * Math.Sin(f), 256 + 200 * Math.Cos(f + step), 256 + 200 * Math.Sin(f + step), 0, 0, 0, 1 });
+
+				lines.Add(new[] { 256, 256, 256 + 180 * Math.Cos(45 / 100.0 * 2 * Math.PI), 256 + 180 * Math.Sin(45 / 100.0 * 2 * Math.PI), 1, 0, 0, 1 });
+
+
+				Connection.sendTunnel("scene/panel/drawlines", new
+				{
+					id = panelId,
+					width = 1,
+					lines = lines.ToArray()
+				});
+				Connection.sendTunnel("scene/panel/swap", new
+				{
+					id = panelId,
+				});
+
+
+
 				Connection.sendTunnel("play", null);
 				Connection.sendTunnel("scene/get", null);
 			}
 
 		}
 
+		private void button2_Click(object sender, EventArgs e)
+		{
+			Connection.sendTunnel("scene/reset", null);
+
+			string panelId = Connection.sendTunnelWait("scene/node/add",
+			new
+			{
+				name = "panel",
+				components = new
+				{
+					transform = new
+					{
+						position = new[] { 0, 1, 0 },
+						rotation = new[] { 0, 0, 0 },
+						scale = 1
+					},
+					panel = new
+					{
+						size = new[] { 1, 1 },
+						resolution = new[] { 512, 512 },
+					}
+				}
+			}, data => data.uuid);
+
+			int count = 0;
+
+			var t = new System.Windows.Forms.Timer();
+			t.Tick += new EventHandler((a, b) =>
+			{
+				Connection.sendTunnel("scene/panel/clear", new
+				{
+					id = panelId,
+				});
 
 
+				List<double[]> lines = new List<double[]>();
+				double step = Math.PI / 36;
+				for(double f = 0; f < 2 * Math.PI; f+=step)
+					lines.Add(new[] { 256 + 200 * Math.Cos(f), 256 + 200 * Math.Sin(f), 256 + 200 * Math.Cos(f+step), 256 + 200 * Math.Sin(f+step),0,0,0,1 });
+
+				lines.Add(new[] { 256, 256, 256 + 180 * Math.Cos(count / 100.0 * 2 * Math.PI), 256 + 180 * Math.Sin(count / 100.0 * 2 * Math.PI), 1,0,0,1 });
+
+
+				Connection.sendTunnel("scene/panel/drawlines", new
+				{
+					id = panelId,
+					width = 1,
+					lines = lines.ToArray()
+				});
+				Connection.sendTunnel("scene/panel/swap", new
+				{
+					id = panelId,
+				});
+
+				count++;
+				if (count == 1000)
+					t.Stop();
+			});
+
+			t.Interval = 30;
+			t.Start();
+		}
 	}
 }

@@ -6,14 +6,19 @@
 int main(int argc, char* argv[])
 {
 	vrlib::Kernel* kernel = vrlib::Kernel::getInstance();
-	vrlib::Application* application = new NetworkEngine();
+	NetworkEngine* application = new NetworkEngine();
 
 	for( int i = 1; i < argc; ++i )
 	{
-		if(strcmp(argv[i], "--config") == 0)
+		if (strcmp(argv[i], "--config") == 0)
 		{
 			i++;
-			kernel->loadConfig(argv[i]); 
+			kernel->loadConfig(argv[i]);
+		}
+		if (strcmp(argv[i], "--key") == 0)
+		{
+			i++;
+			application->tunnelKey = argv[i];
 		}
 	}
 

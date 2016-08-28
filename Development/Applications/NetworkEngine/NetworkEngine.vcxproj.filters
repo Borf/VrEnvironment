@@ -48,6 +48,12 @@
     <ClCompile Include="api_scene_node.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PanelComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="api_scene_panel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NetworkEngine.h">
@@ -60,6 +66,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="api.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PanelComponent.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
