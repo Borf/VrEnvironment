@@ -41,6 +41,27 @@ public:
 
 };
 
+class Mover
+{
+public:
+	vrlib::tien::Node* node;
+	glm::vec3 position;
+
+	bool followHeight;
+	enum class Rotate
+	{
+		XZ,
+		XYZ,
+		NONE,
+	} rotate = Rotate::NONE;
+
+	float speed;
+	enum class Interpolate
+	{
+		Linear,
+		Exponential
+	} interpolate = Interpolate::Linear;
+};
 
 
 class NetworkEngine : public vrlib::Application
@@ -62,7 +83,7 @@ public:
 	std::vector<glm::vec4> routeColors;
 
 	std::vector<RouteFollower> routeFollowers;
-
+	std::vector<Mover> movers;
 	
 	vrlib::Vive vive;
 
