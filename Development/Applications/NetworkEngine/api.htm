@@ -341,6 +341,11 @@ h1
 			"position" : [ 0, 0, 0 ],
 			"scale" : [ 1, 1, 1 ]
 			"rotation" : [ 0, 0, 0 ],
+		},
+		"animation" :
+		{
+			"name" : "walk",
+			"speed" : 0.5
 		}
 	}
 }
@@ -360,12 +365,20 @@ h1
 
 	<div class="call" id="scene/node/moveto">
 		<h2>scene/node/moveto</h2>
-
+		Use either time or speed!
+		if stop is set, the moveto gets stopped, no more callback
 <div class="code">{
 	"id" : "scene/node/moveto",
 	"data" :
 	{
-		"id" : {guid}
+		"id" : {guid},
+		"stop" : "stop",
+		"position" : [ 0, 0, 0 ],
+		"rotate" : "XY",
+		"interpolate" : "linear",
+		"followheight" : false,
+		"speed" : 10,
+		"time" : 1
 	}
 }
 </div>

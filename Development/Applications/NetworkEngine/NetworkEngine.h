@@ -56,11 +56,13 @@ public:
 	} rotate = Rotate::NONE;
 
 	float speed;
+	float time;
 	enum class Interpolate
 	{
 		Linear,
 		Exponential
 	} interpolate = Interpolate::Linear;
+	glm::quat rotateOffset;
 };
 
 

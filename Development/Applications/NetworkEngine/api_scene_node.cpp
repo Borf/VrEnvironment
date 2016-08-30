@@ -98,8 +98,46 @@ Api scene_node_moveto("scene/node/moveto", [](NetworkEngine* engine, vrlib::Tunn
 {
 	vrlib::json::Value packet;
 	packet["id"] = "scene/node/moveto";
-	packet["status"] = "error";
-	packet["error"] = "not implemented";
+	vrlib::tien::Node* node = engine->tien.scene.findNodeWithGuid(data["id"]);
+	if (node)
+	{
+		if (data.isMember("stop"))
+		{
+			for (int i = 0; i < (int)engine->movers.size(); i++)
+				if (engine->movers[i].node == node)
+				{
+					engine->movers.erase(engine->movers.begin() + i);
+					i--;
+				}
+		}
+		else
+		{
+			Mover m;
+			m.node = node;
+			m.position = glm::vec3(data["position"][0].asFloat(), data["position"][1].asFloat(), data["position"][2].asFloat());
+			m.speed = data.isMember("speed") ? data["speed"].asFloat() : -1;
+			m.time = data.isMember("time") ? data["time"].asFloat() : -1;
+			m.interpolate = Mover::Interpolate::Linear;
+			if (data.isMember("interpolate") && data["interpolate"] == "exponential")
+				m.interpolate = Mover::Interpolate::Exponential;
+			m.followHeight = data["followheight"].asBool();
+			m.rotate = Mover::Rotate::NONE;
+			if (data.isMember("rotate"))
+			{
+				if (data["rotate"] == "XZ")
+					m.rotate = Mover::Rotate::XZ;
+				else if (data["rotate"] == "XYZ")
+					m.rotate = Mover::Rotate::XYZ;
+			}
+			engine->movers.push_back(m);
+		}
+		packet["data"]["status"] = "ok";
+	}
+	else
+	{
+		packet["data"]["status"] = "error";
+		packet["data"]["error"] = "node not found";
+	}
 	tunnel->send(packet);
 });
 
@@ -125,6 +163,13 @@ Api scene_node_update("scene/node/update", [](NetworkEngine* engine, vrlib::Tunn
 				node->transform->rotation = glm::quat(glm::vec3(glm::radians(data["transform"]["rotation"][0].asFloat()), glm::radians(data["transform"]["rotation"][1].asFloat()), glm::radians(data["transform"]["rotation"][2].asFloat())));
 			if (data["transform"].isMember("scale"))
 				node->transform->scale = glm::vec3(data["transform"]["scale"].asFloat(), data["transform"]["scale"].asFloat(), data["transform"]["scale"].asFloat());
+		}
+		if (data.isMember("animation"))
+		{
+			if (data["animation"].isMember("name"))
+				node->getComponent<vrlib::tien::components::AnimatedModelRenderer>()->playAnimation(data["animation"]["name"].asString());
+			if (data["animation"].isMember("speed"))
+				node->getComponent<vrlib::tien::components::AnimatedModelRenderer>()->animationSpeed = data["animation"]["speed"].asFloat();
 		}
 
 

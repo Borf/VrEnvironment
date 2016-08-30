@@ -274,6 +274,7 @@ namespace NetworkTunnelControl
 						}
 					}
 				}, data => data.uuid);
+				Console.WriteLine("Terrain ID: " + terrainId);
 				Connection.sendTunnel("scene/node/addlayer",
 					new
 					{
@@ -295,8 +296,6 @@ namespace NetworkTunnelControl
 						maxHeight = 50.0f,
 						fadeDist = 0.5f
 					});
-
-
 				string bikeId = Connection.sendTunnelWait("scene/node/add",
 				new
 				{
@@ -316,9 +315,11 @@ namespace NetworkTunnelControl
 						}
 					}
 				}, data => data.uuid);
+				Console.WriteLine("Bike ID: " + bikeId);
 
 				string cameraId = Connection.sendTunnelWait("scene/node/find",
 					new { name = "Camera" }, data => data[0].uuid);
+				Console.WriteLine("Camera ID: " + cameraId);
 
 
 				Connection.sendTunnel("scene/node/update",
@@ -338,6 +339,7 @@ namespace NetworkTunnelControl
 				{
 					name = "trees"
 				}, data => data.uuid);
+				Console.WriteLine("Trees ID: " + treesId);
 
 
 				Random r = new Random();
@@ -357,7 +359,7 @@ namespace NetworkTunnelControl
 				});
 
 
-				for (int i = 0; i < 100; i++)
+				/*for (int i = 0; i < 100; i++)
 				{
 					Connection.sendTunnel("scene/node/add",
 					new
@@ -379,8 +381,8 @@ namespace NetworkTunnelControl
 							}
 						}
 					});
-				}
-
+				}*/
+				
 
 				float roundness = 10;
 				float size = 20;
@@ -490,6 +492,14 @@ namespace NetworkTunnelControl
 					}
 				}
 			}, data => data.uuid);
+
+			Connection.sendTunnel("scene/node/moveto", new
+			{
+				id = panelId,
+				position = new[] { 0, 1, -50 },
+				speed = 0.1
+			});
+
 
 			int count = 0;
 

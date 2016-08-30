@@ -29,8 +29,8 @@ namespace NetworkTunnelControl
 			client = new TcpClient();
 
 			
-			//await client.ConnectAsync("145.48.6.10", 6666);
-			await client.ConnectAsync("127.0.0.1", 6666);
+			await client.ConnectAsync("borf.info", 6666);
+			//await client.ConnectAsync("127.0.0.1", 6666);
 			System.Console.WriteLine("Connected");
 			stream = client.GetStream();
 			stream.BeginRead(buffer, 0, 1024, onRead, null);
@@ -39,7 +39,10 @@ namespace NetworkTunnelControl
 			{
 				string id = json.data.id;
 				if (callbacks.ContainsKey(id))
+				{
+					Console.WriteLine("Got a packet " + id + " through tunnel");
 					callbacks[id](json.data.data);
+				}
 				else
 					Console.WriteLine("Got an unhandled packet " + id + " through tunnel");
 			};
@@ -128,12 +131,13 @@ namespace NetworkTunnelControl
 			byte[] d = System.Text.Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(command));
 			stream.WriteAsync(BitConverter.GetBytes(d.Length), 0, 4).Wait();
 			stream.WriteAsync(d, 0, d.Length).Wait();
+			Thread.Sleep(50);
 		}
 
 		public delegate dynamic Callback2(dynamic json);
 		public static dynamic sendTunnelWait(string _id, dynamic _data, Callback2 callback)
 		{
-			for (int i = 0; i < 10; i++)
+			//for (int i = 0; i < 10; i++)
 			{
 				dynamic ret = null;
 				AutoResetEvent blocker = new AutoResetEvent(false);
@@ -143,7 +147,7 @@ namespace NetworkTunnelControl
 					blocker.Set();
 				};
 				sendTunnel(_id, _data);
-				if (blocker.WaitOne(500))
+				if (blocker.WaitOne(5000))
 				{
 					Connection.callbacks.Remove(_id);
 					return ret;

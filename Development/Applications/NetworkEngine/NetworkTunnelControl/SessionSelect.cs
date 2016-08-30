@@ -63,6 +63,8 @@ namespace NetworkTunnelControl
 		{
 			if (tunnelApps.SelectedItems.Count != 1)
 				return;
+			if (!Visible)
+				return;
 			string id = tunnelApps.SelectedItems[0].Text;
 			Console.WriteLine("Tunneling to " + id);
 			Connection.openTunnel(id, "muffins");

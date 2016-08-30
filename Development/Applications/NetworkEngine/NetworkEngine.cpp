@@ -246,13 +246,54 @@ void NetworkEngine::preFrame(double frameTime, double totalTime)
 		{
 			f.node->transform->position = terrain->getPosition(glm::vec2(128 + f.node->transform->position.x, 128 + f.node->transform->position.z)) + glm::vec3(-128, 0, -128);
 		}
-
-
 	}
 
-	//tien.scene.cameraNode->transform->lookAt(routeFollowers[0].node->transform->position);
-	//tien.scene.cameraNode->transform->position = routeFollowers[0].node->transform->position;
-	//tien.scene.cameraNode->transform->rotation = routeFollowers[0].node->transform->rotation;
+	for (int i = 0; i < (int)movers.size(); i++)
+	{
+		Mover& m = movers[i];
+		if (m.interpolate == Mover::Interpolate::Linear)
+		{
+			float movement = (float)(frameTime / 1000.0f) * m.speed;
+			glm::vec3 diff = m.position - m.node->transform->position;
+			if (glm::length(diff) > movement)
+				m.node->transform->position += movement * glm::normalize(diff);
+			else
+				m.node->transform->position = m.position;
+		}
+		else if (m.interpolate == Mover::Interpolate::Exponential)
+		{
+			float movement = glm::pow(m.speed, (float)(frameTime / 1000.0));
+			glm::vec3 diff = m.node->transform->position - m.position;
+			if (glm::length(diff) < 0.01f)
+				m.node->transform->position = glm::mix(m.node->transform->position, m.position, movement);
+			else
+				m.node->transform->position = m.position;
+		}
+		if (m.rotate != Mover::Rotate::NONE)
+		{
+			glm::vec3 dir = m.node->transform->position - m.position;
+			if (m.rotate == Mover::Rotate::XZ)
+				m.node->transform->rotation = glm::quat(glm::vec3(0, glm::pi<float>() - glm::atan(dir.z, dir.x), 0)) * m.rotateOffset;
+			if (m.rotate == Mover::Rotate::XYZ)
+				m.node->transform->rotation = glm::quat(glm::lookAt(m.node->transform->position, m.node->transform->position + dir, glm::vec3(0, 1, 0))) * m.rotateOffset;
+		}
+		if (terrain && m.followHeight)
+		{
+			m.node->transform->position = terrain->getPosition(glm::vec2(128 + m.node->transform->position.x, 128 + m.node->transform->position.z)) + glm::vec3(-128, 0, -128);
+		}
+
+		if (glm::distance(m.node->transform->position, m.position) < 0.001f)
+		{
+			vrlib::json::Value packet;
+			packet["id"] = "scene/node/moveto";
+			packet["data"]["status"] = "done";
+			packet["data"]["node"] = m.node->guid;
+			for (auto t : tunnels)
+				t->send(packet);
+			movers.erase(movers.begin() + i);
+			i--;
+		}
+	}
 
 	tien.update((float)(frameTime / 1000.0f));
 }
