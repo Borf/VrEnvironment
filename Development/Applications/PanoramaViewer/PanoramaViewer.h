@@ -21,7 +21,8 @@ class PanoramaViewer : public vrlib::Application
 		diffuseColor,
 		textureFactor,
 		useSphereMap,
-		offset
+		offset,
+		flip
 	};
 	float time = 0;
 	bool showMenu = true;

@@ -6,6 +6,7 @@
 #include <VrLib/gl/Vertex.h>
 #include <VrLib/Model.h>
 #include <VrLib/Texture.h>
+#include <VrLib/Video.h>
 #include <VrLib/util.h>
 #include <VrLib/Log.h>
 using vrlib::Log;
@@ -16,6 +17,9 @@ PanoramaViewer::PanoramaViewer()
 {
 	clearColor = glm::vec4(0.0f, 0.5f, 0.9f, 1.0f);
 }
+
+
+
 
 void PanoramaViewer::init()
 {
@@ -33,6 +37,7 @@ void PanoramaViewer::init()
 	shader->registerUniform(Uniforms::textureFactor, "textureFactor");
 	shader->registerUniform(Uniforms::useSphereMap, "useSphereMap");
 	shader->registerUniform(Uniforms::offset, "offset");
+	shader->registerUniform(Uniforms::flip, "flip");
 	shader->use();
 	shader->setUniform(Uniforms::s_texture, 0);
 
@@ -53,8 +58,6 @@ void PanoramaViewer::init()
 				scanDir(path + f);
 				continue;
 			}
-			if (f.substr(f.size() - 4) == ".mp4" || f.substr(f.size() - 4) == ".MP4")
-				continue;
 
 			vrlib::Texture* t = vrlib::Texture::loadCached(path + f);
 			if (t)
@@ -70,6 +73,9 @@ void PanoramaViewer::init()
 	{
 		viveController = vrlib::Model::getModel<vrlib::gl::VertexP3N3T2>("data/vrlib/rendermodels/vr_controller_vive_1_5/vr_controller_vive_1_5.obj");
 	}
+
+
+	//texture = new vrlib::Texture(nullptr);
 
 	logger << "Initialized" << Log::newline;
 }
@@ -87,6 +93,14 @@ void PanoramaViewer::draw(const glm::mat4 &projectionMatrix, const glm::mat4 &mo
 	shader->setUniform(Uniforms::useSphereMap, true);
 	shader->setUniform(Uniforms::offset, 0.0f);
 	shader->setUniform(Uniforms::textureFactor, 1.0f);
+
+	if(texture->image && dynamic_cast<vrlib::Video*>(texture->image))
+		shader->setUniform(Uniforms::flip, true);
+	else
+		shader->setUniform(Uniforms::flip, false);
+
+
+
 	texture->bind();
 
 	model->draw([this](const glm::mat4 &modelMatrix)
@@ -104,6 +118,11 @@ void PanoramaViewer::draw(const glm::mat4 &projectionMatrix, const glm::mat4 &mo
 		for (size_t i = 0; i < textures.size(); i++)
 		{
 			textures[i]->bind();
+			if (textures[i]->image && dynamic_cast<vrlib::Video*>(textures[i]->image))
+				shader->setUniform(Uniforms::flip, true);
+			else
+				shader->setUniform(Uniforms::flip, false);
+
 			shader->setUniform(Uniforms::offset, time * (float)sin(i / 2.135345f));
 
 			model->draw([this, i](const glm::mat4 &modelMatrix)
@@ -178,8 +197,10 @@ void PanoramaViewer::preFrame(double frameTime, double totalTime)
 
 	if (vive.controllers[0].applicationMenuButton.getData() == vrlib::DigitalState::TOGGLE_ON)
 		showMenu = !showMenu;
+	texture->update(frameTime / 1000.0f);
 
 	time += frameTime / 10000.0f;
+
 }
 
 
