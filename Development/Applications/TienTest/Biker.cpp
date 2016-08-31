@@ -34,7 +34,7 @@ Biker::~Biker()
 
 void Biker::init(vrlib::tien::Scene & scene, TienTest * app)
 {
-	serial.Open(5, 9600);
+	serial.Open(4, 9600);
 	Sleep(100);
 	serial.SendData("ST\r\n", 4);
 
@@ -67,9 +67,9 @@ void Biker::init(vrlib::tien::Scene & scene, TienTest * app)
 		n->addComponent(new vrlib::tien::components::TerrainCollider(n));
 		n->addComponent(new vrlib::tien::components::RigidBody(0));
 
-		vrlib::tien::Node* n2 = new vrlib::tien::Node("Grass", &scene);
-		n2->addComponent(new vrlib::tien::components::Transform(glm::vec3(-terrain->getWidth() / 2.0f * scale, -15, -terrain->getHeight() / 2.0f* scale), glm::quat(), glm::vec3(scale, scale, scale)));
-		n2->addComponent(new GrassComponent(*terrain));
+		//vrlib::tien::Node* n2 = new vrlib::tien::Node("Grass", &scene);
+	//	n2->addComponent(new vrlib::tien::components::Transform(glm::vec3(-terrain->getWidth() / 2.0f * scale, -15, -terrain->getHeight() / 2.0f* scale), glm::quat(), glm::vec3(scale, scale, scale)));
+//		n2->addComponent(new GrassComponent(*terrain));
 
 	}
 

@@ -86,10 +86,21 @@ public:
 
 	std::vector<RouteFollower> routeFollowers;
 	std::vector<Mover> movers;
-	
+
 	vrlib::Vive vive;
 
-
+	enum CallbackMasks
+	{
+		LeftTrigger = 1,
+		LeftTouchPad = 2,
+		LeftApplication = 4,
+		LeftGrip = 8,
+		RightTrigger = 16,
+		RightTouchPad = 32,
+		RightApplication = 64,
+		RightGrip = 128,
+	};
+	int callbackMask = 0;
 
 	NetworkEngine();
 	~NetworkEngine();

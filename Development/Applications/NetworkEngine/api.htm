@@ -352,7 +352,11 @@ h1
 </div>
 		Response
 <div class="code">{
-	"status" : "ok"
+	"id" : "route/node/delete",
+	"data" :
+	{
+		"status" : "ok"
+	}
 }</div>
 		Errors:
 		<ul>
@@ -384,7 +388,11 @@ h1
 </div>
 		Response
 <div class="code">{
-	"status" : "ok"
+	"id" : "route/node/delete",
+	"data" :
+	{
+		"status" : "ok"
+	}
 }</div>
 		Errors:
 		<ul>
@@ -407,7 +415,11 @@ h1
 </div>
 		Response
 <div class="code">{
-	"status" : "ok"
+	"id" : "route/node/delete",
+	"data" :
+	{
+		"status" : "ok"
+	}
 }</div>
 		Errors:
 		<ul>
@@ -429,10 +441,13 @@ h1
 }
 </div>
 		Response
-<div class="code">[
+<div class="code">{
+	"id" : "route/road/delete",
+	"data" :
+	[
 ...node info...
-	
-]</div>
+	]
+</div>
 		Errors:
 		<ul>
 		</ul>
@@ -458,7 +473,10 @@ h1
 </div>
 		Response
 <div class="code">{
-	"status" : "ok"
+	"id" : "route/node/addlayer",
+	"data" :
+	{
+	}
 }</div>
 		Errors:
 		<ul>
@@ -481,7 +499,10 @@ h1
 </div>
 		Response
 <div class="code">{
-	"status" : "ok"
+	"id" : "route/node/dellayer",
+	"data" :
+	{
+	}
 }</div>
 		Errors:
 		<ul>
@@ -503,11 +524,12 @@ h1
 }
 		</div>
 		Response
-		<div class="code">
-			{
-			"status" : "ok"
-			}
-		</div>
+		<div class="code">{
+	"id" : "route/panel/clear",
+	"data" :
+	{
+	}
+}</div>
 		Errors:
 		<ul></ul>
 	</div>
@@ -523,11 +545,12 @@ h1
 }
 		</div>
 		Response
-		<div class="code">
-			{
-			"status" : "ok"
-			}
-		</div>
+		<div class="code">{
+	"id" : "route/panel/swap",
+	"data" :
+	{
+	}
+}</div>
 		Errors:
 		<ul></ul>
 	</div>
@@ -550,11 +573,12 @@ h1
 }
 		</div>
 		Response
-		<div class="code">
-			{
-			"status" : "ok"
-			}
-		</div>
+		<div class="code">{
+	"id" : "route/panel/drawlines",
+	"data" :
+	{
+	}
+}</div>
 		Errors:
 		<ul></ul>
 	</div>
@@ -581,7 +605,10 @@ h1
 </div>
 		Response
 <div class="code">{
-	"status" : "ok"
+	"id" : "route/terrain/add",
+	"data" :
+	{
+	}
 }</div>
 		Errors:
 		<ul>
@@ -604,7 +631,10 @@ h1
 </div>
 		Response
 <div class="code">{
-	"status" : "ok"
+	"id" : "route/terrain/update",
+	"data" :
+	{
+	}
 }</div>
 		Errors:
 		<ul>
@@ -627,7 +657,11 @@ h1
 </div>
 		Response
 <div class="code">{
-	"status" : "ok"
+	"id" : "route/terrain/delete",
+	"data" :
+	{
+		"status" : "ok"
+	}
 }</div>
 		Errors:
 		<ul>
@@ -657,7 +691,13 @@ h1
 </div>
 		Response
 <div class="code">{
-	"status" : "ok"
+	"id" : "route/terrain/getheight",
+	"data" :
+	{
+		"status" : "ok",
+		"height" : 10.3,
+		"heights" : [ 10.3, 10.4, 10.4]
+	}
 }</div>
 		Errors:
 		<ul>
@@ -680,7 +720,10 @@ h1
 </div>
 		Response
 <div class="code">{
-	"status" : "ok"
+	"id" : "scene/skybox/settime",
+	"data" :
+	{
+	}
 }</div>
 		Errors:
 		<ul>
@@ -702,7 +745,10 @@ h1
 </div>
 		Response
 <div class="code">{
-	"status" : "ok"
+	"id" : "route/skybox/update",
+	"data" :
+	{
+	}
 }</div>
 		Errors:
 		<ul>
@@ -726,7 +772,10 @@ h1
 </div>
 		Response
 <div class="code">{
-	"status" : "ok"
+	"id" : "route/road/add",
+	"data" :
+	{
+	}
 }</div>
 		Errors:
 		<ul>
@@ -749,7 +798,10 @@ h1
 </div>
 		Response
 <div class="code">{
-	"status" : "ok"
+	"id" : "route/road/delete",
+	"data" :
+	{
+	}
 }</div>
 		Errors:
 		<ul>
@@ -772,7 +824,10 @@ h1
 </div>
 		Response
 <div class="code">{
-	"status" : "ok"
+	"id" : "route/add",
+	"data" :
+	{
+	}
 }</div>
 		Errors:
 		<ul>
@@ -794,7 +849,11 @@ h1
 </div>
 		Response
 <div class="code">{
-	"status" : "ok"
+	"id" : "route/update",
+	"data" : 
+	{
+		"status" : "ok"
+	}
 }</div>
 		Errors:
 		<ul>
@@ -816,7 +875,11 @@ h1
 </div>
 		Response
 <div class="code">{
-	"status" : "ok"
+	"id" : "route/delete",
+	"data" :
+	{
+		"status" : "ok"
+	}
 }</div>
 		Errors:
 		<ul>
@@ -856,7 +919,7 @@ h1
 
 	<div class="call" id="get">
 		<h2>get</h2>
-			Gets information about a certain part of the VR engine. 
+			Gets information about a certain part of the VR engine. Type can be head, handleft, handright, button. If type is button, extra fields 'button' and 'hand' are used to select the button to read out. hand can be left or right, button can be trigger, thumbpad, application, grip
 <div class="code">{
 	"id" : "get",
 	"data" :
@@ -867,9 +930,13 @@ h1
 </div>
 		Response
 <div class="code">{
-	"status" : "ok",
-	"position" : [ 0, 0, 0 ],
-	"direction" : [ 0, 0, -1 ]
+	"id" : "get",
+	"data" : 
+	{
+		"status" : "ok",
+		"position" : [ 0, 0, 0 ],
+		"direction" : [ 0, 0, -1 ]
+	}
 }</div>
 		Errors:
 		<ul>
@@ -897,9 +964,11 @@ h1
 </div>
 		Response
 <div class="code">{
-	"status" : "ok",
-	"position" : [ 0, 0, 0 ],
-	"direction" : [ 0, 0, -1 ]
+	"id" : "setcallback",
+	"data" : 
+	{
+		"status" : "ok"
+	}
 }</div>
 		Errors:
 		<ul>

@@ -399,14 +399,14 @@ namespace NetworkTunnelControl
 				}, data => data.uuid);
 
 
-				Connection.sendTunnel("route/follow", new
+				/*Connection.sendTunnel("route/follow", new
 				{
 					route = routeId,
 					node = bikeId,
 					speed = 2.0,
 					rotate = "XZ",
 					followHeight = true
-				});
+				});*/
 
 
 				Connection.sendTunnel("scene/road/add", new
@@ -460,7 +460,6 @@ namespace NetworkTunnelControl
 				{
 					id = panelId,
 				});
-
 
 
 				Connection.sendTunnel("play", null);

@@ -2,6 +2,9 @@
 
 #include "Route.h"
 
+#include <algorithm>
+
+
 Api route_add("route/add", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
 {
 	Route* r = new Route();
@@ -84,11 +87,16 @@ Api route_follow("route/follow", [](NetworkEngine* engine, vrlib::Tunnel* tunnel
 				packet["data"]["error"] = "node not found";
 				break;
 			}
-			for (auto & f : engine->routeFollowers)
+			for (size_t ii = 0; ii < engine->routeFollowers.size(); ii++)
 			{
+				auto & f = engine->routeFollowers[ii];
 				if (f.node == n)
 				{
-					//f.route = 
+					engine->routeFollowers.erase(engine->routeFollowers.begin() + ii);
+					packet["data"]["status"] = "ok";
+					packet["data"]["msg"] = "removed";
+					tunnel->send(packet);
+					return;
 				}
 			}
 

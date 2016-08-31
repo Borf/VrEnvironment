@@ -138,36 +138,6 @@ void NetworkEngine::reset()
 		}
 	}
 
-
-/*	{
-		float roundness = 5.0f;
-		Route* r = new Route();
-		r->addNode(glm::vec3(10, 0.1f, -10), glm::vec3(1, 0, 1) * roundness);
-		r->addNode(glm::vec3(10, 0.1f, 10), glm::vec3(-1, 0, 1) * roundness);
-		r->addNode(glm::vec3(-10, 0.1f, 10), glm::vec3(-1, 0, -1) * roundness);
-		r->addNode(glm::vec3(-10, 0.1f, -10), glm::vec3(1, 0, -1) * roundness);
-		r->finish();
-		routes.push_back(r);
-	}*/
-
-	/*{
-	vrlib::tien::Node* n = new vrlib::tien::Node("Character", &tien.scene);
-	n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0, 0), glm::quat(), glm::vec3(0.01f, 0.01f, 0.01f)));
-	n->addComponent(new vrlib::tien::components::AnimatedModelRenderer("data/NetworkEngine/models/bike/bike_anim.fbx"));
-
-	n->getComponent<vrlib::tien::components::AnimatedModelRenderer>()->playAnimation("Armature|Fietsen", true);
-
-	RouteFollower f;
-
-	f.node = n;
-	f.route = routes[0];
-	f.offset = 0;
-	f.speed = 3.0f;
-	f.rotate = RouteFollower::Rotate::XZ;
-	f.rotateOffset = glm::quat(glm::vec3(0, -glm::radians(0.0f), 0));
-	routeFollowers.push_back(f);
-	}*/
-
 	{
 		vrlib::tien::Node* n = new vrlib::tien::Node("GroundPlane", &tien.scene);
 		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0, 0)));
@@ -294,6 +264,41 @@ void NetworkEngine::preFrame(double frameTime, double totalTime)
 			i--;
 		}
 	}
+
+	auto checkButtonCallback = [this](CallbackMasks callback, vrlib::DigitalDevice& button)
+	{
+		vrlib::DigitalState state = button.getData();
+		if (state == vrlib::DigitalState::TOGGLE_ON)
+		{
+			vrlib::json::Value packet;
+			packet["id"] = "callback";
+			packet["data"]["button"] = button.name;
+			packet["data"]["state"] = "on";
+			for (auto t : tunnels)
+				t->send(packet);
+		}
+		if (state == vrlib::DigitalState::TOGGLE_OFF)
+		{
+			vrlib::json::Value packet;
+			packet["id"] = "callback";
+			packet["data"]["button"] = button.name;
+			packet["data"]["state"] = "off";
+			for (auto t : tunnels)
+				t->send(packet);
+		}
+	};
+
+
+	checkButtonCallback(LeftTrigger,		vive.controllers[0].triggerButton);
+	checkButtonCallback(LeftApplication,	vive.controllers[0].applicationMenuButton);
+	checkButtonCallback(LeftTouchPad,		vive.controllers[0].touchButton);
+	checkButtonCallback(LeftGrip,			vive.controllers[0].gripButton);
+
+	checkButtonCallback(RightTrigger,		vive.controllers[1].triggerButton);
+	checkButtonCallback(RightApplication,	vive.controllers[1].applicationMenuButton);
+	checkButtonCallback(RightTouchPad,		vive.controllers[1].touchButton);
+	checkButtonCallback(RightGrip,			vive.controllers[1].gripButton);
+
 
 	tien.update((float)(frameTime / 1000.0f));
 }
