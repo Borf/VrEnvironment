@@ -11,19 +11,19 @@
 			"name" : "buttonLeftMenu",
 			"type" : "digital",
 			"driver" : "keyboard",
-			"src" : "buttonLeftMenu"
+			"src" : "1"
 		},
 		{
 			"name" : "buttonLeftGrip",
 			"type" : "digital",
 			"driver" : "keyboard",
-			"src" : "buttonLeftGrip"
+			"src" : "1"
 		},
 		{
 			"name" : "buttonLeftTouch",
 			"type" : "digital",
 			"driver" : "keyboard",
-			"src" : "buttonLeftTouch"
+			"src" : "1"
 		},
 		{
 			"name" : "buttonLeftTrigger",
@@ -35,25 +35,25 @@
 			"name" : "buttonRightMenu",
 			"type" : "digital",
 			"driver" : "keyboard",
-			"src" : "buttonRightMenu"
+			"src" : "1"
 		},
 		{
 			"name" : "buttonRightGrip",
 			"type" : "digital",
 			"driver" : "keyboard",
-			"src" : "buttonRightGrip"
+			"src" : "1"
 		},
 		{
 			"name" : "buttonRightTouch",
 			"type" : "digital",
 			"driver" : "keyboard",
-			"src" : "buttonRightTouch"
+			"src" : "1"
 		},
 		{
 			"name" : "buttonRightTrigger",
 			"type" : "digital",
 			"driver" : "mouse",
-			"src" : "left"
+			"src" : "right"
 		}
 	]
 }

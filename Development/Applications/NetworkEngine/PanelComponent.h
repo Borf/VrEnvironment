@@ -6,6 +6,7 @@
 namespace vrlib
 {
 	class Texture;
+	class TrueTypeFont;
 	namespace json { class Value; }
 	namespace gl
 	{
@@ -36,11 +37,25 @@ public:
 	vrlib::gl::FBO* fbo;
 	vrlib::gl::FBO* backFbo;
 
+	enum class FontUniform
+	{
+		projectionMatrix,
+		modelMatrix,
+		s_texture,
+		color,
+	};
+	static vrlib::gl::Shader<FontUniform>* fontShader;
+	static std::map<std::pair<std::string, float>, vrlib::TrueTypeFont*> fonts;
+
+
+
+
 	PanelComponent(const glm::vec2 &size, const glm::ivec2 &res);
 	~PanelComponent();
 
 	void clear();
 	void swap();
+	void drawText(const glm::vec2 &position, const std::string &font, const std::string &text, const glm::vec4 &color, float size);
 
 	virtual vrlib::json::Value toJson() const;
 

@@ -77,6 +77,12 @@ public:
 	};
 	vrlib::gl::Shader<DebugUniform>* debugShader;
 
+
+
+
+
+
+
 	std::vector<vrlib::Tunnel*> tunnels;
 
 

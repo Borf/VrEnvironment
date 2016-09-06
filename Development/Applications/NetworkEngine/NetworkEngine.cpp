@@ -27,6 +27,7 @@ using vrlib::logger;
 #include <VrLib/tien/components/AnimatedModelRenderer.h>
 #include <VrLib/tien/components/DynamicSkyBox.h>
 #include <VrLib/tien/components/TransformAttach.h>
+#include <VrLib/Font.h>
 
 inline std::map<std::string, std::function<void(NetworkEngine*, vrlib::Tunnel*, const vrlib::json::Value &)>> &callbacks()
 {
@@ -35,6 +36,7 @@ inline std::map<std::string, std::function<void(NetworkEngine*, vrlib::Tunnel*, 
 }
 
 
+vrlib::TrueTypeFont* font;
 
 NetworkEngine::NetworkEngine()
 {
@@ -62,11 +64,13 @@ void NetworkEngine::init()
 
 	debugShader = new vrlib::gl::Shader<DebugUniform>("data/vrlib/tien/shaders/physicsdebug.vert", "data/vrlib/tien/shaders/physicsdebug.frag");
 	debugShader->bindAttributeLocation("a_position", 0);
-	debugShader->bindAttributeLocation("a_color", 1);
+	debugShader->bindAttributeLocation("a_texture", 1);
 	debugShader->link();
 	debugShader->registerUniform(DebugUniform::projectionMatrix, "projectionMatrix");
 	debugShader->registerUniform(DebugUniform::modelViewMatrix, "modelViewMatrix");
 
+
+	font = new vrlib::TrueTypeFont("segoeui");
 	tien.start();
 }
 
@@ -143,7 +147,7 @@ void NetworkEngine::reset()
 		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0, 0)));
 
 		vrlib::tien::components::MeshRenderer::Mesh* mesh = new vrlib::tien::components::MeshRenderer::Mesh();
-		mesh->material.texture = vrlib::Texture::loadCached("data/TienTest/textures/grid.png");
+		mesh->material.texture = vrlib::Texture::loadCached("data/NetworkEngine/textures/grid.png");
 		mesh->indices = { 2, 1, 0, 2, 0, 3 };
 		vrlib::gl::VertexP3N2B2T2T2 v;
 		vrlib::gl::setN3(v, glm::vec3(0, 1, 0));
@@ -341,5 +345,6 @@ void NetworkEngine::draw(const glm::mat4 & projectionMatrix, const glm::mat4 & m
 
 
 	}
+
 
 }

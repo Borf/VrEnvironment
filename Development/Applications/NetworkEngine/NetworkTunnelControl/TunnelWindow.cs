@@ -538,5 +538,54 @@ namespace NetworkTunnelControl
 			t.Interval = 30;
 			t.Start();
 		}
+
+		private void button3_Click(object sender, EventArgs e)
+		{
+			Connection.sendTunnel("scene/reset", null);
+
+			string panelId = Connection.sendTunnelWait("scene/node/add",
+			new
+			{
+				name = "panel",
+				components = new
+				{
+					transform = new
+					{
+						position = new[] { 0, 1, 0 },
+						rotation = new[] { 0, 0, 0 },
+						scale = 1
+					},
+					panel = new
+					{
+						size = new[] { 1, 1 },
+						resolution = new[] { 512, 512 },
+					}
+				}
+			}, data => data.uuid);
+
+			Connection.sendTunnel("scene/node/moveto", new
+			{
+				id = panelId,
+				position = new[] { 0, 1, -50 },
+				speed = 0.1
+			});
+
+
+			Connection.sendTunnel("scene/panel/clear", new
+			{
+				id = panelId,
+			});
+
+			Connection.sendTunnel("scene/panel/drawtext", new
+			{
+				id = panelId,
+				text = "Hello world",
+				position = new[] { 100, 100 }
+			});
+			Connection.sendTunnel("scene/panel/swap", new
+			{
+				id = panelId,
+			});
+		}
 	}
 }

@@ -29,7 +29,7 @@ namespace NetworkTunnelControl
 			client = new TcpClient();
 
 			
-			await client.ConnectAsync("145.48.6.10", 6666);
+			await client.ConnectAsync("borf.info", 6666);
 			//await client.ConnectAsync("127.0.0.1", 6666);
 			System.Console.WriteLine("Connected");
 			stream = client.GetStream();

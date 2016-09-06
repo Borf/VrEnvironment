@@ -1,11 +1,34 @@
 #include "PanelComponent.h"
 
-
 #include <VrLib/gl/FBO.h>
+#include <VrLib/gl/Vertex.h>
 #include <VrLib/json.h>
+#include <VrLib/Font.h>
+
+#include <glm/gtc/matrix_transform.hpp>
+
+
+vrlib::gl::Shader<PanelComponent::FontUniform>* PanelComponent::fontShader = nullptr;
+std::map<std::pair<std::string, float>, vrlib::TrueTypeFont*> PanelComponent::fonts;
 
 PanelComponent::PanelComponent(const glm::vec2 &size, const glm::ivec2 &res)
 {
+	if (!fontShader)
+	{
+		fontShader = new vrlib::gl::Shader<FontUniform>("data/NetworkEngine/shaders/font.vert", "data/NetworkEngine/shaders/font.frag");
+		fontShader->bindAttributeLocation("a_position", 0);
+		fontShader->bindAttributeLocation("a_color", 1);
+		fontShader->link();
+		fontShader->registerUniform(FontUniform::projectionMatrix, "projectionMatrix");
+		fontShader->registerUniform(FontUniform::modelMatrix, "modelMatrix");
+		fontShader->registerUniform(FontUniform::s_texture, "s_texture");
+		fontShader->registerUniform(FontUniform::color, "color");
+		fontShader->use();
+		fontShader->setUniform(FontUniform::s_texture, 0);
+		fontShader->setUniform(FontUniform::color, glm::vec4(1, 1, 1, 1));
+	}
+
+
 	clearColor = glm::vec4(1, 1, 1, 1);
 	fbo = new vrlib::gl::FBO(res.x, res.y);
 	backFbo = new vrlib::gl::FBO(res.x, res.y);
@@ -57,6 +80,41 @@ void PanelComponent::clear()
 	glViewport(viewport[0], viewport[1], viewport[2], viewport[3]);
 }
 
+
+void PanelComponent::drawText(const glm::vec2 &position, const std::string &font, const std::string &text, const glm::vec4 &color, float size)
+{
+	if (fonts.find(std::pair<std::string, float>(font, size)) == fonts.end())
+	{
+		vrlib::TrueTypeFont* f = new vrlib::TrueTypeFont(font, size);
+		fonts[std::pair<std::string, float>(font, size)] = f;
+
+	}
+
+	vrlib::TrueTypeFont* f = fonts[std::pair<std::string, float>(font, size)];
+
+	int viewport[4];
+	glGetIntegerv(GL_VIEWPORT, viewport);
+	glViewport(0, 0, backFbo->getWidth(), backFbo->getHeight());
+	backFbo->bind();
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glDisable(GL_DEPTH_TEST);
+	glBindVertexArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	fontShader->use();
+	fontShader->setUniform(FontUniform::modelMatrix, glm::translate(glm::mat4(), glm::vec3(position,0)));
+	fontShader->setUniform(FontUniform::projectionMatrix, glm::ortho(0.0f, (float)backFbo->getWidth(), (float)backFbo->getHeight(), 0.0f));
+	fontShader->setUniform(FontUniform::color, color);
+	f->drawText<vrlib::gl::VertexP2T2>(text);
+
+
+
+	backFbo->unbind();
+	glViewport(viewport[0], viewport[1], viewport[2], viewport[3]);
+
+}
 
 
 void PanelComponent::swap()

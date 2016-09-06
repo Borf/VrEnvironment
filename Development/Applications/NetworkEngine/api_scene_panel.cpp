@@ -87,6 +87,17 @@ Api scene_panel_drawtext("scene/panel/drawtext", [](NetworkEngine* engine, vrlib
 	PanelComponent* panel = node->getComponent<PanelComponent>();
 	assert(panel);
 
-	panel->clear();
+	std::string font = "segoeui";
+	float size = 32;
+	glm::vec4 color = glm::vec4(0, 0, 0, 1);
+
+	if (data.isMember("font"))
+		font = data["font"].asString();
+	if (data.isMember("size"))
+		size = data["size"].asFloat();
+	if (data.isMember("color"))
+		color = glm::vec4(data["color"][0].asFloat(), data["color"][1].asFloat(), data["color"][2].asFloat(), data["color"][3].asFloat());
+
+	panel->drawText(glm::vec2(data["position"][0].asFloat(), data["position"][1].asFloat()), font, data["text"].asString(), color, size);
 
 });
