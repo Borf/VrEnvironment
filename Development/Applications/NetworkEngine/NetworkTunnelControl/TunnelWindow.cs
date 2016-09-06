@@ -587,5 +587,109 @@ namespace NetworkTunnelControl
 				id = panelId,
 			});
 		}
+
+		private void button4_Click(object sender, EventArgs e)
+		{
+			string[] map = new string[10]
+			{
+				"          ",
+				" #----T-# ",
+				" |    | | ",
+				" T---T+-T ",
+				" |   |  | ",
+				" | #-#  | ",
+				" | |    | ",
+				" | |    | ",
+				" #-T----# ",
+				"          "
+			};
+
+			for(int x = 0; x < 10; x++)
+			{
+				for(int y = 0; y < 10; y++)
+				{
+					string file = "";
+					float rotation = 0;
+					if (map[y][x] == '-' || map[y][x] == '|')
+						file = "data/NetworkEngine/models/roads/set1/Road-2-Lane-Straight.obj";
+					if (map[y][x] == '|')
+						rotation = 90;
+
+					if (map[y][x] == 'T')
+					{
+						file = "data/NetworkEngine/models/roads/set1/Road-2-Lane-T.obj";
+						if (map[y][x + 1] == ' ')
+							rotation = 90;
+						else if (map[y][x - 1] == ' ')
+							rotation = 270;
+						else if (map[y - 1][x] == ' ')
+							rotation = 0;
+						else if (map[y + 1][x] == ' ')
+							rotation = 180;
+						else
+							file = "";
+					}
+					if (map[y][x] == '#')
+					{
+						file = "data/NetworkEngine/models/roads/set1/Road-2-Lane-Corner.obj";
+						if (map[y][x + 1] == ' ' && map[y + 1][x] == ' ')
+							rotation = 0;
+						else if (map[y][x + 1] == ' ' && map[y - 1][x] == ' ')
+							rotation = 90;
+						else if (map[y][x - 1] == ' ' && map[y + 1][x] == ' ')
+							rotation = 270;
+						else if (map[y][x - 1] == ' ' && map[y - 1][x] == ' ')
+							rotation = 180;
+					}
+					if (map[y][x] == '+')
+					{
+						file = "data/NetworkEngine/models/roads/set1/Road-2-Lane-X.obj";
+					}
+
+
+
+					if (file == "")
+						continue;
+					Connection.sendTunnel("scene/node/add",
+					new
+					{
+						name = "road",
+						components = new
+						{
+							transform = new
+							{
+								position = new[] { 4*x, 0, 4*y },
+								rotation = new[] { 0, rotation, 0 },
+								scale = 4
+							},
+							model = new
+							{
+								file = file
+							}
+						}
+					});
+				}
+			}
+
+			Connection.sendTunnel("scene/node/add",
+			new
+			{
+				name = "road",
+				components = new
+				{
+					transform = new
+					{
+						position = new[] { 10, 0, 10 },
+						rotation = new[] { 0, 0, 0 },
+						scale = 4
+					},
+					model = new
+					{
+						file = "data/NetworkEngine/models/houses/set1/house13.obj"
+					}
+				}
+			});
+
+		}
 	}
 }
