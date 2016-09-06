@@ -138,6 +138,7 @@ h1
 			<li><a href="#scene/panel/clear">scene/panel/clear</a></li>
 			<li><a href="#scene/panel/drawlines">scene/panel/drawlines</a></li>
 			<li><a href="#scene/panel/drawtext">scene/panel/drawtext</a></li>
+			<li><a href="#scene/panel/setclearcolor">scene/panel/setclearcolor</a></li>
 		</ul></li>
 		<li>skybox<ul>
 			<li><a href="#scene/skybox/settime">scene/skybox/settime</a></li>
@@ -584,6 +585,61 @@ h1
 	</div>
 
 
+
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->
+	<div class="call" id="scene/panel/setclearcolor">
+		<h2>scene/panel/setclearcolor</h2>
+		Changes the clear color
+		<div class="code">{
+	"id" : "scene/panel/setclearcolor",
+	"data" :
+	{
+		"id" : {panelid},
+		"color" : [ 1,1,1,1 ]
+	}
+}
+		</div>
+		Response
+		<div class="code">{
+	"id" : "route/panel/setclearcolor",
+	"data" :
+	{
+			"status" : "ok"
+	}
+}</div>
+		Errors:
+		<ul></ul>
+	</div>
+
+
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->
+	<div class="call" id="scene/panel/drawtext">
+		<h2>scene/panel/drawtext</h2>
+		Draws a text on the panel
+		<div class="code">{
+	"id" : "scene/panel/drawtext",
+	"data" :
+	{
+		"id" : {panelid},
+		"text" : "Hello World",
+		"position" : [ 100.0, 100.0 ],
+		"size" : 32.0,
+		"color" : [ 0,0,0,1 ],
+		"font" : "segoeui"
+	}
+}
+		</div>
+		Response
+		<div class="code">{
+	"id" : "route/panel/drawtext",
+	"data" :
+	{
+			"status" : "ok"
+	}
+}</div>
+		Errors:
+		<ul></ul>
+	</div>
 
 
 

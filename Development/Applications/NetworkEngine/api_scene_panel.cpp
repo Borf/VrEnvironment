@@ -101,3 +101,16 @@ Api scene_panel_drawtext("scene/panel/drawtext", [](NetworkEngine* engine, vrlib
 	panel->drawText(glm::vec2(data["position"][0].asFloat(), data["position"][1].asFloat()), font, data["text"].asString(), color, size);
 
 });
+
+
+Api scene_panel_setclearcolor("scene/panel/setclearcolor", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
+{
+	vrlib::tien::Node* node = engine->tien.scene.findNodeWithGuid(data["id"]);
+	assert(node);
+	PanelComponent* panel = node->getComponent<PanelComponent>();
+	assert(panel);
+
+	for (int i = 0; i < 4; i++)
+		panel->clearColor[i] = data["color"][i].asFloat();
+
+});
