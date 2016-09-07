@@ -97,7 +97,7 @@ void main()
 					}
 				}
 				else
-					visibility = 0;
+					visibility = 1;
 			}
 			break;	
 		case 1: // point light

@@ -112,6 +112,13 @@ Api scene_node_moveto("scene/node/moveto", [](NetworkEngine* engine, vrlib::Tunn
 		}
 		else
 		{
+			for(size_t i = 0; i < engine->movers.size(); i++)
+				if (engine->movers[i].node == node)
+				{
+					engine->movers.erase(engine->movers.begin() + i);
+					break;
+				}
+
 			Mover m;
 			m.node = node;
 			m.position = glm::vec3(data["position"][0].asFloat(), data["position"][1].asFloat(), data["position"][2].asFloat());

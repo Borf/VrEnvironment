@@ -52,7 +52,7 @@ Api get("get", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::jso
 	if (ok)
 	{
 		glm::vec4 position = matrix * glm::vec4(0, 0, 0, 1);
-		glm::vec4 forward = (matrix * glm::vec4(0, 0, 1, 1)) - position;
+		glm::vec4 forward = glm::normalize((matrix * glm::vec4(0, 0, -1, 1)) - position);
 		vrlib::json::Value packet;
 		packet["id"] = "get";
 		packet["data"]["status"] = "ok";
