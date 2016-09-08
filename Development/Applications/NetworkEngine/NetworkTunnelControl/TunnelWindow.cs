@@ -74,6 +74,8 @@ namespace NetworkTunnelControl
 			};
 
 			Connection.sendTunnel("scene/get", null);
+
+//			button4_Click(sender, e);
 		}
 
 		private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
@@ -282,7 +284,7 @@ namespace NetworkTunnelControl
 						diffuse = "data/TienTest/textures/grass_diffuse.png",
 						normal = "data/TienTest/textures/grass_normal.png",
 						minHeight = -10.0f,
-						maxHeight = 2.0f,
+						maxHeight = 10.0f,
 						fadeDist = 0.5f
 					});
 
@@ -292,7 +294,7 @@ namespace NetworkTunnelControl
 						id = terrainId,
 						diffuse = "data/TienTest/textures/ground_diffuse.png",
 						normal = "data/TienTest/textures/ground_normal.png",
-						minHeight = 2.5f,
+						minHeight = 10f,
 						maxHeight = 50.0f,
 						fadeDist = 0.5f
 					});
@@ -359,7 +361,7 @@ namespace NetworkTunnelControl
 				});
 
 
-				/*for (int i = 0; i < 100; i++)
+				for (int i = 0; i < 50; i++)
 				{
 					Connection.sendTunnel("scene/node/add",
 					new
@@ -381,7 +383,7 @@ namespace NetworkTunnelControl
 							}
 						}
 					});
-				}*/
+				}
 				
 
 				float roundness = 10;
@@ -399,14 +401,14 @@ namespace NetworkTunnelControl
 				}, data => data.uuid);
 
 
-				/*Connection.sendTunnel("route/follow", new
+				Connection.sendTunnel("route/follow", new
 				{
 					route = routeId,
 					node = bikeId,
 					speed = 2.0,
 					rotate = "XZ",
 					followHeight = true
-				});*/
+				});
 
 
 				Connection.sendTunnel("scene/road/add", new
@@ -445,9 +447,9 @@ namespace NetworkTunnelControl
 				List<double[]> lines = new List<double[]>();
 				double step = Math.PI / 36;
 				for (double f = 0; f < 2 * Math.PI; f += step)
-					lines.Add(new[] { 256 + 200 * Math.Cos(f), 256 + 200 * Math.Sin(f), 256 + 200 * Math.Cos(f + step), 256 + 200 * Math.Sin(f + step), 0, 0, 0, 1 });
+					lines.Add(new[] { 256 + 200 * Math.Cos(f), 300 + 150 * Math.Sin(f), 256 + 200 * Math.Cos(f + step), 300 + 150 * Math.Sin(f + step), 0, 0, 0, 1 });
 
-				lines.Add(new[] { 256, 256, 256 + 180 * Math.Cos(45 / 100.0 * 2 * Math.PI), 256 + 180 * Math.Sin(45 / 100.0 * 2 * Math.PI), 1, 0, 0, 1 });
+				lines.Add(new[] { 256, 300, 256 + 180 * Math.Cos(45 / 100.0 * 2 * Math.PI), 300 + 150 * Math.Sin(45 / 100.0 * 2 * Math.PI), 1, 0, 0, 1 });
 
 
 				Connection.sendTunnel("scene/panel/drawlines", new
@@ -456,6 +458,26 @@ namespace NetworkTunnelControl
 					width = 1,
 					lines = lines.ToArray()
 				});
+
+				Connection.sendTunnel("scene/panel/drawtext", new
+				{
+					id = panelId,
+					text = "Speed: 10km/h",
+					position = new[] { 50, 40 }
+				});
+				Connection.sendTunnel("scene/panel/drawtext", new
+				{
+					id = panelId,
+					text = "Heartrate: 100bpm",
+					position = new[] { 50, 80 }
+				});
+				Connection.sendTunnel("scene/panel/drawtext", new
+				{
+					id = panelId,
+					text = "Power: 33%",
+					position = new[] { 50, 120 }
+				});
+
 				Connection.sendTunnel("scene/panel/swap", new
 				{
 					id = panelId,
@@ -590,24 +612,29 @@ namespace NetworkTunnelControl
 
 		private void button4_Click(object sender, EventArgs e)
 		{
+			Connection.sendTunnel("scene/reset", null);
 			string[] map = new string[10]
 			{
 				"          ",
 				" #----T-# ",
-				" |    | | ",
+				" |hh  | | ",
 				" T---T+-T ",
 				" |   |  | ",
-				" | #-#  | ",
-				" | |    | ",
-				" | |    | ",
+				" |h#-#  | ",
+				" |h|    | ",
+				" |h|    | ",
 				" #-T----# ",
 				"          "
 			};
+
+			Func<char, bool> isEmpty = c => c == ' ' || c == 'h';
+
 
 			for(int x = 0; x < 10; x++)
 			{
 				for(int y = 0; y < 10; y++)
 				{
+					float scale = 10;
 					string file = "";
 					float rotation = 0;
 					if (map[y][x] == '-' || map[y][x] == '|')
@@ -618,13 +645,13 @@ namespace NetworkTunnelControl
 					if (map[y][x] == 'T')
 					{
 						file = "data/NetworkEngine/models/roads/set1/Road-2-Lane-T.obj";
-						if (map[y][x + 1] == ' ')
+						if (isEmpty(map[y][x + 1]))
 							rotation = 90;
-						else if (map[y][x - 1] == ' ')
+						else if (isEmpty(map[y][x - 1]))
 							rotation = 270;
-						else if (map[y - 1][x] == ' ')
+						else if (isEmpty(map[y - 1][x]))
 							rotation = 0;
-						else if (map[y + 1][x] == ' ')
+						else if (isEmpty(map[y + 1][x]))
 							rotation = 180;
 						else
 							file = "";
@@ -632,13 +659,13 @@ namespace NetworkTunnelControl
 					if (map[y][x] == '#')
 					{
 						file = "data/NetworkEngine/models/roads/set1/Road-2-Lane-Corner.obj";
-						if (map[y][x + 1] == ' ' && map[y + 1][x] == ' ')
+						if (isEmpty(map[y][x + 1]) && isEmpty(map[y + 1][x]))
 							rotation = 0;
-						else if (map[y][x + 1] == ' ' && map[y - 1][x] == ' ')
+						else if (isEmpty(map[y][x + 1]) && isEmpty(map[y - 1][x]))
 							rotation = 90;
-						else if (map[y][x - 1] == ' ' && map[y + 1][x] == ' ')
+						else if (isEmpty(map[y][x - 1]) && isEmpty(map[y + 1][x]))
 							rotation = 270;
-						else if (map[y][x - 1] == ' ' && map[y - 1][x] == ' ')
+						else if (isEmpty(map[y][x - 1]) && isEmpty(map[y - 1][x]))
 							rotation = 180;
 					}
 					if (map[y][x] == '+')
@@ -646,7 +673,12 @@ namespace NetworkTunnelControl
 						file = "data/NetworkEngine/models/roads/set1/Road-2-Lane-X.obj";
 					}
 
-
+					if(map[y][x] == 'h')
+					{
+						file = "data/NetworkEngine/models/houses/set1/house15.obj";
+						scale = 4;
+						rotation = 90;
+					}
 
 					if (file == "")
 						continue;
@@ -658,9 +690,9 @@ namespace NetworkTunnelControl
 						{
 							transform = new
 							{
-								position = new[] { 4*x, 0, 4*y },
+								position = new[] { 10*x, 0, 10*y },
 								rotation = new[] { 0, rotation, 0 },
-								scale = 4
+								scale = scale
 							},
 							model = new
 							{
@@ -671,25 +703,92 @@ namespace NetworkTunnelControl
 				}
 			}
 
+
+
+			Connection.sendTunnel("setcallback",
+			new
+			{
+				type = "button",
+				button = "trigger",
+				hand = "right"
+			});
+
+
+			bool moving = false;
+
+
+			Connection.callbacks.Add("callback", (data) =>
+			{
+				if (data.state == "on")
+					moving = true;
+				if (data.state == "off")
+				{
+					moving = false;
+				}
+			});
+
+
+			var t = new System.Windows.Forms.Timer(); ;
+			t.Tick += (a, b) =>
+			{
+				if(moving)
+				{
+					dynamic data = Connection.sendTunnelWait("get",
+					new
+					{
+						type = "handleft"
+					}, d => d);
+
+					var camera = Connection.sendTunnelWait("scene/node/find", new { name = "Camera" }, d => d[0]);
+
+					float[] positioncamera = new float[3];
+					positioncamera[0] = camera.components[0].position[0];
+					positioncamera[1] = camera.components[0].position[1];
+					positioncamera[2] = camera.components[0].position[2];
+
+					positioncamera[0] += (float)data.forward[0] * 2;
+					positioncamera[1] += (float)data.forward[1] * 2;
+					positioncamera[2] += (float)data.forward[2] * 2;
+
+					Connection.sendTunnel("scene/node/moveto",
+					new
+					{
+						id = camera.uuid,
+						position = positioncamera,
+						speed = 3,
+						rotate = "none",
+						followheight = false,
+						interpolate = "linear"
+					});
+
+				}
+			};
+			t.Interval = 1;
+			t.Start();
+			Connection.sendTunnel("scene/skybox/settime", new { time = 13 });
+		}
+
+		private void button5_Click(object sender, EventArgs e)
+		{
+			Connection.sendTunnel("scene/reset", null);
 			Connection.sendTunnel("scene/node/add",
 			new
 			{
-				name = "road",
+				name = "car",
 				components = new
 				{
 					transform = new
 					{
-						position = new[] { 10, 0, 10 },
+						position = new[] { 0, 0, 0 },
 						rotation = new[] { 0, 0, 0 },
-						scale = 4
+						scale = 0.025
 					},
 					model = new
 					{
-						file = "data/NetworkEngine/models/houses/set1/house13.obj"
+						file = "data/NetworkEngine/models/cars/white/car_white.obj"
 					}
 				}
 			});
-
 		}
 	}
 }

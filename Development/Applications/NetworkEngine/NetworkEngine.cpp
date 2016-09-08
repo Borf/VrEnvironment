@@ -307,7 +307,7 @@ void NetworkEngine::preFrame(double frameTime, double totalTime)
 	tien.update((float)(frameTime / 1000.0f));
 }
 
-void NetworkEngine::draw(const glm::mat4 & projectionMatrix, const glm::mat4 & modelViewMatrix, const glm::mat4 & userMatrix)
+void NetworkEngine::draw(const glm::mat4 & projectionMatrix, const glm::mat4 & modelViewMatrix)
 {
 	tien.render(projectionMatrix, modelViewMatrix);
 
