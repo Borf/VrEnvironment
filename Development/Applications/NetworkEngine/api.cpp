@@ -125,3 +125,14 @@ Api setcallback("setcallback", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, 
 	packet["id"] = "setcallback";
 	packet["data"]["status"] = "error";
 });
+
+
+
+void sendError(vrlib::Tunnel* tunnel, const std::string &id, const std::string &error)
+{
+	vrlib::json::Value packet;
+	packet["id"] = id;
+	packet["data"]["status"] = "error";
+	packet["data"]["error"] = error;
+	tunnel->send(packet);
+}

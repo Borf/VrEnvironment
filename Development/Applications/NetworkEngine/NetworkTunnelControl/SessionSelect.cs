@@ -22,8 +22,8 @@ namespace NetworkTunnelControl
 			await Connection.connect();
 
 			button2_Click(null, null);
-			if (tunnelApps.Items.Count > 0)
-				button1_Click(null, null);
+			//if (tunnelApps.Items.Count > 0)
+			//	button1_Click(null, null);
 
 			Timer t = new Timer();
 			t.Tick += new EventHandler((a, b) => reload());

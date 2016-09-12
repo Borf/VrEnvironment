@@ -15,7 +15,16 @@ Api scene_node_add("scene/node/add", [](NetworkEngine* engine, vrlib::Tunnel* tu
 	if (data.isMember("parent"))
 		parent = parent->findNodeWithGuid(data["parent"]);
 	if (!parent)
+	{
+		sendError(tunnel, "scene/node/add", "Parent not found");
 		return;
+	}
+	if (!data.isMember("name"))
+	{
+		sendError(tunnel, "scene/node/add", "Name not specified");
+		return;
+	}
+
 
 	vrlib::tien::Node* n = new vrlib::tien::Node(data["name"], parent);
 	n->addComponent(new vrlib::tien::components::Transform());
@@ -23,6 +32,12 @@ Api scene_node_add("scene/node/add", [](NetworkEngine* engine, vrlib::Tunnel* tu
 	{
 		if (data["components"].isMember("transform"))
 		{
+			if (!data["components"]["transform"]["scale"].isFloat())
+			{
+				sendError(tunnel, "scene/node/add", "transform/scale should be a float");
+				return;
+			}
+
 			if (data["components"]["transform"].isMember("position"))
 				n->transform->position = glm::vec3(data["components"]["transform"]["position"][0].asFloat(), data["components"]["transform"]["position"][1].asFloat(), data["components"]["transform"]["position"][2].asFloat());
 			if (data["components"]["transform"].isMember("rotation"))

@@ -10,3 +10,6 @@ struct Api
 {
 	Api(const std::string &route, const std::function<void(NetworkEngine*, vrlib::Tunnel*, const vrlib::json::Value &)> &callback);
 };
+
+
+void sendError(vrlib::Tunnel* tunnel, const std::string &packet, const std::string &error);

@@ -152,6 +152,7 @@ namespace NetworkTunnelControl
 					Connection.callbacks.Remove(_id);
 					return ret;
 				}
+				Connection.callbacks.Remove(_id);
 			}
 			return null;
 		}
