@@ -1,8 +1,9 @@
 cd %~DP0
-rmdir /q /s package
-md package
-cd package
+rmdir /q /s NetworkEngine
+md NetworkEngine
+cd NetworkEngine
 xcopy ..\..\..\release\networkengine.exe
+xcopy ..\..\..\release\networkengine.pdb
 xcopy /s ..\data\*.* .\data\
 xcopy ..\..\..\..\runtime\*.dll .
 xcopy ..\*.dll .

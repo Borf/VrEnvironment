@@ -3,6 +3,7 @@
 #include "Route.h"
 #include "NetworkEngine.h"
 
+#include <VrLib/tien/components/TerrainRenderer.h>
 #include <VrLib/tien/components/MeshRenderer.h>
 #include <VrLib/tien/components/Transform.h>
 #include <VrLib/tien/Terrain.h>
@@ -14,17 +15,23 @@ Api scene_road_add("scene/road/add", [](NetworkEngine* engine, vrlib::Tunnel* tu
 	{
 		if (engine->routes[i]->id == data["route"].asString())
 		{
+			vrlib::tien::Node* terrainRenderingNode = engine->tien.scene.findNodeWithComponent<vrlib::tien::components::TerrainRenderer>();
+
 			const Route& route = *engine->routes[i];
-			auto getPos = [&engine](const glm::vec2 &p)
+			auto getPos = [&engine, &terrainRenderingNode](const glm::vec2 &p)
 			{
-				return engine->terrain->getPosition(p + glm::vec2(128, 128)) + glm::vec3(-128,0.05f, -128);
+				glm::vec2 offset(0, 0);
+				if (terrainRenderingNode)
+					offset = glm::vec2(terrainRenderingNode->transform->position.x, terrainRenderingNode->transform->position.z);
+
+				return engine->terrain->getPosition(p + offset) - glm::vec3(offset.x, 0, offset.y);
 
 			};
 
 			{
 				auto mesh = new vrlib::tien::components::MeshRenderer::Mesh();
-				mesh->material.texture = vrlib::Texture::loadCached("data/TienTest/biker/textures/tarmac_diffuse.png");
-				mesh->material.normalmap = vrlib::Texture::loadCached("data/TienTest/biker/textures/tarmac_normal.png");
+				mesh->material.texture = vrlib::Texture::loadCached("data/NetworkEngine/textures/tarmac_diffuse.png");
+				mesh->material.normalmap = vrlib::Texture::loadCached("data/NetworkEngine/textures/tarmac_normal.png");
 
 
 
