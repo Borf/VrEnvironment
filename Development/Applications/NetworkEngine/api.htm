@@ -34,7 +34,7 @@ h1
 </style>
 <h1>Network Protocol</h1>
 <p>The network-engine is built upon the networking facilities of VrLib. Every VrLib application connects to a central server, and listens to commands from that server.</p>
-<p>One of the features this server provides, is tunneling of data from one application to another. This is done through the central server, as this allows the connections to cross firewalls, NATs and other kinds of network obstructions. The network protocol of this vr-server is quite simple. Each packet consists of 4 bytes of the packetlength, in little endian, followed by the packet data. THe packet data i a (valid) json object, with a field "id" that indicate the type of the packet, and a field "data" that contains the payload of the packet.</p>
+<p>One of the features this server provides, is tunneling of data from one application to another. This is done through the central server, as this allows the connections to cross firewalls, NATs and other kinds of network obstructions. The network protocol of this vr-server is quite simple. Each packet consists of 4 bytes of the packetlength, in little endian, followed by the packet data. The packet data is a (valid) json object, with a field "id" that indicate the type of the packet, and a field "data" that contains the payload of the packet.</p>
 <p>In order to get to another application, first you need to create a tunnel. This is done in the following steps:
 	<ol>
 		<li>Connect to the Vr Server on port 6666</li>
