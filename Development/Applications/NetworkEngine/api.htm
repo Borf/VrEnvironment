@@ -275,8 +275,9 @@ h1
 	<div class="call" id="scene/node/add">
 		<h2>scene/node/add</h2>
 		Adds a node to the scene. Returns the guid of the newly created node.<br />
+		name is a mandatory field, parent is optional. Also all fields in components are optional<br />
 		Transform indicates the position of the new node. Transformation is relative to parent, including scaling<br/>
-		Model indicates a modelrenderer is attached to this node. cullbackfaces indicates the backfaces are not being drawed (default), animated indicates if the animations should be loaded (default no). If animated, the default animation can be set with the animation field<br/>
+		Model indicates a modelrenderer is attached to this node. Optional cullbackfaces indicates the backfaces are not being drawn (default), Optional animated indicates if the animations should be loaded (default no). If animated, the default animation can be set with the animation field<br/>
 		Terrain indicates a terrain renderer. Terrain should be added first with scene/terrain/add API<br/>
 		Panel creates a virtual drawing panel that can be drawn on. ID can be used for scene/panel/* API calls
 <div class="code">{
@@ -284,21 +285,21 @@ h1
 	"data" : 
 	{
 		"name" : "name",
-		"parent" : {guid},
+		"parent" : "guid",
 		"components" :
 		{
 			"transform" : 
 			{
 				"position" : [ 0, 0, 0 ],
 				"scale" : 1,
-				"rotation" : [ 0, 0, 0 ],
+				"rotation" : [ 0, 0, 0 ]
 			},
 			"model" : 
 			{
-				"file" : {filename},
+				"file" : "filename",
 				"cullbackfaces" : true,
 				"animated" : false,
-				"animation" : ""
+				"animation" : "animationname"
 			},
 			"terrain" : 
 			{
@@ -306,9 +307,9 @@ h1
 			},
 			"panel" :
 			{
-				size = [ 1, 1 ],
-				resolution = [ 512, 512 ],
-				background = [ 1, 1, 1, 1]
+				"size" : [ 1, 1 ],
+				"resolution" : [ 512, 512 ],
+				"background" : [ 1, 1, 1, 1]
 			}
 		}
 	}
@@ -316,10 +317,11 @@ h1
 </div>
 		Response
 <div class="code">{
-	"status" : "ok",
+	"id" : "scene/node/add",
 	"data" :
 	{
-		"id" : {guid}
+		"status" : "ok",
+		"uuid" : {guid}
 	}
 }</div>
 		Errors:
@@ -355,7 +357,7 @@ h1
 </div>
 		Response
 <div class="code">{
-	"id" : "route/node/delete",
+	"id" : "route/node/update",
 	"data" :
 	{
 		"status" : "ok"
@@ -515,14 +517,16 @@ h1
 <!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->
 
 	<h1>scene/panel</h1>
+	<p>Panels are virtual drawing boards in the VR scene. Basically it's a rectangle with a texture stuck on it, where the texture can be drawn on. This quad is double-buffered, meaning your drawings won't show up until the buffers are swapped.</p>
 
 	<div class="call" id="scene/panel/clear">
 		<h2>scene/panel/clear</h2>
-		Clears the contents of the panel
+		Clears the contents of the panel to the background color. Should be used before drawing anything on it. id should be the uuid of the node with the panel
 		<div class="code">{
 	"id" : "scene/panel/clear",
 	"data" :
 	{
+			"id" : "uuid"
 	}
 }
 		</div>
@@ -539,11 +543,12 @@ h1
 <!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->
 	<div class="call" id="scene/panel/swap">
 		<h2>scene/panel/swap</h2>
-		Swaps the buffers for this panel
+		Swaps the buffers for this panel. id should be the uuid of the node of the panel to be cleared
 		<div class="code">{
 	"id" : "scene/panel/swap",
 	"data" :
 	{
+			"id" : "uuid"
 	}
 }
 		</div>
@@ -560,12 +565,12 @@ h1
 <!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->
 	<div class="call" id="scene/panel/drawlines">
 		<h2>scene/panel/drawlines</h2>
-		Swaps the buffers for this panel
+		Draws multiple multiple lines on the the backbuffer for this panel. Lines can have different colors, but all share the same width. id should be the uuid of the node of the panel
 		<div class="code">{
 	"id" : "scene/panel/drawlines",
 	"data" :
 	{
-		"id" : {panelid},
+		"id" : "uuid",
 		"width" : 1,
 		lines : 
 		[
@@ -591,7 +596,7 @@ h1
 <!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->
 	<div class="call" id="scene/panel/setclearcolor">
 		<h2>scene/panel/setclearcolor</h2>
-		Changes the clear color
+		Changes the clear color. Color values are in the range of 0 - 1 (0,0,0 is black, 1,1,1 is white), fourth value is alpha value, 0 is transparent, 1 is opaque
 		<div class="code">{
 	"id" : "scene/panel/setclearcolor",
 	"data" :
@@ -617,7 +622,7 @@ h1
 <!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->
 	<div class="call" id="scene/panel/drawtext">
 		<h2>scene/panel/drawtext</h2>
-		Draws a text on the panel
+		Draws a text on the panel. size, color and font are optional. Font is the name of a ttf font file, found in c:\windows\fonts. A texture is loaded per font/size, so don't use too many different fonts or sizes
 		<div class="code">{
 	"id" : "scene/panel/drawtext",
 	"data" :
@@ -653,11 +658,13 @@ h1
 
 	<div class="call" id="scene/terrain/add">
 		<h2>scene/terrain/add</h2>
-
+		Adds a terrain to the engine. This terrain has an id, although only one terrain can be loaded at this time. 
 <div class="code">{
 	"id" : "scene/terrain/add",
 	"data" :
 	{
+		"size" : [ 256, 256 ],
+		"heights" : [ 0, 0, 0, ...... 0, 0, 0 ], // 65536 values
 	}
 }
 </div>
@@ -710,6 +717,7 @@ h1
 	"id" : "scene/terrain/delete",
 	"data" :
 	{
+		
 	}
 }
 </div>
@@ -732,7 +740,7 @@ h1
 
 	<div class="call" id="scene/terrain/getheight">
 		<h2>scene/terrain/getheight</h2>
-
+		Gets a single height or multiple heights from the heightmap. Positions are mapped according to the position of the terrain rendering node.
 <div class="code">{
 	"id" : "scene/terrain/getheight",
 	"data" :
@@ -768,11 +776,12 @@ h1
 
 	<div class="call" id="scene/skybox/settime">
 		<h2>scene/skybox/settime</h2>
-
+		Sets the time of the sky. Time value ranges from 0 to 24. 12.5 is equal to 12:30
 <div class="code">{
 	"id" : "scene/skybox/settime",
 	"data" :
 	{
+		"time" : 12
 	}
 }
 </div>
@@ -816,8 +825,6 @@ h1
 
 <!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->
 <h1>scene/road</h1>
-
-
 	<div class="call" id="scene/road/add">
 		<h2>scene/road/add</h2>
 
@@ -825,6 +832,7 @@ h1
 	"id" : "scene/road/add",
 	"data" :
 	{
+		"route" : "route uuid"
 	}
 }
 </div>
@@ -872,11 +880,18 @@ h1
 
 	<div class="call" id="route/add">
 		<h2>route/add</h2>
-
+		Adds a route to the engine. A route is a virtual concept and is not visible to the user, unless debug drawing is turned on. Can be used to let nodes follow it
 <div class="code">{
 	"id" : "route/add",
 	"data" :
 	{
+		"nodes" : 
+		[
+			{	"pos" : [ 0, 0  ],	"dir" :		[ 5, -5]	},
+			{	"pos" : [ 50, 0 ],	"dir" :		[ 5, 5]		},
+			{	"pos" : [ 50, 50],	"dir" :		[ -5, 5]	},
+			{	"pos" : [ 0, 50 ],	"dir" :		[ -5, -5]	},
+		]
 	}
 }
 </div>
@@ -885,6 +900,8 @@ h1
 	"id" : "route/add",
 	"data" :
 	{
+		"status" : "ok",
+		"uuid" : "uuid"
 	}
 }</div>
 		Errors:
@@ -923,11 +940,12 @@ h1
 
 	<div class="call" id="route/delete">
 		<h2>route/delete</h2>
-
+		Deletes a route
 <div class="code">{
 	"id" : "route/delete",
 	"data" :
 	{
+		"id" : "uuid"
 	}
 }
 </div>
@@ -948,7 +966,7 @@ h1
 
 	<div class="call" id="route/follow">
 		<h2>route/follow</h2>
-
+		Makes a node follow a route. Rotation can be "none", "XY" or "XYZ". offset is to offset a node on the route
 <div class="code">{
 	"id" : "route/follow",
 	"data" :
@@ -1039,7 +1057,7 @@ h1
 
 	<div class="call" id="play">
 		<h2>play</h2>
-
+		Sets the engine to run if paused. 
 <div class="code">{
 	"id" : "play",
 	"data" :
@@ -1061,7 +1079,7 @@ h1
 
 	<div class="call" id="pause">
 		<h2>pause</h2>
-
+		Pauses the rendering engine. Will make the screen turn dark
 <div class="code">{
 	"id" : "pause",
 	"data" :
