@@ -43,4 +43,11 @@ Api scene_raycast("scene/raycast", [](NetworkEngine* engine, vrlib::Tunnel* tunn
 Api scene_reset("scene/reset", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
 {
 	engine->reset();
+	if (tunnel)
+	{
+		vrlib::json::Value packet;
+		packet["id"] = "scene/reset";
+		packet["status"] = "ok";
+		tunnel->send(packet);
+	}
 });

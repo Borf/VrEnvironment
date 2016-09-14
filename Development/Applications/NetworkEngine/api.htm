@@ -110,7 +110,27 @@ h1
 	</ol>
 	A wireshark trace is provided for further reference
 </p>
-<p>After connecting to the network engine through the tunnel, you can send commands to change parts in the engine</p>
+<p>After connecting to the network engine through the tunnel, you can send commands through the tunnel to change parts in the engine</p>
+<p>All requests should send a response, with the same id. The general structure of a successful request is
+<div class="code">{
+	"id" : "packetid",
+	"data" :
+	{
+		.....packetdata......
+		"status" : "ok"
+	}
+</div>
+	and a request with an error would be
+<div class="code">{
+	"id" : "packetid",
+	"data" :
+	{
+		"status" : "error",
+		"error" : "error description"
+	}
+</div>
+	these status/errors are not mentioned in the API documentation, but have a seperate block with error messages
+</p>
 <h1>Commands</h1>
 <ul>
 	<li>scene
@@ -177,7 +197,6 @@ h1
 </div>
 		Response
 <div class="code">{
-	"status" : "ok",
 	"data" : {scene data}
 }</div>
 		Errors:
@@ -204,7 +223,10 @@ h1
 </div>
 		Response
 <div class="code">{
-	"status" : "ok"
+	"id" : "scene/save",
+	"data" :
+	{
+	}
 }</div>
 		Errors:
 		<ul>
@@ -228,7 +250,10 @@ h1
 </div>
 		Response
 <div class="code">{
-	"status" : "ok"
+	"id" : "scene/load",
+	"data" :
+	{
+	}
 }</div>
 		Errors:
 		<ul>
@@ -538,7 +563,11 @@ h1
 	}
 }</div>
 		Errors:
-		<ul></ul>
+		<ul>
+			<li>id not found: the ID field is not in the json structure</li>
+			<li>node not found: the node with this id is not found</li>
+			<li>panel component not found: the node with this ID does not have a panel component</li>
+		</ul>
 	</div>
 <!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->
 	<div class="call" id="scene/panel/swap">
@@ -560,7 +589,11 @@ h1
 	}
 }</div>
 		Errors:
-		<ul></ul>
+		<ul>
+			<li>id not found: the ID field is not in the json structure</li>
+			<li>node not found: the node with this id is not found</li>
+			<li>panel component not found: the node with this ID does not have a panel component</li>
+		</ul>
 	</div>
 <!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->
 	<div class="call" id="scene/panel/drawlines">
@@ -588,7 +621,11 @@ h1
 	}
 }</div>
 		Errors:
-		<ul></ul>
+		<ul>
+			<li>id not found: the ID field is not in the json structure</li>
+			<li>node not found: the node with this id is not found</li>
+			<li>panel component not found: the node with this ID does not have a panel component</li>
+		</ul>
 	</div>
 
 
@@ -615,7 +652,11 @@ h1
 	}
 }</div>
 		Errors:
-		<ul></ul>
+		<ul>
+			<li>id not found: the ID field is not in the json structure</li>
+			<li>node not found: the node with this id is not found</li>
+			<li>panel component not found: the node with this ID does not have a panel component</li>
+		</ul>
 	</div>
 
 
@@ -645,7 +686,12 @@ h1
 	}
 }</div>
 		Errors:
-		<ul></ul>
+		<ul>
+			<li>id not found: the ID field is not in the json structure</li>
+			<li>node not found: the node with this id is not found</li>
+			<li>panel component not found: the node with this ID does not have a panel component</li>
+			<li>font not found: the font file was not found</li>
+		</ul>
 	</div>
 
 

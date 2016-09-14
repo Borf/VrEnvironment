@@ -218,6 +218,11 @@ Api scene_node_update("scene/node/update", [](NetworkEngine* engine, vrlib::Tunn
 
 Api scene_terrain_addlayer("scene/node/addlayer", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
 {
+	if (!data.isMember("id") || data["id"].isNull())
+	{
+		sendError(tunnel, "scene/node/addlayer", "No ID field");
+		return;
+	}
 	vrlib::json::Value packet;
 	packet["id"] = "scene/node/addlayer";
 

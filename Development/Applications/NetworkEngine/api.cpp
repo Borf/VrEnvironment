@@ -136,3 +136,13 @@ void sendError(vrlib::Tunnel* tunnel, const std::string &id, const std::string &
 	packet["data"]["error"] = error;
 	tunnel->send(packet);
 }
+
+
+
+void sendOk(vrlib::Tunnel* tunnel, const std::string &id)
+{
+	vrlib::json::Value packet;
+	packet["id"] = id;
+	packet["data"]["status"] = "ok";
+	tunnel->send(packet);
+}
