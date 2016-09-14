@@ -32,7 +32,7 @@ Api scene_node_add("scene/node/add", [](NetworkEngine* engine, vrlib::Tunnel* tu
 	{
 		if (data["components"].isMember("transform"))
 		{
-			if (!data["components"]["transform"]["scale"].isFloat())
+			if (!data["components"]["transform"]["scale"].isFloat() && !data["components"]["transform"]["scale"].isInt())
 			{
 				sendError(tunnel, "scene/node/add", "transform/scale should be a float");
 				return;
@@ -112,6 +112,12 @@ Api scene_node_add("scene/node/add", [](NetworkEngine* engine, vrlib::Tunnel* tu
 
 Api scene_node_moveto("scene/node/moveto", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
 {
+	if (!data.isMember("id") || !data["id"].isString())
+	{
+		sendError(tunnel, "scene/node/moveto", "ID field not set");
+		return;
+	}
+
 	vrlib::json::Value packet;
 	packet["id"] = "scene/node/moveto";
 	vrlib::tien::Node* node = engine->tien.scene.findNodeWithGuid(data["id"]);

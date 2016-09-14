@@ -5,6 +5,18 @@
 
 Api scene_terrain_add("scene/terrain/add", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
 {
+	if (!data.isMember("size") || !data["size"].isArray())
+	{
+		sendError(tunnel, "scene/terrain/add", "Size parameter is needed");
+		return;
+	}
+
+	if (data["size"][0].asInt() > 1024 || data["size"][1].asInt() > 1024)
+	{
+		sendError(tunnel, "scene/terrain/add", "Size of terrain too big");
+		return;
+	}
+
 	if (!engine->terrain) //todo: multiple terrains with a seperate guid?
 		engine->terrain = new vrlib::tien::Terrain();
 	engine->terrain->setSize(data["size"][0].asInt(), data["size"][1].asInt());
