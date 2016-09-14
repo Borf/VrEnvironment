@@ -172,8 +172,13 @@ void NetworkEngine::preFrame(double frameTime, double totalTime)
 		while (t->available())
 		{
 			vrlib::json::Value v = t->recv();
-			if (callbacks().find(v["id"].asString()) != callbacks().end())
-				callbacks()[v["id"].asString()](this, t, v["data"]);
+			if (v.isObject() && v.isMember("id"))
+				if (callbacks().find(v["id"].asString()) != callbacks().end())
+					callbacks()[v["id"].asString()](this, t, v["data"]);
+				else
+					logger << "No callback registered for packet " << v["id"] << Log::newline;
+			else
+				logger << "Packet received is not an object, or no ID field found!" << Log::newline;
 		}
 	}
 
