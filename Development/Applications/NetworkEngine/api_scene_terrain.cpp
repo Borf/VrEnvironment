@@ -27,6 +27,7 @@ Api scene_terrain_add("scene/terrain/add", [](NetworkEngine* engine, vrlib::Tunn
 	auto renderer = engine->tien.scene.findNodeWithComponent<vrlib::tien::components::TerrainRenderer>();
 	if (renderer)
 		renderer->getComponent<vrlib::tien::components::TerrainRenderer>()->rebuildBuffers();
+	sendOk(tunnel, "scene/terrain/add");
 });
 
 

@@ -75,12 +75,13 @@ Api route_follow("route/follow", [](NetworkEngine* engine, vrlib::Tunnel* tunnel
 	vrlib::json::Value packet;
 	packet["id"] = "route/follow";
 	packet["data"]["status"] = "error";
-	packet["data"]["error"] = "Route not found";
 
+	bool found = false;
 	for (size_t i = 0; i <engine->routes.size(); i++)
 	{
 		if (engine->routes[i]->id == data["route"].asString())
 		{
+			found = true;
 			vrlib::tien::Node* n = engine->tien.scene.findNodeWithGuid(data["node"].asString());
 			if (!n)
 			{
@@ -108,7 +109,7 @@ Api route_follow("route/follow", [](NetworkEngine* engine, vrlib::Tunnel* tunnel
 			f.offset = data.isMember("offset") ? data["offset"] : 0.0f;
 			f.followHeight = false;
 			if(data.isMember("followHeight"))
-				data["followHeight"].asBool();
+				f.followHeight = data["followHeight"].asBool();
 			f.rotate = RouteFollower::Rotate::NONE;
 			if (data.isMember("rotate"))
 			{
@@ -130,5 +131,7 @@ Api route_follow("route/follow", [](NetworkEngine* engine, vrlib::Tunnel* tunnel
 			packet["data"]["status"] = "ok";
 		}
 	}
+	if(!found && !packet["data"].isMember("error"))
+		packet["data"]["error"] = "Route not found";
 	tunnel->send(packet);
 });

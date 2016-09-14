@@ -26,7 +26,7 @@ Api scene_road_add("scene/road/add", [](NetworkEngine* engine, vrlib::Tunnel* tu
 				if (terrainRenderingNode)
 					offset = glm::vec2(terrainRenderingNode->transform->position.x, terrainRenderingNode->transform->position.z);
 
-				return engine->terrain->getPosition(p + offset) - glm::vec3(offset.x, -0.01f, offset.y);
+				return engine->terrain->getPosition(p - offset) + glm::vec3(offset.x, 0.01f, offset.y);
 
 			};
 
