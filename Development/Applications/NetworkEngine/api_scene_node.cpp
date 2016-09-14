@@ -103,6 +103,7 @@ Api scene_node_add("scene/node/add", [](NetworkEngine* engine, vrlib::Tunnel* tu
 	vrlib::json::Value ret;
 	ret["id"] = "scene/node/add";
 	ret["data"]["uuid"] = n->guid;
+	ret["data"]["name"] = n->name;
 	ret["data"]["status"] = "ok";
 	tunnel->send(ret);
 });
