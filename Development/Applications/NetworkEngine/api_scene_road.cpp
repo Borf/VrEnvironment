@@ -20,13 +20,13 @@ Api scene_road_add("scene/road/add", [](NetworkEngine* engine, vrlib::Tunnel* tu
 			const Route& route = *engine->routes[i];
 			auto getPos = [&engine, &terrainRenderingNode](const glm::vec2 &p)
 			{
-				if (engine->terrain)
-					return glm::vec3(p.x, 0, p.y);
+				if (!engine->terrain)
+					return glm::vec3(p.x, 0.01, p.y);
 				glm::vec2 offset(0, 0);
 				if (terrainRenderingNode)
 					offset = glm::vec2(terrainRenderingNode->transform->position.x, terrainRenderingNode->transform->position.z);
 
-				return engine->terrain->getPosition(p + offset) - glm::vec3(offset.x, 0.01f, offset.y);
+				return engine->terrain->getPosition(p + offset) - glm::vec3(offset.x, -0.01f, offset.y);
 
 			};
 
