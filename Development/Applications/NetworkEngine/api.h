@@ -13,3 +13,4 @@ struct Api
 
 
 void sendError(vrlib::Tunnel* tunnel, const std::string &packet, const std::string &error);
+void sendOk(vrlib::Tunnel* tunnel, const std::string &packet);

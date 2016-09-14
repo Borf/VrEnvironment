@@ -55,7 +55,7 @@ public:
 
 	void clear();
 	void swap();
-	void drawText(const glm::vec2 &position, const std::string &font, const std::string &text, const glm::vec4 &color, float size);
+	bool drawText(const glm::vec2 &position, const std::string &font, const std::string &text, const glm::vec4 &color, float size);
 
 	virtual vrlib::json::Value toJson() const;
 

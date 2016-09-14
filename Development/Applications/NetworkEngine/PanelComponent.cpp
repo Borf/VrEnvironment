@@ -81,16 +81,17 @@ void PanelComponent::clear()
 }
 
 
-void PanelComponent::drawText(const glm::vec2 &position, const std::string &font, const std::string &text, const glm::vec4 &color, float size)
+bool PanelComponent::drawText(const glm::vec2 &position, const std::string &font, const std::string &text, const glm::vec4 &color, float size)
 {
 	if (fonts.find(std::pair<std::string, float>(font, size)) == fonts.end())
 	{
 		vrlib::TrueTypeFont* f = new vrlib::TrueTypeFont(font, size);
 		fonts[std::pair<std::string, float>(font, size)] = f;
-
 	}
 
 	vrlib::TrueTypeFont* f = fonts[std::pair<std::string, float>(font, size)];
+	if (!f || !f->fileData)
+		return false;
 
 	int viewport[4];
 	glGetIntegerv(GL_VIEWPORT, viewport);
@@ -113,7 +114,7 @@ void PanelComponent::drawText(const glm::vec2 &position, const std::string &font
 
 	backFbo->unbind();
 	glViewport(viewport[0], viewport[1], viewport[2], viewport[3]);
-
+	return true;
 }
 
 

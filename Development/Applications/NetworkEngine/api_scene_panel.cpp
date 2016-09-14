@@ -8,11 +8,23 @@
 
 Api scene_panel_clear("scene/panel/clear", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
 {
+	if (data.isMember("id"))
+	{
+		sendError(tunnel, "scene/panel/clear", "id not found");
+		return;
+	}
 	vrlib::tien::Node* node = engine->tien.scene.findNodeWithGuid(data["id"]);
-	assert(node);
+	if (!node)
+	{
+		sendError(tunnel, "scene/panel/clear", "node not found");
+		return;
+	}
 	PanelComponent* panel = node->getComponent<PanelComponent>();
-	assert(panel);
-
+	if (!panel)
+	{
+		sendError(tunnel, "scene/panel/clear", "panel component not found");
+		return;
+	}
 	panel->clear();
 
 });
@@ -20,21 +32,46 @@ Api scene_panel_clear("scene/panel/clear", [](NetworkEngine* engine, vrlib::Tunn
 
 Api scene_panel_swap("scene/panel/swap", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
 {
+	if (data.isMember("id"))
+	{
+		sendError(tunnel, "scene/panel/swap", "id not found");
+		return;
+	}
 	vrlib::tien::Node* node = engine->tien.scene.findNodeWithGuid(data["id"]);
-	assert(node);
+	if (!node)
+	{
+		sendError(tunnel, "scene/panel/swap", "node not found");
+		return;
+	}
 	PanelComponent* panel = node->getComponent<PanelComponent>();
-	assert(panel);
-
+	if (!panel)
+	{
+		sendError(tunnel, "scene/panel/swap", "panel component not found");
+		return;
+	}
 	panel->swap();
 
 });
 
 Api scene_panel_drawlines("scene/panel/drawlines", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
 {
+	if (data.isMember("id"))
+	{
+		sendError(tunnel, "scene/panel/drawlines", "id not found");
+		return;
+	}
 	vrlib::tien::Node* node = engine->tien.scene.findNodeWithGuid(data["id"]);
-	assert(node);
-
+	if (!node)
+	{
+		sendError(tunnel, "scene/panel/drawlines", "node not found");
+		return;
+	}
 	PanelComponent* panel = node->getComponent<PanelComponent>();
+	if (!panel)
+	{
+		sendError(tunnel, "scene/panel/drawlines", "panel component not found");
+		return;
+	}
 
 
 
@@ -82,10 +119,24 @@ Api scene_panel_drawlines("scene/panel/drawlines", [](NetworkEngine* engine, vrl
 
 Api scene_panel_drawtext("scene/panel/drawtext", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
 {
+	if (data.isMember("id"))
+	{
+		sendError(tunnel, "scene/panel/drawtext", "id not found");
+		return;
+	}
 	vrlib::tien::Node* node = engine->tien.scene.findNodeWithGuid(data["id"]);
-	assert(node);
+	if (!node)
+	{
+		sendError(tunnel, "scene/panel/drawtext", "node not found");
+		return;
+	}
 	PanelComponent* panel = node->getComponent<PanelComponent>();
-	assert(panel);
+	if (!panel)
+	{
+		sendError(tunnel, "scene/panel/drawtext", "panel component not found");
+		return;
+	}
+
 
 	std::string font = "segoeui";
 	float size = 32;
@@ -98,17 +149,32 @@ Api scene_panel_drawtext("scene/panel/drawtext", [](NetworkEngine* engine, vrlib
 	if (data.isMember("color"))
 		color = glm::vec4(data["color"][0].asFloat(), data["color"][1].asFloat(), data["color"][2].asFloat(), data["color"][3].asFloat());
 
-	panel->drawText(glm::vec2(data["position"][0].asFloat(), data["position"][1].asFloat()), font, data["text"].asString(), color, size);
-
+	if (!panel->drawText(glm::vec2(data["position"][0].asFloat(), data["position"][1].asFloat()), font, data["text"].asString(), color, size))
+		sendError(tunnel, "scene/panel/drawtext", "Error loading font");
+	else
+		sendOk(tunnel, "scene/panel/drawtext");
 });
 
 
 Api scene_panel_setclearcolor("scene/panel/setclearcolor", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
 {
+	if (data.isMember("id"))
+	{
+		sendError(tunnel, "scene/panel/setclearcolor", "id not found");
+		return;
+	}
 	vrlib::tien::Node* node = engine->tien.scene.findNodeWithGuid(data["id"]);
-	assert(node);
+	if (!node)
+	{
+		sendError(tunnel, "scene/panel/setclearcolor", "node not found");
+		return;
+	}
 	PanelComponent* panel = node->getComponent<PanelComponent>();
-	assert(panel);
+	if (!panel)
+	{
+		sendError(tunnel, "scene/panel/setclearcolor", "panel component not found");
+		return;
+	}
 
 	for (int i = 0; i < 4; i++)
 		panel->clearColor[i] = data["color"][i].asFloat();
