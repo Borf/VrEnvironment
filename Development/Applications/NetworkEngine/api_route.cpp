@@ -106,7 +106,9 @@ Api route_follow("route/follow", [](NetworkEngine* engine, vrlib::Tunnel* tunnel
 			f.route = engine->routes[i];
 			f.speed = data["speed"].asFloat();
 			f.offset = data.isMember("offset") ? data["offset"] : 0.0f;
-			f.followHeight = data["followHeight"].asBool();
+			f.followHeight = false;
+			if(data.isMember("followHeight"))
+				data["followHeight"].asBool();
 			f.rotate = RouteFollower::Rotate::NONE;
 			if (data.isMember("rotate"))
 			{

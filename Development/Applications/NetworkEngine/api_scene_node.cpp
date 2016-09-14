@@ -149,7 +149,9 @@ Api scene_node_moveto("scene/node/moveto", [](NetworkEngine* engine, vrlib::Tunn
 			m.interpolate = Mover::Interpolate::Linear;
 			if (data.isMember("interpolate") && data["interpolate"] == "exponential")
 				m.interpolate = Mover::Interpolate::Exponential;
-			m.followHeight = data["followheight"].asBool();
+			m.followHeight = false;
+			if(data.isMember("followheight"))
+				m.followHeight = data["followheight"].asBool();
 			m.rotate = Mover::Rotate::NONE;
 			if (data.isMember("rotate"))
 			{
