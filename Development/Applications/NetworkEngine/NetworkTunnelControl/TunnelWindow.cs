@@ -75,7 +75,7 @@ namespace NetworkTunnelControl
 
 			Connection.sendTunnel("scene/get", null);
 
-//			button4_Click(sender, e);
+			button6_Click(sender, e);
 		}
 
 		private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
@@ -787,6 +787,25 @@ namespace NetworkTunnelControl
 					{
 						file = "data/NetworkEngine/models/cars/white/car_white.obj"
 					}
+				}
+			});
+		}
+
+		private void button6_Click(object sender, EventArgs e)
+		{
+			Connection.sendTunnel("scene/reset", null);
+			Connection.sendTunnel("scene/skybox/update",
+			new
+			{
+				type = "static",
+				files = new 
+				{
+					xpos = "data/NetworkEngine/textures/SkyBoxes/interstellar/interstellar_rt.png",
+					xneg = "data/NetworkEngine/textures/SkyBoxes/interstellar/interstellar_lf.png",
+					ypos = "data/NetworkEngine/textures/SkyBoxes/interstellar/interstellar_up.png",
+					yneg = "data/NetworkEngine/textures/SkyBoxes/interstellar/interstellar_dn.png",
+					zpos = "data/NetworkEngine/textures/SkyBoxes/interstellar/interstellar_bk.png",
+					zneg = "data/NetworkEngine/textures/SkyBoxes/interstellar/interstellar_ft.png"
 				}
 			});
 		}

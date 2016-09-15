@@ -822,7 +822,7 @@ h1
 
 	<div class="call" id="scene/skybox/settime">
 		<h2>scene/skybox/settime</h2>
-		Sets the time of the sky. Time value ranges from 0 to 24. 12.5 is equal to 12:30
+		Sets the time of the sky, if the skybox is set to the dynamic skybox. Time value ranges from 0 to 24. 12.5 is equal to 12:30
 <div class="code">{
 	"id" : "scene/skybox/settime",
 	"data" :
@@ -848,11 +848,21 @@ h1
 
 	<div class="call" id="scene/skybox/update">
 		<h2>scene/skybox/update</h2>
-
+		Updates or changes the skybox. Type can be 'static' or 'dynamic'. If set to dynamic, a default dynamic skybox with sun and moon will be used. If set to static, a static version will be used, with 6 seperate images in a cubemap.
 <div class="code">{
 	"id" : "scene/skybox/update",
 	"data" :
 	{
+		"type" : "static",
+		"files" :
+		{
+			"xpos" : "data/NetworkEngine/textures/SkyBoxes/interstellar/interstellar_rt.png",
+			"xneg" : "data/NetworkEngine/textures/SkyBoxes/interstellar/interstellar_lf.png",
+			"ypos" : "data/NetworkEngine/textures/SkyBoxes/interstellar/interstellar_up.png",
+			"yneg" : "data/NetworkEngine/textures/SkyBoxes/interstellar/interstellar_dn.png",
+			"zpos" : "data/NetworkEngine/textures/SkyBoxes/interstellar/interstellar_bk.png",
+			"zneg" : "data/NetworkEngine/textures/SkyBoxes/interstellar/interstellar_ft.png"
+		}
 	}
 }
 </div>

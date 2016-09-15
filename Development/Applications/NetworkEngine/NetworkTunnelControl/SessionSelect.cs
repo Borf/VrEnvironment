@@ -22,6 +22,17 @@ namespace NetworkTunnelControl
 			await Connection.connect();
 
 			button2_Click(null, null);
+
+			for(int i = 0; i < tunnelApps.Items.Count; i++)
+			{
+				tunnelApps.Items[i].Selected = false;
+				if (tunnelApps.Items[i].SubItems[2].Text == "johan")
+				{
+					tunnelApps.Items[i].Selected = true;
+					button1_Click(null, null);
+				}
+			}
+
 			//if (tunnelApps.Items.Count > 0)
 			//	button1_Click(null, null);
 
@@ -57,6 +68,16 @@ namespace NetworkTunnelControl
 				tunnelApps.SelectedIndices.Add(0);
 
 			tunnelApps.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+
+			for (int i = 0; i < tunnelApps.Items.Count; i++)
+			{
+				tunnelApps.Items[i].Selected = false;
+				if (tunnelApps.Items[i].SubItems[2].Text == "johan")
+				{
+					tunnelApps.Items[i].Selected = true;
+					button1_Click(null, null);
+				}
+			}
 		}
 
 		private void button1_Click(object sender, EventArgs e)

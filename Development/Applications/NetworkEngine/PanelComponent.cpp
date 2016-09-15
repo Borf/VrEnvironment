@@ -1,4 +1,4 @@
-#include "PanelComponent.h"
+	#include "PanelComponent.h"
 
 #include <VrLib/gl/FBO.h>
 #include <VrLib/gl/Vertex.h>
