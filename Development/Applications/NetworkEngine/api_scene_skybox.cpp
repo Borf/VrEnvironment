@@ -7,10 +7,7 @@ Api scene_skybox_settime("scene/skybox/settime", [](NetworkEngine* engine, vrlib
 {
 	auto skybox = engine->tien.scene.cameraNode->getComponent<vrlib::tien::components::DynamicSkyBox>();
 	skybox->timeOfDay = data["time"].asFloat();
-	vrlib::json::Value packet;
-	packet["id"] = "scene/skybox/settime";
-	packet["data"]["status"] = "ok";
-	tunnel->send(packet);
+	sendOk(tunnel, "scene/skybox/settime");
 });
 
 Api scene_skybox_update("scene/skybox/update", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
@@ -61,6 +58,8 @@ Api scene_skybox_update("scene/skybox/update", [](NetworkEngine* engine, vrlib::
 
 
 	}
+
+	sendOk(tunnel, "scene/skybox/update");
 
 });
 	

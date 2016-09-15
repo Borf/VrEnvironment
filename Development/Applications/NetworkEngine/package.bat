@@ -13,5 +13,7 @@ xcopy /s ..\..\..\..\runtime\data\vrlib\*.* .\data\vrlib\
 echo NetworkEngine.exe --config configs/sim.json --config configs/vive-sim.json > sim.bat
 echo NetworkEngine.exe --config configs/openvr.json > vive.bat
 
+cd ..
+"c:\program files\winrar\winrar.exe" a -r -df -afzip NetworkEngine.zip NetworkEngine\*.*
 
 pause
