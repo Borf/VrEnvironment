@@ -304,7 +304,8 @@ h1
 		Transform indicates the position of the new node. Transformation is relative to parent, including scaling<br/>
 		Model indicates a modelrenderer is attached to this node. Optional cullbackfaces indicates the backfaces are not being drawn (default), Optional animated indicates if the animations should be loaded (default no). If animated, the default animation can be set with the animation field<br/>
 		Terrain indicates a terrain renderer. Terrain should be added first with scene/terrain/add API<br/>
-		Panel creates a virtual drawing panel that can be drawn on. ID can be used for scene/panel/* API calls
+		Panel creates a virtual drawing panel that can be drawn on. ID can be used for scene/panel/* API calls<br />
+		Water creates a sheet of water. Uses a default environment reflection map for now. Size indicates the size of the water quad, resolution indicates the number of quads used. Size 10,10 and resolution 0.1 results in 10000 polygons
 <div class="code">{
 	"id" : "scene/node/add",
 	"data" : 
@@ -335,6 +336,11 @@ h1
 				"size" : [ 1, 1 ],
 				"resolution" : [ 512, 512 ],
 				"background" : [ 1, 1, 1, 1]
+			},
+			"water" :
+			{
+				"size" : [ 20, 20 ],
+				"resolution" : 0.1
 			}
 		}
 	}
@@ -1022,7 +1028,7 @@ h1
 
 	<div class="call" id="route/follow">
 		<h2>route/follow</h2>
-		Makes a node follow a route. Rotation can be "none", "XY" or "XYZ". offset is to offset a node on the route
+		Makes a node follow a route. Rotation can be "NONE", "XZ" or "XYZ". offset is to offset a node on the route
 <div class="code">{
 	"id" : "route/follow",
 	"data" :
@@ -1031,7 +1037,7 @@ h1
 		"node" : {nodeid},
 		"speed" : 1.0,
 		"offset" : 0.0,
-		"rotate" : "XY",
+		"rotate" : "XZ",
 		"followHeight" : false,
 		"rotateOffset" : [ 0, 0, 0 ],
 		"positionOffset" : [ 0, 0, 0]

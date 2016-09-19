@@ -1,5 +1,6 @@
 #include "NetworkEngine.h"
 #include "Route.h"
+#include "WaterComponent.h"
 
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -121,6 +122,7 @@ void NetworkEngine::reset()
 		n->addComponent(new vrlib::tien::components::ModelRenderer("data/vrlib/rendermodels/vr_controller_vive_1_5/vr_controller_vive_1_5.obj"));
 		n->addComponent(new vrlib::tien::components::TransformAttach(vive.controllers[0].transform));
 	}
+
 
 
 	if (false)

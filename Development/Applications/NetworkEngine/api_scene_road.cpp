@@ -129,6 +129,5 @@ Api scene_road_add("scene/road/add", [](NetworkEngine* engine, vrlib::Tunnel* tu
 
 Api scene_road_delete("scene/road/delete", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
 {
-
-
+	sendError(tunnel, "scene/road/delete", "Not implemented");
 });

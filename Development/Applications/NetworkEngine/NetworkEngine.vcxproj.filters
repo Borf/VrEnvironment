@@ -54,6 +54,9 @@
     <ClCompile Include="api_scene_panel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="WaterComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NetworkEngine.h">
@@ -70,6 +73,9 @@
     </ClInclude>
     <ClInclude Include="PanelComponent.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WaterComponent.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

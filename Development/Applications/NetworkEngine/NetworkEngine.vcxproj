@@ -163,6 +163,7 @@
     <ClCompile Include="NetworkEngine.cpp" />
     <ClCompile Include="PanelComponent.cpp" />
     <ClCompile Include="Route.cpp" />
+    <ClCompile Include="WaterComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="api.h" />
@@ -170,6 +171,7 @@
     <ClInclude Include="NetworkEngine.h" />
     <ClInclude Include="PanelComponent.h" />
     <ClInclude Include="Route.h" />
+    <ClInclude Include="WaterComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="api.htm">

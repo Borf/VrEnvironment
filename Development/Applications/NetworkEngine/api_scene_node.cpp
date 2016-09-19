@@ -1,6 +1,7 @@
 #include "api.h"
 
 #include "PanelComponent.h"
+#include "WaterComponent.h"
 
 #include <VrLib/tien/components/Transform.h>
 #include <VrLib/tien/components/ModelRenderer.h>
@@ -80,6 +81,14 @@ Api scene_node_add("scene/node/add", [](NetworkEngine* engine, vrlib::Tunnel* tu
 			if (data["components"]["model"].isMember("smoothnormals"))
 				renderer->smoothNormals = data["components"]["model"]["smoothnormals"];
 			n->addComponent(renderer);
+		}
+		if (data["components"].isMember("water"))
+		{
+			glm::vec2 size = glm::vec2(data["components"]["water"]["size"][0].asFloat(), data["components"]["water"]["size"][1].asFloat());
+			float resolution = 0.1f;
+			if (data["components"]["water"].isMember("resolution"))
+				resolution = data["components"]["water"]["resolution"].asFloat();
+			n->addComponent(new WaterComponent(size, resolution));
 		}
 		if (data["components"].isMember("panel"))
 		{
