@@ -1,5 +1,6 @@
 #include "api.h"
 
+#include <fstream>
 
 Api scene_get("scene/get", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
 {
@@ -12,21 +13,35 @@ Api scene_get("scene/get", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, cons
 
 Api scene_save("scene/save", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
 {
+	vrlib::json::Value d = engine->tien.scene.asJson();
+	std::ofstream file("engine.json");
+	file << d;
+	file.close();
+
+
 	vrlib::json::Value packet;
 	packet["id"] = "scene/save";
 	packet["status"] = "error";
 	packet["error"] = "not implemented";
-	tunnel->send(packet);
+	if(tunnel)
+		tunnel->send(packet);
 });
 
 
 Api scene_load("scene/load", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
 {
+	std::ifstream file("engine.json");
+	vrlib::json::Value json = vrlib::json::readJson(file);
+
+	engine->tien.scene.fromJson(json);
+	engine->tien.scene.cameraNode = nullptr;
+
 	vrlib::json::Value packet;
 	packet["id"] = "scene/load";
 	packet["status"] = "error";
 	packet["error"] = "not implemented";
-	tunnel->send(packet);
+	if(tunnel)
+		tunnel->send(packet);
 });
 
 

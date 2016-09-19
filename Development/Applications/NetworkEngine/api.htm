@@ -176,6 +176,7 @@ h1
 		<li><a href="#route/update">route/update</a></li>
 		<li><a href="#route/delete">route/delete</a></li>
 		<li><a href="#route/follow">route/follow</a></li>
+		<li><a href="#route/show">route/show</a></li>
 	</ul></li>
 	<li><a href="#get">get</a></li>
 	<li><a href="#setcallback">setcallback</a></li>
@@ -1055,6 +1056,28 @@ h1
 		</ul>
 	</div>
 <!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->
+	<div class="call" id="route/follow">
+		<h2>route/show</h2>
+		shows or hides all routes (the red line). If show parameter is not set, it toggles the visibility
+<div class="code">{
+	"id" : "route/show",
+	"data" :
+	{
+		"show" : false
+	}
+}
+</div>
+		Response
+<div class="code">{
+	"status" : "ok"
+}</div>
+		Errors:
+		<ul>
+		</ul>
+	</div>
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
 
 	<div class="call" id="get">
 		<h2>get</h2>

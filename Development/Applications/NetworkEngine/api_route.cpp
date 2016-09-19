@@ -135,3 +135,18 @@ Api route_follow("route/follow", [](NetworkEngine* engine, vrlib::Tunnel* tunnel
 		packet["data"]["error"] = "Route not found";
 	tunnel->send(packet);
 });
+
+
+Api route_show("route/show", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
+{
+	if (!data.isMember("show"))
+		engine->showRoutes = !engine->showRoutes;
+	else
+		engine->showRoutes = data["show"];
+
+	vrlib::json::Value ret;
+	ret["id"] = "route/show";
+	ret["data"]["status"] = "ok";
+	ret["data"]["show"] = engine->showRoutes;
+
+});

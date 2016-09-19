@@ -62,6 +62,12 @@ void NetworkEngine::init()
 	callbacks()["scene/reset"](this, nullptr, vrlib::json::Value());
 
 
+	vrlib::json::Value save;
+	save["filename"] = "default.json";
+	save["overwrite"] = true;
+	callbacks()["scene/save"](this, nullptr, save);
+	callbacks()["scene/load"](this, nullptr, save);
+
 
 	debugShader = new vrlib::gl::Shader<DebugUniform>("data/vrlib/tien/shaders/physicsdebug.vert", "data/vrlib/tien/shaders/physicsdebug.frag");
 	debugShader->bindAttributeLocation("a_position", 0);
@@ -121,6 +127,11 @@ void NetworkEngine::reset()
 		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0, 0)));
 		n->addComponent(new vrlib::tien::components::ModelRenderer("data/vrlib/rendermodels/vr_controller_vive_1_5/vr_controller_vive_1_5.obj"));
 		n->addComponent(new vrlib::tien::components::TransformAttach(vive.controllers[0].transform));
+	}
+	{
+		vrlib::tien::Node* n = new vrlib::tien::Node("Head", &tien.scene);
+		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0, 0)));
+		n->addComponent(new vrlib::tien::components::TransformAttach(vive.hmd));
 	}
 
 
