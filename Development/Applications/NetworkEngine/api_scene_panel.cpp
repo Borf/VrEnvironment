@@ -178,5 +178,6 @@ Api scene_panel_setclearcolor("scene/panel/setclearcolor", [](NetworkEngine* eng
 
 	for (int i = 0; i < 4; i++)
 		panel->clearColor[i] = data["color"][i].asFloat();
+	sendOk(tunnel, "scene/panel/setclearcolor");
 
 });
