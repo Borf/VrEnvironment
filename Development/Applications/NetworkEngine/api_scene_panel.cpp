@@ -8,7 +8,7 @@
 
 Api scene_panel_clear("scene/panel/clear", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
 {
-	if (data.isMember("id"))
+	if (!data.isMember("id"))
 	{
 		sendError(tunnel, "scene/panel/clear", "id not found");
 		return;
@@ -32,7 +32,7 @@ Api scene_panel_clear("scene/panel/clear", [](NetworkEngine* engine, vrlib::Tunn
 
 Api scene_panel_swap("scene/panel/swap", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
 {
-	if (data.isMember("id"))
+	if (!data.isMember("id"))
 	{
 		sendError(tunnel, "scene/panel/swap", "id not found");
 		return;
@@ -55,7 +55,7 @@ Api scene_panel_swap("scene/panel/swap", [](NetworkEngine* engine, vrlib::Tunnel
 
 Api scene_panel_drawlines("scene/panel/drawlines", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
 {
-	if (data.isMember("id"))
+	if (!data.isMember("id"))
 	{
 		sendError(tunnel, "scene/panel/drawlines", "id not found");
 		return;
@@ -119,7 +119,7 @@ Api scene_panel_drawlines("scene/panel/drawlines", [](NetworkEngine* engine, vrl
 
 Api scene_panel_drawtext("scene/panel/drawtext", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
 {
-	if (data.isMember("id"))
+	if (!data.isMember("id"))
 	{
 		sendError(tunnel, "scene/panel/drawtext", "id not found");
 		return;
@@ -158,7 +158,7 @@ Api scene_panel_drawtext("scene/panel/drawtext", [](NetworkEngine* engine, vrlib
 
 Api scene_panel_setclearcolor("scene/panel/setclearcolor", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
 {
-	if (data.isMember("id"))
+	if (!data.isMember("id"))
 	{
 		sendError(tunnel, "scene/panel/setclearcolor", "id not found");
 		return;
