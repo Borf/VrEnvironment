@@ -308,7 +308,7 @@ Api scene_node_find("scene/node/find", [](NetworkEngine* engine, vrlib::Tunnel* 
 	{
 		std::vector<vrlib::tien::Node*> nodes = engine->tien.scene.findNodesWithName(data["name"]);
 		for (auto n : nodes)
-			packet["data"].push_back(n->asJson());
+			packet["data"].push_back(n->asJson(vrlib::json::Value()));
 	}
 		
 	tunnel->send(packet);

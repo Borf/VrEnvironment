@@ -124,7 +124,7 @@ void PanelComponent::swap()
 	((FboToTexture*)material.texture)->fbo = fbo;
 }
 
-vrlib::json::Value PanelComponent::toJson() const
+vrlib::json::Value PanelComponent::toJson(vrlib::json::Value &meshes) const
 {
 	vrlib::json::Value ret;
 	ret["type"] = "panel";

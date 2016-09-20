@@ -6,14 +6,17 @@ Api scene_get("scene/get", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, cons
 {
 	vrlib::json::Value ret;
 	ret["id"] = "scene/get";
-	ret["data"] = engine->tien.scene.asJson();
+	ret["data"] = engine->tien.scene.asJson(vrlib::json::Value());
 	tunnel->send(ret);
 });
 
 
 Api scene_save("scene/save", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
 {
-	vrlib::json::Value d = engine->tien.scene.asJson();
+	vrlib::json::Value d;
+	d["meshes"] = vrlib::json::Value(vrlib::json::Type::arrayValue);
+	d["tree"] = engine->tien.scene.asJson(d["meshes"]);
+
 	std::ofstream file("engine.json");
 	file << d;
 	file.close();
@@ -33,7 +36,7 @@ Api scene_load("scene/load", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, co
 	std::ifstream file("engine.json");
 	vrlib::json::Value json = vrlib::json::readJson(file);
 
-	engine->tien.scene.fromJson(json);
+	engine->tien.scene.fromJson(json["tree"], json);
 	engine->tien.scene.cameraNode = nullptr;
 
 	vrlib::json::Value packet;

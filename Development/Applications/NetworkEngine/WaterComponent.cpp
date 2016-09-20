@@ -156,7 +156,7 @@ void WaterComponent::WaterRenderContext::init()
 }
 
 
-vrlib::json::Value WaterComponent::toJson() const
+vrlib::json::Value WaterComponent::toJson(vrlib::json::Value &meshes) const
 {
 	vrlib::json::Value ret;
 	ret["type"] = "water";
