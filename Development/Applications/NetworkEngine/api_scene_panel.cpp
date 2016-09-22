@@ -26,7 +26,7 @@ Api scene_panel_clear("scene/panel/clear", [](NetworkEngine* engine, vrlib::Tunn
 		return;
 	}
 	panel->clear();
-
+	sendOk(tunnel, "scene/panel/clear");
 });
 
 
@@ -50,7 +50,7 @@ Api scene_panel_swap("scene/panel/swap", [](NetworkEngine* engine, vrlib::Tunnel
 		return;
 	}
 	panel->swap();
-
+	sendOk(tunnel, "scene/panel/swap");
 });
 
 Api scene_panel_drawlines("scene/panel/drawlines", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)

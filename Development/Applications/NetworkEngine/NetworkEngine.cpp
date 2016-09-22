@@ -62,11 +62,11 @@ void NetworkEngine::init()
 	callbacks()["scene/reset"](this, nullptr, vrlib::json::Value());
 
 
-	vrlib::json::Value save;
+/*	vrlib::json::Value save;
 	save["filename"] = "default.json";
 	save["overwrite"] = true;
 	callbacks()["scene/save"](this, nullptr, save);
-	callbacks()["scene/load"](this, nullptr, save);
+	callbacks()["scene/load"](this, nullptr, save);*/
 
 
 	debugShader = new vrlib::gl::Shader<DebugUniform>("data/vrlib/tien/shaders/physicsdebug.vert", "data/vrlib/tien/shaders/physicsdebug.frag");

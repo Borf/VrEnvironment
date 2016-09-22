@@ -4,9 +4,11 @@
 
 Api scene_get("scene/get", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
 {
+	vrlib::json::Value meshes(vrlib::json::Type::arrayValue);
+
 	vrlib::json::Value ret;
 	ret["id"] = "scene/get";
-	ret["data"] = engine->tien.scene.asJson(vrlib::json::Value());
+	ret["data"] = engine->tien.scene.asJson(meshes);
 	tunnel->send(ret);
 });
 
