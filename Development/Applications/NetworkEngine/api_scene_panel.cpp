@@ -97,7 +97,7 @@ Api scene_panel_drawlines("scene/panel/drawlines", [](NetworkEngine* engine, vrl
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	engine->debugShader->use();
-	engine->debugShader->setUniform(NetworkEngine::DebugUniform::projectionMatrix, glm::ortho(0.0f, 512.0f, 512.0f, 0.0f));
+	engine->debugShader->setUniform(NetworkEngine::DebugUniform::projectionMatrix, glm::ortho(0.0f, (float)panel->backFbo->getWidth(), (float)panel->backFbo->getHeight(), 0.0f));
 	engine->debugShader->setUniform(NetworkEngine::DebugUniform::modelViewMatrix, glm::mat4());
 
 	vrlib::gl::setAttributes<vrlib::gl::VertexP3C4>(&verts[0]);

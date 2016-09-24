@@ -59,7 +59,12 @@ Api scene_node_add("scene/node/add", [](NetworkEngine* engine, vrlib::Tunnel* tu
 			}
 			else
 			{
-				auto renderer = new vrlib::tien::components::ModelRenderer(data["components"]["model"]["file"]);
+				if (!data["components"]["model"].isMember("file"))
+				{
+					sendError(tunnel, "scene/node/add", "no file field found in model");
+					return;
+				}
+				auto renderer = new vrlib::tien::components::ModelRenderer(data["components"]["model"]["file"].asString());
 				if (data["components"]["model"].isMember("cullbackfaces"))
 					renderer->cullBackFaces = data["components"]["model"]["cullbackfaces"];
 				n->addComponent(renderer);
@@ -306,9 +311,11 @@ Api scene_node_find("scene/node/find", [](NetworkEngine* engine, vrlib::Tunnel* 
 	packet["id"] = "scene/node/find";
 	if (data.isMember("name"))
 	{
+		vrlib::json::Value meshes(vrlib::json::Type::arrayValue);
+
 		std::vector<vrlib::tien::Node*> nodes = engine->tien.scene.findNodesWithName(data["name"]);
 		for (auto n : nodes)
-			packet["data"].push_back(n->asJson(vrlib::json::Value()));
+			packet["data"].push_back(n->asJson(meshes));
 	}
 		
 	tunnel->send(packet);
