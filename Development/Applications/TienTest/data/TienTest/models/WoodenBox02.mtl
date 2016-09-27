@@ -1,0 +1,14 @@
+# Material Count: 1
+newmtl Material_WoodPlanks_Color.jpg
+Ns 19.607843
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.378205 0.378205 0.378205
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd WoodPlanks_Color.jpg
+map_bump WoodPlanks_Normal.jpg
+bump WoodPlanks_Normal.jpg
+
+

@@ -82,8 +82,8 @@
 		{
 			"name" : "XButton",
 			"type" : "digital",
-			"driver" : "XBOX",
-			"src" : "XButton"
+			"driver" : "keyboard",
+			"src" : "u"
 		},
 		{
 			"name" : "YButton",
@@ -94,14 +94,14 @@
 		{
 			"name" : "AButton",
 			"type" : "digital",
-			"driver" : "XBOX",
-			"src" : "AButton"
+			"driver" : "keyboard",
+			"src" : "h"
 		},
 		{
 			"name" : "BButton",
 			"type" : "digital",
-			"driver" : "XBOX",
-			"src" : "BButton"
+			"driver" : "keyboard",
+			"src" : "j"
 		},
 		{
 			"name" : "RightTrigger",

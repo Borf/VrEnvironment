@@ -7,19 +7,8 @@
 		{
 			"name" : "MainUserHead",
 			"type" : "positional",
-			"driver" : "oculus"
-		},
-		{
-			"name" : "WandPosition",
-			"type" : "positional",
-			"driver" : "SimPosition",
-			"src" : "Wand"
-		},
-		{
-			"name" : "CameraPosition",
-			"type" : "positional",
-			"driver" : "SimPosition",
-			"src" : "Camera"
+			"driver" : "oculus",
+			"src" :  "head"
 		},
 		{
 			"name" : "LeftButton",
@@ -50,123 +39,8 @@
 			"type" : "digital",
 			"driver" : "keyboard",
 			"src" : "pagedown"
-		},
-		{
-			"name" : "LeftLittle",
-			"type" : "analog",
-			"driver" : "glove",
-			"src" : "LeftLittle"
-		},
-		{
-			"name" : "LeftRing",
-			"type" : "analog",
-			"driver" : "glove",
-			"src" : "LeftRing"
-		},
-		{
-			"name" : "LeftMiddle",
-			"type" : "analog",
-			"driver" : "glove",
-			"src" : "LeftMiddle"
-		},
-		{
-			"name" : "LeftIndex",
-			"type" : "analog",
-			"driver" : "glove",
-			"src" : "LeftIndex"
-		},
-		{
-			"name" : "LeftThumb",
-			"type" : "analog",
-			"driver" : "glove",
-			"src" : "LeftThumb"
-		},
-		{
-			"name" : "RightLittle",
-			"type" : "analog",
-			"driver" : "glove",
-			"src" : "RightLittle"
-		},
-		{
-			"name" : "RightRing",
-			"type" : "analog",
-			"driver" : "glove",
-			"src" : "RightRing"
-		},
-		{
-			"name" : "RightMiddle",
-			"type" : "analog",
-			"driver" : "glove",
-			"src" : "RightMiddle"
-		},
-		{
-			"name" : "RightIndex",
-			"type" : "analog",
-			"driver" : "glove",
-			"src" : "RightIndex"
-		},
-		{
-			"name" : "RightThumb",
-			"type" : "analog",
-			"driver" : "glove",
-			"src" : "RightThumb"
 		}
 	],
-	"driverconfig" :
-	{
-		"SimPosition" :
-		{
-			"Head" :
-			{
-				"initial" : [ 0.0, 0.0, 0.0 ],
-				"xneg" : "shift+a",
-				"xpos" : "shift+d",
-				"yneg" : "shift+z",
-				"ypos" : "shift+q",
-				"zneg" : "shift+w",
-				"zpos" : "shift+s",
-				"rotxneg" : "shift+numpad7",
-				"rotxpos" : "shift+numpad9",
-				"rotyneg" : "shift+numpad4",
-				"rotypos" : "shift+numpad6",
-				"rotzneg" : "shift+numpad1",
-				"rotzpos" : "shift+numpad3"
-			},
-			"Wand" :
-			{
-				"initial" : [ 0.0, 0.0, 0.0 ],
-				"xneg" : "ctrl+a",
-				"xpos" : "ctrl+d",
-				"yneg" : "ctrl+z",
-				"ypos" : "ctrl+q",
-				"zneg" : "ctrl+w",
-				"zpos" : "ctrl+s",
-				"rotxneg" : "ctrl+numpad7",
-				"rotxpos" : "ctrl+numpad9",
-				"rotyneg" : "ctrl+numpad4",
-				"rotypos" : "ctrl+numpad6",
-				"rotzneg" : "ctrl+numpad1",
-				"rotzpos" : "ctrl+numpad3"
-			},
-			"Camera" :
-			{
-				"initial" : [ 0.0, -0.5, 3.5 ],
-				"xneg" : "a",
-				"xpos" : "d",
-				"yneg" : "z",
-				"ypos" : "q",
-				"zneg" : "w",
-				"zpos" : "s",
-				"rotxneg" : "numpad7",
-				"rotxpos" : "numpad9",
-				"rotyneg" : "numpad4",
-				"rotypos" : "numpad6",
-				"rotzneg" : "numpad1",
-				"rotzpos" : "numpad3",
-				"camera" : true
-			}
-		}
-	},
 	"users" :
 	[
 		{

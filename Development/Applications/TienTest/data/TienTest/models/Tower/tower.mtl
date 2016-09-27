@@ -1,0 +1,11 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl Bricks-A011
+Ka 0.000000 0.000000 0.000000
+Kd 0.666667 0.545098 0.356863
+Ks 0.330000 0.330000 0.330000
+
+map_Kd tower_d.png
+map_bump tower_n.png

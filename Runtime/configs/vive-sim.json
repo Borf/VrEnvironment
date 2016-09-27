@@ -1,0 +1,59 @@
+{
+	"devices" :
+	[
+		{
+			"name" : "WandPositionLeft",
+			"type" : "position",
+			"driver" : "SimPosition",
+			"src" : "Wand2"
+		},
+		{
+			"name" : "buttonLeftMenu",
+			"type" : "digital",
+			"driver" : "keyboard",
+			"src" : "1"
+		},
+		{
+			"name" : "buttonLeftGrip",
+			"type" : "digital",
+			"driver" : "keyboard",
+			"src" : "1"
+		},
+		{
+			"name" : "buttonLeftTouch",
+			"type" : "digital",
+			"driver" : "keyboard",
+			"src" : "1"
+		},
+		{
+			"name" : "buttonLeftTrigger",
+			"type" : "digital",
+			"driver" : "mouse",
+			"src" : "left"
+		},
+		{
+			"name" : "buttonRightMenu",
+			"type" : "digital",
+			"driver" : "keyboard",
+			"src" : "1"
+		},
+		{
+			"name" : "buttonRightGrip",
+			"type" : "digital",
+			"driver" : "keyboard",
+			"src" : "1"
+		},
+		{
+			"name" : "buttonRightTouch",
+			"type" : "digital",
+			"driver" : "keyboard",
+			"src" : "1"
+		},
+		{
+			"name" : "buttonRightTrigger",
+			"type" : "digital",
+			"driver" : "mouse",
+			"src" : "right"
+		}
+	]
+}

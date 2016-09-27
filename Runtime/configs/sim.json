@@ -111,6 +111,17 @@
 			"type" : "analog",
 			"driver" : "glove",
 			"src" : "RightThumb"
+		},		{
+			"name" : "buttonLeftTrigger",
+			"type" : "digital",
+			"driver" : "mouse",
+			"src" : "left"
+		},
+		{
+			"name" : "buttonRightTrigger",
+			"type" : "digital",
+			"driver" : "mouse",
+			"src" : "left"
 		}
 	],
 	"driverconfig" :
@@ -119,7 +130,7 @@
 		{
 			"Head" :
 			{
-				"initial" : [ 0.0, 0.0, 0.0 ],
+				"initial" : [ 0.0, 1.5, 0.0 ],
 				"xneg" : "shift+a",
 				"xpos" : "shift+d",
 				"yneg" : "shift+z",
@@ -135,7 +146,7 @@
 			},
 			"Wand" :
 			{
-				"initial" : [ 0.0, 0.0, 0.0 ],
+				"initial" : [ 0.0, 1.0, -0.25 ],
 				"xneg" : "ctrl+a",
 				"xpos" : "ctrl+d",
 				"yneg" : "ctrl+z",
@@ -151,7 +162,7 @@
 			},
 			"Camera" :
 			{
-				"initial" : [ 0.0, -0.5, 3.5 ],
+				"initial" : [ 0.0, 1.5, 3.5 ],
 				"xneg" : "a",
 				"xpos" : "d",
 				"yneg" : "z",
@@ -182,12 +193,13 @@
 			"window" : 
 			{
 				"title" : "ChangeMe",
-				"x" : 700,
-				"y" : 100,
-				"width" : 800,
-				"height" : 800,
+				"x" : -1,
+				"y" : -1,
+				"width" : 1920,
+				"height" : 1079,
 				"border" : true,
-				"vsync" : false
+				"vsync" : true,
+				"cursor" :  true
 			},
             "viewports" :
 			[
