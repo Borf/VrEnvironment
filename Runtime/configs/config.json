@@ -37,8 +37,8 @@
 				"title" : "Front",
 				"x" : 0,
 				"y" : 0,
-				"width" : 1280,
-				"height" : 1024,
+				"width" : 2800,
+				"height" : 1050,
 				"border" : false,
 				"vsync" : false
 			},
@@ -48,10 +48,24 @@
 					"type" : "viewport",
 					"x" : 0,
 					"y" : 0,
-					"width" : 1,
+					"width" : 0.5,
 					"height" : 1,
 					"user" : "MainUser",
 					"eye" : "left",
+
+					"topleft" :		[ -1.5, 0.8,  -1.5 ],
+					"topright" :	[  1.5, 0.8,  -1.5 ],
+					"bottomleft" :	[ -1.5, -1.5, -1.5 ],
+					"bottomright" : [  1.5, -1.5, -1.5 ]
+				},
+				{
+					"type" : "viewport",
+					"x" : 0.5,
+					"y" : 0,
+					"width" : 0.5,
+					"height" : 1,
+					"user" : "MainUser",
+					"eye" : "right",
 
 					"topleft" :		[ -1.5, 0.8,  -1.5 ],
 					"topright" :	[  1.5, 0.8,  -1.5 ],
@@ -69,8 +83,8 @@
 				"title" : "Rechts",
 				"x" : 0,
 				"y" : 0,
-				"width" : 1280,
-				"height" : 1024,
+				"width" : 2800,
+				"height" : 1050,
 				"border" : false
 			},
 			"viewports" :
@@ -79,7 +93,21 @@
 					"type" : "viewport",
 					"x" : 0,
 					"y" : 0,
-					"width" : 1,
+					"width" : 0.5,
+					"height" : 1,
+					"user" : "MainUser",
+					"eye" : "left",
+
+					"topleft" :		[  1.5,	 0.8, -1.5 ],
+					"topright" :	[  1.5,	 0.8,  1.5 ],
+					"bottomleft" :	[  1.5,	-1.5, -1.5 ],
+					"bottomright" : [  1.5, -1.5,  1.5 ]
+				},
+				{
+					"type" : "viewport",
+					"x" : 0.5,
+					"y" : 0,
+					"width" : 0.5,
 					"height" : 1,
 					"user" : "MainUser",
 					"eye" : "right",
@@ -100,8 +128,8 @@
 				"title" : "Links",
 				"x" : 0,
 				"y" : 0,
-				"width" : 1280,
-				"height" : 1024,
+				"width" : 2800,
+				"height" : 1050,
 				"border" : false
 			},
 			"viewports" :
@@ -110,10 +138,24 @@
 					"type" : "viewport",
 					"x" : 0,
 					"y" : 0,
-					"width" : 1,
+					"width" : 0.5,
 					"height" : 1,
 					"user" : "MainUser",
 					"eye" : "left",
+
+					"topleft" :		[ -1.5,	 0.8,  1.5 ],
+					"topright" :	[ -1.5,	 0.8, -1.5 ],
+					"bottomleft" :	[ -1.5,	-1.5,  1.5 ],
+					"bottomright" : [ -1.5, -1.5, -1.5 ]
+				},
+				{
+					"type" : "viewport",
+					"x" : 0.5,
+					"y" : 0,
+					"width" : 0.5,
+					"height" : 1,
+					"user" : "MainUser",
+					"eye" : "right",
 
 					"topleft" :		[ -1.5,	 0.8,  1.5 ],
 					"topright" :	[ -1.5,	 0.8, -1.5 ],
@@ -131,8 +173,8 @@
 				"title" : "Vloer",
 				"x" : 0,
 				"y" : 0,
-				"width" : 1280,
-				"height" : 1024,
+				"width" : 2800,
+				"height" : 1050,
 				"border" : false
 			},
 			"viewports" :
@@ -141,10 +183,24 @@
 					"type" : "viewport",
 					"x" : 0,
 					"y" : 0,
-					"width" : 1,
+					"width" : 0.5,
 					"height" : 1,
 					"user" : "MainUser",
 					"eye" : "left",
+
+					"topleft" :		[ -1.5, -1.5, -1.5 ],  
+					"topright" :	[  1.5, -1.5, -1.5 ],  
+					"bottomleft" :	[ -1.5, -1.5,  0.75 ],  
+					"bottomright" : [  1.5, -1.5,  0.75 ]  
+				},
+				{
+					"type" : "viewport",
+					"x" : 0.5,
+					"y" : 0,
+					"width" : 0.5,
+					"height" : 1,
+					"user" : "MainUser",
+					"eye" : "right",
 
 					"topleft" :		[ -1.5, -1.5, -1.5 ],  
 					"topright" :	[  1.5, -1.5, -1.5 ],  
