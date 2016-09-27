@@ -15,6 +15,7 @@
 #include <VrLib/tien/components/TerrainRenderer.h>
 #include <VrLib/math/Ray.h>
 #include <VrLib/util.h>
+#include <VrLib/json.h>
 
 using vrlib::Log;
 using vrlib::logger;

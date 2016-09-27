@@ -420,7 +420,7 @@ void GrassComponent::drawShadowMap()
 {
 }
 
-vrlib::json::Value GrassComponent::toJson() const
+vrlib::json::Value GrassComponent::toJson(vrlib::json::Value &meshes) const
 {
 	vrlib::json::Value ret;
 	ret["type"] = "grass";

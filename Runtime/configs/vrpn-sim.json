@@ -1,0 +1,108 @@
+{
+	"devices" :
+	[
+		{
+			"name" : "MainUserHead",
+			"type" : "positional",
+			"driver" : "SimPosition",
+			"src" : "Head"
+		},
+		{
+			"name" : "WandPosition",
+			"type" : "positional",
+			"driver" : "SimPosition",
+			"src" : "Wand"
+		},
+		{
+			"name" : "CameraPosition",
+			"type" : "positional",
+			"driver" : "SimPosition",
+			"src" : "Camera"
+		},
+		{
+			"name" : "LeftButton",
+			"type" : "digital",
+			"driver" : "mouse",
+			"src" : "left"
+		},
+		{
+			"name" : "RightButton",
+			"type" : "digital",
+			"driver" : "mouse",
+			"src" : "right"
+		},
+		{
+			"name" : "MiddleButton",
+			"type" : "digital",
+			"driver" : "keyboard",
+			"src" : "f5"
+		},
+		{
+			"name" : "KeyPageUp",
+			"type" : "digital",
+			"driver" : "keyboard",
+			"src" : "pageup"
+		},
+		{
+			"name" : "KeyPageDown",
+			"type" : "digital",
+			"driver" : "keyboard",
+			"src" : "pagedown"
+		}
+	],
+	"driverconfig" :
+	{
+		"SimPosition" :
+		{
+			"Head" :
+			{
+				"initial" : [ 0.0, 1.5, 0.0 ],
+				"xneg" : "shift+a",
+				"xpos" : "shift+d",
+				"yneg" : "shift+z",
+				"ypos" : "shift+q",
+				"zneg" : "shift+w",
+				"zpos" : "shift+s",
+				"rotxneg" : "shift+numpad7",
+				"rotxpos" : "shift+numpad9",
+				"rotyneg" : "shift+numpad4",
+				"rotypos" : "shift+numpad6",
+				"rotzneg" : "shift+numpad1",
+				"rotzpos" : "shift+numpad3"
+			},
+			"Wand" :
+			{
+				"initial" : [ 0.0, 1.0, 0.0 ],
+				"xneg" : "ctrl+a",
+				"xpos" : "ctrl+d",
+				"yneg" : "ctrl+z",
+				"ypos" : "ctrl+q",
+				"zneg" : "ctrl+w",
+				"zpos" : "ctrl+s",
+				"rotxneg" : "ctrl+numpad7",
+				"rotxpos" : "ctrl+numpad9",
+				"rotyneg" : "ctrl+numpad4",
+				"rotypos" : "ctrl+numpad6",
+				"rotzneg" : "ctrl+numpad1",
+				"rotzpos" : "ctrl+numpad3"
+			},
+			"Camera" :
+			{
+				"initial" : [ 0.0, 1.5, 3.5 ],
+				"xneg" : "a",
+				"xpos" : "d",
+				"yneg" : "z",
+				"ypos" : "q",
+				"zneg" : "w",
+				"zpos" : "s",
+				"rotxneg" : "numpad7",
+				"rotxpos" : "numpad9",
+				"rotyneg" : "numpad4",
+				"rotypos" : "numpad6",
+				"rotzneg" : "numpad1",
+				"rotzpos" : "numpad3",
+				"camera" : true
+			}
+		}
+	}
+}
