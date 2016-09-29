@@ -5,7 +5,7 @@
 using vrlib::logger; using vrlib::Log;
 
 
-Api::Api(const std::string &route, const std::function<void(NetworkEngine*, vrlib::Tunnel*, const vrlib::json::Value &)> &callback)
+Api::Api(const std::string &route, const std::function<void(NetworkEngine*, vrlib::Tunnel*, vrlib::json::Value &)> &callback)
 {
 	callbacks()[route] = callback;
 }
@@ -130,6 +130,8 @@ Api setcallback("setcallback", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, 
 
 void sendError(vrlib::Tunnel* tunnel, const std::string &id, const std::string &error)
 {
+	if (!tunnel)
+		return;
 	vrlib::json::Value packet;
 	packet["id"] = id;
 	packet["data"]["status"] = "error";
@@ -141,6 +143,8 @@ void sendError(vrlib::Tunnel* tunnel, const std::string &id, const std::string &
 
 void sendOk(vrlib::Tunnel* tunnel, const std::string &id)
 {
+	if (!tunnel)
+		return;
 	vrlib::json::Value packet;
 	packet["id"] = id;
 	packet["data"]["status"] = "ok";

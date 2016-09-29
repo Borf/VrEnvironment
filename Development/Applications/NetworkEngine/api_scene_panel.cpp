@@ -6,7 +6,7 @@
 #include <VrLib/tien/components/DynamicSkyBox.h>
 
 
-Api scene_panel_clear("scene/panel/clear", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
+Api scene_panel_clear("scene/panel/clear", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, vrlib::json::Value &data)
 {
 	if (!data.isMember("id"))
 	{
@@ -30,7 +30,7 @@ Api scene_panel_clear("scene/panel/clear", [](NetworkEngine* engine, vrlib::Tunn
 });
 
 
-Api scene_panel_swap("scene/panel/swap", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
+Api scene_panel_swap("scene/panel/swap", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, vrlib::json::Value &data)
 {
 	if (!data.isMember("id"))
 	{
@@ -53,7 +53,7 @@ Api scene_panel_swap("scene/panel/swap", [](NetworkEngine* engine, vrlib::Tunnel
 	sendOk(tunnel, "scene/panel/swap");
 });
 
-Api scene_panel_drawlines("scene/panel/drawlines", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
+Api scene_panel_drawlines("scene/panel/drawlines", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, vrlib::json::Value &data)
 {
 	if (!data.isMember("id"))
 	{
@@ -117,7 +117,7 @@ Api scene_panel_drawlines("scene/panel/drawlines", [](NetworkEngine* engine, vrl
 });
 
 
-Api scene_panel_drawtext("scene/panel/drawtext", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
+Api scene_panel_drawtext("scene/panel/drawtext", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, vrlib::json::Value &data)
 {
 	if (!data.isMember("id"))
 	{
@@ -156,7 +156,7 @@ Api scene_panel_drawtext("scene/panel/drawtext", [](NetworkEngine* engine, vrlib
 });
 
 
-Api scene_panel_setclearcolor("scene/panel/setclearcolor", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
+Api scene_panel_setclearcolor("scene/panel/setclearcolor", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, vrlib::json::Value &data)
 {
 	if (!data.isMember("id"))
 	{

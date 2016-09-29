@@ -30,9 +30,9 @@ using vrlib::logger;
 #include <VrLib/tien/components/TransformAttach.h>
 #include <VrLib/Font.h>
 
-inline std::map<std::string, std::function<void(NetworkEngine*, vrlib::Tunnel*, const vrlib::json::Value &)>> &callbacks()
+inline std::map<std::string, std::function<void(NetworkEngine*, vrlib::Tunnel*, vrlib::json::Value &)>> &callbacks()
 {
-	static std::map<std::string, std::function<void(NetworkEngine*, vrlib::Tunnel*, const vrlib::json::Value &)>> callbacks;
+	static std::map<std::string, std::function<void(NetworkEngine*, vrlib::Tunnel*, vrlib::json::Value &)>> callbacks;
 	return callbacks;
 }
 
@@ -200,6 +200,7 @@ void NetworkEngine::preFrame(double frameTime, double totalTime)
 				logFile << "," << std::endl << std::endl;
 				logFile.flush();
 			}
+
 			if (v.isObject() && v.isMember("id"))
 			{
 				logger << "Got packet " << v["id"] << "Through tunnel"<<Log::newline;
@@ -210,6 +211,11 @@ void NetworkEngine::preFrame(double frameTime, double totalTime)
 			}
 			else
 				logger << "Packet received is not an object, or no ID field found!" << Log::newline;
+
+
+			std::string jsonStr;
+			jsonStr << v;
+			clusterData->networkPackets.push_back(jsonStr);
 		}
 	}
 
@@ -339,7 +345,32 @@ void NetworkEngine::preFrame(double frameTime, double totalTime)
 	checkButtonCallback(RightTouchPad,		vive.controllers[1].touchButton);
 	checkButtonCallback(RightGrip,			vive.controllers[1].gripButton);
 
+	this->frameTime = frameTime;
+}
 
+
+void NetworkEngine::latePreFrame()
+{
+	if (!clusterData.isLocal())
+	{
+		for (size_t i = 0; i < clusterData->networkPackets.size(); i++)
+		{
+			vrlib::json::Value v = vrlib::json::readJson(clusterData->networkPackets[i]);
+
+			if (v.isObject() && v.isMember("id"))
+			{
+				logger << "Got packet " << v["id"] << "Through tunnel" << Log::newline;
+				if (callbacks().find(v["id"].asString()) != callbacks().end())
+					callbacks()[v["id"].asString()](this, nullptr, v["data"]);
+				else
+					logger << "No callback registered for packet " << v["id"] << Log::newline;
+			}
+			else
+				logger << "Packet received is not an object, or no ID field found!" << Log::newline;
+
+		}
+	}
+	clusterData->networkPackets.clear();
 	tien.update((float)(frameTime / 1000.0f));
 }
 
@@ -403,4 +434,12 @@ void NetworkData::readObject(vrlib::BinaryStream & reader)
 		reader >> packet;
 		networkPackets.push_back(packet);
 	}
+}
+
+int NetworkData::getEstimatedSize()
+{
+	int sum = 10;
+	for (size_t i = 0; i < networkPackets.size(); i++)
+		sum += networkPackets[i].size() + 4;
+	return sum;
 }

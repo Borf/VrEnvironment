@@ -5,9 +5,14 @@
 #include <algorithm>
 
 
-Api route_add("route/add", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
+Api route_add("route/add", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, vrlib::json::Value &data)
 {
 	Route* r = new Route();
+	if (data.isMember("id"))
+	{
+		printf("Got forced route id!\n");
+		r->id = data["id"];
+	}
 	for (size_t i = 0; i < data["nodes"].size(); i++)
 	{
 		r->addNode(glm::vec3(data["nodes"][i]["pos"][0].asFloat(), data["nodes"][i]["pos"][1].asFloat(), data["nodes"][i]["pos"][2].asFloat()),
@@ -15,6 +20,8 @@ Api route_add("route/add", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, cons
 	}
 	r->finish();
 	engine->routes.push_back(r);
+
+	data["id"] = r->id;
 
 	vrlib::json::Value packet;
 	packet["id"] = "route/add";
@@ -25,14 +32,14 @@ Api route_add("route/add", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, cons
 
 
 
-Api route_update("route/update", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
+Api route_update("route/update", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, vrlib::json::Value &data)
 {
 
 
 });
 
 
-Api route_delete("route/delete", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
+Api route_delete("route/delete", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, vrlib::json::Value &data)
 {
 	for (size_t i = 0; i < engine->routeFollowers.size(); i++)
 	{
@@ -70,7 +77,7 @@ Api route_delete("route/delete", [](NetworkEngine* engine, vrlib::Tunnel* tunnel
 
 
 
-Api route_follow("route/follow", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
+Api route_follow("route/follow", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, vrlib::json::Value &data)
 {
 	vrlib::json::Value packet;
 	packet["id"] = "route/follow";

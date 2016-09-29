@@ -9,7 +9,7 @@
 #include <VrLib/tien/Terrain.h>
 #include <VrLib/Texture.h>
 
-Api scene_road_add("scene/road/add", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
+Api scene_road_add("scene/road/add", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, vrlib::json::Value &data)
 {
 	float heightOffset = 0.01f;
 	if (data.isMember("heightoffset"))
@@ -131,7 +131,7 @@ Api scene_road_add("scene/road/add", [](NetworkEngine* engine, vrlib::Tunnel* tu
 
 });
 
-Api scene_road_delete("scene/road/delete", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
+Api scene_road_delete("scene/road/delete", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, vrlib::json::Value &data)
 {
 	sendError(tunnel, "scene/road/delete", "Not implemented");
 });
