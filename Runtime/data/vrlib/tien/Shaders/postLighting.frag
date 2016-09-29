@@ -22,6 +22,7 @@ uniform vec3 lightDirection;
 uniform vec4 lightColor;
 uniform float lightRange;
 uniform vec2 windowSize = vec2(1024,1024);
+uniform vec2 windowPos = vec2(0,0);
 uniform bool lightCastShadow;
 
 
@@ -57,7 +58,7 @@ float insideBox(vec2 v, vec2 bottomLeft, vec2 topRight) {
 
 void main()
 {
-	vec2 texCoord = gl_FragCoord.xy / windowSize;
+	vec2 texCoord = (gl_FragCoord.xy - windowPos.xy) / windowSize;
 
     vec4 image = texture2D( s_color, texCoord );
     float depth = texture2D( s_depth, texCoord ).x;

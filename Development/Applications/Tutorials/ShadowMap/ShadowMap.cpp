@@ -119,7 +119,7 @@ void ShadowMap::drawScene(int pass, std::function<void(const glm::mat4 &modelMat
 	model->draw([this, &modelViewCallback](const glm::mat4 &modelMatrix)
 	{
 		glm::mat4 matrix(modelMatrix);
-		matrix = glm::translate(matrix, glm::vec3(0, 0, -1.5f));
+		matrix = glm::translate(matrix, glm::vec3(0, 0, 0));
 		matrix = glm::scale(matrix, glm::vec3(0.5f, 0.5f, 0.5f));
 		modelViewCallback(matrix);
 	},
@@ -145,10 +145,10 @@ void ShadowMap::drawScene(int pass, std::function<void(const glm::mat4 &modelMat
 	std::vector<vrlib::gl::VertexP3N3T2> verts;
 	vrlib::gl::VertexP3N3T2 vert;
 	vrlib::gl::setN3(vert, glm::vec3(0, 1, 0));
-	vrlib::gl::setP3(vert, glm::vec3(-4, -1.5f, -4)); vrlib::gl::setT2(vert, glm::vec2(0, 0)); verts.push_back(vert);
-	vrlib::gl::setP3(vert, glm::vec3(-4, -1.5f, 4)); vrlib::gl::setT2(vert, glm::vec2(0, 4)); verts.push_back(vert);
-	vrlib::gl::setP3(vert, glm::vec3(4, -1.5f, 4)); vrlib::gl::setT2(vert, glm::vec2(4, 4)); verts.push_back(vert);
-	vrlib::gl::setP3(vert, glm::vec3(4, -1.5f, -4)); vrlib::gl::setT2(vert, glm::vec2(4, 0)); verts.push_back(vert);
+	vrlib::gl::setP3(vert, glm::vec3(-4, 0, -4)); vrlib::gl::setT2(vert, glm::vec2(0, 0)); verts.push_back(vert);
+	vrlib::gl::setP3(vert, glm::vec3(-4, 0, 4)); vrlib::gl::setT2(vert, glm::vec2(0, 4)); verts.push_back(vert);
+	vrlib::gl::setP3(vert, glm::vec3(4, 0, 4)); vrlib::gl::setT2(vert, glm::vec2(4, 4)); verts.push_back(vert);
+	vrlib::gl::setP3(vert, glm::vec3(4, 0, -4)); vrlib::gl::setT2(vert, glm::vec2(4, 0)); verts.push_back(vert);
 
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);

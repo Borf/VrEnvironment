@@ -26,7 +26,7 @@ namespace NetworkTunnelControl
 			for(int i = 0; i < tunnelApps.Items.Count; i++)
 			{
 				tunnelApps.Items[i].Selected = false;
-				if (tunnelApps.Items[i].SubItems[2].Text == "johan")
+				if (tunnelApps.Items[i].SubItems[2].Text == "cave")
 				{
 					tunnelApps.Items[i].Selected = true;
 					button1_Click(null, null);
@@ -72,7 +72,7 @@ namespace NetworkTunnelControl
 			for (int i = 0; i < tunnelApps.Items.Count; i++)
 			{
 				tunnelApps.Items[i].Selected = false;
-				if (tunnelApps.Items[i].SubItems[2].Text == "johan")
+				if (tunnelApps.Items[i].SubItems[2].Text == "CAVE")
 				{
 					tunnelApps.Items[i].Selected = true;
 					button1_Click(null, null);

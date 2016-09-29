@@ -11,6 +11,10 @@
 
 Api scene_road_add("scene/road/add", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
 {
+	float heightOffset = 0.01f;
+	if (data.isMember("heightoffset"))
+		heightOffset = data["heightoffset"];
+
 	for (size_t i = 0; i < engine->routes.size(); i++)
 	{
 		if (engine->routes[i]->id == data["route"].asString())

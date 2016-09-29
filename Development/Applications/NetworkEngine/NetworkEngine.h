@@ -3,8 +3,11 @@
 #include <VrLib/Application.h>
 #include <VrLib/tien/Tien.h>
 #include <VrLib/util.h>
+#include <VrLib/ClusterData.h>
 #include <glm/gtc/quaternion.hpp>
 #include <VrLib/HtcVive.h>
+
+#include <fstream>
 
 
 
@@ -65,6 +68,14 @@ public:
 	glm::quat rotateOffset;
 };
 
+class NetworkData : public vrlib::SerializableObject
+{
+public:
+	std::vector<std::string> networkPackets;
+	virtual void writeObject(vrlib::BinaryStream & writer) override;
+	virtual void readObject(vrlib::BinaryStream & reader) override;
+};
+
 
 class NetworkEngine : public vrlib::Application
 {
@@ -77,10 +88,10 @@ public:
 	};
 	vrlib::gl::Shader<DebugUniform>* debugShader;
 
+	vrlib::ClusterData<NetworkData> clusterData;
 
 
-
-
+	std::ofstream logFile;
 
 
 	std::vector<vrlib::Tunnel*> tunnels;

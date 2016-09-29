@@ -16,6 +16,13 @@ Api scene_terrain_add("scene/terrain/add", [](NetworkEngine* engine, vrlib::Tunn
 		sendError(tunnel, "scene/terrain/add", "Size of terrain too big");
 		return;
 	}
+	if (data.isMember("heights") && data["heights"].size() < data["size"][0].asInt() * data["size"][1].asInt())
+	{
+		sendError(tunnel, "scene/terrain/add", "Not enough terrain height data");
+		return;
+	}
+
+
 
 	if (!engine->terrain) //todo: multiple terrains with a seperate guid?
 		engine->terrain = new vrlib::tien::Terrain();

@@ -41,6 +41,7 @@
 			this.button4 = new System.Windows.Forms.Button();
 			this.button5 = new System.Windows.Forms.Button();
 			this.button6 = new System.Windows.Forms.Button();
+			this.button7 = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.timeOfDay)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -169,11 +170,22 @@
 			this.button6.UseVisualStyleBackColor = true;
 			this.button6.Click += new System.EventHandler(this.button6_Click);
 			// 
+			// button7
+			// 
+			this.button7.Location = new System.Drawing.Point(422, 496);
+			this.button7.Name = "button7";
+			this.button7.Size = new System.Drawing.Size(159, 23);
+			this.button7.TabIndex = 13;
+			this.button7.Text = "Panel met head";
+			this.button7.UseVisualStyleBackColor = true;
+			this.button7.Click += new System.EventHandler(this.button7_Click);
+			// 
 			// TunnelWindow
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1313, 653);
+			this.Controls.Add(this.button7);
 			this.Controls.Add(this.button6);
 			this.Controls.Add(this.button5);
 			this.Controls.Add(this.button4);
@@ -212,5 +224,6 @@
 		private System.Windows.Forms.Button button4;
 		private System.Windows.Forms.Button button5;
 		private System.Windows.Forms.Button button6;
+		private System.Windows.Forms.Button button7;
 	}
 }

@@ -41,8 +41,10 @@ namespace NetworkTunnelControl
 				string id = json.data.id;
 				if (callbacks.ContainsKey(id))
 				{
-					if (json["data"] != null && json["data"]["data"] != null && json["data"]["data"]["data"] != null && json["data"]["data"]["data"] is JObject && json.data.data.data.status == "error")
-						Console.WriteLine("Got an error");
+					/*try				{
+						if (json["data"] != null && json["data"]["data"] != null && json["data"]["data"]["data"] != null && json["data"]["data"]["data"] is JObject && json.data.data.data.status == "error")
+							Console.WriteLine("Got an error");
+					}	catch (Exception e) { }*/
 					Console.WriteLine("Got a packet " + id + " through tunnel");
 					callbacks[id](json.data.data);
 				}
@@ -150,7 +152,7 @@ namespace NetworkTunnelControl
 					blocker.Set();
 				};
 				sendTunnel(_id, _data);
-				if (blocker.WaitOne(5000))
+				if (blocker.WaitOne())
 				{
 					Connection.callbacks.Remove(_id);
 					return ret;

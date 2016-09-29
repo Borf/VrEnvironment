@@ -52,12 +52,18 @@ void NetworkEngine::init()
 {
 	tien.init();
 	vive.init();
-	vrlib::Kernel::getInstance()->serverConnection->onTunnelCreate(tunnelKey, [this](vrlib::Tunnel* tunnel)
-	{
-		logger << "Got a tunnel" << Log::newline;
-		tunnels.push_back(tunnel);
-	});
 
+	clusterData.init();
+
+	if (clusterData.isLocal())
+	{
+		logger << "I'm the master, I can tunnel" << Log::newline;
+		vrlib::Kernel::getInstance()->serverConnection->onTunnelCreate(tunnelKey, [this](vrlib::Tunnel* tunnel)
+		{
+			logger << "Got a tunnel" << Log::newline;
+			tunnels.push_back(tunnel);
+		});
+	}
 
 	callbacks()["scene/reset"](this, nullptr, vrlib::json::Value());
 
@@ -76,6 +82,8 @@ void NetworkEngine::init()
 	debugShader->registerUniform(DebugUniform::projectionMatrix, "projectionMatrix");
 	debugShader->registerUniform(DebugUniform::modelViewMatrix, "modelViewMatrix");
 
+	logFile.open("log.txt", std::ofstream::out);
+	logFile << "[";
 
 	font = new vrlib::TrueTypeFont("segoeui");
 	tien.start();
@@ -131,6 +139,7 @@ void NetworkEngine::reset()
 	{
 		vrlib::tien::Node* n = new vrlib::tien::Node("Head", &tien.scene);
 		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0, 0)));
+//		n->addComponent(new vrlib::tien::components::ModelRenderer("data/vrlib/rendermodels/generic_hmd/generic_hmd.obj"));
 		n->addComponent(new vrlib::tien::components::TransformAttach(vive.hmd));
 	}
 
@@ -157,7 +166,7 @@ void NetworkEngine::reset()
 
 	{
 		vrlib::tien::Node* n = new vrlib::tien::Node("GroundPlane", &tien.scene);
-		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0, 0)));
+		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, -0.01f, 0)));
 
 		vrlib::tien::components::MeshRenderer::Mesh* mesh = new vrlib::tien::components::MeshRenderer::Mesh();
 		mesh->material.texture = vrlib::Texture::loadCached("data/NetworkEngine/textures/grid.png");
@@ -185,6 +194,12 @@ void NetworkEngine::preFrame(double frameTime, double totalTime)
 		while (t->available())
 		{
 			vrlib::json::Value v = t->recv();
+			if (logFile.is_open())
+			{
+				logFile << v << std::endl;
+				logFile << "," << std::endl << std::endl;
+				logFile.flush();
+			}
 			if (v.isObject() && v.isMember("id"))
 			{
 				logger << "Got packet " << v["id"] << "Through tunnel"<<Log::newline;
@@ -234,7 +249,7 @@ void NetworkEngine::preFrame(double frameTime, double totalTime)
 			if (f.rotate == RouteFollower::Rotate::XZ)
 				f.node->transform->rotation = glm::quat(glm::vec3(0, glm::pi<float>() - glm::atan(dir.z, dir.x), 0)) * f.rotateOffset;
 			if (f.rotate == RouteFollower::Rotate::XYZ)
-				f.node->transform->rotation = glm::quat(glm::lookAt(f.node->transform->position, f.node->transform->position + dir, glm::vec3(0,1,0))) * f.rotateOffset;
+				f.node->transform->rotation = glm::quat(glm::inverse(glm::lookAt(f.node->transform->position, f.node->transform->position + dir, glm::vec3(0,1,0)))) * f.rotateOffset;
 		}
 
 		if (terrain && f.followHeight)
@@ -368,4 +383,24 @@ void NetworkEngine::draw(const glm::mat4 & projectionMatrix, const glm::mat4 & m
 	}
 
 
+}
+
+void NetworkData::writeObject(vrlib::BinaryStream & writer)
+{
+	writer << (int)networkPackets.size();
+	for (const auto & s : networkPackets)
+		writer << s;
+}
+
+void NetworkData::readObject(vrlib::BinaryStream & reader)
+{
+	int count;
+	reader >> count;
+	networkPackets.clear();
+	for (int i = 0; i < count; i++)
+	{
+		std::string packet;
+		reader >> packet;
+		networkPackets.push_back(packet);
+	}
 }
