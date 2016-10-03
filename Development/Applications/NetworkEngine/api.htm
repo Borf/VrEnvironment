@@ -176,6 +176,7 @@ h1
 		<li><a href="#route/update">route/update</a></li>
 		<li><a href="#route/delete">route/delete</a></li>
 		<li><a href="#route/follow">route/follow</a></li>
+		<li><a href="#route/follow/speed">route/follow/speed</a></li>
 		<li><a href="#route/show">route/show</a></li>
 	</ul></li>
 	<li><a href="#get">get</a></li>
@@ -1053,6 +1054,29 @@ h1
 		<ul>
 			<li>Route not found</li>
 			<li>Node not found</li>
+		</ul>
+	</div>
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+	<div class="call" id="route/follow/speed">
+		<h2>route/follow/speed</h2>
+		Changed the speed of a node on a route
+<div class="code">{
+	"id" : "route/follow/speed",
+	"data" :
+	{
+		"node" : {nodeid},
+		"speed" : 1.0
+	}
+}
+</div>
+		Response
+<div class="code">{
+	"status" : "ok"
+}</div>
+		Errors:
+		<ul>
+			<li>Node ID not found</li>
 		</ul>
 	</div>
 <!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->
