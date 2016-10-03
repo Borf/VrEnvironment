@@ -85,7 +85,9 @@
 				"y" : 0,
 				"width" : 2800,
 				"height" : 1050,
-				"border" : false
+				"border" : false,
+				"vsync" : false
+
 			},
 			"viewports" :
 			[
@@ -130,7 +132,9 @@
 				"y" : 0,
 				"width" : 2800,
 				"height" : 1050,
-				"border" : false
+				"border" : false,
+				"vsync" : false
+
 			},
 			"viewports" :
 			[
@@ -175,7 +179,9 @@
 				"y" : 0,
 				"width" : 2800,
 				"height" : 1050,
-				"border" : false
+				"border" : false,
+				"vsync" : false
+
 			},
 			"viewports" :
 			[
@@ -186,7 +192,7 @@
 					"width" : 0.5,
 					"height" : 1,
 					"user" : "MainUser",
-					"eye" : "left",
+					"eye" : "right",
 
 					"topleft" :		[ -1.5,  0.0, -1.5 ],  
 					"topright" :	[  1.5,  0.0, -1.5 ],  
@@ -200,7 +206,7 @@
 					"width" : 0.5,
 					"height" : 1,
 					"user" : "MainUser",
-					"eye" : "right",
+					"eye" : "left",
 
 					"topleft" :		[ -1.5,  0.0, -1.5 ],  
 					"topright" :	[  1.5,  0.0, -1.5 ],  

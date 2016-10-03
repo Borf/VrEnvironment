@@ -3,8 +3,11 @@
 #include <VrLib/Application.h>
 #include <VrLib/tien/Tien.h>
 #include <VrLib/util.h>
+#include <VrLib/ClusterData.h>
 #include <glm/gtc/quaternion.hpp>
 #include <VrLib/HtcVive.h>
+
+#include <fstream>
 
 
 
@@ -16,7 +19,7 @@ namespace vrlib {
 }
 class Route;
 class NetworkEngine;
-std::map<std::string, std::function<void(NetworkEngine*, vrlib::Tunnel*, const vrlib::json::Value &)>> &callbacks();
+std::map<std::string, std::function<void(NetworkEngine*, vrlib::Tunnel*, vrlib::json::Value &)>> &callbacks();
 
 class RouteFollower
 {
@@ -65,6 +68,15 @@ public:
 	glm::quat rotateOffset;
 };
 
+class NetworkData : public vrlib::SerializableObject
+{
+public:
+	std::vector<std::string> networkPackets;
+	virtual void writeObject(vrlib::BinaryStream & writer) override;
+	virtual void readObject(vrlib::BinaryStream & reader) override;
+	virtual int getEstimatedSize();
+};
+
 
 class NetworkEngine : public vrlib::Application
 {
@@ -77,10 +89,10 @@ public:
 	};
 	vrlib::gl::Shader<DebugUniform>* debugShader;
 
+	vrlib::ClusterData<NetworkData> clusterData;
 
 
-
-
+	std::ofstream logFile;
 
 
 	std::vector<vrlib::Tunnel*> tunnels;
@@ -115,9 +127,11 @@ public:
 
 	vrlib::tien::Terrain* terrain = nullptr;
 
+	double frameTime;
 	// Inherited via Demo
 	virtual void init() override;
 	virtual void preFrame(double frameTime, double totalTime) override;
+	virtual void latePreFrame();
 	virtual void draw(const glm::mat4 &projectionMatrix, const glm::mat4 &modelViewMatrix) override;
 
 	void reset();

@@ -3,14 +3,14 @@
 #include <VrLib/tien/components/DynamicSkyBox.h>
 #include <VrLib/tien/components/StaticSkyBox.h>
 
-Api scene_skybox_settime("scene/skybox/settime", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
+Api scene_skybox_settime("scene/skybox/settime", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, vrlib::json::Value &data)
 {
 	auto skybox = engine->tien.scene.cameraNode->getComponent<vrlib::tien::components::DynamicSkyBox>();
 	skybox->timeOfDay = data["time"].asFloat();
 	sendOk(tunnel, "scene/skybox/settime");
 });
 
-Api scene_skybox_update("scene/skybox/update", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
+Api scene_skybox_update("scene/skybox/update", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, vrlib::json::Value &data)
 {
 	if (!data.isMember("type"))
 	{

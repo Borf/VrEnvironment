@@ -2,7 +2,7 @@
 
 #include <fstream>
 
-Api scene_get("scene/get", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
+Api scene_get("scene/get", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, vrlib::json::Value &data)
 {
 	vrlib::json::Value meshes(vrlib::json::Type::arrayValue);
 
@@ -13,7 +13,7 @@ Api scene_get("scene/get", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, cons
 });
 
 
-Api scene_save("scene/save", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
+Api scene_save("scene/save", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, vrlib::json::Value &data)
 {
 	vrlib::json::Value d;
 	d["meshes"] = vrlib::json::Value(vrlib::json::Type::arrayValue);
@@ -33,7 +33,7 @@ Api scene_save("scene/save", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, co
 });
 
 
-Api scene_load("scene/load", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
+Api scene_load("scene/load", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, vrlib::json::Value &data)
 {
 	std::ifstream file("engine.json");
 	vrlib::json::Value json = vrlib::json::readJson(file);
@@ -50,7 +50,7 @@ Api scene_load("scene/load", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, co
 });
 
 
-Api scene_raycast("scene/raycast", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
+Api scene_raycast("scene/raycast", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, vrlib::json::Value &data)
 {
 	vrlib::json::Value packet;
 	packet["id"] = "scene/raycast";
@@ -60,9 +60,20 @@ Api scene_raycast("scene/raycast", [](NetworkEngine* engine, vrlib::Tunnel* tunn
 });
 
 
-Api scene_reset("scene/reset", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
+Api scene_reset("scene/reset", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, vrlib::json::Value &data)
 {
 	engine->reset();
+
+	std::string nodes[] = { "Camera", "Sunlight", "LeftHand", "RightHand", "Head", "GroundPlane" };
+	for (int i = 0; i < sizeof(nodes) / sizeof(std::string); i++)
+	{
+		if (data.isMember(nodes[i]))
+			engine->tien.scene.cameraNode->guid = data[nodes[i]];
+		data[nodes[i]] = engine->tien.scene.findNodesWithName(nodes[i])[0]->guid;
+
+	}
+
+
 	if (tunnel)
 	{
 		vrlib::json::Value packet;

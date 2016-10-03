@@ -138,7 +138,7 @@ void PhysicsDemo::spawnStuff()
 	for (int i = 0; i < 50; i++)
 	{
 		bool isBall = (rand() % 2 == 0);
-		btCollisionShape* ballShape = isBall ? (btCollisionShape*)(new btSphereShape(0.5f)) : (btCollisionShape*)(new btBoxShape(btVector3(0.5f, 0.5f, 0.5f)));
+		btCollisionShape* ballShape = isBall ? (btCollisionShape*)(new btSphereShape(0.25f)) : (btCollisionShape*)(new btBoxShape(btVector3(0.25f, 0.25f, 0.25f)));
 		btTransform ballTransform;
 		ballTransform.setIdentity();
 		ballTransform.setOrigin(btVector3(sin(i), 5 + i, cos(i)));
@@ -164,7 +164,7 @@ void PhysicsDemo::draw(const glm::mat4 &projectionMatrix, const glm::mat4 &model
 {
 	shader->use();
 	shader->setUniform(Uniforms::projectionMatrix, projectionMatrix);
-	shader->setUniform(Uniforms::viewMatrix, glm::translate(modelViewMatrix, glm::vec3(0,-2,-5)));
+	shader->setUniform(Uniforms::viewMatrix, glm::translate(modelViewMatrix, glm::vec3(0,0,0)));
 	shader->setUniform(Uniforms::modelMatrix, glm::mat4());
 
 	int size = 32;
@@ -191,7 +191,7 @@ void PhysicsDemo::draw(const glm::mat4 &projectionMatrix, const glm::mat4 &model
 		btScalar m[16];
 		c->getWorldTransform().getOpenGLMatrix(m);
 		glm::mat4 matrix = glm::make_mat4(m);
-		matrix = glm::scale(matrix, glm::vec3(0.3333f, 0.3333f, 0.3333f));
+		matrix = glm::scale(matrix, 0.5f * glm::vec3(0.3333f, 0.3333f, 0.3333f));
 		
 		cubeModel->draw([this, &matrix](const glm::mat4 &modelMatrix) 
 		{
@@ -208,7 +208,7 @@ void PhysicsDemo::draw(const glm::mat4 &projectionMatrix, const glm::mat4 &model
 		btScalar m[16];
 		c->getWorldTransform().getOpenGLMatrix(m);
 		glm::mat4 matrix = glm::make_mat4(m);
-		matrix = glm::scale(matrix, glm::vec3(0.5f, 0.5f, 0.5f));
+		matrix = glm::scale(matrix, glm::vec3(0.25f, 0.25f, 0.25f));
 
 		sphereModel->draw([this, &matrix](const glm::mat4 &modelMatrix)
 		{

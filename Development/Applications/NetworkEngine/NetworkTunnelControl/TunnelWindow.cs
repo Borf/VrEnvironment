@@ -75,7 +75,7 @@ namespace NetworkTunnelControl
 
 			Connection.sendTunnel("scene/get", null);
 
-			button6_Click(sender, e);
+			//button7_Click(sender, e);
 		}
 
 		private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
@@ -690,7 +690,7 @@ namespace NetworkTunnelControl
 						{
 							transform = new
 							{
-								position = new[] { 10*x, 0, 10*y },
+								position = new[] { -50 + 10*x, 0, -100 + 10*y },
 								rotation = new[] { 0, rotation, 0 },
 								scale = scale
 							},
@@ -808,6 +808,108 @@ namespace NetworkTunnelControl
 					zneg = "data/NetworkEngine/textures/SkyBoxes/interstellar/interstellar_ft.png"
 				}
 			});
+		}
+
+		private void button7_Click(object sender, EventArgs e)
+		{
+			Connection.sendTunnel("scene/reset", null);
+
+
+			string headId = Connection.sendTunnelWait("scene/node/find",
+				new { name = "Head" }, data => data[0].uuid);
+			Console.WriteLine("Head ID: " + headId);
+
+			string cameraId = Connection.sendTunnelWait("scene/node/find",
+				new { name = "Camera" }, data => data[0].uuid);
+			Console.WriteLine("cameraId ID: " + cameraId);
+
+			string panelId = Connection.sendTunnelWait("scene/node/add",
+			new
+			{
+				name = "panel",
+				parent = headId,
+				components = new
+				{
+					transform = new
+					{
+						position = new[] { 0, 0, -1 },
+						rotation = new[] { 0, 0, 0 },
+						scale = 1
+					},
+					panel = new
+					{
+						size = new[] { 1, 1 },
+						resolution = new[] { 512, 512 },
+						background = new[] { 1, 1, 1, 0.25f }
+					}
+				}
+			}, data => data.uuid);
+
+			string carId = Connection.sendTunnelWait("scene/node/add",
+			new
+			{
+				name = "car",
+				components = new
+				{
+					transform = new
+					{
+						position = new[] { 0, 0, 0 },
+						rotation = new[] { 0, 0, 0 },
+						scale = 0.025
+					},
+					model = new
+					{
+						file = "data/NetworkEngine/models/cars/white/car_white.obj"
+					}
+				}
+			}, data => data.uuid);
+
+			Connection.sendTunnel("scene/node/update",
+				new
+				{
+					id = cameraId,
+					parent = carId,
+					transform = new
+					{
+						scale = 1/ 0.025
+					}
+				});
+
+
+
+			/*Connection.sendTunnel("scene/node/moveto", new
+			{
+				id = cameraId,
+				position = new[] { 0, 0, -50 },
+				speed = 0.5
+			});*/
+
+			float roundness = 10;
+			float size = 20;
+			string routeId = Connection.sendTunnelWait("route/add", new
+			{
+				nodes = new[]
+				{
+						new {   pos = new [] { size, 5, -size },    dir = new [] { roundness, 0, roundness } },
+						new {   pos = new [] { size, 0, size },     dir = new [] {-roundness, 0, roundness } },
+						new {   pos = new [] { -size, 5, size },    dir = new [] {-roundness, 0,-roundness } },
+						new {   pos = new [] { -size, 0, -size },   dir = new [] { roundness, 0,-roundness } }
+					}
+
+			}, data => data.uuid);
+
+
+			Connection.sendTunnel("route/follow", new
+			{
+				route = routeId,
+				node = carId,
+				speed = 2.0,
+				rotate = "XYZ",
+				followHeight = true
+			});
+
+
+
 		}
 	}
 }

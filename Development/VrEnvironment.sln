@@ -131,6 +131,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NetworkEngine", "Applicatio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkTunnelControl", "Applications\NetworkEngine\NetworkTunnelControl\NetworkTunnelControl.csproj", "{5D4C16AD-CC72-44D0-8A9C-D28233BCA800}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "vrpn_service", "Services\vrpn_service\vrpn_service.vcxproj", "{3015DA63-4118-47D4-AC7F-52FF79F0FBA9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -241,6 +243,10 @@ Global
 		{5D4C16AD-CC72-44D0-8A9C-D28233BCA800}.Debug|Win32.Build.0 = Debug|Any CPU
 		{5D4C16AD-CC72-44D0-8A9C-D28233BCA800}.Release|Win32.ActiveCfg = Release|Any CPU
 		{5D4C16AD-CC72-44D0-8A9C-D28233BCA800}.Release|Win32.Build.0 = Release|Any CPU
+		{3015DA63-4118-47D4-AC7F-52FF79F0FBA9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3015DA63-4118-47D4-AC7F-52FF79F0FBA9}.Debug|Win32.Build.0 = Debug|Win32
+		{3015DA63-4118-47D4-AC7F-52FF79F0FBA9}.Release|Win32.ActiveCfg = Release|Win32
+		{3015DA63-4118-47D4-AC7F-52FF79F0FBA9}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -275,5 +281,6 @@ Global
 		{91AF5288-7E22-4A11-967E-F26CDD0B6493} = {35B9C100-7203-495D-BF91-619AF27F698E}
 		{3A1F63D5-CEDA-4408-88A3-9B5369DF8566} = {3CF58B01-824F-4D2D-AA83-C6ADB9FAAC32}
 		{5D4C16AD-CC72-44D0-8A9C-D28233BCA800} = {3CF58B01-824F-4D2D-AA83-C6ADB9FAAC32}
+		{3015DA63-4118-47D4-AC7F-52FF79F0FBA9} = {42FCCA53-AC8C-42CC-BF55-A3BFA5F06531}
 	EndGlobalSection
 EndGlobal

@@ -10,7 +10,7 @@
 
 
 
-Api scene_node_add("scene/node/add", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
+Api scene_node_add("scene/node/add", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, vrlib::json::Value &data)
 {
 	vrlib::tien::Node* parent = &engine->tien.scene;
 	if (data.isMember("parent"))
@@ -28,6 +28,8 @@ Api scene_node_add("scene/node/add", [](NetworkEngine* engine, vrlib::Tunnel* tu
 
 
 	vrlib::tien::Node* n = new vrlib::tien::Node(data["name"], parent);
+	if (data.isMember("id"))
+		n->guid = data["id"];
 	n->addComponent(new vrlib::tien::components::Transform());
 	if (data.isMember("components"))
 	{
@@ -114,6 +116,9 @@ Api scene_node_add("scene/node/add", [](NetworkEngine* engine, vrlib::Tunnel* tu
 			n->addComponent(new vrlib::tien::components::MeshRenderer(panel));
 		}
 	}
+
+	data["id"] = n->guid;
+
 	vrlib::json::Value ret;
 	ret["id"] = "scene/node/add";
 	ret["data"]["uuid"] = n->guid;
@@ -124,7 +129,7 @@ Api scene_node_add("scene/node/add", [](NetworkEngine* engine, vrlib::Tunnel* tu
 
 
 
-Api scene_node_moveto("scene/node/moveto", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
+Api scene_node_moveto("scene/node/moveto", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, vrlib::json::Value &data)
 {
 	if (!data.isMember("id") || !data["id"].isString())
 	{
@@ -187,7 +192,7 @@ Api scene_node_moveto("scene/node/moveto", [](NetworkEngine* engine, vrlib::Tunn
 });
 
 
-Api scene_node_update("scene/node/update", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
+Api scene_node_update("scene/node/update", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, vrlib::json::Value &data)
 {
 	vrlib::json::Value packet;
 	packet["id"] = "scene/node/delete";
@@ -232,7 +237,7 @@ Api scene_node_update("scene/node/update", [](NetworkEngine* engine, vrlib::Tunn
 
 
 
-Api scene_terrain_addlayer("scene/node/addlayer", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
+Api scene_terrain_addlayer("scene/node/addlayer", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, vrlib::json::Value &data)
 {
 	if (!data.isMember("id") || data["id"].isNull())
 	{
@@ -272,7 +277,7 @@ Api scene_terrain_addlayer("scene/node/addlayer", [](NetworkEngine* engine, vrli
 
 
 
-Api scene_terrain_dellayer("scene/node/dellayer", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
+Api scene_terrain_dellayer("scene/node/dellayer", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, vrlib::json::Value &data)
 {
 	vrlib::json::Value packet;
 	packet["id"] = "scene/node/dellayer";
@@ -283,7 +288,7 @@ Api scene_terrain_dellayer("scene/node/dellayer", [](NetworkEngine* engine, vrli
 
 
 
-Api scene_node_delete("scene/node/delete", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
+Api scene_node_delete("scene/node/delete", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, vrlib::json::Value &data)
 {
 	vrlib::json::Value packet;
 	packet["id"] = "scene/node/delete";
@@ -305,7 +310,7 @@ Api scene_node_delete("scene/node/delete", [](NetworkEngine* engine, vrlib::Tunn
 
 
 
-Api scene_node_find("scene/node/find", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
+Api scene_node_find("scene/node/find", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, vrlib::json::Value &data)
 {
 	vrlib::json::Value packet;
 	packet["id"] = "scene/node/find";

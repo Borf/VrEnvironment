@@ -3,7 +3,7 @@
 #include <VrLib/tien/components/TerrainRenderer.h>
 #include <VrLib/tien/Terrain.h>
 
-Api scene_terrain_add("scene/terrain/add", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
+Api scene_terrain_add("scene/terrain/add", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, vrlib::json::Value &data)
 {
 	if (!data.isMember("size") || !data["size"].isArray())
 	{
@@ -16,6 +16,13 @@ Api scene_terrain_add("scene/terrain/add", [](NetworkEngine* engine, vrlib::Tunn
 		sendError(tunnel, "scene/terrain/add", "Size of terrain too big");
 		return;
 	}
+	if (data.isMember("heights") && data["heights"].size() < data["size"][0].asInt() * data["size"][1].asInt())
+	{
+		sendError(tunnel, "scene/terrain/add", "Not enough terrain height data");
+		return;
+	}
+
+
 
 	if (!engine->terrain) //todo: multiple terrains with a seperate guid?
 		engine->terrain = new vrlib::tien::Terrain();
@@ -31,7 +38,7 @@ Api scene_terrain_add("scene/terrain/add", [](NetworkEngine* engine, vrlib::Tunn
 });
 
 
-Api scene_terrain_update("scene/terrain/update", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
+Api scene_terrain_update("scene/terrain/update", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, vrlib::json::Value &data)
 {
 	vrlib::json::Value packet;
 	packet["id"] = "scene/terrain/update";
@@ -41,7 +48,7 @@ Api scene_terrain_update("scene/terrain/update", [](NetworkEngine* engine, vrlib
 });
 
 
-Api scene_terrain_delete("scene/terrain/delete", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
+Api scene_terrain_delete("scene/terrain/delete", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, vrlib::json::Value &data)
 {
 	auto renderer = engine->tien.scene.findNodeWithComponent<vrlib::tien::components::TerrainRenderer>();
 	vrlib::json::Value packet;
@@ -65,7 +72,7 @@ Api scene_terrain_delete("scene/terrain/delete", [](NetworkEngine* engine, vrlib
 
 
 
-Api scene_terrain_getheight("scene/terrain/getheight", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
+Api scene_terrain_getheight("scene/terrain/getheight", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, vrlib::json::Value &data)
 {
 	vrlib::json::Value packet;
 	packet["id"] = "scene/terrain/getheight";
