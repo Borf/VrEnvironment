@@ -186,3 +186,44 @@ Api scene_panel_setclearcolor("scene/panel/setclearcolor", [](NetworkEngine* eng
 	sendOk(tunnel, "scene/panel/setclearcolor");
 
 });
+
+
+
+Api scene_panel_image("scene/panel/image", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, vrlib::json::Value &data)
+{
+	if (!data.isMember("id"))
+	{
+		sendError(tunnel, "scene/panel/image", "id not found");
+		return;
+	}
+	if (!data.isMember("image"))
+	{
+		sendError(tunnel, "scene/panel/image", "image field not set");
+		return;
+	}
+	vrlib::tien::Node* node = engine->tien.scene.findNodeWithGuid(data["id"]);
+	if (!node)
+	{
+		sendError(tunnel, "scene/panel/image", "node not found");
+		return;
+	}
+	PanelComponent* panel = node->getComponent<PanelComponent>();
+	if (!panel)
+	{
+		sendError(tunnel, "scene/panel/image", "panel component not found");
+		return;
+	}
+
+	glm::vec2 position(0, 0);
+	glm::vec2 size(panel->backFbo->getWidth(), panel->backFbo->getHeight());
+
+	if (data.isMember("position"))
+		position = glm::vec2(data["position"][0].asFloat(), data["position"][1].asFloat());
+	if (data.isMember("size"))
+		position = glm::vec2(data["size"][0].asFloat(), data["size"][1].asFloat());
+
+	if (!panel->drawImage(data["image"].asString(), position, size))
+		sendError(tunnel, "scene/panel/drawtext", "Error drawing image");
+	else
+		sendOk(tunnel, "scene/panel/drawtext");
+});

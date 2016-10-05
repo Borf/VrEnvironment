@@ -159,6 +159,7 @@ h1
 			<li><a href="#scene/panel/clear">scene/panel/clear</a></li>
 			<li><a href="#scene/panel/drawlines">scene/panel/drawlines</a></li>
 			<li><a href="#scene/panel/drawtext">scene/panel/drawtext</a></li>
+			<li><a href="#scene/panel/image">scene/panel/image</a></li>
 			<li><a href="#scene/panel/setclearcolor">scene/panel/setclearcolor</a></li>
 			<li><a href="#scene/panel/swap">scene/panel/sawp</a></li>
 		</ul></li>
@@ -722,6 +723,39 @@ h1
 			<li>node not found: the node with this id is not found</li>
 			<li>panel component not found: the node with this ID does not have a panel component</li>
 			<li>font not found: the font file was not found</li>
+		</ul>
+	</div>
+
+
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->
+	<div class="call" id="scene/panel/image">
+		<h2>scene/panel/image</h2>
+		Draws an image on the panel. Image must be available on the NetworkEngine
+		<div class="code">{
+	"id" : "scene/panel/image",
+	"data" :
+	{
+		"id" : {panelid},
+		"image" : "data/NetworkEngine/textures/SkyBoxes/interstellar/interstellar_up.png",
+		"position" : [ 0.0, 0.0 ],
+		"size" : [ 512.0, 512.0]
+	}
+}
+		</div>
+		Response
+		<div class="code">{
+	"id" : "route/panel/image",
+	"data" :
+	{
+			"status" : "ok"
+	}
+}</div>
+		Errors:
+		<ul>
+			<li>id not found: the ID field is not in the json structure</li>
+			<li>node not found: the node with this id is not found</li>
+			<li>panel component not found: the node with this ID does not have a panel component</li>
+			<li>Error drawing image: the image file was not found</li>
 		</ul>
 	</div>
 

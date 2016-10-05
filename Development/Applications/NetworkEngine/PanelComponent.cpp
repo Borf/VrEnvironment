@@ -4,7 +4,7 @@
 #include <VrLib/gl/Vertex.h>
 #include <VrLib/json.h>
 #include <VrLib/Font.h>
-
+#include <VrLib/gl/Vertex.h>
 #include <glm/gtc/matrix_transform.hpp>
 
 
@@ -110,6 +110,50 @@ bool PanelComponent::drawText(const glm::vec2 &position, const std::string &font
 	fontShader->setUniform(FontUniform::color, color);
 	f->drawText<vrlib::gl::VertexP2T2>(text);
 
+
+
+	backFbo->unbind();
+	glViewport(viewport[0], viewport[1], viewport[2], viewport[3]);
+	return true;
+}
+
+bool PanelComponent::drawImage(const std::string & image, const glm::vec2 & position, const glm::vec2 & size)
+{
+	vrlib::Texture* t = vrlib::Texture::loadCached(image);
+	if (!t)
+		return false;
+
+	int viewport[4];
+	glGetIntegerv(GL_VIEWPORT, viewport);
+	glViewport(0, 0, backFbo->getWidth(), backFbo->getHeight());
+	backFbo->bind();
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glDisable(GL_DEPTH_TEST);
+	glBindVertexArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	fontShader->use();
+	fontShader->setUniform(FontUniform::modelMatrix, glm::translate(glm::mat4(), glm::vec3(position, 0)));
+	fontShader->setUniform(FontUniform::projectionMatrix, glm::ortho(0.0f, (float)backFbo->getWidth(), (float)backFbo->getHeight(), 0.0f));
+	fontShader->setUniform(FontUniform::color, glm::vec4(1,1,1,1));
+	
+	std::vector<vrlib::gl::VertexP2T2> verts;
+
+	verts.push_back(vrlib::gl::VertexP2T2(glm::vec2(position.x,					position.y),			glm::vec2(0, 0)));
+	verts.push_back(vrlib::gl::VertexP2T2(glm::vec2(position.x + size.x,		position.y),			glm::vec2(1, 0)));
+	verts.push_back(vrlib::gl::VertexP2T2(glm::vec2(position.x + size.x,		position.y + size.y),	glm::vec2(1, 1)));
+	verts.push_back(vrlib::gl::VertexP2T2(glm::vec2(position.x,					position.y + size.y),	glm::vec2(0, 1)));
+
+
+	t->bind();
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	vrlib::gl::setAttributes<vrlib::gl::VertexP2T2>(&verts[0]);
+
+	glDrawArrays(GL_QUADS, 0, verts.size());
+	glDisableVertexAttribArray(0);
+	glDisableVertexAttribArray(1);
 
 
 	backFbo->unbind();
