@@ -108,7 +108,7 @@ void NetworkEngine::reset()
 		delete r;
 	routes.clear();
 	routeFollowers.clear();
-
+	movers.clear();
 
 	vrlib::tien::Node* sunlight;
 	{
