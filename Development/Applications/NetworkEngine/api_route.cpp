@@ -109,7 +109,6 @@ Api route_follow("route/follow", [](NetworkEngine* engine, vrlib::Tunnel* tunnel
 			}
 
 			RouteFollower f;
-
 			f.node = n;
 			f.route = engine->routes[i];
 			f.speed = data["speed"].asFloat();
@@ -131,10 +130,6 @@ Api route_follow("route/follow", [](NetworkEngine* engine, vrlib::Tunnel* tunnel
 				f.positionOffset = glm::vec3(data["positionOffset"][0].asFloat(), data["positionOffset"][1].asFloat(), data["positionOffset"][2].asFloat());
 
 			engine->routeFollowers.push_back(f);
-
-			
-
-
 			packet["data"]["status"] = "ok";
 		}
 	}
@@ -143,6 +138,19 @@ Api route_follow("route/follow", [](NetworkEngine* engine, vrlib::Tunnel* tunnel
 	tunnel->send(packet);
 });
 
+Api route_follow_speed("route/follow/speed", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
+{
+	for (auto &f : engine->routeFollowers)
+	{
+		if (f.node->guid == data["node"].asString())
+		{
+			f.speed = data["speed"].asFloat();
+			sendOk(tunnel, "route/follow/speed");
+			return;
+		}
+	}
+	sendError(tunnel, "route/follow/speed", "Node ID not found");
+});
 
 Api route_show("route/show", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, const vrlib::json::Value &data)
 {

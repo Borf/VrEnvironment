@@ -124,6 +124,11 @@ Api scene_panel_drawtext("scene/panel/drawtext", [](NetworkEngine* engine, vrlib
 		sendError(tunnel, "scene/panel/drawtext", "id not found");
 		return;
 	}
+	if (!data.isMember("position"))
+	{
+		sendError(tunnel, "scene/panel/drawtext", "position field not set");
+		return;
+	}
 	vrlib::tien::Node* node = engine->tien.scene.findNodeWithGuid(data["id"]);
 	if (!node)
 	{
