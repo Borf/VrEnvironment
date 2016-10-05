@@ -68,7 +68,7 @@ Api scene_reset("scene/reset", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, 
 	for (int i = 0; i < sizeof(nodes) / sizeof(std::string); i++)
 	{
 		if (data.isMember(nodes[i]))
-			engine->tien.scene.cameraNode->guid = data[nodes[i]];
+			engine->tien.scene.findNodesWithName(nodes[i])[0]->guid = data[nodes[i]];
 		data[nodes[i]] = engine->tien.scene.findNodesWithName(nodes[i])[0]->guid;
 
 	}

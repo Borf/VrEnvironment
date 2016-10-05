@@ -8,7 +8,8 @@
 #include <VrLib/tien/components/AnimatedModelRenderer.h>
 #include <VrLib/tien/components/TerrainRenderer.h>
 
-
+#include <VrLib/Log.h>
+using vrlib::logger;
 
 Api scene_node_add("scene/node/add", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, vrlib::json::Value &data)
 {
@@ -195,7 +196,13 @@ Api scene_node_moveto("scene/node/moveto", [](NetworkEngine* engine, vrlib::Tunn
 Api scene_node_update("scene/node/update", [](NetworkEngine* engine, vrlib::Tunnel* tunnel, vrlib::json::Value &data)
 {
 	vrlib::json::Value packet;
-	packet["id"] = "scene/node/delete";
+	packet["id"] = "scene/node/update";
+	if (!data.isMember("id"))
+	{
+		sendError(tunnel, "scene/node/update", "id not specified");
+		return;
+	}
+
 	vrlib::tien::Node* node = engine->tien.scene.findNodeWithGuid(data["id"]);
 	if (node)
 	{
@@ -203,7 +210,11 @@ Api scene_node_update("scene/node/update", [](NetworkEngine* engine, vrlib::Tunn
 		if (data.isMember("parent"))
 		{
 			vrlib::tien::Node* newParent = engine->tien.scene.findNodeWithGuid(data["parent"]);
-			node->setParent(newParent);
+			if (newParent)
+				node->setParent(newParent);
+			else
+				logger << "Could not find new parent " << data["parent"].asString() << " in scene/node/update, for node " << data["id"] << " with name " << node->name << Log::newline;
+
 		}
 		if (data.isMember("transform"))
 		{
@@ -292,6 +303,11 @@ Api scene_node_delete("scene/node/delete", [](NetworkEngine* engine, vrlib::Tunn
 {
 	vrlib::json::Value packet;
 	packet["id"] = "scene/node/delete";
+	if (!data.isMember("id"))
+	{
+		sendError(tunnel, "scene/node/delete", "id not specified");
+		return;
+	}
 	vrlib::tien::Node* node = engine->tien.scene.findNodeWithGuid(data["id"]);
 	if (node)
 	{

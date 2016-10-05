@@ -196,8 +196,8 @@
 
 					"topleft" :		[ -1.5,  0.0, -1.5 ],  
 					"topright" :	[  1.5,  0.0, -1.5 ],  
-					"bottomleft" :	[ -1.5,  0.0,  0.75 ],  
-					"bottomright" : [  1.5,  0.0,  0.75 ]  
+					"bottomleft" :	[ -1.5,  0.0,  0.80 ],  
+					"bottomright" : [  1.5,  0.0,  0.80 ]  
 				},
 				{
 					"type" : "viewport",
@@ -210,8 +210,8 @@
 
 					"topleft" :		[ -1.5,  0.0, -1.5 ],  
 					"topright" :	[  1.5,  0.0, -1.5 ],  
-					"bottomleft" :	[ -1.5,  0.0,  0.75 ],  
-					"bottomright" : [  1.5,  0.0,  0.75 ]  
+					"bottomleft" :	[ -1.5,  0.0,  0.80 ],  
+					"bottomright" : [  1.5,  0.0,  0.80 ]  
 				}
 			]
 		}

@@ -63,9 +63,19 @@ void NetworkEngine::init()
 			logger << "Got a tunnel" << Log::newline;
 			tunnels.push_back(tunnel);
 		});
+
+		vrlib::json::Value packet;
+		packet["id"] = "scene/reset";
+		packet["data"];
+		callbacks()["scene/reset"](this, nullptr, packet["data"]);
+
+		std::string jsonStr;
+		jsonStr << packet;
+		logger << jsonStr << Log::newline;
+		clusterData->networkPackets.push_back(jsonStr);
+
 	}
 
-	callbacks()["scene/reset"](this, nullptr, vrlib::json::Value());
 
 
 /*	vrlib::json::Value save;
