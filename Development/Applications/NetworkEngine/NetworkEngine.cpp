@@ -71,7 +71,6 @@ void NetworkEngine::init()
 
 		std::string jsonStr;
 		jsonStr << packet;
-		logger << jsonStr << Log::newline;
 		clusterData->networkPackets.push_back(jsonStr);
 
 	}

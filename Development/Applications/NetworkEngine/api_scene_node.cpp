@@ -86,8 +86,8 @@ Api scene_node_add("scene/node/add", [](NetworkEngine* engine, vrlib::Tunnel* tu
 				return;
 			}
 			auto renderer = new vrlib::tien::components::TerrainRenderer(engine->terrain);
-			if (data["components"]["model"].isMember("smoothnormals"))
-				renderer->smoothNormals = data["components"]["model"]["smoothnormals"];
+			if (data["components"]["terrain"].isMember("smoothnormals"))
+				renderer->smoothNormals = data["components"]["terrain"]["smoothnormals"];
 			n->addComponent(renderer);
 		}
 		if (data["components"].isMember("water"))
