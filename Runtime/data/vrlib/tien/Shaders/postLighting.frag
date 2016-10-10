@@ -86,7 +86,7 @@ void main()
 			if(lightCastShadow)
 			{
 				vec4 shadowPos = biasMatrix * shadowMatrix * vec4(position,1.0);
-				if(insideBox(shadowPos.xy, vec2(-.5,-.5), vec2(.5,.5)) > 0.1)
+				if(insideBox(shadowPos.xy, vec2(-1,-1), vec2(1,1)) > 0.1)
 				{
 					vec3 L = normalize( position.xyz - lightPosition.xyz);
 					float cosTheta = clamp(dot(n,L), 0, 1);
