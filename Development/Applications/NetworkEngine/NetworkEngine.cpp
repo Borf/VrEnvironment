@@ -269,7 +269,13 @@ void NetworkEngine::preFrame(double frameTime, double totalTime)
 
 		if (terrain && f.followHeight)
 		{
-			f.node->transform->position = terrain->getPosition(glm::vec2(128 + f.node->transform->position.x, 128 + f.node->transform->position.z)) + glm::vec3(-128, 0, -128);
+			vrlib::tien::Node* terrainRenderingNode = tien.scene.findNodeWithComponent<vrlib::tien::components::TerrainRenderer>();
+
+			glm::vec2 offset(0, 0);
+			if (terrainRenderingNode)
+				offset = glm::vec2(terrainRenderingNode->transform->position.x, terrainRenderingNode->transform->position.z);
+
+			f.node->transform->position = terrain->getPosition(glm::vec2(f.node->transform->position.x - offset.x, f.node->transform->position.z - offset.y)) + glm::vec3(offset.x, 0, offset.y);
 		}
 	}
 
