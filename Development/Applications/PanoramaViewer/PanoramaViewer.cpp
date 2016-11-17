@@ -61,7 +61,12 @@ void PanoramaViewer::init()
 
 			vrlib::Texture* t = vrlib::Texture::loadCached(path + f);
 			if (t)
+			{
 				textures.push_back(t);
+				logger << "Loaded " << path + f << Log::newline;
+			}
+			else
+				logger << "error loading " << path + f << Log::newline;
 		}
 	};
 

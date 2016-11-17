@@ -40,3 +40,6 @@
 [submodule "Development/Applications/chemicalstorage"]
 	path = Development/Applications/chemicalstorage
 	url = https://bitbucket.org/ti_vr/chemicalstorage.git
+[submodule "Development/Applications/TiEnEdit"]
+	path = Development/Applications/TiEnEdit
+	url = https://github.com/Borf/TiEnEdit.git
