@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{35F31874-6217-437D-9209-9FC783136E32}"
 EndProject
@@ -137,6 +137,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CaveAlign", "Applications\C
 	ProjectSection(ProjectDependencies) = postProject
 		{C1C8BD19-EF70-44E0-A9B4-E11BAC4FB858} = {C1C8BD19-EF70-44E0-A9B4-E11BAC4FB858}
 	EndProjectSection
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TiEnEdit", "Applications\TiEnEdit\TiEnEdit.vcxproj", "{F353BAE4-E795-4A1E-9F12-6C1882C01143}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C1C8BD19-EF70-44E0-A9B4-E11BAC4FB858} = {C1C8BD19-EF70-44E0-A9B4-E11BAC4FB858}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -256,6 +260,10 @@ Global
 		{FDB8B9CA-B332-4934-B777-A2FF28754151}.Debug|Win32.Build.0 = Debug|Win32
 		{FDB8B9CA-B332-4934-B777-A2FF28754151}.Release|Win32.ActiveCfg = Release|Win32
 		{FDB8B9CA-B332-4934-B777-A2FF28754151}.Release|Win32.Build.0 = Release|Win32
+		{F353BAE4-E795-4A1E-9F12-6C1882C01143}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F353BAE4-E795-4A1E-9F12-6C1882C01143}.Debug|Win32.Build.0 = Debug|Win32
+		{F353BAE4-E795-4A1E-9F12-6C1882C01143}.Release|Win32.ActiveCfg = Release|Win32
+		{F353BAE4-E795-4A1E-9F12-6C1882C01143}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -292,5 +300,6 @@ Global
 		{5D4C16AD-CC72-44D0-8A9C-D28233BCA800} = {3CF58B01-824F-4D2D-AA83-C6ADB9FAAC32}
 		{3015DA63-4118-47D4-AC7F-52FF79F0FBA9} = {42FCCA53-AC8C-42CC-BF55-A3BFA5F06531}
 		{FDB8B9CA-B332-4934-B777-A2FF28754151} = {35B9C100-7203-495D-BF91-619AF27F698E}
+		{F353BAE4-E795-4A1E-9F12-6C1882C01143} = {3CF58B01-824F-4D2D-AA83-C6ADB9FAAC32}
 	EndGlobalSection
 EndGlobal

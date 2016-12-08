@@ -87,6 +87,18 @@
 			"type" : "digital",
 			"driver" : "openvr",
 			"src" : "buttonRightTrigger"
+		},
+		{
+			"name" : "LeftThumbPos",
+			"type" : "twodimension",
+			"driver" : "openvr",
+			"src" : "LeftThumbPos"
+		},
+		{
+			"name" : "RightThumbPos",
+			"type" : "twodimension",
+			"driver" : "openvr",
+			"src" : "RightThumbPos"
 		}
 	],
 	"driverconfig" :
