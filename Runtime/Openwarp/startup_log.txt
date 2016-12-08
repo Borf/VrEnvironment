@@ -1,210 +1,47 @@
-openWARP2 designer (OW2LCD v1.2.8 / 03.07.2011)
+openWARP2 designer (OW2D v1.6.22 / 13.05.2013)
 
-system info:
-	- fit mode 2 = using original X (independeant calculation)
-	- force grid window to 2048x1152
-	- using 3th order polynoms
-
+configured COM speed: 3 Mbit
 scanning for valid USB device ports...
-found 6 serial device ports
-	1	COM3 (ThinkPad Modem Adapter)	Conexant Systems.
-	2	COM7 (Qualcomm Gobi 2000 HS-USB Modem 9205)	Qualcomm Incorporated.
-	3	COM30 (Intel(R) Active Management Technology - SOL)	Intel.
-	4	COM31 (Qualcomm Gobi 2000 HS-USB Diagnostics 9205)	Qualcomm Incorporated.
-	5	COM32 (Qualcomm Gobi 2000 HS-USB NMEA 9205)	Qualcomm Incorporated.
-	6	COM45 (USB Serial Port)	FTDI.
+found 3 serial device ports
+	1	COM1 (Communications Port)	(Standard port types).
+	2	COM3 (USB Serial Port)	FTDI.
+  ... valid
+	3	COM4 (USB Serial Port)	FTDI.
   ... valid
 
-found 1 valid device ports:
-	1	A600fBbfA
+found 2 valid device ports:
+	1	A800KJSOA
+	2	AE0089FQA
 
-searching for connected openWAR2-LC device...
-found 1 valid device ports
+-- NOW 1 --
+searching for connected openWARP2 device...
+found 2 valid device ports
 
-scanning A600fBbfA...
-looking for OW2 device...
+scanning A800KJSOA...
+looking for valid device...
 waiting for answer...
-... OW2 Device detected
-Firmware version: 02020203
+... Device detected
+Firmware version: 01010407
+Firmware version: OW2 - 1.4.7
 
+scanning AE0089FQA...
+looking for valid device...
+waiting for answer...
+... Device detected
+Firmware version: 01010407
+Firmware version: OW2 - 1.4.7
+
+fetching information from device: 0  --  A800KJSOA
+  -- open Port
+  -- get Timing
+  -- new device: (A800KJSOA)  1 - Rechts - 1400x1050@60Hz
+fetching information from device: 1  --  AE0089FQA
+  -- open Port
+  -- get Timing
+  -- new device: (AE0089FQA)  2 - Links - 1400x1050@60Hz
+
+select first device
 ... done! ready to use!
+
 looking for default framework
-(D:\eyevis\software\openWARP2-LC_designer\openWARP2-LC_designer\default.frw)
-== buffer length: 	240	00F00000
-
-== length: 1920
-== Sector_adress: 110000
-padding size of Block: 0 384
-corrected size: 512
-upload time: 0,5s
-upload time: 0,0min
-
-== length: 1904
-== Sector_adress: 100000
-padding size of Block: 0 368
-corrected size: 512
-upload time: 0,5s
-upload time: 0,0min
-== buffer length: 	246	00F60000
-
-== length: 1968
-== Sector_adress: 110000
-padding size of Block: 0 432
-corrected size: 512
-upload time: 0,5s
-upload time: 0,0min
-== buffer length: 	246	00F60000
-
-== length: 1968
-== Sector_adress: 110000
-padding size of Block: 0 432
-corrected size: 512
-upload time: 0,5s
-upload time: 0,0min
-== buffer length: 	246	00F60000
-
-== length: 1968
-== Sector_adress: 110000
-padding size of Block: 0 432
-corrected size: 512
-upload time: 0,5s
-upload time: 0,0min
-searching for connected openWAR2-LC device...
-closing active connection...
-found 1 valid device ports
-
-scanning A600fBbfA...
-looking for OW2 device...
-waiting for answer...
-... OW2 Device detected
-Firmware version: 02020203
-
-... done! ready to use!
-
-== length: 1904
-== Sector_adress: 100000
-padding size of Block: 0 368
-corrected size: 512
-upload time: 0,6s
-upload time: 0,0min
-== buffer length: 	240	00F00000
-
-== length: 1920
-== Sector_adress: 110000
-padding size of Block: 0 384
-corrected size: 512
-upload time: 0,6s
-upload time: 0,0min
-searching for connected openWAR2-LC device...
-closing active connection...
-found 1 valid device ports
-
-scanning A600fBbfA...
-looking for OW2 device...
-waiting for answer...
-... OW2 Device detected
-Firmware version: 02020101
-
-... done! ready to use!
-
-== length: 1904
-== Sector_adress: 100000
-padding size of Block: 0 368
-corrected size: 512
-upload time: 0,6s
-upload time: 0,0min
-== buffer length: 	240	00F00000
-
-== length: 1920
-== Sector_adress: 110000
-padding size of Block: 0 384
-corrected size: 512
-upload time: 0,6s
-upload time: 0,0min
-searching for connected openWAR2-LC device...
-closing active connection...
-found 1 valid device ports
-
-scanning A600fBbfA...
-looking for OW2 device...
-waiting for answer...
-... OW2 Device detected
-Firmware version: 02020203
-
-... done! ready to use!
-searching for connected openWAR2-LC device...
-closing active connection...
-found 1 valid device ports
-
-scanning A600fBbfA...
-ERR: Exception during device open procedure
-looking for OW2 device...
-waiting for answer...
-ERR: Reactivating device #1
-ERR: Exception during Send-String procedure
-ERR: Reactivating device #1
-ERR: Exception during Send-String procedure
-ERR: Reactivating device #1
-ERR: Exception during Send-String procedure
-ERR: Reactivating device #1
-ERR: Exception during Send-String procedure
-ERR: Reactivating device #1
-ERR: Exception during Send-String procedure
-ERR: Reactivating device #1
-ERR: Exception during Send-String procedure
-ERR: Reactivating device #1
-ERR: Exception during Send-String procedure
-ERR: Reactivating device #1
-ERR: Exception during Send-String procedure
-... No OW2 Device found
-
-
-searching for connected openWAR2-LC device...
-found 1 valid device ports
-
-scanning A600fBbfA...
-ERR: Exception during device open procedure
-looking for OW2 device...
-waiting for answer...
-ERR: Reactivating device #1
-ERR: Exception during Send-String procedure
-ERR: Reactivating device #1
-ERR: Exception during Send-String procedure
-ERR: Reactivating device #1
-ERR: Exception during Send-String procedure
-ERR: Reactivating device #1
-ERR: Exception during Send-String procedure
-ERR: Reactivating device #1
-ERR: Exception during Send-String procedure
-ERR: Reactivating device #1
-ERR: Exception during Send-String procedure
-ERR: Reactivating device #1
-ERR: Exception during Send-String procedure
-ERR: Reactivating device #1
-ERR: Exception during Send-String procedure
-... No OW2 Device found
-
-
-searching for connected openWAR2-LC device...
-found 1 valid device ports
-
-scanning A600fBbfA...
-ERR: Exception during device open procedure
-looking for OW2 device...
-waiting for answer...
-ERR: Reactivating device #1
-ERR: Exception during Send-String procedure
-ERR: Reactivating device #1
-ERR: Exception during Send-String procedure
-ERR: Reactivating device #1
-ERR: Exception during Send-String procedure
-ERR: Reactivating device #1
-ERR: Exception during Send-String procedure
-ERR: Reactivating device #1
-ERR: Exception during Send-String procedure
-ERR: Reactivating device #1
-ERR: Exception during Send-String procedure
-ERR: Reactivating device #1
-ERR: Exception during Send-String procedure
-ERR: Reactivating device #1
-ERR: Exception during Send-String procedure
+(C:\Users\CAVE\Desktop\VrEnvironment\Runtime\Openwarp\default.frw)

@@ -1,0 +1,5 @@
+# set shading modes
+SELECTCHANNEL dummy_device0
+LOADSHADING c:\temp\temp_1.bmp
+SELECTCHANNEL dummy_device1
+LOADSHADING c:\temp\shading image1.bmp

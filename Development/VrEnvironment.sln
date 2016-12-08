@@ -133,6 +133,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkTunnelControl", "App
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "vrpn_service", "Services\vrpn_service\vrpn_service.vcxproj", "{3015DA63-4118-47D4-AC7F-52FF79F0FBA9}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CaveAlign", "Applications\CaveAlign\CaveAlign.vcxproj", "{FDB8B9CA-B332-4934-B777-A2FF28754151}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C1C8BD19-EF70-44E0-A9B4-E11BAC4FB858} = {C1C8BD19-EF70-44E0-A9B4-E11BAC4FB858}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -247,6 +252,10 @@ Global
 		{3015DA63-4118-47D4-AC7F-52FF79F0FBA9}.Debug|Win32.Build.0 = Debug|Win32
 		{3015DA63-4118-47D4-AC7F-52FF79F0FBA9}.Release|Win32.ActiveCfg = Release|Win32
 		{3015DA63-4118-47D4-AC7F-52FF79F0FBA9}.Release|Win32.Build.0 = Release|Win32
+		{FDB8B9CA-B332-4934-B777-A2FF28754151}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FDB8B9CA-B332-4934-B777-A2FF28754151}.Debug|Win32.Build.0 = Debug|Win32
+		{FDB8B9CA-B332-4934-B777-A2FF28754151}.Release|Win32.ActiveCfg = Release|Win32
+		{FDB8B9CA-B332-4934-B777-A2FF28754151}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -282,5 +291,6 @@ Global
 		{3A1F63D5-CEDA-4408-88A3-9B5369DF8566} = {3CF58B01-824F-4D2D-AA83-C6ADB9FAAC32}
 		{5D4C16AD-CC72-44D0-8A9C-D28233BCA800} = {3CF58B01-824F-4D2D-AA83-C6ADB9FAAC32}
 		{3015DA63-4118-47D4-AC7F-52FF79F0FBA9} = {42FCCA53-AC8C-42CC-BF55-A3BFA5F06531}
+		{FDB8B9CA-B332-4934-B777-A2FF28754151} = {35B9C100-7203-495D-BF91-619AF27F698E}
 	EndGlobalSection
 EndGlobal

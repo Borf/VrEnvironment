@@ -1,0 +1,6 @@
+# first channel
+SELECTCHANNEL dummy_device0
+LOADBWIMAGE .\bw_image\bw_image_1.txt
+# second channel
+SELECTCHANNEL dummy_device1
+LOADBWIMAGE .\gamma\lut_test2.txt

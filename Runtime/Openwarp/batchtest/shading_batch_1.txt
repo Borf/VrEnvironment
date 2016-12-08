@@ -1,0 +1,7 @@
+# set shading modes
+SELECTCHANNEL dummy_device0
+SHADING 1
+SELECTCHANNEL dummy_device1
+SHADING 2
+# SELECTCHANNEL dummy_device3
+# SHADING 0

@@ -1,0 +1,7 @@
+# first channel
+SELECTCHANNEL dummy_device0
+LOADGRID c:\temp\warpmap_1a.txt
+# second channel
+SELECTCHANNEL dummy_device1
+LOADGRID .\grids\immersiveRoom\proj1-mirrored.txt
+# done

@@ -1,102 +1,395 @@
-openWARP² LC designer
+openWARP² designer
 
-Todo:
+== OW2D v1.6.22 / 13.05.2013
+- Bugfix: Blending Copy for low resolutions: Now fixed to 2048x2048 internally
+- Bugfix: Rotation option for ROT-UPDATE
+- Matrix Window is now using the device resolution
 
-- Warp-Feld intern mit Werten bei Start füllen sonst ist nix drin?
-- refetch device
-- option window für Warping Option usw
-- Matrix in Auto Upload after Framework
-- all devices ON/ OFF
-- Timeout?
+== OW2D v1.6.21 / 07.03.2013
+- Blending Grid NxM setting
+- Cursor Pos now scaled to Device Resolution
 
-== OW2LCD v1.2.8 / 03.07.2011
-- extended Device Options
-- DVI input adjustment implemented (Timing adjustment)
-- double buffer in Framework
+== OW2D v1.6.20 / 26.11.2012
+- Bugfix Sort of device list
+- new COM component
 
-== OW2LCD v1.2.7 / 06.05.2011
-- Bugfix Auto Reset Check Box
+== OW2D v1.6.19 / 13.04.2012
+- Bugfix Version number detection
 
-== OW2LCD v1.2.6 / 12.04.2011
-- Auto Reset function embedded
-- Quick_scan and Auto_Reset in framework
-- Quick_scan, auto_reset, Matrix_values, double_buffer, delay_lines included in upload device function
+== OW2D v1.6.18 / 12.04.2012
+- More Debug output during Device Scan
+
+== OW2D v1.6.17 / 12.03.2012
+- minor changes OSH config
+
+== OW2D v1.6.16 / 09.02.2012
+- Bugfix Win7 Device ID with new Driver
+
+== OW2D v1.6.15 / 28.01.2012
+- Rotation in Warp-Assistant now working with device resolution
+- Brightness Matching in SETSHADING command
+
+== OW2D v1.6.14 / 21.12.2011
+- Additional Baudrate: 256000 Baud
+
+== OW2D v1.6.13 / 24.11.2011
+- upload fit is now using the device resolution not the window resolution
+
+== OW2D v1.6.12 / 14.11.2011
+- RESETALL Command also clears the shading.
+- Cursor disable if no dot is selected in gird window
+- "export fit" and "add fit" functions implemented
+- new Commands: ADDFIT, EXPORTFIT, SAVEGRID, SETCROPPING, INCLUDE
+- HELP command output now sorted
+- Add 'reset warping' to "all devices" menu
+- GETINFO index now starts with 1 instead of 0
+- now three dummy devices
+- dummy device names load from INI file like real devices
+
+== OW2D v1.6.11 / 12.11.2011
+- itrative fit calculation implemented
+- secure backimage loading in Grid Window
+- Backimage Selection with Device Selection
+- explicit load of Backimage with 'b' key
+- force wait before SELECTCHANNEL Batch command
+- New Commands: LOADCONFIG, SAVECONFIG, SETFITITERATIONS, RESET
+- SAVEASDEFAULT command now allows one option: 0= without 1= with SHADING  2= SHADING only
+- Command RESETWARPING also RESETS the grid
+- Fit calculation optimization
+
+== OW2D v1.6.10 / 21.10.2011
+- wait for response after shading upload
+- activate GammaLUT after LUT programming. Not before
+- firmware version dependant LUT write operation
+
+== OW2D v1.6.09 / 19.10.2011
+- different Framerate calculations for older Firmware versions
+- optimized Waitwindow_close method
+- red status line for 'erase configuration' now waiting for device response
+- Bugfix Pseudo refresh for Shading if not enabled (internal uplaod)
+- verbose text and time information after red indication bar
+- Bugfix Warp-reset Button
+
+== OW2D v1.6.08 / 16.10.2011
+- Bugfix Matrix calculation
+
+== OW2D v1.6.07 / 13.10.2011
+- new framerate calculation
+- "erase stored configuration" implemented
+
+== OW2D v1.6.06 / 12.10.2011
+- Bugfix row- column move in grid window
+- load Color Matrix implemented
+- no resync in Flash after loading
+- two runs / not 4 for Status Info
+
+== OW2D v1.6.05 / 01.10.2011
+- Save actual shading into flash button implemented
+
+== OW2D v1.6.04 / 28.09.2011
+- bugfix negativ cursor positions
+- Do not save Shadingmap into Flash manually since Firmware version .4
+- Reset device button implemented
+- readable Firmware version label
+- bugfix shading storage with brightness matching enabled
+- Comm-Speed Switchbutton in GeneralOption Window implemented
+- bugfix export device settings
+
+== OW2D v1.6.03 / 28.09.2011
+- upload speed option in general option window
+
+== OW2D v1.6.02 / 29.07.2011
+- export configuration implemented
+
+== OW2D v1.6.01 / 21.07.2011
+- Bugfix warping 'non resolution rescaling'
 - cropping implemented
-- cropping rest button
-- Auto disable resolution rescaling if Matrix is used
+- Border in Gridwindow = 0
+- resolution rescaling default = off
+- Cursor in Grid Window
+
+== OW2D v1.5.26 / 07.07.2011
+- Bugfix Rotation checkbox
+
+== OW2D v1.5.25 / 01.07.2011
+- Rotation enabled
+
+== OW2D v1.5.24 / 04.06.2011
+- BugFix Cursor Off in Blending Window
+
+== OW2D v1.5.23 / 29.05.2011
+- Cursor pos for blending and input shading based on warping
+
+== OW2D v1.5.22 / 28.05.2011
+- two runs in info / staus window for better debugging
+- save FIle menu in Status Window
+- Cursor in Blending Assistant
+- brightness matching in blending window
+
+== OW2D v1.5.21 / 10.05.2011
+- hide other gridpointes option
+- mouse place dot (CTRL-ALT Klick)
+
+== OW2D v1.5.20 / 01.05.2011
+- bug fix color shading
+- comm speed in log file
+- double reading of status information
+- fast erase shading image option implemented
+- shading status function deleted
+- Shding clear button
+- force LUT upload on Reset Click
+- single command mode option in script window
+- Matrix reset buttons
+- refetch device after shading upload
+- fetch response before binary image upload
+- Gamma ON/OFF in all Device Menu
+
+== OW2D v1.5.19 / 27.04.2011
+- 115200Baud included for communication
+
+== OW2D v1.5.18 / 18.04.2011
+- Picture Matrix enabled (Matrix assistant)
+- Rotation 90° embedded
+- Reset popup-Box during Reset
+
+== OW2D v1.5.17 / 12.04.2011
+- Testversion rotation 90°
+
+== OW2D v1.5.16 / 08.04.2011
+- Chnage Color Matrix orientation
+- Negative Values for COlor Matrix Offset possible
+- Bugfix binary Color Image
+- Color preview for binary Image
+- binary color in framework
+- Color replacement in seperate window
+- save Color Matrix
+
+== OW2D v1.5.15 / 31.03.2011
+- Delay now stored in Flash (Startup Default)
+- color setting for binary image upload
+
+== OW2D v1.5.14 / 30.03.2011
+- optimized skript upload function
+- Enter Key detection for CMD-Line in Comm-Conf Window
+
+== OW2D v1.5.13 / 17.03.2011
+- optimized shading upload routine (speed inhancement)
+- speed optimization for bw image upload
+
+== OW2D v1.5.12 / 15.03.2011
 - cosmetic changes
+- new default values for blending Assistant
 
-== OW2LCD v1.2.5 / 25.02.2011
-- matrix calculation enhancd
-- matrix values stored in framework
+== OW2D v1.5.11 / 07.03.2011
+- Calculation for Vfreq updated for 200MHz internal clock
+- cols always equal rows for rebuild in warp window
 
-== OW2LCD v1.2.4 / 24.02.2011
-- new scaling method for matrix embedded
+== OW2D v1.5.10 / 02.02.2011
+- changes INI extention to .cfg
 
-== OW2LCD v1.2.3 / 23.01.2011
-- cosmetic changes in button and menu captions
-- 'board reset' button added
-- update internal SPI programming subroutines
-- reject warp reset after scan on first device
-- latency now also stored in default setting
-- firmware update function added
-- import device option now working
+== OW2D v1.5.09 / 20.01.2011
+- Show Fitvalues without connected Device
+- Hide unused Hints in Log window
 
-== OW2LCD v1.2.2 / 19.01.2011
-- Quick scan check box added
+== OW2D v1.5.08 / 19.11.2010
+- Error Message in Log file if Fit parameter overflow
+- Fit mode set option internally
+- ImageCreation for Binary Test-Image-Upload
+- New Command LOADBWIMAGETXT
 
-== OW2LCD v1.2.1 / 25.10.2010
-- system path 'intern' for temporary calculations
-- new grid window (openWARP2-designer)
-- new warp window (openWARP2-designer)
-- device names in INI-File
--Debig Message switch in INI File
+== OW2D v1.5.07 / 08.11.2010
+- Double-Buffer option
 
-== OW2LCD v1.1.5 / 06.10.2010
--  new communication Window
+== OW2D v1.5.06 / 10.10.2010
+- fit mode in GeneralOption Window
 
-== OW2LCD v1.1.4 / 07.07.2010
-- default value: no resolution rescaling
-- No Warp-reset after start up
+== OW2D v1.5.05 / 08.10.2010
+- Set fit mode on device
 
-== OW2LCD v1.1.3 / 29.06.2010
-- Baudrate 115200 included
+== OW2D v1.5.04 / 08.10.2010
+- gridwindow size can be forced in INI file
+- reduced refetch timeout
 
-== OW2LCD v1.1.2 / 28.06.2010
-- Safe_Send method embedded
-- truncation of warp coefficient during load from fit calculation
-- force main tab during startup
-- Matrix Function embeded
+== OW2D v1.5.03 / 04.10.2010
+- Command-List in communication Window
+- Scrollbars in Consol window
+- commandhistory in console
+- new Batchcommand CLEARBWIMAGE, ENABLEOUTPUT, BGCOLOR
+- new Batchcommand RESETWARPING, SAVEASDEFAULT, RESETALL
 
-== OW2LCD v1.1.1 / 05.05.2010
-- new adresses for Flash memory
+== OW2D v1.5.02 / 04.10.2010
+- Scan_On_Startup in INI File
+- Save Backup-Framework on Close can be switched off in INI File
+- Trim Memory size after warping and shading
 
-== OW2LCD v1.0.4 / 01.02.2010
-- autoscan in INI file
-- manual selection of devices in comm-window (doubleklick)
-- bugfix grid window size after manual device selection
-- resolution rescaling default value is now TRUE
+== OW2D v1.5.01 / 15.09.2010
+- New serial port library (better support and bugfixes)
+- scanning for new serial ports on 'scan now' (not only on software startup)
 
-== OW2LCD v1.0.3 / 26.11.2009
-- Flash programming for configuration settings embedded
-- Reset all in Warpwindow now also resets the corner shift values
-- scale fix to 2048 or to automatically calculated scaling option added
-- save as default now working.
-- bugfix default warp coeffs
-- bugfix reset button now resets flip_v and flip_h
-- disabled flip boxes
+== OW2D v1.4.17 / 13.09.2010
+- all device functions in Main Menue integrated
+- bugfix statusbar in Blending Assistant
+- device names now stored in INI file
+- Update device list on 'scan now'
+- Bugfix negative Register Values
+- StatusBar in WarpAssistant for Mous-Scroll Values
+- Upload time in StatusBar after default config upload
+- Moved fitmode in INI file to WARPING section
+- framework_auto_upload after load framwork in INI file
+- Confirmation Dialog for backup_framework save on application close
+- bugfix Port deactivation
 
-== OW2LCD v1.0.2 / 23.11.2009
-- bugfix reset warp button klick
+== OW2D v1.4.16 / 17.08.2010
+- bugfix shading noise
+- save backup framework on application close
+- blending curve manipulation implemented
 
-== OW2LCD v1.0.1 / 17.11.2009
+== OW2D v1.4.15 / 17.08.2010
+- bugfix hint linearity bar
+- reste in warping tab now didn't rest the grid and warp assistant
+- shading noise function implemented
+
+== OW2D v1.4.14 / 01.08.2010
+- load / save config for Warp-Assistant (Speed Buttons)
+- reste for slider in Warp-Assistant (right mouse button context menu)
+- new remote commands: COLORMATRIX and COLOROFFSET
+
+== OW2D v1.4.13 / 29.07.2010
+- fit mode option in INI File
+
+== OW2D v1.4.12 / 21.06.2010
+- bugfix store value for linerity in WarpAssistant
+
+== OW2D v1.4.10 / 19.04.2010
+- better exception handling for USB communication
+- Debug Messages for Communication
+- disable main window during device selection
+- disable mainwindow if device cannot be selected
+- visualtization of blending curve in blending assistant
+- geometry correction for shading image implemented
+- bugfix: linearity name: horizontal and vertical
+- color offset hot button (combo list)
+
+== OW2D v1.4.09 / 14.04.2010
+- bugfix auto-default in INI
+
+== OW2D v1.4.08 / 14.04.2010
+- save log file after INIT (startup_log.txt)
+- bugfix export / import device settings
+- export / import more verbose in INI File
+- "look for default" in INI file (default value= True)
+- better exception handling for USB communication
+- load grid without upload during load framework
+- optimized scanning for devices
+
+== OW2D v1.4.07 / 13.04.2010
+- new functions in grid window:
+   - load bitmap
+   - invert source-target
+   - double grid dimensions
+- power function for blending
+- Gamma correction for blending
+- export and import of single device options function enabled
+- timing refresh to get actual resolution after framework loading
+- framwork now stores .grd as filename for Gridfiles instead of .txt
+- Hot buttons for Matrix color presets RED, GREEN and BLUE
+- Automatically fit and upload after Mouse based Gridpoint movement with STRG
+
+== OW2D v1.4.06 / 09.04.2010
+- auto close application after default write in INI file
+- bugfix Shading upload precalculation timing.
+
+== OW2D v1.4.05 / 13.03.2010
+- now using intern-folder for internal calculation files
+- bugfix scrollbar failure in warp window
+- rename option 'auto clear grid' into 'absolute mode'
+- auto reset scroll bar values it not 'absolute mode'
+- bugfix Taborder in Warp assistant
+- remove 'bacwards fit' option
+- max and min value for grid dimensions in bw-upload
+- new batch commands: LOADFIT, UPLOADFIT
+- Shading Test settings in mainWindow and stored in INI File
+- new warp assistant function: linearity left/right and hor/vert
+
+
+== OW2D v1.4.04 / 10.03.2010
+- com-Speed non visible in Communication Window
+- Command line clear in Console window after send
+- Resolution Memo now Read only
+- Freezetimer time can be configured in Option window
+- Option-Window Settings now saved in INI after window close
+- shading speed control not visible. Can be configured in INI File
+- automatically reactivating USB device if not active
+- bugfix shading type in flash config
+- alway general tab after startup
+- blending assistant window implemented
+- linear blending type added
+- rebuild grid dimensions minimum now 10 / max is 999
+- bugfix label refresh Gamma LUT
+- taborder change in blending assistant
+- bugfix key x if no dot selected in grid window
+
+== OW2D v1.4.03 / 01.03.2010
+- bugfix freeze after shading flash
+- bugfix COM init in for remote COM
+
+== OW2D v1.4.02 / 27.02.2010
+- bugfix resolution calculation if no connection
+- Flash programming
+- "select new dafault framework" Menu function added
+- Hotbutton visibility in INI File
+- enable_periodical_batch in INI File
+- batch filename in INI File
+- new batch commands: LOADFRAMEWORK, LOADDEFAULT, ASSIGNDEFAULT
+- enable serial remote in INI File
+
+== OW2D v1.4.01 / 12.02.2010
+- disable shading before mode switching
+- statusbar message after device refetch
+- shading upload improvement
+- information about upload time for shading and test image in log window
+- bugfix timing detection
+- bugfix WarpAssistant fit if not resolution scaling
+- bugfix upload after 'f' in grid window if not auto upload
+- Hotkey STRG+f for fit and uplaod in Grid Window
+- Popup menue entry for fit and upload in grid Window
+- Mouse wheel can change the values in Warp-Assistant Window
+- bugfix fit excluding deleted grid points
+
+== OW2D v1.3.24 / 28.01.2010
+- Bugfix Fit warping 2048
+
+== OW2D v1.3.23 / 12.01.2010
+- Bugfix Debug register in Status window
+
+== OW2D v1.3.22 / 12.01.2010
+- serial remote connection added
+- memory usage optimization
+
+== OW2D v1.3.21 / 11.01.2010
+- console window added
+- rename batch command SHADING in SETSHADING
+- new batch commands: GETVERSION, GETRESOLUTION, SETFREEZE, DORESYNC, GETINFO, HELP, DOSCAN
+
+== OW2D v1.3.20 / 02.01.2010
+- main window size limitations
+- bugfix enable LUT / Matrix
+- internal warping calculation with 2048 pixel resolution
+- resolution scaling check box
+- more verbose batch processing
+- new batch commands: SHADING, LOADSHADING, LOADGRID, LOADLUT, LOADBWIMAGE
+- fetch device function implemented
+- fit button added in WarpAssistant
+
+== OW2D v1.3.19 / 3.12.2009
 - better bow calculation in WarpAssistant
-- clean up source code...
-- save as default button
 - new about window
+- "Reset all" in Warpwindow now also resets the corner shift values
+- TEst image upload function enabled
 
-== OW2LCD v0.1.1 / 24.10.2009
-- first Verion based on OW2D v1.3.17
+== OW2D v1.3.18 / 3.11.2009
+- log for commands in Comm-Window
+- Reset Warp will set 2k scaling and set fix warping coefficients
 
 == OW2D v1.3.17 / 20.09.2009
 - new Method for Device-Serialnumber detection for new board

@@ -1,0 +1,6 @@
+# first channel
+SELECTCHANNEL dummy_device0
+LOADLUT .\gamma\lut_test1.txt
+# second channel
+SELECTCHANNEL dummy_device1
+LOADLUT .\gamma\lut_test2.txt

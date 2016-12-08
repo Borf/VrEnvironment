@@ -4,9 +4,9 @@ Hier eine kurze Anleitung:
 
 == Device-Treiber
 
-        1.)    Es gibt das Unterverzeichnis ‚driver‘. Dort ist das Zip-Archiv ‚FTDI_RS232_CDM 2.04.16 WHQL Certified.zip‘ zu finden. Dieses bitte entpacken und den Ort des Verzeichnisses merken.
+        1.)    Es gibt das Unterverzeichnis ‚driver‘. Dort ist das Unterverzeichniss "USB device driver" zu finden. Dieser Ordner enthält alle nötigen Treiberdateien für die Verbindung zur Box.
 
-        2.)    Jetzt das USB-Kabel vom openWAR² anstecken. Windows sucht nun den Treiber für das Device. Hier explizit auf das entpackte Verzeichnis verweisen, dann installiert er den Treiber richtig.
+        2.)    Das USB-Kabel vom openWAR² anstecken. Windows sucht nun den Treiber für das Device. Hier explizit auf das Verzeichnis verweisen, dann installiert er den Treiber richtig.
 
        
 
@@ -14,17 +14,17 @@ Hier eine kurze Anleitung:
 
         1.)    Einfach die EXE ‚openWARP2_designer.exe‘ starten. Wenn es Probleme geben sollte in Form einer Meldung, dass die Software nicht richtig installiert sei, dann bitte die Datei ‚vcredist_x86.exe‘ aus dem Unterverzeichnis ‚driver‘ starten. Dann sollte es gehen.
 
-        2.)    Nachdem die Software gestartet wurde, sucht si automatisch nach angeschlossenen openWARP² Kanälen. Alle gefundenen Kanäle werden links in der Liste aufgelistet. Wenn keine Geräte gefunden wurden, dann erzeugt die Software zwei Dummy-Geräte, damit die Software auch OHNE angeschlossenen Geräte benutzt werden kann.
+        2.)    Nachdem die Software gestartet wurde, sucht sie automatisch nach angeschlossenen openWARP² Kanälen (kann in der INI DAtei an- oder abgeschaltet werden). Alle gefundenen Kanäle werden links in der Liste aufgelistet. Wenn keine Geräte gefunden wurden, dann erzeugt die Software zwei Dummy-Geräte, damit die Software auch OHNE angeschlossenen Geräte benutzt werden kann.
 
         3.)    Wenn keine Geräte gefunden wurden, obwohl ein Geräte angeschlossen ist, so kann das folgende Ursachen haben:
 
         a.       Das Gerät ist nicht angeschaltet (Stecker in Steckdose)
 
-        b.      Es wird kein Eingangssignal eingespeist (Zur Zeit muss ein DVI-Signal anliegen, damit das Gerät gefunden wird)
+        b.       Das Gerät hat sich aufgehängt. Dann bitte Stecker ziehen, kurz warten und wieder einschalten.
 
-        c.       Das Gerät hat sich aufgehängt. Dann bitte Stecker ziehen, kurz warten und wieder einschalten.
+	c.	Der Treiber wurde nicht richtig installiert. Dazu einmal im Gerätemanager des Windows-Systems nachschauen.
 
-        4.)    Wenn trotzdem kein Gerät gefunden wird, bitte den Inhalt des Log-Fenster (unter ‚help --> log window...‘) kopieren und mir schicken.
+        4.)    Wenn trotzdem kein Gerät gefunden wird, bitte den Inhalt des Log-Fenster (unter ‚help --> log window...‘) kopieren und per Mail an service@eyevis.de.
 
        
 
@@ -52,14 +52,12 @@ Hier eine kurze Anleitung:
 
         2.)    Beim Start der Software sucht die Software nach einem ‚Default-Framework‘. Wenn dieses gefunden wurde, wird es automatisch geladen und auf die verbundenen Geräte geladen. Dabei wird das Framework stets für jedes Gerät anhand der Seriennummer gespeichert und zugewiesen.
 
-        3.)    Um beim Start eines ganzen Systems das automatische Hochladen des Frameworks zu gewährleisten muss also der openWARP² designer in dem Autostart des Systems gelegt werden.
-
        
 
 == Troubleshooting
 
-        1.)    Die openWARP² Box braucht nicht für eine bestimmte Auflösung konfiguriert werden. Allerdings ist das EDID noch nicht durchgeschliffen. Ich habe ein generisches 1080p EDID auf die Box gespielt. Wenn das nicht mit dem Display und der Grafikkarte funktionieren sollte, dann bitte das EDID aus dem Display auslesen und auf die Box spielen (muss dabei am Strom hängen). Ich habe einen DDC-Programmer mit in die Box gelegt und die Software angehängt. Den Programmer brauche ich allerdings wieder!
+        1.)    Die openWARP² Box braucht nicht für eine bestimmte Auflösung konfiguriert werden. An der Rückseite zwischen den beiden DVI-Buchsen befindet sich ein kleiner Schalter. Dieser Schalter bestimmt, ob die EDID Information von dem angeschlossenen Gerät durchgeschliffen werden soll, oder ob ein internes EDID verwendet werden soll. Wenn der Schalter zum DVI-Out zeigt, wird das EDID-SIgnal vom angeschlossenen GErät (Display / Projektor) durchgereicht. WEnn der SChalter mit der Position zum DVI-IN zeigt, wird die interne EDID-Information verwendet. Diese kann mit einem externen Programmer aufgespielt werden.
 
-        2.)    Es kann vorkommen (sehr selten), dass die Box sicht nicht richtig auf das Eingangssignal ‚fängt‘. Das Bild sieht dann etwas ‚verpixelt‘ aus. Es reicht in diesem Falle aus, in der Software in dem ‚General‘-Reiter ein ‚resync‘ zu forcieren.
+        2.)    Es kann vorkommen (sehr selten), dass die Box sicht nicht richtig auf das Eingangssignal ‚fängt‘. Das Bild sieht dann etwas ‚verpixelt‘ aus. Es reicht in diesem Falle aus, in der Software in dem ‚General‘-Reiter ein ‚resync‘ zu forcieren. Ganz selten ist ein Aus- und Einschalten nötig....
 
        

@@ -1,0 +1,2 @@
+Binarybildgenerator.exe
+PAUSE

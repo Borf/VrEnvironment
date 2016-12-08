@@ -50,7 +50,7 @@ void TowerDefense::init(vrlib::tien::Scene& scene, TienTest* app)
 
 	{
 		vrlib::tien::Node* n = new vrlib::tien::Node("Main Camera", &scene);
-		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0, 5)));
+		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(0, 0, 0)));
 		n->addComponent(new vrlib::tien::components::Camera());
 		//		n->addComponent(new vrlib::tien::components::TransformAttach(mHead));
 	}
