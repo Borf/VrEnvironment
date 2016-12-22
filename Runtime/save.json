@@ -1,0 +1,1051 @@
+{"meshes" : []
+, "scene" : {"children" : [{"children" : [{"components" : [{"position" : [0.466613, -0.000581, -0.135123]
+, "rotation" : [0.000000, -0.999991, 0.000000, -0.004363]
+, "scale" : [0.950240, 0.950240, 0.950240]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Bedroom/0-singleBedTidy/0-singleBedTidy.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "0-singleBedTidy"
+, "uuid" : "99ffe00d-7fae-49b8-90cd-adb3285bf108"
+}, {"components" : [{"position" : [-0.670891, 0.680200, 1.332208]
+, "rotation" : [0.000000, 0.030539, 0.000000, 0.999533]
+, "scale" : [0.837360, 0.837360, 0.837360]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Office/book_03/book_03.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "book_03"
+, "uuid" : "de9815f0-20d5-4083-b043-d86e2950e812"
+}, {"components" : [{"position" : [0.781504, 0.849816, 0.272517]
+, "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
+, "scale" : [0.257760, 0.257760, 0.257760]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Evidence/hairDarkBrown/hairDarkBrown.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "hairDarkBrown"
+, "uuid" : "45286fb3-49dd-4372-8f4b-6851e72ed451"
+}, {"components" : [{"position" : [0.389070, 0.849297, 0.252779]
+, "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
+, "scale" : [0.231520, 0.231520, 0.231520]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Evidence/hairBlond/hairBlond.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "hairBlond"
+, "uuid" : "79ab6aca-c43b-4a76-b167-1be1fa201583"
+}, {"components" : [{"position" : [-1.125009, 0.000100, 1.451902]
+, "rotation" : [0.000000, -0.999961, 0.000000, -0.008727]
+, "scale" : [0.787360, 0.787360, 0.787360]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Tables/cabinetRoundedSmall/cabinetRoundedSmall.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "cabinetRoundedSmall"
+, "uuid" : "67655c06-5790-4df3-b91a-0190468d5dde"
+}, {"components" : [{"position" : [-0.739236, 1.047287, 1.357727]
+, "rotation" : [0.000000, -0.935135, 0.000000, -0.354291]
+, "scale" : [0.531720, 0.531720, 0.531720]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Props/metroKrant/metroKrant.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "metroKrant"
+, "uuid" : "f0a54bf7-7004-41a7-bcd0-b2dc72bfa761"
+}, {"components" : [{"position" : [-1.265782, 1.046680, 1.238072]
+, "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
+, "scale" : [1.612240, 1.612240, 1.612240]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Drugs/ashtray/ashtray.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "ashtray"
+, "uuid" : "516a8dd8-e0b2-4f1c-ba17-511923f55439"
+}]
+, "components" : [{"position" : [3.527983, -0.044467, 7.844582]
+, "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
+, "scale" : [1.000000, 1.000000, 1.000000]
+, "type" : "transform"
+}]
+, "name" : "bed"
+, "uuid" : "ac647159-35b9-4c8c-b55d-76c159eb57f6"
+}, {"children" : [{"components" : [{"position" : [0.456387, 3.354108, 0.381547]
+, "rotation" : [0.000000, -0.999390, 0.000000, 0.034899]
+, "scale" : [1.110200, 1.110200, 1.110200]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Office/briefcaseBlack/briefcaseBlack.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "briefcaseBlack"
+, "uuid" : "f400b6aa-87ce-4bf6-8c3d-a71cef320c6d"
+}, {"components" : [{"position" : [0.947120, 1.787821, 0.511501]
+, "rotation" : [0.000000, -0.719340, 0.000000, 0.694658]
+, "scale" : [0.714280, 0.714280, 0.714280]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Clothes/pantsBlueFolded/pantsBlueFolded.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "pantsBlueFolded"
+, "uuid" : "6d2ce366-5a94-434c-a02e-e77320c02d3f"
+}, {"components" : [{"position" : [-0.361379, 2.327985, 0.433687]
+, "rotation" : [0.000000, -0.691512, 0.000000, -0.722363]
+, "scale" : [0.714280, 0.714280, 0.714280]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Clothes/pantsBlueFolded/pantsBlueFolded.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "pantsBlueFolded"
+, "uuid" : "fb21592e-9198-4bbe-bf64-2e19061c27fe"
+}, {"components" : [{"position" : [-0.543387, 0.905206, 0.484648]
+, "rotation" : [0.519086, -0.479836, 0.527698, 0.470996]
+, "scale" : [1.413800, 1.413800, 1.413800]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Office/book_07/book_07.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "book_07"
+, "uuid" : "ca822058-f348-4d72-bb03-060912d30803"
+}, {"components" : [{"position" : [-0.576447, 0.891423, 0.478447]
+, "rotation" : [0.519086, -0.479836, 0.527698, 0.470996]
+, "scale" : [1.339200, 1.339200, 1.339200]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Office/book_07/book_07.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "book_07"
+, "uuid" : "fb41e710-e11d-412c-8d0c-66004d929754"
+}, {"components" : [{"position" : [-0.768174, 0.959260, 0.465249]
+, "rotation" : [0.495465, -0.504191, 0.513069, 0.486892]
+, "scale" : [1.232280, 1.232280, 1.232280]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Office/book_01/book_01.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "book_01"
+, "uuid" : "424fcaae-862a-44f3-8449-ecc7c01e3cec"
+}, {"components" : [{"position" : [0.790085, 1.943557, 0.413713]
+, "rotation" : [0.060016, -0.997555, 0.024241, -0.026168]
+, "scale" : [0.520600, 0.520600, 0.520600]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Clothes/shirtBlueFolded/shirtBlueFolded.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "shirtBlueFolded"
+, "uuid" : "1ec885bd-a320-4b83-a6ca-ffde6f49365c"
+}, {"components" : [{"position" : [0.210517, 2.329162, 0.546158]
+, "rotation" : [0.000000, -0.740218, 0.000000, 0.672367]
+, "scale" : [0.714280, 0.714280, 0.714280]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Clothes/shirtBlueFolded/shirtBlueFolded.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "shirtBlueFolded"
+, "uuid" : "59d3b7d2-d194-4ae6-908e-de043b24f92a"
+}, {"components" : [{"position" : [0.266474, 0.000871, 0.430038]
+, "rotation" : [0.000000, -0.999961, 0.000000, 0.008726]
+, "scale" : [0.714280, 0.714280, 0.714280]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Bedroom/closetGlassDoor/closetGlassDoor.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "closetGlassDoor"
+, "uuid" : "3072db4d-cdc0-44d3-8019-371c3ecf8fdd"
+}, {"components" : [{"position" : [-0.650058, 0.922870, 0.482779]
+, "rotation" : [0.503862, -0.495144, 0.517615, 0.482724]
+, "scale" : [0.986040, 0.986040, 0.986040]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Office/book_05/book_05.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "book_05"
+, "uuid" : "01a38056-416a-4997-a52a-15108694deb0"
+}, {"components" : [{"position" : [0.075927, 1.786441, 0.432652]
+, "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
+, "scale" : [0.714280, 0.714280, 0.714280]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Clothes/pantsBlackFolded/pantsBlackFolded.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "pantsBlackFolded"
+, "uuid" : "118eda53-88ed-4bf9-a4e0-c786735e187a"
+}, {"components" : [{"position" : [-0.439506, 2.405092, 0.505892]
+, "rotation" : [0.000000, -0.688354, 0.000000, 0.725374]
+, "scale" : [0.714280, 0.714280, 0.714280]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Clothes/pantsBlackFolded/pantsBlackFolded.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "pantsBlackFolded"
+, "uuid" : "14dc853f-5eea-4c31-a38b-a95e13e4770a"
+}, {"components" : [{"position" : [-0.757918, 0.954181, 0.536373]
+, "rotation" : [-0.495616, -0.504342, -0.491196, 0.508648]
+, "scale" : [1.157680, 1.157680, 1.157680]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Office/book_02/book_02.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "book_02"
+, "uuid" : "9a07165b-7a3e-4a1c-9d0d-fe0a9f5c41c3"
+}, {"components" : [{"position" : [-0.531691, 0.962195, 0.477763]
+, "rotation" : [-0.495616, -0.504342, -0.491196, 0.508648]
+, "scale" : [1.175840, 1.175840, 1.175840]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Office/book_02/book_02.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "book_02"
+, "uuid" : "77044cbe-2ef5-410f-bc12-2954b384623d"
+}, {"components" : [{"position" : [-0.618538, 0.917813, 0.447746]
+, "rotation" : [0.518823, -0.479565, 0.527959, 0.471267]
+, "scale" : [0.992040, 0.992040, 0.992040]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Office/book_06/book_06.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "book_06"
+, "uuid" : "caa8108b-1730-401d-a86e-bf33617d567c"
+}, {"components" : [{"position" : [0.829262, 1.861278, 0.476745]
+, "rotation" : [0.000000, 0.000000, 0.056693, 0.998391]
+, "scale" : [0.714280, 0.714280, 0.714280]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Clothes/shirtRedFolded/shirtRedFolded.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "shirtRedFolded"
+, "uuid" : "cae48547-dc49-4d22-bc33-6b0a89facf06"
+}, {"components" : [{"position" : [0.716331, 2.735337, -0.833344]
+, "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
+, "scale" : [0.714280, 0.714280, 0.714280]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Clothes/coatHanging/coatHanging.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "coatHanging"
+, "uuid" : "b01f333d-02e5-4c49-8a92-22cbc740bb3a"
+}]
+, "components" : [{"position" : [-3.619876, -0.044467, 10.233307]
+, "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
+, "scale" : [1.000000, 1.000000, 1.000000]
+, "type" : "transform"
+}]
+, "name" : "closet"
+, "uuid" : "b8a792ea-8a12-4443-b9e2-1401b528d58e"
+}, {"children" : [{"components" : [{"position" : [-0.216915, 1.279963, 0.250227]
+, "rotation" : [0.000000, -0.074108, 0.000000, 0.997250]
+, "scale" : [1.008560, 1.008560, 1.008560]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Kitchen/fork/fork.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "fork"
+, "uuid" : "46b2739c-79dc-4cd9-958c-86b7c98e59a6"
+}, {"components" : [{"position" : [0.290799, 1.280118, -0.234829]
+, "rotation" : [0.000000, -0.998134, 0.000000, 0.061048]
+, "scale" : [1.008560, 1.008560, 1.008560]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Kitchen/fork/fork.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "fork"
+, "uuid" : "42ac7829-dfbc-4425-8a15-a7eddc26c60b"
+}, {"components" : [{"position" : [-0.041195, 1.398058, -0.065601]
+, "rotation" : [0.091968, -0.098624, -0.675769, 0.724673]
+, "scale" : [0.091200, 0.091200, 0.091200]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Traces/fingerprintgrey/fingerprintgrey.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "fingerprintgrey"
+, "uuid" : "ecc6b3bd-f276-4737-b045-c80fe0a70b02"
+}, {"components" : [{"position" : [0.281107, 1.288342, -0.311462]
+, "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
+, "scale" : [0.091200, 0.091200, 0.091200]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Traces/fingerprintgrey/fingerprintgrey.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "fingerprintgrey"
+, "uuid" : "8578dbca-4b8f-427d-9f22-2a078c2e00e1"
+}, {"components" : [{"position" : [1.684543, 1.629775, 1.660182]
+, "rotation" : [-0.000888, 0.380151, 0.070400, 0.922240]
+, "scale" : [0.784160, 0.784160, 0.784160]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Clothes/shirtBlueHanging/shirtBlueHanging.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "shirtBlueHanging"
+, "uuid" : "1376aab9-cc96-4558-8f7d-2e0db00eba2b"
+}, {"components" : [{"position" : [-0.524236, 1.279820, -0.010270]
+, "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
+, "scale" : [0.714280, 0.714280, 0.714280]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Lamps/deskLampBlack/deskLampBlack.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "deskLampBlack"
+, "uuid" : "154358d5-e6fb-479c-8e44-636dee36aad6"
+}, {"components" : [{"position" : [0.851132, 1.279776, -0.069726]
+, "rotation" : [0.000000, -0.300705, 0.000000, 0.953716]
+, "scale" : [0.518120, 0.518120, 0.518120]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Kitchen/peijnenburgBlik/peijnenburgBlik.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "peijnenburgBlik"
+, "uuid" : "8ee7bdfd-10c7-4f32-bd15-3d62464baaf2"
+}, {"components" : [{"position" : [0.088651, 1.280044, -0.246758]
+, "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
+, "scale" : [0.852320, 0.852320, 0.852320]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Kitchen/0-plateDeep/0-plateDeep.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "0-plateDeep"
+, "uuid" : "b9316876-9303-446d-b0e9-951829494485"
+}, {"components" : [{"position" : [0.010503, 1.279653, 0.242933]
+, "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
+, "scale" : [0.852320, 0.852320, 0.852320]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Kitchen/0-plateDeep/0-plateDeep.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "0-plateDeep"
+, "uuid" : "999c0408-e398-4fb8-98f3-935ef09618f5"
+}, {"components" : [{"position" : [-0.130550, 1.279871, -0.282163]
+, "rotation" : [0.000000, -0.981627, 0.000000, -0.190809]
+, "scale" : [0.921880, 0.921880, 0.921880]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Kitchen/knive/knive.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "knive"
+, "uuid" : "02a86058-6d44-4fbd-809b-09a85cc84f43"
+}, {"components" : [{"position" : [0.161581, 1.279766, 0.054824]
+, "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
+, "scale" : [0.932720, 0.932720, 0.932720]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Kitchen/beerGlassSmall/beerGlassSmall.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "beerGlassSmall"
+, "uuid" : "661301f6-7ee1-4f48-9938-639b0c1603d4"
+}, {"components" : [{"position" : [-0.084418, 1.279792, -0.078189]
+, "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
+, "scale" : [0.932720, 0.932720, 0.932720]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Kitchen/beerGlassSmall/beerGlassSmall.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "beerGlassSmall"
+, "uuid" : "3a5a19f7-d0d7-42a1-a929-1620e5f5d808"
+}, {"components" : [{"position" : [0.151625, -0.001489, -0.031301]
+, "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
+, "scale" : [0.770680, 0.770680, 0.770680]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Tables/tableWoodStraight/tableWoodStraight.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "tableWoodStraight"
+, "uuid" : "8635dd17-8132-4206-92e1-9f30465b231e"
+}, {"components" : [{"position" : [1.924537, 0.018665, 1.426478]
+, "rotation" : [0.000000, 0.374606, 0.000000, -0.927182]
+, "scale" : [0.714280, 0.714280, 0.714280]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Chairs/chairSimpleWood/chairSimpleWood.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "chairSimpleWood"
+, "uuid" : "10a8b415-b538-4d8a-89ba-f14ff18aef9e"
+}, {"components" : [{"position" : [0.058718, -0.001212, -1.114015]
+, "rotation" : [0.000000, -0.958819, 0.000000, 0.284015]
+, "scale" : [0.714280, 0.714280, 0.714280]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Chairs/chairSimpleWood/chairSimpleWood.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "chairSimpleWood"
+, "uuid" : "547afb5c-c1cf-40ba-a7f9-f9a531067afd"
+}, {"components" : [{"position" : [1.845949, 0.000549, -1.236309]
+, "rotation" : [0.000000, -0.932006, 0.000000, -0.362438]
+, "scale" : [0.714280, 0.714280, 0.714280]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Chairs/chairSimpleWood/chairSimpleWood.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "chairSimpleWood"
+, "uuid" : "eca4c3a3-8ff9-4a83-a83d-8dd4ba2c9e66"
+}, {"components" : [{"position" : [-0.108657, -0.000771, 0.671713]
+, "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
+, "scale" : [0.714280, 0.714280, 0.714280]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Chairs/chairSimpleWood/chairSimpleWood.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "chairSimpleWood"
+, "uuid" : "f9b992db-24cb-4683-9bf4-a3fe6ac560df"
+}, {"components" : [{"position" : [0.217065, 1.279898, 0.274981]
+, "rotation" : [0.000000, -0.047978, 0.000000, 0.998848]
+, "scale" : [0.921880, 0.921880, 0.921880]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Kitchen/knive/knive.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "knive"
+, "uuid" : "bae6819f-6660-489d-bf8c-16879d6882f5"
+}]
+, "components" : [{"position" : [-4.828390, -0.044467, 5.890769]
+, "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
+, "scale" : [1.000000, 1.000000, 1.000000]
+, "type" : "transform"
+}]
+, "name" : "eettafel"
+, "uuid" : "e01a9959-9bed-48c7-821c-96ecf437e4fe"
+}, {"children" : [{"components" : [{"position" : [1.145934, 0.014241, 1.114115]
+, "rotation" : [0.000000, 0.891006, 0.000000, -0.453990]
+, "scale" : [0.923640, 0.923640, 0.923640]
+, "type" : "transform"
+}, {"castShadow" : false
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Traces/shoeprint_right/shoeprint_right.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "shoeprint_right"
+, "uuid" : "0646e21d-c687-47bb-88e1-9915f9edac68"
+}, {"components" : [{"position" : [1.130356, 0.014268, -0.394228]
+, "rotation" : [0.000000, -0.996708, 0.000000, 0.081068]
+, "scale" : [0.923640, 0.923640, 0.923640]
+, "type" : "transform"
+}, {"castShadow" : false
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Traces/shoeprint_right/shoeprint_right.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "shoeprint_right"
+, "uuid" : "4270eae8-a585-4a06-aa2c-3309f175e5b3"
+}, {"components" : [{"position" : [-4.242927, 0.014507, -4.144677]
+, "rotation" : [0.000000, -0.844794, 0.000000, 0.535089]
+, "scale" : [0.853280, 0.853280, 0.853280]
+, "type" : "transform"
+}, {"castShadow" : false
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Traces/shoeprint_right/shoeprint_right.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "shoeprint_right"
+, "uuid" : "5560e1e9-e417-4b28-8c8e-fe67315497e5"
+}, {"components" : [{"position" : [-2.550096, 0.000285, -2.934836]
+, "rotation" : [0.000000, -0.918100, 0.000000, 0.396346]
+, "scale" : [0.853280, 0.853280, 0.853280]
+, "type" : "transform"
+}, {"castShadow" : false
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Traces/shoeprint_right/shoeprint_right.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "shoeprint_right"
+, "uuid" : "b3f00eec-2e9f-4de8-b73b-0233e993a5d7"
+}, {"components" : [{"position" : [-0.967906, 0.001590, 5.000758]
+, "rotation" : [0.000000, -0.078459, 0.000000, 0.996916]
+, "scale" : [0.714280, 0.714280, 0.714280]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Bedroom/clothesPilledUp/clothesPilledUp.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "clothesPilledUp"
+, "uuid" : "35c8d652-3f61-4bdf-9ccc-6b7c45076cfa"
+}, {"components" : [{"position" : [-0.530668, 0.014697, -1.195338]
+, "rotation" : [0.000000, -0.549023, 0.000000, 0.835807]
+, "scale" : [0.853280, 0.853280, 0.853280]
+, "type" : "transform"
+}, {"castShadow" : false
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Traces/shoeprint_right/shoeprint_right.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "shoeprint_right"
+, "uuid" : "13805257-1311-4a5f-b079-3667759d6f6c"
+}, {"components" : [{"position" : [0.356063, 0.045710, 2.834701]
+, "rotation" : [0.000000, -0.522498, 0.000000, -0.852639]
+, "scale" : [0.923640, 0.923640, 0.923640]
+, "type" : "transform"
+}, {"castShadow" : false
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Traces/shoeprint_right/shoeprint_right.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "shoeprint_right"
+, "uuid" : "d2440fea-d867-4cad-9da5-70fa4f9221ce"
+}, {"components" : [{"position" : [-0.376744, 0.017493, 2.130749]
+, "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
+, "scale" : [0.234280, 0.234280, 0.234280]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Evidence/hairDarkBrown/hairDarkBrown.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "hairDarkBrown"
+, "uuid" : "bdb64f32-8c33-45f3-a707-94d9efe77bc1"
+}, {"components" : [{"position" : [-0.376981, 0.017319, 1.469507]
+, "rotation" : [0.000000, -0.993068, 0.000000, 0.117537]
+, "scale" : [0.714280, 0.714280, 0.714280]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Bodies/malePD12/malePD12.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "malePD12"
+, "uuid" : "21ccea09-1e4d-4800-bec4-acb6420e1f37"
+}, {"components" : [{"position" : [2.043386, 0.037013, 3.110702]
+, "rotation" : [-0.176271, -0.687563, 0.681590, -0.177816]
+, "scale" : [0.978320, 0.978320, 0.978320]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Kitchen/beerBottleBrown/beerBottleBrown.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "beerBottleBrown"
+, "uuid" : "563d02b4-1ff4-48ce-b24c-ee873fed8fc1"
+}, {"components" : [{"position" : [-3.685815, 0.038833, 3.046720]
+, "rotation" : [0.704014, 0.000000, 0.000000, 0.710185]
+, "scale" : [0.978320, 0.978320, 0.978320]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Kitchen/beerBottleBrown/beerBottleBrown.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "beerBottleBrown"
+, "uuid" : "51eac841-ffa4-4a49-bf5b-77c26aaf41d1"
+}, {"components" : [{"position" : [-1.938772, 0.037562, -4.316895]
+, "rotation" : [0.578451, -0.404803, 0.401286, 0.583521]
+, "scale" : [0.978320, 0.978320, 0.978320]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Kitchen/beerBottleBrown/beerBottleBrown.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "beerBottleBrown"
+, "uuid" : "8686a93d-d4e3-4cff-bb84-a000398b7cce"
+}, {"components" : [{"position" : [0.769661, 0.013811, -1.280407]
+, "rotation" : [0.000000, -0.861628, 0.000000, 0.507538]
+, "scale" : [0.919000, 0.919000, 0.919000]
+, "type" : "transform"
+}, {"castShadow" : false
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Traces/shoeprint_left/shoeprint_left.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "shoeprint_left"
+, "uuid" : "a57093ca-736e-491a-958d-637255039f5f"
+}, {"components" : [{"position" : [-3.044318, 0.014085, -3.961413]
+, "rotation" : [0.000000, -0.911761, 0.000000, 0.410719]
+, "scale" : [0.919000, 0.919000, 0.919000]
+, "type" : "transform"
+}, {"castShadow" : false
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Traces/shoeprint_left/shoeprint_left.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "shoeprint_left"
+, "uuid" : "10f55aa3-b416-4641-9633-98fb4deb06e1"
+}, {"components" : [{"position" : [1.602276, 0.000118, 0.239184]
+, "rotation" : [0.000000, -0.998391, 0.000000, 0.056693]
+, "scale" : [0.919000, 0.919000, 0.919000]
+, "type" : "transform"
+}, {"castShadow" : false
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Traces/shoeprint_left/shoeprint_left.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "shoeprint_left"
+, "uuid" : "d8eb2baf-7461-4be9-8db0-5b142b6e000e"
+}, {"components" : [{"position" : [-4.871888, 0.014287, -5.066464]
+, "rotation" : [0.000000, -0.816642, 0.000000, 0.577146]
+, "scale" : [0.919000, 0.919000, 0.919000]
+, "type" : "transform"
+}, {"castShadow" : false
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Traces/shoeprint_left/shoeprint_left.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "shoeprint_left"
+, "uuid" : "3c157f3f-fdd7-4c57-9614-89bd91ba45e1"
+}, {"components" : [{"position" : [1.205698, 0.014130, 2.164700]
+, "rotation" : [0.000000, -0.967045, 0.000000, -0.254601]
+, "scale" : [0.919000, 0.919000, 0.919000]
+, "type" : "transform"
+}, {"castShadow" : false
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Traces/shoeprint_left/shoeprint_left.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "shoeprint_left"
+, "uuid" : "6be55158-949e-44f6-b9be-3e1f20dd8cd4"
+}, {"components" : [{"position" : [-0.029357, 0.042972, 2.879697]
+, "rotation" : [0.000000, -0.186524, 0.000000, -0.982449]
+, "scale" : [0.919000, 0.919000, 0.919000]
+, "type" : "transform"
+}, {"castShadow" : false
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Traces/shoeprint_left/shoeprint_left.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "shoeprint_left"
+, "uuid" : "f80e9c1a-c3e6-4705-bf2e-2d91bfae83c7"
+}, {"components" : [{"position" : [-1.218917, 0.013885, -2.270399]
+, "rotation" : [0.000000, -0.911761, 0.000000, 0.410719]
+, "scale" : [0.919000, 0.919000, 0.919000]
+, "type" : "transform"
+}, {"castShadow" : false
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Traces/shoeprint_left/shoeprint_left.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "shoeprint_left"
+, "uuid" : "d1139926-80ff-483e-88ea-8d3126e432dd"
+}]
+, "components" : [{"position" : [-0.105887, -0.044467, 4.934320]
+, "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
+, "scale" : [1.000000, 1.000000, 1.000000]
+, "type" : "transform"
+}]
+, "name" : "vloer"
+, "uuid" : "bb8a7ae5-a15d-4cae-a06f-3513bff66fb9"
+}, {"components" : [{"position" : [0.000000, 0.000000, 0.000000]
+, "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
+, "scale" : [1.000000, 1.000000, 1.000000]
+, "type" : "transform"
+}, {"type" : "camera"
+}, {"light" : ""
+, "timeOfDay" : 14.000000
+, "type" : "dynamicskybox"
+}]
+, "name" : "Camera"
+, "uuid" : "0353e425-3c52-4d96-b2ca-6b42235ce11e"
+}, {"components" : [{"position" : [0.000000, 1.000000, 0.510000]
+, "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
+, "scale" : [1.000000, 1.000000, 1.000000]
+, "type" : "transform"
+}, {"color" : [0.866025, 0.866025, 0.747120, 0.866025]
+, "intensity" : 20.000000
+, "lighttype" : "directional"
+, "range" : 63729283083796480.000000
+, "shadow" : "shadowmap"
+, "type" : "light"
+}]
+, "name" : "Sunlight"
+, "uuid" : "c179146c-4696-4140-8240-bc9fa9a3a7d4"
+}, {"components" : [{"position" : [3.639711, -0.044467, 0.460258]
+, "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
+, "scale" : [0.003099, 0.003099, 0.003099]
+, "type" : "transform"
+}, {"castShadow" : true
+, "file" : "./data/TienTest/models/dude/testgastje.fbx"
+, "type" : "animatedmodelrenderer"
+}]
+, "name" : "human"
+, "uuid" : "7737ea18-1fd6-4c7c-b199-b1979c5b7459"
+}, {"components" : [{"position" : [-0.812883, 1.154124, 1.664957]
+, "rotation" : [0.000000, -0.000000, 0.000000, 0.999999]
+, "scale" : [0.898600, 0.898600, 0.898600]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Office/paperTest2/paperTest2.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "paperTest2"
+, "uuid" : "b6148d88-89ac-4934-bab4-28cd86247ea6"
+}, {"components" : [{"position" : [-0.850668, 1.139849, 1.332772]
+, "rotation" : [0.000000, 0.104528, 0.000000, 0.994522]
+, "scale" : [0.890880, 0.890880, 0.890880]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Office/paperTest2/paperTest2.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "paperTest2"
+, "uuid" : "533354d2-bf43-439f-840c-0323ee562d7c"
+}, {"components" : [{"position" : [-0.259169, -0.044153, -0.280059]
+, "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
+, "scale" : [0.714280, 0.714280, 0.714280]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Tables/deskAvans/deskAvans.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "deskAvans"
+, "uuid" : "7b6aa4de-a7d7-4378-a482-2bc0febcbf49"
+}, {"components" : [{"position" : [-0.258212, -0.043064, 1.266727]
+, "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
+, "scale" : [0.714280, 0.714280, 0.714280]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Tables/deskAvans/deskAvans.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "deskAvans"
+, "uuid" : "a40627e1-f55c-4969-b7cb-ed7a4278e017"
+}, {"components" : [{"position" : [-0.618106, 1.140316, 1.523188]
+, "rotation" : [0.000000, 0.043619, 0.000000, 0.999047]
+, "scale" : [0.830200, 0.830200, 0.830200]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Office/paperTest1/paperTest1.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "paperTest1"
+, "uuid" : "8982f16b-8a29-4080-97c1-b7fa60771d93"
+}, {"components" : [{"position" : [-1.069152, 1.139878, 1.246193]
+, "rotation" : [0.000000, 0.139173, 0.000000, 0.990265]
+, "scale" : [0.914080, 0.914080, 0.914080]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Office/paperTest1/paperTest1.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "paperTest1"
+, "uuid" : "b6e4d695-53a0-4e66-b73f-bf99a8b6cc97"
+}, {"components" : [{"position" : [4.957190, 1.262879, 4.897897]
+, "rotation" : [-0.054993, -0.711051, 0.055961, 0.698747]
+, "scale" : [0.545120, 0.545120, 0.545120]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Clothes/pantsBlackFolded/pantsBlackFolded.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "pantsBlackFolded"
+, "uuid" : "739711fb-280e-4903-a993-db9694189936"
+}, {"components" : [{"position" : [5.013174, 1.206915, 5.114239]
+, "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
+, "scale" : [0.490840, 0.490840, 0.490840]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Clothes/shirtBlueFolded/shirtBlueFolded.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "shirtBlueFolded"
+, "uuid" : "59428c32-fb17-4086-b3f9-842575f4dcdb"
+}, {"components" : [{"position" : [-8.633629, -0.033276, -0.035187]
+, "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
+, "scale" : [0.978560, 0.978560, 0.978560]
+, "type" : "transform"
+}, {"castShadow" : false
+, "cullBackFaces" : false
+, "file" : "data/virtueelpd/models/Houses/realPDHallway/realPDHallway.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "realPDHallway"
+, "uuid" : "893230de-bc97-4696-8bd7-b866ad148ef2"
+}, {"components" : [{"position" : [2.490160, 1.002915, 9.395313]
+, "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
+, "scale" : [0.714280, 0.714280, 0.714280]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Lamps/tableLampRed/tableLampRed.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "tableLampRed"
+, "uuid" : "f421f83d-3b47-43dd-a71f-540eac4766ca"
+}, {"components" : [{"position" : [-4.080996, 0.802439, 10.727127]
+, "rotation" : [0.495465, -0.504191, 0.513069, 0.486892]
+, "scale" : [0.760080, 0.760080, 0.760080]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Office/book_01/book_01.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "book_01"
+, "uuid" : "ce2c48bb-4228-4a85-a9dc-cabaa2200210"
+}, {"components" : [{"position" : [5.191376, 2.848471, 8.468746]
+, "rotation" : [0.493488, -0.502100, 0.497737, 0.506577]
+, "scale" : [0.852760, 0.852760, 0.852760]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Evidence/paintingBullets/paintingBullets.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "paintingBullets"
+, "uuid" : "5da1f17a-05e2-441e-a458-20398fbe80ff"
+}, {"components" : [{"position" : [-0.800762, -0.044467, 4.518270]
+, "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
+, "scale" : [1.000000, 1.000000, 1.000000]
+, "type" : "transform"
+}, {"castShadow" : false
+, "cullBackFaces" : false
+, "file" : "data/virtueelpd/models/Houses/realPD1/realPD1.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "realPD1"
+, "uuid" : "09ad4fb7-b735-46c2-ac33-525ff43d4455"
+}, {"components" : [{"position" : [-2.151900, 0.014850, 0.662169]
+, "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
+, "scale" : [0.091200, 0.091200, 0.091200]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Traces/fingerprintgrey/fingerprintgrey.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "fingerprintgrey"
+, "uuid" : "fe3f912c-04d7-4c7c-87be-15b7f891dd45"
+}, {"components" : [{"position" : [-3.794403, 0.039033, 8.120927]
+, "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
+, "scale" : [0.091200, 0.091200, 0.091200]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Traces/fingerprintgrey/fingerprintgrey.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "fingerprintgrey"
+, "uuid" : "2cf9fbaa-cef6-414e-a546-55008b140750"
+}, {"components" : [{"position" : [1.993391, 0.013942, 7.932021]
+, "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
+, "scale" : [0.091200, 0.091200, 0.091200]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Traces/fingerprintgrey/fingerprintgrey.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "fingerprintgrey"
+, "uuid" : "085b7620-6010-4510-b3c3-c4a4b2b3a693"
+}, {"components" : [{"position" : [-4.942001, 1.255602, 5.562989]
+, "rotation" : [0.000000, 0.104528, 0.000000, 0.994522]
+, "scale" : [0.091200, 0.091200, 0.091200]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Traces/fingerprintgrey/fingerprintgrey.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "fingerprintgrey"
+, "uuid" : "4df18ce7-8d80-48f9-be0d-918bdd8bc79c"
+}, {"components" : [{"position" : [-7.384563, 2.416240, 0.384871]
+, "rotation" : [-0.703850, -0.071227, -0.064133, 0.703850]
+, "scale" : [0.089320, 0.089320, 0.089320]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Traces/fingerprintgrey/fingerprintgrey.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "fingerprintgrey"
+, "uuid" : "e880b686-a0d6-4c5f-98a9-4563cbecab20"
+}, {"components" : [{"position" : [-0.643537, 1.139717, 1.858010]
+, "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
+, "scale" : [0.091200, 0.091200, 0.091200]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Traces/fingerprintgrey/fingerprintgrey.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "fingerprintgrey"
+, "uuid" : "6a8dce9e-c141-4823-aeb1-51e146e6c80b"
+}, {"components" : [{"position" : [-7.191083, 2.049629, 0.240149]
+, "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
+, "scale" : [0.089320, 0.089320, 0.089320]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Traces/fingerprintgrey/fingerprintgrey.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "fingerprintgrey"
+, "uuid" : "1405d1bb-e890-495d-8810-edfbf2c2cf02"
+}, {"components" : [{"position" : [-6.048863, -0.044102, -0.004805]
+, "rotation" : [0.000000, -1.000000, 0.000000, 0.000000]
+, "scale" : [0.983800, 0.983800, 0.983800]
+, "type" : "transform"
+}, {"castShadow" : false
+, "cullBackFaces" : false
+, "file" : "data/virtueelpd/models/Houses/realPDDoor1/realPDDoor1.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "realPDDoor1"
+, "uuid" : "d8c3af27-602b-41f2-b27f-b0a690cfb0d0"
+}, {"components" : [{"position" : [-0.148395, -0.044579, 2.643039]
+, "rotation" : [0.000000, 0.177943, 0.000000, 0.984040]
+, "scale" : [0.651480, 0.651480, 0.651480]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Chairs/chairAvans/chairAvans.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "chairAvans"
+, "uuid" : "5b96cbf9-3e84-42af-a178-d22c4b6719e2"
+}, {"components" : [{"position" : [3.900362, 1.414865, 3.693243]
+, "rotation" : [0.000000, -0.979923, 0.000000, 0.199367]
+, "scale" : [0.586000, 0.586000, 0.586000]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Bedroom/clothesPilledUp/clothesPilledUp.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "clothesPilledUp"
+, "uuid" : "e1c7eaab-3b38-4c96-aa45-2f7603cc8a5c"
+}, {"components" : [{"position" : [4.104646, 1.414622, 4.626804]
+, "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
+, "scale" : [0.657640, 0.657640, 0.657640]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Props/ironer/ironer.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "ironer"
+, "uuid" : "9a862306-1b0e-425c-b760-121b0d9fa0a5"
+}, {"components" : [{"position" : [-7.004814, 2.561983, 0.486097]
+, "rotation" : [0.716321, -0.063562, 0.065821, 0.691744]
+, "scale" : [0.714280, 0.714280, 0.714280]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Traces/bulletHoleGlass/bulletHoleGlass.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "bulletHoleGlass"
+, "uuid" : "de00fcfb-c406-4143-8195-dc39fab14549"
+}, {"components" : [{"position" : [-7.075754, 2.400947, 0.482996]
+, "rotation" : [0.047316, 0.686925, 0.707030, 0.161245]
+, "scale" : [0.714280, 0.714280, 0.714280]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Traces/bulletHoleGlass/bulletHoleGlass.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "bulletHoleGlass"
+, "uuid" : "ad8cfd7a-c930-414f-a5a0-82d97875285f"
+}, {"components" : [{"position" : [3.808006, -0.045470, 3.518998]
+, "rotation" : [0.000000, -0.573576, 0.000000, 0.819151]
+, "scale" : [0.714280, 0.714280, 0.714280]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Props/ironingBoard/ironingBoard.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "ironingBoard"
+, "uuid" : "629bdfb6-4d38-4453-b50d-408e4a03ad8c"
+}, {"components" : [{"position" : [0.070115, 1.138846, 0.054545]
+, "rotation" : [0.000000, -0.216439, 0.000000, 0.976295]
+, "scale" : [0.714280, 0.714280, 0.714280]
+, "type" : "transform"
+}, {"castShadow" : true
+, "cullBackFaces" : true
+, "file" : "data/virtueelpd/models/Props/0-paintingDomtoren/0-paintingDomtoren.fbx"
+, "type" : "modelrenderer"
+}]
+, "name" : "0-paintingDomtoren"
+, "uuid" : "1838b84f-9e5f-4100-ba96-f5046184d1ba"
+}]
+, "name" : "Root"
+, "uuid" : "34b0fbf1-3833-42c3-b087-670d8f6669de"
+}
+}

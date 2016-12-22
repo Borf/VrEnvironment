@@ -9,7 +9,7 @@ uniform sampler2DShadow s_shadowmap;
 uniform samplerCube s_shadowmapcube;
 
 uniform mat4 projectionMatrix;
-uniform mat4 modelViewMatrix;
+//uniform mat4 modelViewMatrix;
 uniform mat4 projectionMatrixInv;
 uniform mat4 modelViewMatrixInv;
 uniform mat4 shadowMatrix;
@@ -24,6 +24,7 @@ uniform float lightRange;
 uniform vec2 windowSize = vec2(1024,1024);
 uniform vec2 windowPos = vec2(0,0);
 uniform bool lightCastShadow;
+uniform vec3 cameraPosition;
 
 
 vec2 poissonDisk[16] = vec2[]( 
@@ -83,14 +84,47 @@ void main()
 
 			diffuse = max(0, dot(n, normalize(lightPosition.xyz))) * 0.5;
 			ambient = 0.5;
+
+/*			// Eye vector (towards the camera)
+			vec3 E = normalize(EyeDirection_cameraspace);
+			// Direction in which the triangle reflects the light
+			vec3 R = reflect(-l,n);
+			// Cosine of the angle between the Eye vector and the Reflect vector,
+			// clamped to 0
+			//  - Looking into the reflection -> 1
+			//  - Looking elsewhere -> < 1
+			float cosAlpha = clamp( dot( E,R ), 0,1 );*/
+
+			vec3 l = normalize( cameraPosition.xyz - lightPosition.xyz);
+			vec3 R = reflect(-l, n);
+
+			float cosAlpha = clamp(dot(vec3(0,0,-1), R), 0, 1);
+
+			specular = pow(cosAlpha, 5);
+
 			if(lightCastShadow)
 			{
 				vec4 shadowPos = biasMatrix * shadowMatrix * vec4(position,1.0);
 				if(insideBox(shadowPos.xy, vec2(-1,-1), vec2(1,1)) > 0.1)
 				{
+/*						// Normal of the computed fragment, in camera space
+	vec3 n = normalize( Normal_cameraspace );
+	// Direction of the light (from the fragment to the light)
+	vec3 l = normalize( LightDirection_cameraspace );
+	// Cosine of the angle between the normal and the light direction, 
+	// clamped above 0
+	//  - light is at the vertical of the triangle -> 1
+	//  - light is perpendiular to the triangle -> 0
+	//  - light is behind the triangle -> 0
+	float cosTheta = clamp( dot( n,l ), 0,1 );
+*/
+					
+
+
 					vec3 L = normalize( position.xyz - lightPosition.xyz);
-					float cosTheta = clamp(dot(n,L), 0, 1);
-					float bias = clamp(0.001*tan(acos(cosTheta)), 0.001, 0.005);
+					float cosTheta = clamp(dot(n,L), 0.0, 1.0);
+					float bias = clamp(0.005*tan(acos(cosTheta)), 0.0001, 0.005);
+					float bias = 0.0001;
 
 					for (int i=0;i<4;i++){
 						int index = i;
