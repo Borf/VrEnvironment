@@ -61,46 +61,31 @@ void main()
 {
 	vec2 texCoord = (gl_FragCoord.xy - windowPos.xy) / windowSize;
 
-    vec4 image = texture2D( s_color, texCoord );
-    float depth = texture2D( s_depth, texCoord ).x;
-    vec3 normal = normalize(decodeNormal(texture2D( s_normal, texCoord ).xyz));
+    vec4 image = texture2D( s_color, texCoord );									//albedo texture
+    float depth = texture2D( s_depth, texCoord ).x;									//depth
+    vec3 normal = normalize(decodeNormal(texture2D( s_normal, texCoord ).xyz));		//normal in world space
 
-	vec4 viewPos = vec4(texCoord.xy*2.0-1.0, depth*2.0-1.0, 1);
+	vec4 viewPos = vec4(texCoord.xy*2.0-1.0, depth*2.0-1.0, 1);						//position relative to view
 	vec4 tempPos = modelViewMatrixInv * projectionMatrixInv * viewPos;
-	vec3 position = tempPos.xyz / tempPos.w;
+	vec3 position = tempPos.xyz / tempPos.w;										//position in world coordinats
     
-	float diffuse = 0;
-	float ambient = 0;
-	float specular = 0;
-	float visibility = 1.0;
+	float diffuse = 0;																//final diffuse factor
+	float ambient = 0;																//final ambient factor
+	float specular = 0;																//final specular factor
+	float visibility = 1.0;															//shadow occlusion. 1 is visible, 0 is occluded by shadow
 
-
-	//image.rgb = normal.rgb;
-
-	switch(lightType) // directional light
+	switch(lightType)
 	{
-		case 0: // directional light
-			vec3 n = normalize( normal );
-
-			diffuse = max(0, dot(n, normalize(lightPosition.xyz))) * 0.5;
+		case 0:																		// directional light
+																					// for a directional light, the position is actually the direction...for now
+			diffuse = max(0, dot(normal, normalize(lightPosition.xyz))) * 0.5;
 			ambient = 0.5;
 
-/*			// Eye vector (towards the camera)
-			vec3 E = normalize(EyeDirection_cameraspace);
-			// Direction in which the triangle reflects the light
-			vec3 R = reflect(-l,n);
-			// Cosine of the angle between the Eye vector and the Reflect vector,
-			// clamped to 0
-			//  - Looking into the reflection -> 1
-			//  - Looking elsewhere -> < 1
-			float cosAlpha = clamp( dot( E,R ), 0,1 );*/
-
-			vec3 l = normalize( cameraPosition.xyz - lightPosition.xyz);
-			vec3 R = reflect(-l, n);
-
-			float cosAlpha = clamp(dot(vec3(0,0,-1), R), 0, 1);
-
+			vec3 l = normalize( lightPosition.xyz);
+			vec3 R = normalize(reflect(-l, normal));
+			float cosAlpha = clamp(dot(normalize(cameraPosition.xyz - position.xyz), R), 0, 1);
 			specular = pow(cosAlpha, 5);
+
 
 			if(lightCastShadow)
 			{
@@ -119,11 +104,9 @@ void main()
 	float cosTheta = clamp( dot( n,l ), 0,1 );
 */
 					
-
-
 					vec3 L = normalize( position.xyz - lightPosition.xyz);
-					float cosTheta = clamp(dot(n,L), 0.0, 1.0);
-					float bias = clamp(0.005*tan(acos(cosTheta)), 0.0001, 0.005);
+					float cosTheta = clamp(dot(normal,L), 0.0, 1.0);
+					//float bias = clamp(0.005*tan(acos(cosTheta)), 0.0001, 0.005);
 					float bias = 0.0001;
 
 					for (int i=0;i<4;i++){
@@ -151,7 +134,7 @@ void main()
 			diffuse = distanceFac * clamp(dot(normalize(normal), normalize(lightDir)), 0, 1);
 			break;	
 		case 2: // spotlight
-		
+			//TODO
 			break;	
 		default:
 			fragColor = vec4(0,1,1,1);
@@ -162,12 +145,4 @@ void main()
 
 	fragColor = lightColor * (diffuse + ambient + specular) * visibility * image;
 	fragColor.a = 1;
-	
-//	fragColor = lightColor * 0.1;
-//	fragColor = vec4(0.15,0,0, 0.25);
-
-	//fragColor.rgb = (normal.rgb);
-
-	//fragColor.rgb = position.xyz;
-
 }
