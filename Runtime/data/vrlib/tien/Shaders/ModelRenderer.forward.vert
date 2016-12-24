@@ -27,9 +27,9 @@ void main()
 {
 	texCoord = a_texture;
 
-	normal = normalMatrix * (a_normal);
-	bitangent = normalMatrix * (a_bitangent);
-	tangent = normalMatrix * (a_tangent);
+	normal = normalize(normalMatrix * (a_normal));
+	bitangent = normalize(normalMatrix * (a_bitangent));
+	tangent = normalize(normalMatrix * (a_tangent));
 
 /*	TBN = mat3( tangent,
 				bitangent,
@@ -39,6 +39,4 @@ void main()
 	position = modelMatrix * vec4(a_position,1.0);
 
 	gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(a_position,1.0);
-
-
 }

@@ -60,7 +60,7 @@ public:
 
 	GrassComponent(vrlib::tien::Terrain &terrain);
 	virtual void update(float elapsedTime, vrlib::tien::Scene& scene) override;
-	virtual void draw() override;
+	virtual void drawDeferredPass() override;
 	virtual void drawShadowMap() override;
 
 	vrlib::json::Value toJson(vrlib::json::Value &meshes) const override;

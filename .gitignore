@@ -19,3 +19,5 @@ Development/Applications/NetworkEngine/NetworkTunnelControl/obj/
 Development/Applications/NetworkEngine/NetworkTunnelControl/packages/Newtonsoft.Json.9.0.1/Newtonsoft.Json.9.0.1.nupkg
 Development/Services/vrpn_service/Debug/
 Development/Services/vrpn_service/Release/
+Development/VrEnvironment.VC.db
+Development/VrEnvironment.VC.VC.opendb

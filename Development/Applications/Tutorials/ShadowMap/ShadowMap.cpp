@@ -126,7 +126,7 @@ void ShadowMap::drawScene(int pass, std::function<void(const glm::mat4 &modelMat
 	[this, &pass](const vrlib::Material &material)
 	{
 		if (pass == 0)
-			return;
+			return true;
 		if (material.texture)
 		{
 			shader->setUniform(Uniforms::textureFactor, 1.0f);
@@ -137,6 +137,7 @@ void ShadowMap::drawScene(int pass, std::function<void(const glm::mat4 &modelMat
 			shader->setUniform(Uniforms::textureFactor, 0.0f);
 			shader->setUniform(Uniforms::diffuseColor, material.color.diffuse);
 		}
+		return true;
 	});
 
 

@@ -394,7 +394,7 @@
 , "scale" : [0.932720, 0.932720, 0.932720]
 , "type" : "transform"
 }, {"castShadow" : true
-, "cullBackFaces" : true
+, "cullBackFaces" : false
 , "file" : "data/virtueelpd/models/Kitchen/beerGlassSmall/beerGlassSmall.fbx"
 , "type" : "modelrenderer"
 }]
@@ -405,7 +405,7 @@
 , "scale" : [0.932720, 0.932720, 0.932720]
 , "type" : "transform"
 }, {"castShadow" : true
-, "cullBackFaces" : true
+, "cullBackFaces" : false
 , "file" : "data/virtueelpd/models/Kitchen/beerGlassSmall/beerGlassSmall.fbx"
 , "type" : "modelrenderer"
 }]
@@ -713,7 +713,7 @@
 }]
 , "name" : "Camera"
 , "uuid" : "0353e425-3c52-4d96-b2ca-6b42235ce11e"
-}, {"components" : [{"position" : [0.000000, 1.000000, 0.510000]
+}, {"components" : [{"position" : [1.000000, 1.000000, 0.250000]
 , "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
 , "scale" : [1.000000, 1.000000, 1.000000]
 , "type" : "transform"
@@ -726,16 +726,6 @@
 }]
 , "name" : "Sunlight"
 , "uuid" : "c179146c-4696-4140-8240-bc9fa9a3a7d4"
-}, {"components" : [{"position" : [3.639711, -0.044467, 0.460258]
-, "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
-, "scale" : [0.003099, 0.003099, 0.003099]
-, "type" : "transform"
-}, {"castShadow" : true
-, "file" : "./data/TienTest/models/dude/testgastje.fbx"
-, "type" : "animatedmodelrenderer"
-}]
-, "name" : "human"
-, "uuid" : "7737ea18-1fd6-4c7c-b199-b1979c5b7459"
 }, {"components" : [{"position" : [-0.812883, 1.154124, 1.664957]
 , "rotation" : [0.000000, -0.000000, 0.000000, 0.999999]
 , "scale" : [0.898600, 0.898600, 0.898600]
@@ -1044,6 +1034,19 @@
 }]
 , "name" : "0-paintingDomtoren"
 , "uuid" : "1838b84f-9e5f-4100-ba96-f5046184d1ba"
+}, {"components" : [{"position" : [0.000000, 3.493032, 5.755683]
+, "rotation" : [0.000000, 0.000000, 0.000000, 1.000000]
+, "scale" : [1.000000, 1.000000, 1.000000]
+, "type" : "transform"
+}, {"color" : [0.000000, 0.000000, 0.000000, 0.000000]
+, "intensity" : 0.000000
+, "lighttype" : "point"
+, "range" : 0.000000
+, "shadow" : "shadowmap"
+, "type" : "light"
+}]
+, "name" : "new node"
+, "uuid" : "de39d2c2-7935-4d6d-a56f-447987033801"
 }]
 , "name" : "Root"
 , "uuid" : "34b0fbf1-3833-42c3-b087-670d8f6669de"

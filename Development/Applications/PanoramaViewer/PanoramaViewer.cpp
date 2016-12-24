@@ -113,9 +113,6 @@ void PanoramaViewer::draw(const glm::mat4 &projectionMatrix, const glm::mat4 &mo
 		glm::mat4 matrix(modelMatrix);
 		matrix = glm::scale(matrix, glm::vec3(75, 75, 75));
 		shader->setUniform(Uniforms::modelMatrix, matrix);
-	},
-		[this](const vrlib::Material &material)
-	{
 	});
 
 	if (showMenu)
@@ -137,9 +134,6 @@ void PanoramaViewer::draw(const glm::mat4 &projectionMatrix, const glm::mat4 &mo
 				matrix = glm::translate(matrix, getPos(i, true));
 				matrix = glm::scale(matrix, glm::vec3(s, s, s));
 				shader->setUniform(Uniforms::modelMatrix, matrix);
-			},
-				[this](const vrlib::Material &material)
-			{
 			});
 		}
 	}
@@ -164,6 +158,7 @@ void PanoramaViewer::draw(const glm::mat4 &projectionMatrix, const glm::mat4 &mo
 			shader->setUniform(Uniforms::textureFactor, 0.0f);
 			shader->setUniform(Uniforms::diffuseColor, material.color.diffuse);
 		}
+		return true;
 	});
 
 

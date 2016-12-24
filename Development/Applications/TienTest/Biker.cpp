@@ -356,7 +356,7 @@ glm::vec2 Route::getPosition(float index)
 
 GrassComponent::GrassComponent(vrlib::tien::Terrain &terrain) : terrain(terrain)
 {
-	renderContext = GrassRenderContext::getInstance();
+	renderContextDeferred = GrassRenderContext::getInstance();
 	
 	grassTexture = vrlib::Texture::loadCached("data/TienTest/biker/textures/texture_grass.jpg");
 
@@ -396,12 +396,12 @@ void GrassComponent::update(float elapsedTime, vrlib::tien::Scene& scene)
 }
 
 
-void GrassComponent::draw()
+void GrassComponent::drawDeferredPass()
 {
 	glDisable(GL_CULL_FACE);
 	vrlib::tien::components::Transform* t = node->getComponent<vrlib::tien::components::Transform>();
 
-	GrassRenderContext* context = dynamic_cast<GrassRenderContext*>(renderContext);
+	GrassRenderContext* context = dynamic_cast<GrassRenderContext*>(renderContextDeferred);
 	context->renderShader->use();
 	context->renderShader->setUniform(GrassRenderContext::RenderUniform::modelMatrix, t->globalTransform);
 	context->renderShader->setUniform(GrassRenderContext::RenderUniform::normalMatrix, glm::transpose(glm::inverse(glm::mat3(t->globalTransform))));

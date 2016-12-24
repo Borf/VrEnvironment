@@ -116,6 +116,7 @@ void DeferredRenderer::draw(const glm::mat4 &projectionMatrix, const glm::mat4 &
 			shader->setUniform(Uniforms::textureFactor, 0.0f);
 			shader->setUniform(Uniforms::diffuseColor, material.color.diffuse);
 		}
+		return true;
 	});
 
 
@@ -144,6 +145,7 @@ void DeferredRenderer::draw(const glm::mat4 &projectionMatrix, const glm::mat4 &
 					shader->setUniform(Uniforms::textureFactor, 0.0f);
 					shader->setUniform(Uniforms::diffuseColor, material.color.diffuse);
 				}
+				return true;
 			});
 		}
 	}

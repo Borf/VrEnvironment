@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{35F31874-6217-437D-9209-9FC783136E32}"
 EndProject
@@ -137,9 +137,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CaveAlign", "Applications\C
 	ProjectSection(ProjectDependencies) = postProject
 		{C1C8BD19-EF70-44E0-A9B4-E11BAC4FB858} = {C1C8BD19-EF70-44E0-A9B4-E11BAC4FB858}
 	EndProjectSection
+EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TiEnEdit", "Applications\TiEnEdit\TiEnEdit.vcxproj", "{F353BAE4-E795-4A1E-9F12-6C1882C01143}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C1C8BD19-EF70-44E0-A9B4-E11BAC4FB858} = {C1C8BD19-EF70-44E0-A9B4-E11BAC4FB858}
+		{CA560089-F243-4A8D-9371-DDC350F0AA54} = {CA560089-F243-4A8D-9371-DDC350F0AA54}
 	EndProjectSection
 EndProject
 Global

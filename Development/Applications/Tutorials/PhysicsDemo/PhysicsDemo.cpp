@@ -196,9 +196,6 @@ void PhysicsDemo::draw(const glm::mat4 &projectionMatrix, const glm::mat4 &model
 		cubeModel->draw([this, &matrix](const glm::mat4 &modelMatrix) 
 		{
 			shader->setUniform(Uniforms::modelMatrix, matrix * modelMatrix);
-		}, [this](const vrlib::Material &material)
-		{
-
 		});
 	}
 	sphereTexture->bind();
@@ -213,9 +210,6 @@ void PhysicsDemo::draw(const glm::mat4 &projectionMatrix, const glm::mat4 &model
 		sphereModel->draw([this, &matrix](const glm::mat4 &modelMatrix)
 		{
 			shader->setUniform(Uniforms::modelMatrix, matrix * modelMatrix);
-		}, [this](const vrlib::Material &material)
-		{
-
 		});
 	}
 

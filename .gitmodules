@@ -43,3 +43,6 @@
 [submodule "Development/Applications/TiEnEdit"]
 	path = Development/Applications/TiEnEdit
 	url = https://github.com/Borf/TiEnEdit.git
+[submodule "Development/Applications/NetworkEngine"]
+	path = Development/Applications/NetworkEngine
+	url = https://github.com/Borf/NetworkEngine.git

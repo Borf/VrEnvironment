@@ -63,7 +63,9 @@ void main()
 
     vec4 image = texture2D( s_color, texCoord );									//albedo texture
     float depth = texture2D( s_depth, texCoord ).x;									//depth
-    vec3 normal = normalize(decodeNormal(texture2D( s_normal, texCoord ).xyz));		//normal in world space
+	vec4 normalEncoded = texture2D( s_normal, texCoord );
+	float shinyness = normalEncoded.a;												// shinyness is encoded in the alpha of the normal buffer
+    vec3 normal = normalize(decodeNormal(normalEncoded.xyz));						//normal in world space
 
 	vec4 viewPos = vec4(texCoord.xy*2.0-1.0, depth*2.0-1.0, 1);						//position relative to view
 	vec4 tempPos = modelViewMatrixInv * projectionMatrixInv * viewPos;
@@ -81,11 +83,15 @@ void main()
 			diffuse = max(0, dot(normal, normalize(lightPosition.xyz))) * 0.5;
 			ambient = 0.5;
 
-			vec3 l = normalize( lightPosition.xyz);
-			vec3 R = normalize(reflect(-l, normal));
-			float cosAlpha = clamp(dot(normalize(cameraPosition.xyz - position.xyz), R), 0, 1);
-			specular = pow(cosAlpha, 5);
 
+			//if(shinyness > 0)
+			{
+				vec3 l = normalize( lightPosition.xyz);
+				vec3 R = normalize(reflect(-l, normal));
+				float cosAlpha = clamp(dot(normalize(cameraPosition - position.xyz), R), 0, 1);
+				specular = pow(cosAlpha, 10) * shinyness;
+//				specular = clamp(specular, 0, 1);
+			}
 
 			if(lightCastShadow)
 			{
