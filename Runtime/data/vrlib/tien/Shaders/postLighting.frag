@@ -110,14 +110,14 @@ void main()
 	float cosTheta = clamp( dot( n,l ), 0,1 );
 */
 					
-					vec3 L = normalize( position.xyz - lightPosition.xyz);
+					vec3 L = normalize(lightPosition.xyz);
 					float cosTheta = clamp(dot(normal,L), 0.0, 1.0);
-					//float bias = clamp(0.005*tan(acos(cosTheta)), 0.0001, 0.005);
+					//float bias = 0.00005*tan(acos(cosTheta));
+
 					float bias = 0.0001;
 
 					for (int i=0;i<4;i++){
-						int index = i;
-						visibility -= 0.15*(1.0-texture( s_shadowmap, vec3(shadowPos.xy + poissonDisk[index]/4000.0,  (shadowPos.z-bias)/shadowPos.w) ));
+						visibility -= 0.15*(1.0-texture( s_shadowmap, vec3(shadowPos.xy + poissonDisk[i]/4000.0,  (shadowPos.z-bias)/shadowPos.w) ));
 					}
 				}
 				else
