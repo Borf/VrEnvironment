@@ -55,5 +55,26 @@
 			"driver" : "mouse",
 			"src" : "right"
 		}
-	]
+	],
+	"driverconfig" :
+	{
+		"SimPosition" :
+		{
+			"Wand2" :
+			{
+				"initial" : [ -0.25, 1.0, -0.25 ],
+				"xneg" : "ctrl+a",
+				"xpos" : "ctrl+d",
+				"yneg" : "ctrl+z",
+				"ypos" : "ctrl+q",
+				"zneg" : "ctrl+w",
+				"zpos" : "ctrl+s",
+				"rotxneg" : "ctrl+numpad7",
+				"rotxpos" : "ctrl+numpad9",
+				"rotyneg" : "ctrl+numpad4",
+				"rotypos" : "ctrl+numpad6",
+				"rotzneg" : "ctrl+numpad1",
+				"rotzpos" : "ctrl+numpad3"			}
+		}
+	}
 }
