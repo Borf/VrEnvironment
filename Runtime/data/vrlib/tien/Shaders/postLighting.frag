@@ -21,6 +21,7 @@ uniform vec3 lightPosition;
 uniform vec3 lightDirection;
 uniform vec4 lightColor;
 uniform float lightRange;
+uniform float lightSpotAngle;
 uniform vec2 windowSize = vec2(1024,1024);
 uniform vec2 windowPos = vec2(0,0);
 uniform bool lightCastShadow;
@@ -75,18 +76,20 @@ void main()
 	float ambient = 0;																//final ambient factor
 	float specular = 0;																//final specular factor
 	float visibility = 1.0;															//shadow occlusion. 1 is visible, 0 is occluded by shadow
+	vec3 lightDir = lightPosition.xyz - position.xyz;
+	float distance = length(lightDir);
 
 	switch(lightType)
 	{
 		case 0:																		// directional light
 																					// for a directional light, the position is actually the direction...for now
-			diffuse = max(0, dot(normal, normalize(lightPosition.xyz))) * 0.5;
+			diffuse = max(0, dot(normal, normalize(lightDirection.xyz))) * 0.5;
 			ambient = 0.5;
 
 
 			//if(shinyness > 0)
 			{
-				vec3 l = normalize( lightPosition.xyz);
+				vec3 l = normalize( lightDirection.xyz);
 				vec3 R = normalize(reflect(-l, normal));
 				float cosAlpha = clamp(dot(normalize(cameraPosition - position.xyz), R), 0, 1);
 				specular = pow(cosAlpha, 10) * shinyness;
@@ -98,24 +101,7 @@ void main()
 				vec4 shadowPos = biasMatrix * shadowMatrix * vec4(position,1.0);
 				if(insideBox(shadowPos.xy, vec2(-1,-1), vec2(1,1)) > 0.1)
 				{
-/*						// Normal of the computed fragment, in camera space
-	vec3 n = normalize( Normal_cameraspace );
-	// Direction of the light (from the fragment to the light)
-	vec3 l = normalize( LightDirection_cameraspace );
-	// Cosine of the angle between the normal and the light direction, 
-	// clamped above 0
-	//  - light is at the vertical of the triangle -> 1
-	//  - light is perpendiular to the triangle -> 0
-	//  - light is behind the triangle -> 0
-	float cosTheta = clamp( dot( n,l ), 0,1 );
-*/
-					
-					vec3 L = normalize(lightPosition.xyz);
-					float cosTheta = clamp(dot(normal,L), 0.0, 1.0);
-					//float bias = 0.00005*tan(acos(cosTheta));
-
 					float bias = 0.0001;
-
 					for (int i=0;i<4;i++){
 						visibility -= 0.15*(1.0-texture( s_shadowmap, vec3(shadowPos.xy + poissonDisk[i]/4000.0,  (shadowPos.z-bias)/shadowPos.w) ));
 					}
@@ -126,8 +112,6 @@ void main()
 			break;	
 		case 1: // point light
 			ambient = 0;
-			vec3 lightDir = lightPosition.xyz - position.xyz;
-			float distance = length(lightDir);
 
 			if(lightCastShadow)
 			{
@@ -140,7 +124,30 @@ void main()
 			diffuse = distanceFac * clamp(dot(normalize(normal), normalize(lightDir)), 0, 1);
 			break;	
 		case 2: // spotlight
-			//TODO
+			ambient = 0;
+			
+			if(lightCastShadow)
+			{
+				vec4 shadowPos = biasMatrix * shadowMatrix * vec4(position,1.0);
+//				if(insideBox(shadowPos.xy, vec2(-1,-1), vec2(1,1)) > 0.1)
+				{
+					float bias = 0.0001;
+					for (int i=0;i<4;i++){
+						visibility -= 0.15*(1.0-textureProj( s_shadowmap, vec4(shadowPos.xy + poissonDisk[i]/4000.0,  (shadowPos.z-bias), shadowPos.w) ));
+					}
+				}
+//				else
+//					visibility = 1;
+			}
+			float distanceFac2 = pow(clamp((lightRange - distance) / lightRange, 0, 1), 1.5);
+			diffuse = distanceFac2 * clamp(dot(normalize(normal), normalize(lightDir)), 0, 1);
+
+			float angle = acos(dot(normalize(lightDir), normalize(lightDirection)));
+			if(abs(angle) > lightSpotAngle)
+				diffuse = 0;
+			else
+				diffuse = diffuse * clamp(pow(abs(angle-lightSpotAngle), 0.45),0,1.5);
+
 			break;	
 		default:
 			fragColor = vec4(0,1,1,1);
