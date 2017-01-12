@@ -71,6 +71,16 @@
 				"rotzpos" : "numpad3",
 				"camera" : true
 			}
-		}
+		},
+		"vrpn" :
+		[
+			{
+				"id" : 1,
+				"transform" :
+				{
+					"rot" : [ 0, 0, 90.0]
+				}
+			}
+		]
 	}
 }
