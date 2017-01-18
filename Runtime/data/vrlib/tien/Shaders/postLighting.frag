@@ -127,11 +127,11 @@ void main()
 			
 			float d = max(distance - lightRange, 0.0);
 			float denom = d / lightRange + 1;
-			float attenuation = 1 / (denom * denom);
+			float attenuation = lightIntensity / (denom * denom);
 			if(lightCutoff > 0)
 				attenuation = max(0, (attenuation - lightCutoff) / (1 - lightCutoff));
 
-			attenuation = attenuation * lightIntensity;
+			attenuation = attenuation;
 
 //			float distanceFac = pow(clamp((lightRange - distance) / lightRange, 0, 1), 1.5);
 			diffuse = attenuation * clamp(dot(normalize(normal), normalize(lightDir)), 0, 1);
