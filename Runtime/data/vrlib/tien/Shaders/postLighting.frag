@@ -21,7 +21,10 @@ uniform vec3 lightPosition;
 uniform vec3 lightDirection;
 uniform vec4 lightColor;
 uniform float lightRange;
+uniform float lightIntensity;
 uniform float lightSpotAngle;
+uniform float lightAmbient;
+uniform float lightCutoff;
 uniform vec2 windowSize = vec2(1024,1024);
 uniform vec2 windowPos = vec2(0,0);
 uniform bool lightCastShadow;
@@ -120,8 +123,18 @@ void main()
 					visibility = 0.4;
 			}
 
-			float distanceFac = pow(clamp((lightRange - distance) / lightRange, 0, 1), 1.5);
-			diffuse = distanceFac * clamp(dot(normalize(normal), normalize(lightDir)), 0, 1);
+			//float attenuation = 1.0 / (1.0 + (2.0 / lightRange) * distance + (1.0 / (lightRange * lightRange)) * distance * distance);
+			
+			float d = max(distance - lightRange, 0.0);
+			float denom = d / lightRange + 1;
+			float attenuation = 1 / (denom * denom);
+			if(lightCutoff > 0)
+				attenuation = max(0, (attenuation - lightCutoff) / (1 - lightCutoff));
+
+			attenuation = attenuation * lightIntensity;
+
+//			float distanceFac = pow(clamp((lightRange - distance) / lightRange, 0, 1), 1.5);
+			diffuse = attenuation * clamp(dot(normalize(normal), normalize(lightDir)), 0, 1);
 			break;	
 		case 2: // spotlight
 			ambient = 0;
