@@ -131,10 +131,15 @@ void main()
 			if(lightCutoff > 0)
 				attenuation = max(0, (attenuation - lightCutoff) / (1 - lightCutoff));
 
-			attenuation = attenuation;
-
 //			float distanceFac = pow(clamp((lightRange - distance) / lightRange, 0, 1), 1.5);
 			diffuse = attenuation * clamp(dot(normalize(normal), normalize(lightDir)), 0, 1);
+
+			vec3 l = normalize( lightDir.xyz);
+			vec3 R = normalize(reflect(-l, normal));
+			float cosAlpha = clamp(dot(normalize(cameraPosition - position.xyz), R), 0, 1);
+			specular = attenuation * pow(cosAlpha, 10) * shinyness;
+
+
 			break;	
 		case 2: // spotlight
 			ambient = 0;
