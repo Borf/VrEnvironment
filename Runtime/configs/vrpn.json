@@ -19,35 +19,29 @@
 			"driver" : "SimPosition",
 			"src" : "Camera"
 		},
-		{
+				{
 			"name" : "LeftButton",
-			"type" : "digital",
-			"driver" : "mouse",
-			"src" : "left"
-		},
-		{
-			"name" : "RightButton",
-			"type" : "digital",
-			"driver" : "mouse",
-			"src" : "right"
-		},
-		{
-			"name" : "MiddleButton",
-			"type" : "digital",
-			"driver" : "keyboard",
-			"src" : "f5"
-		},
-		{
-			"name" : "KeyPageUp",
 			"type" : "digital",
 			"driver" : "keyboard",
 			"src" : "pageup"
 		},
 		{
-			"name" : "KeyPageDown",
+			"name" : "RightButton",
 			"type" : "digital",
 			"driver" : "keyboard",
 			"src" : "pagedown"
+		},
+		{
+			"name" : "alt1",
+			"type" : "digital",
+			"driver" : "keyboard",
+			"src" : "f5"
+		},
+		{
+			"name" : "alt2",
+			"type" : "digital",
+			"driver" : "keyboard",
+			"src" : "."
 		}
 	],
 	"driverconfig" :

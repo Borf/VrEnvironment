@@ -86,8 +86,8 @@ void main()
 	{
 		case 0:																		// directional light
 																					// for a directional light, the position is actually the direction...for now
-			diffuse = max(0, dot(normal, normalize(lightDirection.xyz))) * 0.5;
-			ambient = 0.5;
+			diffuse = max(0, dot(normal, normalize(lightDirection.xyz))) * lightIntensity;
+			ambient = lightAmbient;
 
 
 			//if(shinyness > 0)
@@ -96,7 +96,7 @@ void main()
 				vec3 R = normalize(reflect(-l, normal));
 				float cosAlpha = clamp(dot(normalize(cameraPosition - position.xyz), R), 0, 1);
 				specular = pow(cosAlpha, 10) * shinyness;
-//				specular = clamp(specular, 0, 1);
+//				specular = clamp(lightIntensity * specular, 0, 1);
 			}
 
 			if(lightCastShadow)
@@ -174,6 +174,6 @@ void main()
 
 
 
-	fragColor = lightColor * (diffuse + ambient + specular) * visibility * image;
+	fragColor = lightColor * clamp(diffuse + ambient + specular,0,1) * visibility * image;
 	fragColor.a = 1;
 }
