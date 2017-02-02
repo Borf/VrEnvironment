@@ -63,7 +63,7 @@ public:
 	virtual void drawDeferredPass() override;
 	virtual void drawShadowMap() override;
 
-	vrlib::json::Value toJson(vrlib::json::Value &meshes) const override;
+	json toJson(json &meshes) const override;
 
 };
 

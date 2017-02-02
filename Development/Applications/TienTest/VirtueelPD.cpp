@@ -9,7 +9,7 @@
 #include <VrLib/tien/components/TransformAttach.h>
 #include <VrLib/tien/components/ModelRenderer.h>
 #include <VrLib/tien/components/Light.h>
-#include <VrLib/json.h>
+#include <VrLib/json.hpp>
 #include <VrLib/Log.h>
 using vrlib::Log;
 using vrlib::logger;
@@ -68,26 +68,28 @@ void VirtueelPD::init(vrlib::tien::Scene & scene, TienTest * app)
 		}
 	}
 
-	vrlib::json::Value v = vrlib::json::readJson(std::ifstream("data/virtueelpd/scenes/Real PD1 v1-6.json"));
-	for (const auto &o : v["objects"])
+	json v = json::parse(std::ifstream("data/virtueelpd/scenes/Real PD1 v1-6.json"));
+	for (auto &o : v["objects"])
 	{
-		if (o["model"].asString().find(".fbx") != std::string::npos)
-			o["model"] = o["model"].asString().substr(0, o["model"].asString().size() - 4);
+		if (o["model"].get<std::string>().find(".fbx") != std::string::npos)
+		{
+			o["model"] = o["model"].get<std::string>().substr(0, o["model"].get<std::string>().size() - 4);
+		}
 
 			
-		std::string fileName = "data/virtueelpd/models/" + o["category"].asString() + "/" + o["model"].asString() + "/" + o["model"].asString() + ".fbx";
+		std::string fileName = "data/virtueelpd/models/" + o["category"].get<std::string>() + "/" + o["model"].get<std::string>() + "/" + o["model"].get<std::string>() + ".fbx";
 		std::ifstream file(fileName);
 		if (file.is_open())
 		{
 			file.close();
 			vrlib::tien::Node* n = new vrlib::tien::Node("Environment", &scene);
 			n->addComponent(new vrlib::tien::components::Transform(
-				glm::vec3(o["x"], o["y"], -o["z"].asFloat() + 10),
+				glm::vec3(o["x"], o["y"], -o["z"].get<float>() + 10),
 				glm::quat(o["rotationquat"]["w"], o["rotationquat"]["x"], o["rotationquat"]["y"], o["rotationquat"]["z"]),
 				glm::vec3(o["scale"], o["scale"], o["scale"]) * 40.0f));
 			n->addComponent(new vrlib::tien::components::ModelRenderer(fileName));
 
-			if (o["model"].asString().find("realPD1") != std::string::npos)
+			if (o["model"].get<std::string>().find("realPD1") != std::string::npos)
 				n->getComponent<vrlib::tien::components::ModelRenderer>()->castShadow = false;
 		}
 		else

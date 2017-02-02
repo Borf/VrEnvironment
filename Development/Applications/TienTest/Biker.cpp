@@ -18,7 +18,7 @@
 #include <VrLib/tien/components/AnimatedModelRenderer.h>
 #include <VrLib/tien/components/DynamicSkyBox.h>
 #include <VrLib/tien/components/TransformAttach.h>
-#include <VrLib/json.h>
+#include <VrLib/json.hpp>
 CSerial serial;
 std::string buffer;
 float speed;
@@ -420,9 +420,9 @@ void GrassComponent::drawShadowMap()
 {
 }
 
-vrlib::json::Value GrassComponent::toJson(vrlib::json::Value &meshes) const
+json GrassComponent::toJson(json &meshes) const
 {
-	vrlib::json::Value ret;
+	json ret;
 	ret["type"] = "grass";
 	return ret;
 }
