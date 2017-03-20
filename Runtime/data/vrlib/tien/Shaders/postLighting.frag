@@ -82,6 +82,12 @@ void main()
 	vec3 lightDir = lightPosition.xyz - position.xyz;
 	float distance = length(lightDir);
 
+	float d = max(distance - lightRange, 0.0);
+	float denom = d / lightRange + 1;
+	float attenuation = lightIntensity / (denom * denom);
+	if(lightCutoff > 0)
+		attenuation = max(0, (attenuation - lightCutoff) / (1 - lightCutoff));
+
 	switch(lightType)
 	{
 		case 0:																		// directional light
@@ -123,14 +129,6 @@ void main()
 					visibility = 0.4;
 			}
 
-			//float attenuation = 1.0 / (1.0 + (2.0 / lightRange) * distance + (1.0 / (lightRange * lightRange)) * distance * distance);
-			
-			float d = max(distance - lightRange, 0.0);
-			float denom = d / lightRange + 1;
-			float attenuation = lightIntensity / (denom * denom);
-			if(lightCutoff > 0)
-				attenuation = max(0, (attenuation - lightCutoff) / (1 - lightCutoff));
-
 //			float distanceFac = pow(clamp((lightRange - distance) / lightRange, 0, 1), 1.5);
 			diffuse = attenuation * clamp(dot(normalize(normal), normalize(lightDir)), 0, 1);
 
@@ -147,24 +145,31 @@ void main()
 			if(lightCastShadow)
 			{
 				vec4 shadowPos = biasMatrix * shadowMatrix * vec4(position,1.0);
-//				if(insideBox(shadowPos.xy, vec2(-1,-1), vec2(1,1)) > 0.1)
-				{
-					float bias = 0.0001;
-					for (int i=0;i<4;i++){
-						visibility -= 0.15*(1.0-textureProj( s_shadowmap, vec4(shadowPos.xy + poissonDisk[i]/4000.0,  (shadowPos.z-bias), shadowPos.w) ));
-					}
+				float bias = 0.0001;
+				for (int i=0;i<4;i++){
+					visibility -= 0.15*(1.0-textureProj( s_shadowmap, vec4(shadowPos.xy + poissonDisk[i]/4000.0,  (shadowPos.z-bias), shadowPos.w) ));
 				}
-//				else
-//					visibility = 1;
 			}
+
 			float distanceFac2 = pow(clamp((lightRange - distance) / lightRange, 0, 1), 1.5);
 			diffuse = distanceFac2 * clamp(dot(normalize(normal), normalize(lightDir)), 0, 1);
 
 			float angle = acos(dot(normalize(lightDir), normalize(lightDirection)));
 			if(abs(angle) > lightSpotAngle)
+			{
 				diffuse = 0;
+				specular = 0;
+			}
 			else
-				diffuse = diffuse * clamp(pow(abs(angle-lightSpotAngle), 0.45),0,1.5);
+			{
+				float angleFactor = clamp(pow(abs(angle-lightSpotAngle), 1.0 + lightCutoff),0,1.5);
+				diffuse = diffuse * attenuation * angleFactor;
+
+				vec3 l = normalize( lightDir.xyz);
+				vec3 R = normalize(reflect(-l, normal));
+				float cosAlpha = clamp(dot(normalize(cameraPosition - position.xyz), R), 0, 1);
+				specular = attenuation * angleFactor * pow(cosAlpha, 10) * shinyness;
+			}
 
 			break;	
 		default:
