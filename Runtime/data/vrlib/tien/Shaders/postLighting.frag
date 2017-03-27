@@ -141,7 +141,7 @@ void main()
 			break;	
 		case 2: // spotlight
 			ambient = 0;
-			
+
 			if(lightCastShadow)
 			{
 				vec4 shadowPos = biasMatrix * shadowMatrix * vec4(position,1.0);
