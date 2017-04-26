@@ -137,7 +137,7 @@ void PhysXDemo::init()
 	for (physx::PxU32 i = 0; i<5; i++)
 		createStack(physx::PxTransform(physx::PxVec3(0, 0, stackZ -= 10.0f)), 10, .5f);
 
-	createDynamic(physx::PxTransform(physx::PxVec3(0, 15, 100)), physx::PxSphereGeometry(1), physx::PxVec3(0, -5, -100));
+	//createDynamic(physx::PxTransform(physx::PxVec3(0, 15, 100)), physx::PxSphereGeometry(1), physx::PxVec3(0, -5, -100));
 
 }
 

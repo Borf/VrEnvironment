@@ -201,7 +201,7 @@ void TowerDefense::init(vrlib::tien::Scene& scene, TienTest* app)
 	spawnCount = 0;
 	nextSpawn = 10;
 
-	{
+/*	{
 		vrlib::tien::Node* n = new vrlib::tien::Node("NewArcherTower", &scene);
 		n->addComponent(new vrlib::tien::components::Transform(glm::vec3(-.4f, 2, -.52f), glm::quat(), glm::vec3(0.05f, 0.05f, 0.05f)));
 		n->addComponent(new vrlib::tien::components::ModelRenderer("data/TienTest/models/ArcherTower/archertower.obj"));
@@ -225,7 +225,7 @@ void TowerDefense::init(vrlib::tien::Scene& scene, TienTest* app)
 		nn->addComponent(new vrlib::tien::components::Transform(glm::vec3(-3, 0, 2), glm::quat(glm::vec3(0, glm::radians(90.0f), 0)), glm::vec3(0.25f, 0.25f, 0.25f)));
 		nn->addComponent(new vrlib::tien::components::AnimatedModelRenderer("data/TienTest/models/spider/spider3.fbx"));
 		nn->getComponent<vrlib::tien::components::AnimatedModelRenderer>()->playAnimation("Armature|ArmatureAction", true);
-	}
+	}*/
 
 }
 
@@ -408,7 +408,7 @@ void TowerDefense::update(float frameTime, vrlib::tien::Scene& scene, TienTest* 
 		}
 	}
 
-	bool left;
+	/*bool left;
 	if (newTower &&
 		((left = scene.testBodyCollision(leftHand, newTower) && app->vive.controllers[1].triggerButton.getData() == vrlib::DigitalState::ON) ||
 		(scene.testBodyCollision(rightHand, newTower) && app->vive.controllers[0].triggerButton.getData() == vrlib::DigitalState::ON)))
@@ -484,7 +484,7 @@ void TowerDefense::update(float frameTime, vrlib::tien::Scene& scene, TienTest* 
 			newTower = n;
 			newTowerTime = 2;
 		}
-	}
+	}*/
 }
 
 

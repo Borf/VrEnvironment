@@ -142,6 +142,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TiEnEdit", "Applications\Ti
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PhysXDemo", "Applications\Tutorials\PhysXDemo\PhysXDemo.vcxproj", "{208B5957-FE1E-434E-B052-2C78E9DD2F02}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C1C8BD19-EF70-44E0-A9B4-E11BAC4FB858} = {C1C8BD19-EF70-44E0-A9B4-E11BAC4FB858}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
