@@ -46,3 +46,6 @@
 [submodule "Development/Applications/NetworkEngine"]
 	path = Development/Applications/NetworkEngine
 	url = https://github.com/Borf/NetworkEngine.git
+[submodule "Runtime/data/Models"]
+	path = Runtime/data/Models
+	url = https://bitbucket.org/ti_vr/models.git
