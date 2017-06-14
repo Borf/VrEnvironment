@@ -40,5 +40,5 @@ void main()
 	fragColor.rgb = tex.rgb * mask;
 
 	fragNormal.xyz = encodeNormal(n);
-	fragNormal.a = 1;
+	fragNormal.a = tex.a;
 }

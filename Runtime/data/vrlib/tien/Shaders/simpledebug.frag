@@ -28,5 +28,8 @@ void main()
 		fragColor = vec4(alpha,alpha,alpha,1);
 	}
 	else
+	{
 		fragColor = mix(color, texture2D( s_texture, texcoord ), textureFactor);
+		fragColor.a = 1;
+	}
 }
