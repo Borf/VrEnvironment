@@ -110,7 +110,7 @@ void main()
 				vec4 shadowPos = biasMatrix * shadowMatrix * vec4(position,1.0);
 				if(insideBox(shadowPos.xy, vec2(-1,-1), vec2(1,1)) > 0.1)
 				{
-					float bias = 0.0001;
+					float bias = 0.000001;
 					for (int i=0;i<4;i++){
 						visibility -= 0.15*(1.0-texture( s_shadowmap, vec3(shadowPos.xy + poissonDisk[i]/4000.0,  (shadowPos.z-bias)/shadowPos.w) ));
 					}

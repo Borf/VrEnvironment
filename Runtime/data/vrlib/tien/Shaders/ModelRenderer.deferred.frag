@@ -9,6 +9,7 @@ uniform sampler2D s_specularmap;
 uniform vec4 diffuseColor;
 uniform float textureFactor;
 uniform float shinyness;
+uniform float hasNormalMap = 1;
 
 
 in vec2 texCoord;
@@ -44,7 +45,9 @@ void main()
 	fragNormal.a = shinyness * texture2D(s_specularmap, texCoord).r;
 	
 
-
-	fragNormal.xyz = encodeNormal(normalize(n));
+	if(hasNormalMap < 0.5)
+		fragNormal.xyz = encodeNormal(normalize(normal));
+	else
+		fragNormal.xyz = encodeNormal(normalize(n));
 	//fragPosition = position;
 }
