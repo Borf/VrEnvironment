@@ -14,7 +14,7 @@
 			"vive" : 
 			{
 				"mode" : "local",
-				"arguments" : "--config configs/vive.json"
+				"arguments" : "--config configs/OpenVR.json"
 			},
 			"sim" :
 			{
@@ -38,7 +38,7 @@
 			"vive" : 
 			{
 				"mode" : "local",
-				"arguments" : "--config configs/vive.json"
+				"arguments" : "--config configs/OpenVR.json"
 			},
 			"sim" :
 			{
@@ -62,7 +62,7 @@
 			"vive" : 
 			{
 				"mode" : "local",
-				"arguments" : "--config configs/vive.json maps/level2.bsp"
+				"arguments" : "--config configs/OpenVR.json maps/level2.bsp"
 			},
 			"sim" :
 			{
@@ -86,7 +86,7 @@
 			"vive" : 
 			{
 				"mode" : "local",
-				"arguments" : "--config configs/vive.json"
+				"arguments" : "--config configs/OpenVR.json"
 			},
 			"sim" :
 			{
@@ -111,7 +111,7 @@
 			"vive" : 
 			{
 				"mode" : "local",
-				"arguments" : "--config configs/vive.json"
+				"arguments" : "--config configs/OpenVR.json"
 			},
 			"sim" :
 			{
@@ -144,7 +144,7 @@
 			"vive" : 
 			{
 				"mode" : "local",
-				"arguments" : "--config configs/vive.json"
+				"arguments" : "--config configs/OpenVR.json"
 			},
 			"sim" :
 			{
@@ -168,7 +168,7 @@
 			"vive" : 
 			{
 				"mode" : "local",
-				"arguments" : "--config configs/vive.json"
+				"arguments" : "--config configs/OpenVR.json"
 			},
 			"sim" :
 			{
