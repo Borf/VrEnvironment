@@ -1,0 +1,236 @@
+{
+	"server"	: "CAVE-Control",
+	"port"		: 9999,
+	"clients"	: 
+	[
+		"PC121010",
+		"PC121006",
+		"PC121007",
+		"PC121013",
+		"PC121015"
+	],
+
+	"filters"	: 
+	[
+	],
+
+	"apps" :
+	[
+		{
+			"name"		: "CaveQuake",
+			"display"	: "d:/cave/runtime/data/CaveQuake/levelshots/Q3TOURNEY5.jpg",
+			"apps" :
+			[
+				{
+					"name"		: "DIF level 1",
+					"path"		: "d:/cave/runtime/",
+					"display"	: "d:/cave/runtime/data/CaveQuake/levelshots/level1.jpg",
+					"command"	: "d:/cave/runtime/cavequake.exe",
+					"parameters"	: "maps/level1.bsp"
+				},
+				{
+					"name"		: "DIF level 2",
+					"display"	: "d:/cave/runtime/data/CaveQuake/levelshots/level2.jpg",
+					"path"		: "d:/cave/runtime/",
+					"command"	: "d:/cave/runtime/cavequake.exe",
+					"parameters"	: "maps/level2.bsp"
+				},
+				{
+					"name"		: "Tourney 5",
+					"display"	: "d:/cave/runtime/data/CaveQuake/levelshots/Q3TOURNEY5.jpg",
+					"path"		: "d:/cave/runtime/",
+					"command"	: "d:/cave/runtime/cavequake.exe",
+					"parameters"	: "maps/Q3TOURNEY5.bsp"
+				},
+				{
+					"name"		: "Tourney 4",
+					"display"	: "d:/cave/runtime/data/CaveQuake/levelshots/Q3TOURNEY4.jpg",
+					"path"		: "d:/cave/runtime/",
+					"command"	: "d:/cave/runtime/cavequake.exe",
+					"parameters"	: "maps/Q3TOURNEY4.bsp"
+				},
+				{
+					"name"		: "Town",
+					"display"	: "d:/cave/runtime/data/CaveQuake/levelshots/an_town.jpg",
+					"path"		: "d:/cave/runtime/",
+					"command"	: "d:/cave/runtime/cavequake.exe",
+					"parameters"	: "maps/an_town.bsp"
+				},
+				{
+					"name"		: "Jail",
+					"display"	: "d:/cave/runtime/data/CaveQuake/levelshots/an_jail.jpg",
+					"path"		: "d:/cave/runtime/",
+					"command"	: "d:/cave/runtime/cavequake.exe",
+					"parameters"	: "maps/an_jail.bsp"
+				}
+			]
+		},
+		{
+			"name"		: "OpenSceneGraph Modelviewer",
+			"display"	: "d:/cave/runtime/data/Models/models.bmp",
+			"apps"		:
+			[
+				{
+					"name"		: "Hangar",
+					"display"	: "d:/cave/runtime/data/Models/hangar/model.jpg",
+					"command"	: "d:/cave/runtime/osgNav.exe",
+					"path"		: "d:/cave/runtime/data/models/hangar",
+					"parameters"	: "--model model.osg"
+				},
+				{
+					"name"		: "Trein NS",
+					"display"	: "d:/cave/runtime/data/Models/trein/model.jpg",
+					"command"	: "d:/cave/runtime/osgNav.exe",
+					"path"		: "d:/cave/runtime/data/models/trein",
+					"parameters"	: "--model model.osg"
+				},
+				{
+					"name"		: "Galossy Truck (langzaam)",
+					"display"	: "d:/cave/runtime/data/Models/galossy/model.jpg",
+					"command"	: "d:/cave/runtime/osgNav.exe",
+					"path"		: "d:/cave/runtime/data/models/galossy",
+					"parameters"	: "--model model.osg"
+				},
+				{
+					"name"		: "Oven",
+					"display"	: "d:/cave/runtime/data/Models/oven/model.jpg",
+					"command"	: "d:/cave/runtime/osgNav.exe",
+					"path"		: "d:/cave/runtime/data/models/oven",
+					"parameters"	: "--model model.osg"
+				},
+				{
+					"name"		: "Ship",
+					"display"	: "d:/cave/runtime/data/Models/ship/model.jpg",
+					"command"	: "d:/cave/runtime/osgNav.exe",
+					"path"		: "d:/cave/runtime/data/models/ship",
+					"parameters"	: "--model model.osg"
+				},
+				{
+					"name"		: "T-rex",
+					"display"	: "d:/cave/runtime/data/Models/trex/model.jpg",
+					"command"	: "d:/cave/runtime/osgNav.exe",
+					"path"		: "d:/cave/runtime/data/models/trex",
+					"parameters"	: "--model model.osg"
+				},
+				{
+					"name"		: "Gebouw",
+					"display"	: "d:/cave/runtime/data/Models/gebouw/model.jpg",
+					"command"	: "d:/cave/runtime/osgNav.exe",
+					"path"		: "d:/cave/runtime/data/models/gebouw",
+					"parameters"	: "--model model.osg"
+				},
+				{
+					"name"		: "Cylinder",
+					"display"	: "d:/cave/runtime/data/Models/engine/model.jpg",
+					"command"	: "d:/cave/runtime/osgNav.exe",
+					"path"		: "d:/cave/runtime/data/models/engine",
+					"parameters"	: "--model model.osg"
+				}
+			]
+		},
+		{
+			"name"		: "OpenSceneGraph VR",
+			"display"	: "d:/cave/runtime/data/osgRoom/osgRoom.bmp",
+			"apps"		:
+			[
+				{
+					"name"		: "Auto",
+					"display"	: "d:/cave/runtime/data/Models/auto/model.jpg",
+					"command"	: "d:/cave/runtime/osgRoom.exe",
+					"path"		: "d:/cave/runtime/data/models/auto",
+					"parameters"	: "--model model.osg"
+				},
+				{
+					"name"		: "Auto 2",
+					"display"	: "d:/cave/runtime/data/Models/auto2/model.jpg",
+					"command"	: "d:/cave/runtime/osgRoom.exe",
+					"path"		: "d:/cave/runtime/data/models/auto2",
+					"parameters"	: "--model model.osg"
+				},
+				{
+					"name"		: "Galossy Truck (langzaam)",
+					"display"	: "d:/cave/runtime/data/Models/galossy/model.jpg",
+					"command"	: "d:/cave/runtime/osgRoom.exe",
+					"path"		: "d:/cave/runtime/data/models/galossy",
+					"parameters"	: "--model model.osg"
+				},
+				{
+					"name"		: "Oven",
+					"display"	: "d:/cave/runtime/data/models/oven/model.jpg",
+					"command"	: "d:/cave/runtime/osgRoom.exe",
+					"path"		: "d:/cave/runtime/data/models/oven",
+					"parameters"	: "--model model.osg"
+				},
+				{
+					"name"		: "Ship",
+					"display"	: "d:/cave/runtime/data/models/ship/model.jpg",
+					"command"	: "d:/cave/runtime/osgRoom.exe",
+					"path"		: "d:/cave/runtime/data/models/ship",
+					"parameters"	: "--model model.osg"
+				},
+				{
+					"name"		: "T-rex",
+					"display"	: "d:/cave/runtime/data/models/trex/model.jpg",
+					"command"	: "d:/cave/runtime/osgRoom.exe",
+					"path"		: "d:/cave/runtime/data/models/trex",
+					"parameters"	: "--model model.osg"
+				},
+				{
+					"name"		: "Gebouw",
+					"display"	: "d:/cave/runtime/data/models/gebouw/model.jpg",
+					"command"	: "d:/cave/runtime/osgRoom.exe",
+					"path"		: "d:/cave/runtime/data/models/gebouw",
+					"parameters"	: "--model model.osg"
+				},
+				{
+					"name"		: "Cylinder",
+					"display"	: "d:/cave/runtime/data/models/engine/model.jpg",
+					"command"	: "d:/cave/runtime/osgRoom.exe",
+					"path"		: "d:/cave/runtime/data/models/engine",
+					"parameters"	: "--model model.osg"
+				},
+				{
+					"name"		: "Stad",
+					"display"	: "d:/cave/runtime/data/models/stad/model.jpg",
+					"command"	: "d:/cave/runtime/osgRoom.exe",
+					"path"		: "d:/cave/runtime/data/models/stad",
+					"parameters"	: "--model model.osg"
+				},
+				{
+					"name"		: "Telefoon",
+					"display"	: "d:/cave/runtime/data/models/telefoon/model.jpg",
+					"command"	: "d:/cave/runtime/osgRoom.exe",
+					"path"		: "d:/cave/runtime/data/models/telefoon",
+					"parameters"	: "--model model.osg"
+				},
+				{
+					"name"		: "Mier",
+					"display"	: "d:/cave/runtime/data/models/mier/model.jpg",
+					"command"	: "d:/cave/runtime/osgRoom.exe",
+					"path"		: "d:/cave/runtime/data/models/mier",
+					"parameters"	: "--model model.osg"
+				}
+				
+			]
+		},
+		{
+			"name"		: "Mieren",
+			"path"		: "d:/cave/runtime",
+			"display"	: "d:/cave/runtime/Data/mieren/mieren.jpg",
+			"command"	: "d:/cave/runtime/mieren.exe",
+			"parameters"	: ""
+		},
+		{
+			"name"		: "USB Drive",
+			"display"	: "d:/cave/Runtime/data/CaveStarter/usbstick.bmp",
+			"mount"		: "USB"
+		},
+		{
+			"name"		: "FyloGeneticTree",
+			"path"		: "d:/cave/runtime/",
+			"display"	: "d:/cave/runtime/Data/FyloGeneticTree/biopanel.jpg",
+			"command"	: "d:/cave/runtime/FyloGeneticTree.exe",
+			"parameters"	: "--file d:/cave/Runtime/Data/FyloGeneticTree/fgt0234834.dnd"
+		}
+	]
+}

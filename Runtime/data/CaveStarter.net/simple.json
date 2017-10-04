@@ -1,0 +1,180 @@
+[
+	{
+		"name" : "Cave Alignment",
+		"icon" : "gridalign.png",
+		"exe" : "CaveAlign.exe",
+		"configs" : 
+		{
+			"cave" : 
+			{
+				"mode" : "remote", 
+				"arguments" : "--config configs/config.json --config configs/vrpn.json",
+				"path" : "C:\\Users\\CAVE\\Desktop\\VrEnvironment\\Runtime"
+			},
+			"vive" : 
+			{
+				"mode" : "local",
+				"arguments" : "--config configs/vive.json"
+			},
+			"sim" :
+			{
+				"mode" : "local", 
+				"arguments" : "--config configs/sim.json --config configs/vive-sim.json"
+			}
+		}
+	},
+	{
+		"name" : "VR Demos",
+		"icon" : "johandemo.png",
+		"exe" : "VrDemos.exe",
+		"configs" : 
+		{
+			"cave" : 
+			{
+				"mode" : "remote", 
+				"arguments" : "--config configs/config.json --config configs/vrpn.json",
+				"path" : "C:\\Users\\CAVE\\Desktop\\VrEnvironment\\Runtime"
+			},
+			"vive" : 
+			{
+				"mode" : "local",
+				"arguments" : "--config configs/vive.json"
+			},
+			"sim" :
+			{
+				"mode" : "local", 
+				"arguments" : "--config configs/sim.json"
+			}
+		}
+	},
+	{
+		"name" : "CaveQuake DIF",
+		"icon" : "CaveQuakeDif.png",
+		"exe" : "cavequake.exe",
+		"configs" : 
+		{
+			"cave" : 
+			{
+				"mode" : "remote", 
+				"arguments" : "--config configs/config.json --config configs/vrpn.json maps/level2.bsp",
+				"path" : "C:\\Users\\CAVE\\Desktop\\VrEnvironment\\Runtime"
+			},
+			"vive" : 
+			{
+				"mode" : "local",
+				"arguments" : "--config configs/vive.json maps/level2.bsp"
+			},
+			"sim" :
+			{
+				"mode" : "local", 
+				"arguments" : "--config configs/sim.json maps/level2.bsp"
+			}
+		}
+	},
+	{
+		"name" : "CaveCraft",
+		"icon" : "CaveCraft.png",
+		"exe" : "CaveCraft.exe",
+		"configs" : 
+		{
+			"cave" : 
+			{
+				"mode" : "remote", 
+				"arguments" : "--config configs/config.json --config configs/vrpn.json",
+				"path" : "C:\\Users\\CAVE\\Desktop\\VrEnvironment\\Runtime"
+			},
+			"vive" : 
+			{
+				"mode" : "local",
+				"arguments" : "--config configs/vive.json"
+			},
+			"sim" :
+			{
+				"mode" : "local", 
+				"arguments" : "--config configs/sim.json"
+			}
+		}
+	},
+	{
+		"name" : "Chemical Storage",
+		"icon" : "ChemStorage.png",
+		"exe" : "ChemicalStorage.exe",
+		"userlogin" : true,
+		"configs" : 
+		{
+			"cave" : 
+			{
+				"mode" : "remote", 
+				"arguments" : "--config configs/config.json --config configs/vrpn.json",
+				"path" : "C:\\Users\\CAVE\\Desktop\\VrEnvironment\\Runtime"
+			},
+			"vive" : 
+			{
+				"mode" : "local",
+				"arguments" : "--config configs/vive.json"
+			},
+			"sim" :
+			{
+				"mode" : "local", 
+				"arguments" : "--config configs/sim.json"
+			}
+		}
+	},
+	{
+		"name" : "Virtueel PD",
+		"icon" : "CrimeScene.png",
+		"exe" : "VirtueelPD.exe",
+		"userlogin" : true,
+		"options" : 
+		[
+			{
+				"name" : "PD1",
+				"arguments" : "--map pd1.json",
+				"icon" : "pd/pd1.png"
+			}
+		],
+		"configs" : 
+		{
+			"cave" : 
+			{
+				"mode" : "remote", 
+				"arguments" : "--config configs/config.json --config configs/vrpn.json",
+				"path" : "C:\\Users\\CAVE\\Desktop\\VrEnvironment\\Runtime"
+			},
+			"vive" : 
+			{
+				"mode" : "local",
+				"arguments" : "--config configs/vive.json"
+			},
+			"sim" :
+			{
+				"mode" : "local", 
+				"arguments" : "--config configs/sim.json"
+			}
+		}
+	},
+	{
+		"name" : "Network Engine",
+		"icon" : "NetworkEngine.png",
+		"exe" : "NetworkEngine.exe",
+		"configs" : 
+		{
+			"cave" : 
+			{
+				"mode" : "remote", 
+				"arguments" : "--config configs/config.json --config configs/vrpn.json",
+				"path" : "C:\\Users\\CAVE\\Desktop\\VrEnvironment\\Runtime"
+			},
+			"vive" : 
+			{
+				"mode" : "local",
+				"arguments" : "--config configs/vive.json"
+			},
+			"sim" :
+			{
+				"mode" : "local", 
+				"arguments" : "--config configs/sim.json --config configs/vive-sim.json"
+			}
+		}
+	}
+]
