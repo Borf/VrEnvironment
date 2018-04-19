@@ -49,3 +49,6 @@
 [submodule "Runtime/data/Models"]
 	path = Runtime/data/Models
 	url = https://bitbucket.org/ti_vr/models.git
+[submodule "Development/Applications/pointcloud"]
+	path = Development/Applications/pointcloud
+	url = https://bitbucket.org/ti_vr/pointcloud.git
