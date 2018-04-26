@@ -52,3 +52,6 @@
 [submodule "Development/Applications/pointcloud"]
 	path = Development/Applications/pointcloud
 	url = https://bitbucket.org/ti_vr/pointcloud.git
+[submodule "Development/Applications/BodemOnderzoek"]
+	path = Development/Applications/BodemOnderzoek
+	url = https://bitbucket.org/ti_vr/bodemonderzoek.git
