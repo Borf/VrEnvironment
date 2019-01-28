@@ -1,180 +1,430 @@
 [
-	{
-		"name" : "Cave Alignment",
-		"icon" : "gridalign.png",
-		"exe" : "CaveAlign.exe",
-		"configs" : 
-		{
-			"cave" : 
-			{
-				"mode" : "remote", 
-				"arguments" : "--config configs/config.json --config configs/vrpn.json",
-				"path" : "C:\\Users\\CAVE\\Desktop\\VrEnvironment\\Runtime"
-			},
-			"vive" : 
-			{
-				"mode" : "local",
-				"arguments" : "--config configs/OpenVR.json"
-			},
-			"sim" :
-			{
-				"mode" : "local", 
-				"arguments" : "--config configs/sim.json --config configs/vive-sim.json"
-			}
-		}
-	},
-	{
-		"name" : "VR Demos",
-		"icon" : "johandemo.png",
-		"exe" : "VrDemos.exe",
-		"configs" : 
-		{
-			"cave" : 
-			{
-				"mode" : "remote", 
-				"arguments" : "--config configs/config.json --config configs/vrpn.json",
-				"path" : "C:\\Users\\CAVE\\Desktop\\VrEnvironment\\Runtime"
-			},
-			"vive" : 
-			{
-				"mode" : "local",
-				"arguments" : "--config configs/OpenVR.json"
-			},
-			"sim" :
-			{
-				"mode" : "local", 
-				"arguments" : "--config configs/sim.json"
-			}
-		}
-	},
-	{
-		"name" : "CaveQuake DIF",
-		"icon" : "CaveQuakeDif.png",
-		"exe" : "cavequake.exe",
-		"configs" : 
-		{
-			"cave" : 
-			{
-				"mode" : "remote", 
-				"arguments" : "--config configs/config.json --config configs/vrpn.json maps/level2.bsp",
-				"path" : "C:\\Users\\CAVE\\Desktop\\VrEnvironment\\Runtime"
-			},
-			"vive" : 
-			{
-				"mode" : "local",
-				"arguments" : "--config configs/OpenVR.json maps/level2.bsp"
-			},
-			"sim" :
-			{
-				"mode" : "local", 
-				"arguments" : "--config configs/sim.json maps/level2.bsp"
-			}
-		}
-	},
-	{
-		"name" : "CaveCraft",
-		"icon" : "CaveCraft.png",
-		"exe" : "CaveCraft.exe",
-		"configs" : 
-		{
-			"cave" : 
-			{
-				"mode" : "remote", 
-				"arguments" : "--config configs/config.json --config configs/vrpn.json",
-				"path" : "C:\\Users\\CAVE\\Desktop\\VrEnvironment\\Runtime"
-			},
-			"vive" : 
-			{
-				"mode" : "local",
-				"arguments" : "--config configs/OpenVR.json"
-			},
-			"sim" :
-			{
-				"mode" : "local", 
-				"arguments" : "--config configs/sim.json"
-			}
-		}
-	},
-	{
-		"name" : "Chemical Storage",
-		"icon" : "ChemStorage.png",
-		"exe" : "ChemicalStorage.exe",
-		"userlogin" : true,
-		"configs" : 
-		{
-			"cave" : 
-			{
-				"mode" : "remote", 
-				"arguments" : "--config configs/config.json --config configs/vrpn.json",
-				"path" : "C:\\Users\\CAVE\\Desktop\\VrEnvironment\\Runtime"
-			},
-			"vive" : 
-			{
-				"mode" : "local",
-				"arguments" : "--config configs/OpenVR.json"
-			},
-			"sim" :
-			{
-				"mode" : "local", 
-				"arguments" : "--config configs/sim.json"
-			}
-		}
-	},
-	{
-		"name" : "Virtueel PD",
-		"icon" : "CrimeScene.png",
-		"exe" : "VirtueelPD.exe",
-		"userlogin" : true,
-		"options" : 
-		[
-			{
-				"name" : "PD1",
-				"arguments" : "--map pd1.json",
-				"icon" : "pd/pd1.png"
-			}
-		],
-		"configs" : 
-		{
-			"cave" : 
-			{
-				"mode" : "remote", 
-				"arguments" : "--config configs/config.json --config configs/vrpn.json",
-				"path" : "C:\\Users\\CAVE\\Desktop\\VrEnvironment\\Runtime"
-			},
-			"vive" : 
-			{
-				"mode" : "local",
-				"arguments" : "--config configs/OpenVR.json"
-			},
-			"sim" :
-			{
-				"mode" : "local", 
-				"arguments" : "--config configs/sim.json"
-			}
-		}
-	},
-	{
-		"name" : "Network Engine",
-		"icon" : "NetworkEngine.png",
-		"exe" : "NetworkEngine.exe",
-		"configs" : 
-		{
-			"cave" : 
-			{
-				"mode" : "remote", 
-				"arguments" : "--config configs/config.json --config configs/vrpn.json",
-				"path" : "C:\\Users\\CAVE\\Desktop\\VrEnvironment\\Runtime"
-			},
-			"vive" : 
-			{
-				"mode" : "local",
-				"arguments" : "--config configs/OpenVR.json"
-			},
-			"sim" :
-			{
-				"mode" : "local", 
-				"arguments" : "--config configs/sim.json --config configs/vive-sim.json"
-			}
-		}
-	}
+  {
+    "name": "Cave Alignment",
+    "icon": "gridalign.png",
+    "exe": "CaveAlign.exe",
+    "configs": {
+      "cave": {
+        "mode": "remote",
+        "arguments": "--config configs/config.json --config configs/vrpn.json",
+        "path": "C:\\Users\\CAVE\\Desktop\\VrEnvironment\\Runtime"
+      },
+      "vive": {
+        "mode": "local",
+        "arguments": "--config configs/OpenVR.json"
+      },
+      "sim": {
+        "mode": "local",
+        "arguments": "--config configs/sim.json --config configs/vive-sim.json"
+      }
+    }
+  },
+  {
+    "name": "VR Demos",
+    "icon": "johandemo.png",
+    "exe": "VrDemos.exe",
+    "configs": {
+      "cave": {
+        "mode": "remote",
+        "arguments": "--config configs/config.json --config configs/vrpn.json",
+        "path": "C:\\Users\\CAVE\\Desktop\\VrEnvironment\\Runtime"
+      },
+      "vive": {
+        "mode": "local",
+        "arguments": "--config configs/OpenVR.json"
+      },
+      "sim": {
+        "mode": "local",
+        "arguments": "--config configs/sim.json"
+      }
+    }
+  },
+  {
+    "name": "CaveQuake DIF",
+    "icon": "CaveQuakeDif.png",
+    "exe": "cavequake.exe",
+    "configs": {
+      "cave": {
+        "mode": "remote",
+        "arguments": "--config configs/config.json --config configs/vrpn.json maps/level2.bsp",
+        "path": "C:\\Users\\CAVE\\Desktop\\VrEnvironment\\Runtime"
+      },
+      "vive": {
+        "mode": "local",
+        "arguments": "--config configs/OpenVR.json maps/level2.bsp"
+      },
+      "sim": {
+        "mode": "local",
+        "arguments": "--config configs/sim.json maps/level2.bsp"
+      }
+    }
+  },
+  {
+    "name": "CaveCraft",
+    "icon": "CaveCraft.png",
+    "exe": "CaveCraft.exe",
+    "configs": {
+      "cave": {
+        "mode": "remote",
+        "arguments": "--config configs/config.json --config configs/vrpn.json",
+        "path": "C:\\Users\\CAVE\\Desktop\\VrEnvironment\\Runtime"
+      },
+      "vive": {
+        "mode": "local",
+        "arguments": "--config configs/OpenVR.json"
+      },
+      "sim": {
+        "mode": "local",
+        "arguments": "--config configs/sim.json"
+      }
+    }
+  },
+  {
+    "name": "Chemical Storage",
+    "icon": "ChemStorage.png",
+    "exe": "ChemicalStorage.exe",
+    "userlogin": true,
+    "configs": {
+      "cave": {
+        "mode": "remote",
+        "arguments": "--config configs/config.json --config configs/vrpn.json",
+        "path": "C:\\Users\\CAVE\\Desktop\\VrEnvironment\\Runtime"
+      },
+      "vive": {
+        "mode": "local",
+        "arguments": "--config configs/OpenVR.json"
+      },
+      "sim": {
+        "mode": "local",
+        "arguments": "--config configs/sim.json"
+      }
+    }
+  },
+  {
+    "name": "AVB",
+    "icon": "ChemStorage.png",
+    "exe": "ChemicalStorage_avb.exe",
+    "userlogin": false,
+    "configs": {
+      "cave": {
+        "mode": "remote",
+        "arguments": "--config configs/config.json --config configs/vrpn.json",
+        "path": "C:\\Users\\CAVE\\Desktop\\VrEnvironment\\Runtime"
+      },
+      "vive": {
+        "mode": "local",
+        "arguments": "--config configs/OpenVR.json"
+      },
+      "sim": {
+        "mode": "local",
+        "arguments": "--config configs/sim.json"
+      }
+    }
+  },
+  {
+    "name": "Bodemonderzoek",
+    "icon": "PdbViewer.png",
+    "exe": "Bodemonderzoek.exe",
+    "configs": {
+      "cave": {
+        "mode": "remote",
+        "arguments": "--config configs/config.json --config configs/vrpn.json",
+        "path": "C:\\Users\\CAVE\\Desktop\\VrEnvironment\\Runtime"
+      },
+      "vive": {
+        "mode": "local",
+        "arguments": "--config configs/OpenVR.json"
+      },
+      "sim": {
+        "mode": "local",
+        "arguments": "--config configs/sim.json"
+      }
+    }
+  },
+  {
+    "name": "Virtueel PD",
+    "icon": "CrimeScene.png",
+    "exe": "VirtueelPD.exe",
+    "userlogin": true,
+    "options": [
+      {
+        "name": "PD1",
+        "arguments": "--map pd1.json",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2017 - PD1 - Di1",
+        "arguments": "--map \"2017 - PD1 - Di1.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD1",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD1.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD2",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD2.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD3",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD3.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD4",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD4.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD5",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD5.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD6",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD6.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD7",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD7.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD8",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD8.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD9",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD9.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD10",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD10.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD11",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD11.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD12",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD12.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD13",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD13.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD14",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD14.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD15",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD15.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD16",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD16.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD17",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD17.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD18",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD18.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD19",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD19.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD20",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD20.json\"",
+        "icon": "pd/pd1.png"
+      }
+    ],
+    "configs": {
+      "cave": {
+        "mode": "remote",
+        "arguments": "--config configs/config.json --config configs/vrpn.json",
+        "path": "C:\\Users\\CAVE\\Desktop\\VrEnvironment\\Runtime"
+      },
+      "vive": {
+        "mode": "local",
+        "arguments": "--config configs/OpenVR.json"
+      },
+      "sim": {
+        "mode": "local",
+        "arguments": "--config configs/sim.json"
+      }
+    }
+  },
+  {
+    "name": "Virtueel PD zonder login",
+    "icon": "CrimeScene.png",
+    "exe": "VirtueelPD.exe",
+    "userlogin": false,
+    "options": [
+      {
+        "name": "Container",
+        "arguments": "--scene data/virtueelpd/scenes/Container.json",
+        "icon": "pd/map.png"
+      },
+      {
+        "name": "PD1",
+        "arguments": "--scene data/virtueelpd/scenes/pd1.json",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD1",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD1.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD2",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD2.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD3",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD3.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD4",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD4.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD5",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD5.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD6",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD6.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD7",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD7.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD8",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD8.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD9",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD9.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD10",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD10.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD11",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD11.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD12",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD12.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD13",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD13.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD14",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD14.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD15",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD15.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD16",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD16.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD17",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD17.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD18",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD18.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD19",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD19.json\"",
+        "icon": "pd/pd1.png"
+      },
+      {
+        "name": "2018 - PD20",
+        "arguments": "--scene \"data/virtueelpd/scenes/2018 - PD20.json\"",
+        "icon": "pd/pd1.png"
+      }
+    ],
+    "configs": {
+      "cave": {
+        "mode": "remote",
+        "arguments": "--config configs/config.json --config configs/vrpn.json",
+        "path": "C:\\Users\\CAVE\\Desktop\\VrEnvironment\\Runtime"
+      },
+      "vive": {
+        "mode": "local",
+        "arguments": "--config configs/OpenVR.json"
+      },
+      "sim": {
+        "mode": "local",
+        "arguments": "--config configs/sim.json"
+      }
+    }
+  },
+  {
+    "name": "Network Engine",
+    "icon": "NetworkEngine.png",
+    "exe": "NetworkEngine.exe",
+    "configs": {
+      "cave": {
+        "mode": "remote",
+        "arguments": "--config configs/config.json --config configs/vrpn.json",
+        "path": "C:\\Users\\CAVE\\Desktop\\VrEnvironment\\Runtime"
+      },
+      "vive": {
+        "mode": "local",
+        "arguments": "--config configs/OpenVR.json"
+      },
+      "sim": {
+        "mode": "local",
+        "arguments": "--config configs/sim.json --config configs/vive-sim.json"
+      }
+    }
+  }
 ]
